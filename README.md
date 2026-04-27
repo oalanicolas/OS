@@ -1,81 +1,199 @@
-# OS — Opensource Benchmarks
+<div align="center">
 
-Coleção de 28 projetos opensource usados como referência/benchmark para estudo de **AI agents**: frameworks de orquestração, coding agents, sistemas de memória, assistentes pessoais, MCP, workflows, observability e **enterprise agent platforms**.
+# 🧰 cured-harness
 
-Não contém código próprio — todos são forks/clones para análise.
+[![Awesome](https://awesome.re/badge-flat2.svg)](https://awesome.re)
+[![Last Update](https://img.shields.io/badge/last%20update-Abril%202026-blue?style=flat-square)]()
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](#contribuindo)
+[![License: CC0-1.0](https://img.shields.io/badge/License-CC0_1.0-lightgrey.svg?style=flat-square)](https://creativecommons.org/publicdomain/zero/1.0/)
 
-## Projetos
+<h3>Índice curado de agent harnesses — frameworks, CLIs de coding, memória, orquestração e plataformas enterprise — usados como referência e benchmark de estudo.</h3>
 
-| # | Projeto | Tags | Stack | Diferencial |
-|---|---------|------|-------|-------------|
-| 1 | [BMAD-METHOD](./BMAD-METHOD) | `multi-agent` `agile` `orchestration` | TS | Party Mode: múltiplas personas em uma sessão; 12+ agentes (PM, arquiteto, UX…) |
-| 2 | [ai-website-cloner-template](./ai-website-cloner-template) | `website-clone` `coding-agent` `claude-code` | Next.js + shadcn | Clonagem pixel-perfect via builder agents paralelos em `/clone-website` |
-| 3 | [claude-code-main](./claude-code-main) | `cli` `coding-agent` `terminal-ui` | TS + Ink + Bun | Snapshot (~512K LOC) do CLI oficial da Anthropic (source leak) |
-| 4 | [claude-remote-manager](./claude-remote-manager) | `remote-control` `persistence` `telegram` | Bash + TS | Claude Code 24/7 controlado por Telegram; cron sobrevive restart |
-| 5 | [codex](./codex) | `coding-agent` `cli` `openai` | TS + Rust | CLI coding agent oficial da OpenAI com integrações IDE |
-| 6 | [crewAI](./crewAI) | `multi-agent` `framework` `python` | Python | Agentes role-playing colaborativos com objetivos compartilhados |
-| 7 | [gbrain](./gbrain) | `memory` `rag` `knowledge-graph` | TS + PGLite + pgvector | 95% recall@5; self-wiring entity links sem LLM; setup em 30min |
-| 8 | [get-shit-done](./get-shit-done) | `spec-driven` `meta-prompting` `context-engineering` | TS | Resolve "context rot" via spec discipline (usado em Amazon/Google/Shopify) |
-| 9 | [gh-aw](./gh-aw) | `github-actions` `agentic-workflows` `governance` | Go + markdown | Workflows em linguagem natural executados safe em GH Actions |
-| 10 | [gsd-2](./gsd-2) | `coding-agent` `automation` `memory` | TS (Pi SDK) | Auto-milestones sem humano; RTK comprime shell output |
-| 11 | [gstack](./gstack) | `coding-agent` `workflow` `multi-role` | TS + Playwright | Software factory pessoal do pres. da YC; 24 agentes especializados |
-| 12 | [hermes-agent](./hermes-agent) | `personal-assistant` `learning-loop` `multi-model` | Python asyncio | Auto-cria skills; roda em VPS de $5 ou serverless com hibernação |
-| 13 | [mempalace](./mempalace) | `memory` `rag` `local-first` | Python + Chroma | 96.6% R@5 com storage verbatim (sem paráfrase); zero API keys |
-| 14 | [openclaw](./openclaw) | `personal-assistant` `multi-channel` `local-first` | TS + SwiftUI + Kotlin | 20+ canais (WhatsApp, Telegram, iMessage…) rodando on-device |
-| 15 | [paperclip](./paperclip) | `multi-agent` `orchestration` `governance` | TS + React + Postgres | Gerencia agentes como empregados: org charts, budgets, goals |
-| 16 | [spec-kit](./spec-kit) | `spec-driven` `github` `tooling` | Python + TS | Specs executáveis que geram implementação; metodologia oficial do GitHub |
-| 17 | [superpowers](./superpowers) | `coding-agent` `tdd` `subagent-driven` | TS (Claude Code plugin) | TDD red/green puro; subagents paralelos; 94% PR rejection rate |
-| 18 | [workflow](./workflow) | `durable-functions` `event-sourcing` `serverless` | TS + Next.js + PG | Replay determinístico via event log; split VM + step runtime |
-| 19 | [OpenHands](./OpenHands) | `autonomous-agent` `swe-bench` `coding-agent` | Python | Autonomous agent mais estrelado do GitHub (ex-OpenDevin) |
-| 20 | [aider](./aider) | `coding-cli` `pair-programming` `git-native` | Python | Pair programming CLI mais usado no OS; commits automáticos |
-| 21 | [autogen](./autogen) | `multi-agent` `conversational` `microsoft` | Python | Framework multi-agente conversacional da Microsoft |
-| 22 | [mem0](./mem0) | `memory` `layer` `vector-store` | Python | Memory layer líder; cresceu explosivamente em 2025 |
-| 23 | [mcp-servers](./mcp-servers) | `mcp` `protocol` `reference` | TS + Python | Repo oficial do Model Context Protocol; 50+ servers de referência |
-| 24 | [langfuse](./langfuse) | `observability` `eval` `tracing` | TS + Next.js | Observability OS mais popular pra aplicações LLM |
-| 25 | [Clawith](./Clawith) | `enterprise-platform` `multi-tenant` `digital-employees` | TS | "OpenClaw for Teams": agentes com `soul.md`+`memory.md`+org chart+delegation |
-| 26 | [agent-governance-toolkit](./agent-governance-toolkit) | `governance` `runtime-security` `owasp-agentic` | Multi-lang | Microsoft: policy enforcement sub-ms, cobre 10/10 OWASP Agentic Top 10 |
-| 27 | [memori-labs](./memori-labs) | `memory` `agent-native` `llm-agnostic` | Python | Memory infrastructure, 81.95% LoCoMo, SQL-backed |
-| 28 | [dify](./dify) | `enterprise-platform` `low-code` `visual` | Python + TS | Plataforma low-code mais popular (129k stars), teams + production |
+<a href="#-coding-agents--clis">Coding</a> · <a href="#-orquestração-multi-agente">Multi-agente</a> · <a href="#-memória--conhecimento">Memória</a> · <a href="#-assistentes-pessoais">Assistentes</a> · <a href="#-spec-driven--metodologia">Spec-driven</a> · <a href="#️-workflow--execução-durável">Workflow</a> · <a href="#-protocolo--infraestrutura">Protocolo</a> · <a href="#-avaliação--observabilidade">Eval</a> · <a href="#-plataformas-enterprise">Enterprise</a> · <a href="#-skills-cross-agent">Skills</a>
 
-## Categorias
+<sub>by **Alan Nicolas**</sub>
 
-### Por função
-- **Coding agents**: `claude-code-main`, `codex`, `aider`, `OpenHands`, `ai-website-cloner-template`, `gsd-2`, `gstack`, `superpowers`
-- **Multi-agent orchestration**: `BMAD-METHOD`, `crewAI`, `autogen`, `paperclip`, `claude-remote-manager`, `gh-aw`
-- **Personal assistants**: `openclaw`, `hermes-agent`, `gbrain`
-- **Memory / knowledge**: `mem0`, `mempalace`, `gbrain`, `gsd-2`, `hermes-agent`
-- **Spec-driven / methodology**: `spec-kit`, `get-shit-done`, `superpowers`
-- **Workflow infra**: `workflow`, `gh-aw`
-- **Protocol / MCP**: `mcp-servers`
-- **Eval / observability**: `langfuse`
-- **Enterprise platforms**: `Clawith`, `dify`, `agent-governance-toolkit`
-- **Memory infrastructure**: `memori-labs` (adicional a mem0/mempalace/gbrain)
+</div>
 
-### Por origem
-- **Big tech / fundações**: codex (OpenAI), spec-kit/gh-aw (GitHub), workflow (Vercel), claude-code (Anthropic), autogen (Microsoft), hermes (NousResearch), mcp-servers (Anthropic/MCP)
-- **YC / founders**: gstack/gbrain (Garry Tan), superpowers (Obra)
-- **Comunidade**: BMAD-METHOD, crewAI, aider, OpenHands, mem0, langfuse, openclaw, mempalace, paperclip, gsd-build/*
+---
 
-### Por maturidade / local-first
-- **Local-first**: `mempalace`, `openclaw`, `gbrain`, `hermes-agent`
-- **Cloud-native**: `workflow`, `paperclip`, `gh-aw`
-- **Híbrido**: `claude-remote-manager`, `gstack`, `gsd-2`
+> **29 projetos. 10 categorias. Curadoria opinativa.** Não contém código próprio — todos os repos são forks/clones para análise. Veja [Espelho local](#-espelho-local) para reproduzir o bench.
 
-## Observações
+---
 
-- **Memória é first-class em 4 projetos** (gbrain, mempalace, gsd-2, hermes)
-- **Spec-driven está em ascensão** (spec-kit, get-shit-done, superpowers) — alternativa a "vibe coding"
-- **8 de 18 projetos** centram em coordenação multi-agente
-- **GitHub e Vercel** já têm frameworks de agente em produção (gh-aw, workflow)
+## Conteúdo
 
-## Manutenção
+- [💻 Coding agents & CLIs](#-coding-agents--clis) — IDE-native, Terminal/CLI, Templates
+- [🤝 Orquestração multi-agente](#-orquestração-multi-agente)
+- [🧠 Memória & conhecimento](#-memória--conhecimento)
+- [🦾 Assistentes pessoais](#-assistentes-pessoais)
+- [📐 Spec-driven & metodologia](#-spec-driven--metodologia)
+- [⚙️ Workflow & execução durável](#️-workflow--execução-durável)
+- [🔌 Protocolo & infraestrutura](#-protocolo--infraestrutura)
+- [📊 Avaliação & observabilidade](#-avaliação--observabilidade)
+- [🏢 Plataformas enterprise](#-plataformas-enterprise)
+- [🧩 Skills cross-agent](#-skills-cross-agent)
+- [🗒️ Padrões observados](#️-padrões-observados)
+- [🛠 Espelho local](#-espelho-local)
+- [🤝 Contribuindo](#contribuindo)
+- [📄 Licença](#-licença)
 
-Em uma máquina nova (ou pra atualizar tudo de uma vez):
+---
+
+## 💻 Coding agents & CLIs
+
+### Terminal / CLI
+
+| Projeto | Stack | Diferencial |
+|---------|-------|-------------|
+| [anthropics/claude-code](https://github.com/anthropics/claude-code) | TS + Ink + Bun | Snapshot (~512K LOC) do CLI oficial da Anthropic; referência canônica de terminal-UI para coding agents. |
+| [openai/codex](https://github.com/openai/codex) | TS + Rust | CLI coding agent oficial da OpenAI, com integrações IDE e foco em automação local. |
+| [Aider-AI/aider](https://github.com/Aider-AI/aider) | Python | Pair programming CLI mais usado no open source; git-native e commits automáticos por iteração. |
+| [All-Hands-AI/OpenHands](https://github.com/All-Hands-AI/OpenHands) | Python | Agente autônomo mais estrelado do GitHub (ex-OpenDevin); benchmark padrão em SWE-bench. |
+
+### Autonomous / Multi-role
+
+| Projeto | Stack | Diferencial |
+|---------|-------|-------------|
+| [gsd-build/gsd-2](https://github.com/gsd-build/gsd-2) | TS (Pi SDK) | Auto-milestones sem humano; RTK comprime output de shell em loop longo. |
+| [garrytan/gstack](https://github.com/garrytan/gstack) | TS + Playwright | Software factory pessoal do presidente da YC; 24 agentes especializados em workflow multi-role. |
+| [obra/superpowers](https://github.com/obra/superpowers) | TS (Claude Code plugin) | TDD red/green puro com subagents paralelos; reporta 94% de PR rejection rate. |
+
+### Templates / App-builders
+
+| Projeto | Stack | Diferencial |
+|---------|-------|-------------|
+| [JCodesMore/ai-website-cloner-template](https://github.com/JCodesMore/ai-website-cloner-template) | Next.js + shadcn | Clonagem pixel-perfect via builder agents paralelos no comando `/clone-website`. |
+
+---
+
+## 🤝 Orquestração multi-agente
+
+| Projeto | Stack | Diferencial |
+|---------|-------|-------------|
+| [bmad-code-org/BMAD-METHOD](https://github.com/bmad-code-org/BMAD-METHOD) | TS | 12+ personas (PM, arquiteto, UX…) com "Party Mode" para múltiplas em uma sessão; ágil aplicado a agentes. |
+| [crewAI-inc/crewAI](https://github.com/crewAI-inc/crewAI) | Python | Framework para agentes role-playing colaborativos com objetivos compartilhados. |
+| [microsoft/autogen](https://github.com/microsoft/autogen) | Python | Framework multi-agente conversacional da Microsoft; padrão de pesquisa em coordenação por mensagens. |
+| [paperclipai/paperclip](https://github.com/paperclipai/paperclip) | TS + React + Postgres | Gerencia agentes como empregados — org charts, budgets e goals. |
+| [grandamenium/claude-remote-manager](https://github.com/grandamenium/claude-remote-manager) | Bash + TS | Claude Code 24/7 controlado por Telegram; cron persistente sobrevive restart. |
+
+---
+
+## 🧠 Memória & conhecimento
+
+| Projeto | Stack | Diferencial |
+|---------|-------|-------------|
+| [mem0ai/mem0](https://github.com/mem0ai/mem0) | Python | Memory layer líder em 2025; vector store nativo e API simples para LLM apps. |
+| [milla-jovovich/mempalace](https://github.com/milla-jovovich/mempalace) | Python + Chroma | 96.6% R@5 com storage verbatim (sem paráfrase); local-first e sem API keys. |
+| [garrytan/gbrain](https://github.com/garrytan/gbrain) | TS + PGLite + pgvector | 95% recall@5; self-wiring de entidades sem LLM; setup em 30 minutos. |
+| [MemoriLabs/Memori](https://github.com/MemoriLabs/Memori) | Python | Memory infrastructure agent-native LLM-agnóstica; 81.95% no LoCoMo, backing em SQL. |
+
+---
+
+## 🦾 Assistentes pessoais
+
+| Projeto | Stack | Diferencial |
+|---------|-------|-------------|
+| [openclaw/openclaw](https://github.com/openclaw/openclaw) | TS + SwiftUI + Kotlin | 20+ canais (WhatsApp, Telegram, iMessage…) rodando on-device. |
+| [NousResearch/hermes-agent](https://github.com/NousResearch/hermes-agent) | Python asyncio | Auto-cria skills; roda em VPS de $5 ou serverless com hibernação; multi-model. |
+
+---
+
+## 📐 Spec-driven & metodologia
+
+| Projeto | Stack | Diferencial |
+|---------|-------|-------------|
+| [github/spec-kit](https://github.com/github/spec-kit) | Python + TS | Specs executáveis que geram implementação; metodologia oficial do GitHub. |
+| [gsd-build/get-shit-done](https://github.com/gsd-build/get-shit-done) | TS | Resolve "context rot" via spec discipline e meta-prompting; em uso na Amazon, Google e Shopify. |
+
+---
+
+## ⚙️ Workflow & execução durável
+
+| Projeto | Stack | Diferencial |
+|---------|-------|-------------|
+| [vercel/workflow](https://github.com/vercel/workflow) | TS + Next.js + PG | Replay determinístico via event log; split VM + step runtime. |
+| [github/gh-aw](https://github.com/github/gh-aw) | Go + Markdown | Agentic workflows escritos em linguagem natural, executados sandboxed em GH Actions. |
+
+---
+
+## 🔌 Protocolo & infraestrutura
+
+| Projeto | Stack | Diferencial |
+|---------|-------|-------------|
+| [modelcontextprotocol/servers](https://github.com/modelcontextprotocol/servers) | TS + Python | Repo oficial do Model Context Protocol; 50+ servers de referência. |
+
+---
+
+## 📊 Avaliação & observabilidade
+
+| Projeto | Stack | Diferencial |
+|---------|-------|-------------|
+| [langfuse/langfuse](https://github.com/langfuse/langfuse) | TS + Next.js | Observability OS mais popular para apps LLM; tracing, eval e prompt management. |
+
+---
+
+## 🏢 Plataformas enterprise
+
+| Projeto | Stack | Diferencial |
+|---------|-------|-------------|
+| [dataelement/Clawith](https://github.com/dataelement/Clawith) | TS | "OpenClaw para times": digital employees com `soul.md` + `memory.md`, org chart e delegation multi-tenant. |
+| [microsoft/agent-governance-toolkit](https://github.com/microsoft/agent-governance-toolkit) | Multi-lang | Policy enforcement sub-ms cobrindo 10/10 do OWASP Agentic Top 10; runtime security. |
+| [langgenius/dify](https://github.com/langgenius/dify) | Python + TS | Plataforma low-code mais popular (129k+ stars); pronta para teams e production. |
+
+---
+
+## 🧩 Skills cross-agent
+
+| Projeto | Stack | Diferencial |
+|---------|-------|-------------|
+| [alchaincyf/huashu-design](https://github.com/alchaincyf/huashu-design) | Skill (multi-agent) | Skill agent-agnóstica (Claude Code, Cursor, Codex, OpenClaw, Hermes) que entrega design pronto — animações, protótipos clicáveis, PPT, infográficos — a partir de um prompt. |
+
+---
+
+## 🗒️ Padrões observados
+
+Eixo cruzado, agrupando harnesses por técnica/arquitetura recorrente:
+
+| Padrão | Projetos | Observação |
+|--------|----------|------------|
+| **Memória first-class** | gbrain, mempalace, gsd-2, hermes-agent, mem0, memori-labs | Memória como componente separado e medível, não bolt-on. |
+| **Spec-driven** | spec-kit, get-shit-done, superpowers | Alternativa pragmática a "vibe coding"; specs guiam execução. |
+| **Multi-persona / party-mode** | BMAD-METHOD, crewAI, autogen, paperclip, gstack | Coordenação entre múltiplos roles em um harness. |
+| **Subagents paralelos** | superpowers, ai-website-cloner-template, gstack | Fan-out de tarefas para agentes especializados. |
+| **Durable / replay** | vercel/workflow, gh-aw | Event-sourced; sobrevive a crash; reproduzível. |
+| **Local-first** | mempalace, openclaw, gbrain, hermes-agent | Sem dependência de cloud; on-device ou self-hosted. |
+| **Governance / policy** | agent-governance-toolkit, Clawith | Runtime security e org chart de agentes. |
+| **24/7 persistente** | claude-remote-manager, hermes-agent, gsd-2 | Cron, hibernação, retomada automática. |
+
+---
+
+## 🛠 Espelho local
+
+Para clonar/atualizar todos os projetos em paralelo:
 
 ```bash
 ./update.sh
 ```
 
-O script lê `repos.tsv`, clona o que está faltando e dá `pull --ff-only` no que já existe. Tudo em paralelo.
+O script lê `repos.tsv`, clona o que falta e dá `pull --ff-only` no resto.
 
 Legenda: `[+]` clonado · `[↑]` atualizado · `[=]` up-to-date · `[x]` erro
+
+---
+
+## Contribuindo
+
+PRs são bem-vindos. Para adicionar um harness:
+
+1. Adicione a entrada em `repos.tsv` no formato `name<TAB>url<TAB>branch`.
+2. Adicione a linha na tabela da seção correspondente do README, com `[owner/repo](url) | Stack | Descrição em uma frase com diferencial técnico`.
+3. Se for um padrão novo recorrente, adicione em **🗒️ Padrões observados**.
+
+**Critério de inclusão**: o projeto precisa ser um *harness* — algo que orquestra, executa, dá memória ou ferramentas a um LLM. Bibliotecas-modelo (sem loop de agente) e infraestrutura genérica (vector DB puro, etc.) ficam de fora.
+
+---
+
+## 📄 Licença
+
+Esta lista é distribuída sob [CC0-1.0](https://creativecommons.org/publicdomain/zero/1.0/).
