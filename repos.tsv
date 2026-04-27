@@ -1,4 +1,6 @@
 # name	url	branch
+ADAS	https://github.com/ShengranHu/ADAS	main
+AI-Scientist-v2	https://github.com/SakanaAI/AI-Scientist-v2	main
 BMAD-METHOD	https://github.com/bmad-code-org/BMAD-METHOD	main
 Clawith	https://github.com/dataelement/Clawith.git	main
 OpenHands	https://github.com/All-Hands-AI/OpenHands.git	main
@@ -11,6 +13,7 @@ codex	https://github.com/openai/codex	main
 crewAI	https://github.com/crewAI-inc/crewAI	main
 dify	https://github.com/langgenius/dify.git	main
 gbrain	https://github.com/garrytan/gbrain	master
+gepa	https://github.com/gepa-ai/gepa	main
 get-shit-done	https://github.com/gsd-build/get-shit-done	main
 gh-aw	https://github.com/github/gh-aw	main
 gsd-2	https://github.com/gsd-build/gsd-2	main

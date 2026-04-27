@@ -10,6 +10,7 @@
 !/_bench/
 !/README.md
 !/repos.tsv
+!/STUDENT-AGENT.md
 !/update.sh
 
 # Sempre ignorar (recursivo)
