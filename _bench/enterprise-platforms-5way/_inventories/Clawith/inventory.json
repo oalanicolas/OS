@@ -1,0 +1,61 @@
+{
+  "subject": "Clawith",
+  "path": "OS/Clawith/",
+  "profile": "quick",
+  "positioning": "OpenClaw for Teams — multi-agent collaboration platform with digital employees (persistent identity, soul.md, memory.md, org chart).",
+  "language_stack": {
+    "backend": "Python 3.12+ / FastAPI / SQLAlchemy async / Alembic",
+    "frontend": "React 19 / TypeScript / Vite / Zustand / TanStack Query",
+    "infra": "PostgreSQL 15+ (or SQLite) / Redis / Docker / Helm chart"
+  },
+  "license": "Apache-2.0",
+  "top_level": [
+    "AGENTS.md",
+    "ARCHITECTURE_SPEC_EN.md",
+    "README.md",
+    "README_{zh-CN,ja,ko,es}.md",
+    "backend/",
+    "frontend/",
+    "helm/clawith/",
+    "docker-compose.yml",
+    "setup.sh",
+    "restart.sh"
+  ],
+  "backend_modules": {
+    "api_routes_count": 34,
+    "api_highlights": [
+      "agents.py", "organization.py", "tenants.py", "teams.py", "plaza.py",
+      "skills.py", "tools.py", "triggers.py", "schedules.py", "approvals via admin.py",
+      "sso.py", "enterprise.py", "activity.py", "webhooks.py"
+    ],
+    "models_highlights": [
+      "tenant.py", "org.py", "agent.py", "agent_credential.py", "audit.py",
+      "skill.py", "tool.py", "trigger.py", "schedule.py", "plaza.py", "task.py"
+    ],
+    "services_highlights": [
+      "agent_manager.py", "audit_logger.py", "autonomy_service.py", "heartbeat.py",
+      "org_sync_service.py", "quota_guard.py", "sandbox/", "scheduler.py",
+      "skill_creator_content.py", "skill_seeder.py", "sso_service.py",
+      "task_executor.py", "enterprise_sync.py"
+    ]
+  },
+  "differentiators_observable": [
+    "Multi-tenant RBAC declarado no README ('organization-based isolation with role-based access')",
+    "tenant.py modela default_message_limit, default_max_agents, default_agent_ttl_hours, default_max_llm_calls_per_day, sso_enabled",
+    "Aware — autonomous consciousness com 6 trigger types (cron/once/interval/poll/on_message/webhook)",
+    "The Plaza — knowledge feed para agentes absorverem contexto organizacional",
+    "Digital employees com soul.md + memory.md + org chart",
+    "Channel integration: Slack, Discord, Feishu/Lark, DingTalk, WeCom (wecom-aibot-sdk), Microsoft Teams",
+    "Approval workflows e audit logs listados como features",
+    "Self-evolving skills via Smithery + ModelScope MCP discovery at runtime",
+    "Helm chart oficial em helm/clawith/"
+  ],
+  "evidence_paths": [
+    "OS/Clawith/README.md#L27-L58",
+    "OS/Clawith/backend/app/api/",
+    "OS/Clawith/backend/app/models/tenant.py",
+    "OS/Clawith/backend/app/services/audit_logger.py",
+    "OS/Clawith/backend/app/services/sandbox/",
+    "OS/Clawith/helm/clawith/"
+  ]
+}

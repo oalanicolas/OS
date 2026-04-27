@@ -1,0 +1,78 @@
+{
+  "subject": "paperclip",
+  "path": "OS/paperclip/",
+  "profile": "quick",
+  "positioning": "Open-source orchestration for zero-human companies — 'If OpenClaw is an employee, Paperclip is the company.' Company-sim control plane: org charts, budgets, goals, governance, agent coordination.",
+  "language_stack": {
+    "server": "Node.js 20+ / TypeScript, tsx runner, pnpm 9.15.4 workspaces",
+    "db": "PostgreSQL (embedded via embedded-postgres patch, para first-run zero-setup; aponta pro seu Postgres em prod)",
+    "testing": "Vitest (unit), Playwright (e2e, release-smoke, multiuser-authenticated)",
+    "ui": "React UI em ui/ (mencionada no README)",
+    "evals": "promptfoo em evals/promptfoo/"
+  },
+  "license": "MIT",
+  "top_level": [
+    "README.md", "ROADMAP.md", "AGENTS.md", "CONTRIBUTING.md",
+    "LICENSE", "SECURITY.md", "Dockerfile", "adapter-plugin.md",
+    "package.json", "pnpm-workspace.yaml", "pnpm-lock.yaml",
+    "tsconfig.json", "tsconfig.base.json", "vitest.config.ts",
+    "cli/", "server/", "ui/", "packages/", "skills/", "evals/",
+    "doc/", "docs/", "docker/", "tests/", "scripts/", "patches/",
+    "releases/", "report/"
+  ],
+  "packages": [
+    "packages/adapter-utils", "packages/adapters",
+    "packages/db", "packages/mcp-server",
+    "packages/plugins", "packages/shared"
+  ],
+  "server_routes": [
+    "companies.ts", "org-chart-svg.ts", "goals.ts", "projects.ts",
+    "agents.ts", "issues.ts", "issues-checkout-wakeup.ts",
+    "approvals.ts", "costs.ts", "routines.ts", "dashboard.ts",
+    "authz.ts", "access.ts", "secrets.ts", "assets.ts",
+    "adapters.ts", "plugins.ts", "company-skills.ts",
+    "execution-workspaces.ts", "workspace-command-authz.ts",
+    "workspace-runtime-service-authz.ts", "instance-settings.ts",
+    "inbox-dismissals.ts", "llms.ts", "sidebar-badges.ts",
+    "sidebar-preferences.ts", "activity.ts"
+  ],
+  "skills_shipped": [
+    "paperclip", "paperclip-create-agent",
+    "paperclip-create-plugin", "para-memory-files"
+  ],
+  "differentiators_observable": [
+    "Company-sim paradigm: org charts, CEO/CTO/engineers, reporting lines, job descriptions",
+    "True multi-company isolation: 'Every entity is company-scoped, so one deployment can run many companies with separate data and audit trails'",
+    "Atomic task checkout + budget enforcement (no double-work, no runaway spend)",
+    "Heartbeat-based agents (BYOA: OpenClaw, Claude Code, Codex, Cursor, Bash, HTTP)",
+    "Goal-aware execution — tasks carry full goal ancestry",
+    "Portable company templates via companies.sh (export/import com secret scrubbing)",
+    "Governance with rollback — approval gates + revisioned config",
+    "Adapter plugin system (adapter-plugin.md) para BYOA agents",
+    "Scheduled Routines, Skills Manager, Agent Reviews and Approvals — marcados como shipped em ROADMAP",
+    "Clipmart (roadmap) — one-click company templates marketplace",
+    "Bind presets: local loopback / lan / tailnet (tailscale-friendly)",
+    "E2E testing robusto: Playwright + release-smoke + multiuser-authenticated",
+    "Evals via promptfoo"
+  ],
+  "gaps_in_roadmap_not_yet_shipped": [
+    "Multiple Human Users",
+    "Cloud / Sandbox agents (Cursor / e2b)",
+    "Artifacts & Work Products",
+    "Memory / Knowledge",
+    "Enforced Outcomes",
+    "Deep Planning", "Work Queues", "Self-Organization",
+    "Automatic Organizational Learning", "CEO Chat",
+    "Cloud deployments", "Desktop App"
+  ],
+  "evidence_paths": [
+    "OS/paperclip/README.md",
+    "OS/paperclip/ROADMAP.md",
+    "OS/paperclip/package.json",
+    "OS/paperclip/server/src/routes/",
+    "OS/paperclip/server/src/services/",
+    "OS/paperclip/skills/",
+    "OS/paperclip/evals/promptfoo/",
+    "OS/paperclip/adapter-plugin.md"
+  ]
+}

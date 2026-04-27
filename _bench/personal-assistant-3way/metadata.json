@@ -1,0 +1,61 @@
+{
+  "$schema": "os-bench metadata v1.0",
+  "generatedAt": "2026-04-19T22:30:00Z",
+  "comparison_type": "nway",
+  "slug": "personal-assistant-3way",
+  "subject_count": 3,
+  "subjects": [
+    {
+      "slug": "openclaw",
+      "path": "OS/openclaw/",
+      "source_url": "https://github.com/openclaw/openclaw",
+      "detected_stack": ["TypeScript", "Node.js >=22", "pnpm", "Bun (dev)", "SwiftUI", "Kotlin", "Docker"]
+    },
+    {
+      "slug": "hermes-agent",
+      "path": "OS/hermes-agent/",
+      "source_url": "https://github.com/NousResearch/hermes-agent",
+      "detected_stack": ["Python 3.11", "uv", "asyncio", "SQLite FTS5", "Honcho", "Modal", "Daytona"]
+    },
+    {
+      "slug": "gbrain",
+      "path": "OS/gbrain/",
+      "source_url": "https://github.com/garrytan/gbrain",
+      "detected_stack": ["TypeScript", "Bun", "PGLite (WASM)", "Postgres + pgvector", "OpenAI embeddings", "MCP"]
+    }
+  ],
+  "dimension_pack": "personal-assistant",
+  "scoring_dimensions": [
+    "channels",
+    "local_first",
+    "memory",
+    "skills",
+    "cost",
+    "privacy"
+  ],
+  "profile": "standard",
+  "skill_version": "1.0.0",
+  "output_root": "OS/_bench/personal-assistant-3way/",
+  "artifacts_generated": [
+    "metadata.json",
+    "inventory-openclaw.json",
+    "inventory-openclaw.md",
+    "inventory-hermes-agent.json",
+    "inventory-hermes-agent.md",
+    "inventory-gbrain.json",
+    "inventory-gbrain.md",
+    "comparison-matrix.json",
+    "comparison-matrix.md",
+    "scorecard.json",
+    "scorecard.md",
+    "executive-report.md"
+  ],
+  "artifacts_skipped": [
+    "gap-analysis.json",
+    "gap-analysis.md",
+    "battle-card.md"
+  ],
+  "confidence_overall": "HIGH",
+  "quality_gate_passed": true,
+  "notes": "N-way benchmark. The three subjects occupy different product tiers of the 'personal assistant' space: openclaw is a multi-channel assistant platform, hermes-agent is a self-improving cross-channel CLI agent, gbrain is the knowledge/memory substrate that can plug into either. Comparison focuses on shared dimensions (channels, local-first posture, memory model, skills surface, cost profile, privacy). Gap-analysis and battle-card are per-pair artifacts, omitted for 3-way per os-bench SKILL.md (n-way canonical set = metadata + inventories + matrix + scorecard + executive)."
+}

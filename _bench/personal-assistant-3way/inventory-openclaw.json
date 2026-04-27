@@ -1,0 +1,109 @@
+{
+  "generatedAt": "2026-04-19T22:30:00Z",
+  "subject": "openclaw",
+  "path": "OS/openclaw/",
+  "primary_language": "TypeScript",
+  "secondary_languages": ["Swift", "Kotlin", "Python"],
+  "stack": ["Node.js (>=22)", "pnpm workspaces", "Bun (dev)", "Vitest", "Oxlint", "Oxfmt", "Ink (TUI)", "Docker", "SwiftUI (macOS/iOS)", "Gradle (Android)"],
+  "license": "MIT",
+  "tagline": "Personal AI assistant you run on your own devices; multi-channel inbox plus local-first Gateway",
+  "metrics": {
+    "loc_estimate": null,
+    "file_count": null,
+    "top_level_dirs": ["src", "extensions", "packages", "apps", "ui", "skills", "docs", "test", "scripts", "qa"],
+    "readme_lines": 1433,
+    "last_commit_date": "2026-04-19",
+    "github_stars": null,
+    "github_contributors": null,
+    "ts_source_files": 6676,
+    "extensions_count": 113,
+    "bundled_skills_count": 53,
+    "channel_extensions_count": 25
+  },
+  "version": "2026.4.19-beta.2",
+  "modules": [
+    { "name": "src", "path": "OS/openclaw/src/", "type": "app", "description": "Gateway core: channels, agents, commands, CLI wiring, context-engine, canvas-host, cron, gateway protocol" },
+    { "name": "extensions", "path": "OS/openclaw/extensions/", "type": "package", "description": "113 bundled plugins, including 25 messaging channel extensions, model providers, voice/TTS/STT, memory backends" },
+    { "name": "packages", "path": "OS/openclaw/packages/", "type": "package", "description": "plugin-sdk, memory-host-sdk, plugin-package-contract published contracts" },
+    { "name": "apps", "path": "OS/openclaw/apps/", "type": "app", "description": "Companion apps for android, ios, macos, shared SwiftUI/Kotlin sources" },
+    { "name": "ui", "path": "OS/openclaw/ui/", "type": "app", "description": "Control UI (web)" },
+    { "name": "skills", "path": "OS/openclaw/skills/", "type": "package", "description": "53 bundled agent skills (apple-notes, clawhub, coding-agent, obsidian, etc)" },
+    { "name": "docs", "path": "OS/openclaw/docs/", "type": "library", "description": "Mintlify docs site (46 sections)" },
+    { "name": "Swabble", "path": "OS/openclaw/Swabble/", "type": "app", "description": "Voice/audio helper component" }
+  ],
+  "external_dependencies_top10": [
+    { "package": "@modelcontextprotocol/sdk", "version": "via mcporter", "purpose": "MCP bridge client (external)" },
+    { "package": "ink", "version": "inferred", "purpose": "Terminal UI rendering (CLI)" },
+    { "package": "oxlint", "version": "inferred", "purpose": "Linting (Rust-based, fast)" },
+    { "package": "oxfmt", "version": "inferred", "purpose": "Formatting" },
+    { "package": "vitest", "version": "inferred", "purpose": "Test runner" },
+    { "package": "tsdown", "version": "inferred", "purpose": "Build (bundler)" },
+    { "package": "knip", "version": "inferred", "purpose": "Dead-code detection" }
+  ],
+  "entry_points": [
+    { "kind": "cli", "path": "OS/openclaw/src/cli/", "command": "openclaw <cmd>" },
+    { "kind": "cli", "path": "OS/openclaw/openclaw.mjs", "command": "openclaw" },
+    { "kind": "gateway", "path": "OS/openclaw/src/gateway/", "command": "openclaw gateway run" },
+    { "kind": "app", "path": "OS/openclaw/apps/macos/", "command": "OpenClaw.app (menu bar + voice wake)" },
+    { "kind": "app", "path": "OS/openclaw/apps/ios/", "command": "iOS companion node" },
+    { "kind": "app", "path": "OS/openclaw/apps/android/", "command": "Android companion node" }
+  ],
+  "capabilities": [
+    { "name": "Multi-channel messaging (25 channels)", "evidence_paths": ["OS/openclaw/extensions/whatsapp/", "OS/openclaw/extensions/telegram/", "OS/openclaw/extensions/slack/", "OS/openclaw/extensions/discord/", "OS/openclaw/extensions/signal/", "OS/openclaw/extensions/imessage/", "OS/openclaw/extensions/bluebubbles/", "OS/openclaw/extensions/matrix/", "OS/openclaw/extensions/irc/", "OS/openclaw/extensions/msteams/", "OS/openclaw/extensions/feishu/", "OS/openclaw/extensions/line/", "OS/openclaw/extensions/mattermost/", "OS/openclaw/extensions/nextcloud-talk/", "OS/openclaw/extensions/nostr/", "OS/openclaw/extensions/synology-chat/", "OS/openclaw/extensions/tlon/", "OS/openclaw/extensions/twitch/", "OS/openclaw/extensions/zalo/", "OS/openclaw/extensions/zalouser/", "OS/openclaw/extensions/googlechat/", "OS/openclaw/extensions/qqbot/", "OS/openclaw/extensions/qa-matrix/", "OS/openclaw/extensions/talk-voice/", "OS/openclaw/extensions/voice-call/"], "category": "integration", "description": "25 messaging platform bundled plugins" },
+    { "name": "Local-first Gateway", "evidence_paths": ["OS/openclaw/src/gateway/", "OS/openclaw/src/gateway/protocol/"], "category": "core", "description": "Single control plane binding loopback by default; typed protocol between Gateway and nodes" },
+    { "name": "Companion native apps (macOS, iOS, Android)", "evidence_paths": ["OS/openclaw/apps/macos/", "OS/openclaw/apps/ios/", "OS/openclaw/apps/android/", "OS/openclaw/apps/shared/"], "category": "integration", "description": "SwiftUI (macOS/iOS) + Kotlin (Android) native clients paired over Gateway WebSocket" },
+    { "name": "Voice Wake + Talk Mode", "evidence_paths": ["OS/openclaw/extensions/elevenlabs/", "OS/openclaw/extensions/talk-voice/", "OS/openclaw/extensions/voice-call/", "OS/openclaw/Swabble/"], "category": "core", "description": "Wake words + continuous voice with ElevenLabs + TTS fallbacks (per README)" },
+    { "name": "Live Canvas (A2UI)", "evidence_paths": ["OS/openclaw/src/canvas-host/", "OS/openclaw/src/canvas-host/a2ui/"], "category": "core", "description": "Agent-driven visual workspace with A2UI bundle" },
+    { "name": "Skills system (53 bundled + ClawHub)", "evidence_paths": ["OS/openclaw/skills/", "OS/openclaw/extensions/clawhub/", "OS/openclaw/skills/apple-notes/", "OS/openclaw/skills/obsidian/"], "category": "extensibility", "description": "Bundled skills + ClawHub marketplace for third-party skills" },
+    { "name": "Plugin SDK (versioned public contract)", "evidence_paths": ["OS/openclaw/packages/plugin-sdk/", "OS/openclaw/src/plugin-sdk/", "OS/openclaw/packages/plugin-package-contract/"], "category": "extensibility", "description": "Public versioned cross-package contract for channel/provider/tool plugins" },
+    { "name": "MCP bridge via mcporter", "evidence_paths": ["OS/openclaw/skills/mcporter/", "OS/openclaw/VISION.md"], "category": "integration", "description": "MCP integration routed through external mcporter (decoupled from core runtime)" },
+    { "name": "Pluggable memory (4 backends)", "evidence_paths": ["OS/openclaw/extensions/active-memory/", "OS/openclaw/extensions/memory-core/", "OS/openclaw/extensions/memory-lancedb/", "OS/openclaw/extensions/memory-wiki/", "OS/openclaw/packages/memory-host-sdk/"], "category": "core", "description": "Memory is a single-slot plugin (one active); ships with multiple options including LanceDB" },
+    { "name": "Multi-agent routing (per-agent sessions)", "evidence_paths": ["OS/openclaw/src/agents/", "OS/openclaw/src/channels/", "OS/openclaw/README.md"], "category": "core", "description": "Route inbound channels/accounts/peers to isolated agents (workspaces + per-agent sessions)" },
+    { "name": "Docker sandboxing for non-main sessions", "evidence_paths": ["OS/openclaw/Dockerfile.sandbox", "OS/openclaw/Dockerfile.sandbox-browser", "OS/openclaw/Dockerfile.sandbox-common", "OS/openclaw/docker-compose.yml"], "category": "governance", "description": "Per-session Docker sandboxes configurable for non-main sessions" },
+    { "name": "DM pairing policy + allowlists", "evidence_paths": ["OS/openclaw/src/channels/allowlists/", "OS/openclaw/README.md"], "category": "governance", "description": "Pairing codes for unknown senders; per-channel allow-from lists" },
+    { "name": "Cron service (durable)", "evidence_paths": ["OS/openclaw/src/cron/", "OS/openclaw/src/cron/service.jobs.test.ts", "OS/openclaw/src/cron/schedule.test.ts"], "category": "core", "description": "Built-in cron with store, schedule, jobs, delivery plan" },
+    { "name": "Remote access (Tailscale, SSH)", "evidence_paths": ["OS/openclaw/docs/", "OS/openclaw/AGENTS.md"], "category": "integration", "description": "Remote gateway control over Tailscale and SSH per docs" },
+    { "name": "Model provider plugins (many)", "evidence_paths": ["OS/openclaw/extensions/anthropic/", "OS/openclaw/extensions/google/", "OS/openclaw/extensions/deepseek/", "OS/openclaw/extensions/groq/", "OS/openclaw/extensions/fireworks/", "OS/openclaw/extensions/huggingface/", "OS/openclaw/extensions/kimi-coding/", "OS/openclaw/extensions/codex/", "OS/openclaw/extensions/amazon-bedrock/", "OS/openclaw/extensions/cloudflare-ai-gateway/", "OS/openclaw/extensions/copilot-proxy/"], "category": "integration", "description": "30+ model/provider bundled extensions" }
+  ],
+  "quality_signals": {
+    "test_framework": "vitest",
+    "test_file_count": null,
+    "linter": "oxlint + oxfmt",
+    "ci_provider": "GitHub Actions",
+    "ci_workflow_count": null,
+    "coverage_threshold": "70% lines/branches/functions/statements (V8)"
+  },
+  "documentation": {
+    "readme_lines": 1433,
+    "readme_sections": ["Install", "Quick start", "Security defaults", "Highlights", "Security model", "Operator quick refs", "Docs by goal", "Apps (macOS/iOS/Android)"],
+    "has_contributing": true,
+    "has_architecture_doc": true,
+    "docs_page_count": 46,
+    "mintlify_site": true
+  },
+  "extension_points": {
+    "plugins": { "mechanism": "Bundled plugins in extensions/ + published contract via packages/plugin-package-contract; npm-distributed third-party plugins", "path": "OS/openclaw/extensions/ + OS/openclaw/packages/plugin-sdk/" },
+    "channel_plugins": { "mechanism": "Typed channel-contract in src/plugin-sdk/channel-contract.ts; 25 bundled channel extensions", "path": "OS/openclaw/src/plugin-sdk/channel-contract.ts" },
+    "provider_plugins": { "mechanism": "Typed provider-entry; auto-enable hooks; SecretRef auth", "path": "OS/openclaw/src/plugin-sdk/provider-entry.ts" },
+    "hooks": { "mechanism": "hooks.internal.entries in config; gateway protocol events", "events": ["inbound", "pairing", "onboarding"] },
+    "mcp": { "client": true, "server": false, "note": "MCP via external mcporter bridge (not first-class in core)" },
+    "skills": { "mechanism": "Bundled skills/ + ClawHub marketplace (clawhub.ai)", "path": "OS/openclaw/skills/" }
+  },
+  "unique_selling_points": [
+    "Widest messaging channel coverage observed here (25 bundled channel extensions)",
+    "Native companion apps on macOS, iOS, Android (SwiftUI + Kotlin)",
+    "Live Canvas (A2UI) surface for agent-driven visual output",
+    "Local-first Gateway with typed node pairing protocol",
+    "Voice Wake + Talk Mode with ElevenLabs + system TTS fallback",
+    "Docker sandboxing for non-main (group/channel) sessions",
+    "Strict plugin/extension architectural boundaries enforced by contract"
+  ],
+  "limitations": [
+    { "description": "No first-class MCP server runtime in core; MCP integration delegated to external mcporter", "source": "OS/openclaw/VISION.md" },
+    { "description": "Terminal-first setup by design; onboarding flows intentionally not hidden", "source": "OS/openclaw/VISION.md" },
+    { "description": "Memory is single-slot (only one memory plugin active at a time)", "source": "OS/openclaw/VISION.md" }
+  ],
+  "confidence": "HIGH",
+  "extraction_method": "filesystem-scan",
+  "skill_version": "1.0.0"
+}

@@ -1,0 +1,90 @@
+{
+  "generatedAt": "2026-04-19T22:30:00Z",
+  "subject": "crewAI",
+  "path": "OS/crewAI/",
+  "primary_language": "Python",
+  "secondary_languages": ["Markdown"],
+  "stack": ["Python 3.10–3.12", "Pydantic 2", "LiteLLM", "OpenTelemetry", "ChromaDB", "uv"],
+  "license": "MIT",
+  "tagline": "Framework de orquestração de agentes autônomos role-playing, por cooperação (Crew = time com papéis + tasks).",
+  "source_url": "https://github.com/crewAIInc/crewAI",
+  "metrics": {
+    "loc_estimate": 23651,
+    "file_count": 500,
+    "top_level_dirs": ["src", "tests", "docs"],
+    "readme_lines": 300,
+    "last_commit_date": "2024-12-22",
+    "github_stars": null,
+    "github_contributors": null
+  },
+  "modules": [
+    { "name": "crewai", "path": "src/crewai/", "type": "package", "loc_estimate": 0, "description": "Core package — Agent, Crew, Task, Process, Flow" },
+    { "name": "memory", "path": "src/crewai/memory/", "type": "library", "loc_estimate": 0, "description": "Short-term, long-term, entity, user memory + storage" },
+    { "name": "flow", "path": "src/crewai/flow/", "type": "library", "loc_estimate": 0, "description": "Flow — graph-based orchestration com visualizer HTML" },
+    { "name": "cli", "path": "src/crewai/cli/", "type": "app", "loc_estimate": 0, "description": "CLI (crewai create crew <name>)" },
+    { "name": "telemetry", "path": "src/crewai/telemetry/", "type": "library", "loc_estimate": 0, "description": "OTel wiring" },
+    { "name": "tests", "path": "tests/", "type": "library", "loc_estimate": 0, "description": "Pytest suite" }
+  ],
+  "external_dependencies_top10": [
+    { "package": "pydantic", "version": ">=2.4.2", "purpose": "Models Agent/Crew/Task" },
+    { "package": "openai", "version": ">=1.13.3", "purpose": "LLM client" },
+    { "package": "litellm", "version": ">=1.44.22", "purpose": "Multi-provider LLM routing" },
+    { "package": "chromadb", "version": ">=0.5.23", "purpose": "Vector store para memória" },
+    { "package": "opentelemetry-sdk", "version": ">=1.22.0", "purpose": "Telemetry" },
+    { "package": "instructor", "version": ">=1.3.3", "purpose": "Structured output forcing" },
+    { "package": "click", "version": ">=8.1.7", "purpose": "CLI framework" },
+    { "package": "auth0-python", "version": ">=4.7.1", "purpose": "Auth para tools enterprise" },
+    { "package": "pyvis", "version": ">=0.3.2", "purpose": "Flow visualization" },
+    { "package": "pdfplumber", "version": ">=0.11.4", "purpose": "Leitura de PDF para knowledge sources" }
+  ],
+  "entry_points": [
+    { "kind": "cli", "path": "src/crewai/cli/cli.py", "command": "crewai create crew <project>" },
+    { "kind": "python_api", "path": "src/crewai/crew.py", "command": "from crewai import Crew, Agent, Task" }
+  ],
+  "capabilities": [
+    { "name": "Role-playing agents with goal+backstory", "evidence_paths": ["OS/crewAI/src/crewai/agent.py"], "category": "core", "description": "Cada Agent tem role, goal, backstory, tools — persona injetada no system prompt" },
+    { "name": "Crew orchestration (sequential & hierarchical)", "evidence_paths": ["OS/crewAI/src/crewai/crew.py", "OS/crewAI/src/crewai/process.py"], "category": "core", "description": "Process.sequential e Process.hierarchical como topologias fixas" },
+    { "name": "Task graph with dependencies", "evidence_paths": ["OS/crewAI/src/crewai/task.py", "OS/crewAI/src/crewai/tasks/conditional_task.py"], "category": "core", "description": "Tasks com context, expected_output, callbacks e ConditionalTask" },
+    { "name": "Flow (graph-based workflow)", "evidence_paths": ["OS/crewAI/src/crewai/flow/flow.py", "OS/crewAI/src/crewai/flow/flow_visualizer.py"], "category": "core", "description": "DSL decorators @start/@listen/@router para grafos de eventos + visualizer HTML" },
+    { "name": "Multi-tier memory (short/long/entity/user)", "evidence_paths": ["OS/crewAI/src/crewai/memory/short_term/", "OS/crewAI/src/crewai/memory/long_term/", "OS/crewAI/src/crewai/memory/entity/", "OS/crewAI/src/crewai/memory/user/"], "category": "core", "description": "4 níveis de memória com backend Chroma/SQLite" },
+    { "name": "Knowledge sources", "evidence_paths": ["OS/crewAI/src/crewai/knowledge/"], "category": "integration", "description": "PDF/CSV/texto como contexto compartilhado" },
+    { "name": "LiteLLM multi-provider", "evidence_paths": ["OS/crewAI/src/crewai/llm.py"], "category": "integration", "description": "Suporte a OpenAI, Anthropic, Ollama, Groq, etc. via litellm" },
+    { "name": "Telemetry via OpenTelemetry", "evidence_paths": ["OS/crewAI/src/crewai/telemetry/telemetry.py"], "category": "governance", "description": "OTel export para observabilidade externa" },
+    { "name": "Task guardrails", "evidence_paths": ["OS/crewAI/src/crewai/task.py"], "category": "governance", "description": "Guardrails validam output antes de passar ao próximo task (v0.86)" },
+    { "name": "Planner handler", "evidence_paths": ["OS/crewAI/src/crewai/utilities/planning_handler.py"], "category": "core", "description": "Planning automático que decompõe tasks antes da execução" },
+    { "name": "Task output storage + training", "evidence_paths": ["OS/crewAI/src/crewai/utilities/task_output_storage_handler.py", "OS/crewAI/src/crewai/utilities/training_handler.py"], "category": "governance", "description": "Persistência de outputs e modo training para aprimorar agentes" }
+  ],
+  "quality_signals": {
+    "test_framework": "pytest + pytest-vcr + pytest-asyncio",
+    "test_file_count": 43,
+    "linter": "ruff + mypy",
+    "ci_provider": "GitHub Actions",
+    "ci_workflow_count": 6
+  },
+  "documentation": {
+    "readme_sections": ["Why CrewAI", "Getting Started", "Key Features", "Examples", "How CrewAI Compares"],
+    "has_contributing": false,
+    "has_architecture_doc": true,
+    "docs_page_count": 30
+  },
+  "extension_points": {
+    "plugins": { "mechanism": "crewai-tools package + custom BaseTool", "path": "src/crewai/tools/" },
+    "hooks": { "mechanism": "callbacks em Task/Crew + telemetry events", "events": ["task_start", "task_end", "crew_start", "crew_end"] },
+    "mcp": { "client": false, "server": false }
+  },
+  "unique_selling_points": [
+    "Modelo mental de 'crew' (time com papéis) — abstração role-playing natural",
+    "Sequential + hierarchical + Flow (grafo) cobre múltiplas topologias",
+    "Multi-tier memory (short/long/entity/user) embutido com Chroma",
+    "OTel-first para observabilidade externa",
+    "CLI para scaffolding de projetos novos"
+  ],
+  "limitations": [
+    { "description": "Paralelismo limitado pelo GIL Python — fan-out verdadeiro requer async manual", "source": "src/crewai/crew.py (sync-by-default)" },
+    { "description": "Sem UI de monitoramento oficial — depende de OTel backend externo", "source": "ausência de dashboard em src/" },
+    { "description": "Failure recovery rudimentar — sem DLQ/replay determinístico embutido", "source": "src/crewai/crew.py" }
+  ],
+  "confidence": "HIGH",
+  "extraction_method": "filesystem-scan",
+  "skill_version": "1.0.0"
+}

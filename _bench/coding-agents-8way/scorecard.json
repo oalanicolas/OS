@@ -1,0 +1,552 @@
+{
+  "generatedAt": "2026-04-19T22:50:00Z",
+  "comparison_type": "nway",
+  "subjects": ["claude-code-main", "codex", "aider", "OpenHands", "gsd-2", "gstack", "superpowers", "ai-website-cloner-template"],
+  "dimension_pack": "coding-agent",
+  "methods": {
+    "claude-code-main": "installed",
+    "codex": "installed",
+    "aider": "installed",
+    "OpenHands": "installed",
+    "gsd-2": "installed",
+    "gstack": "installed",
+    "superpowers": "installed",
+    "ai-website-cloner-template": "installed"
+  },
+  "dimensions": [
+    {
+      "id": "coding_depth",
+      "name": "Coding Depth",
+      "weight": 0.18,
+      "scores": {
+        "claude-code-main": 88,
+        "codex": 82,
+        "aider": 85,
+        "OpenHands": 92,
+        "gsd-2": 84,
+        "gstack": 70,
+        "superpowers": 72,
+        "ai-website-cloner-template": 55
+      },
+      "signals_observed": {
+        "claude-code-main": [
+          { "signal": "Multi-file edits", "value": "43 tools incl FileEditTool/AgentTool", "evidence": "OS/claude-code-main/src/tools/" },
+          { "signal": "Language coverage", "value": "generic + LSP", "evidence": "OS/claude-code-main/src/tools/LSPTool" }
+        ],
+        "codex": [
+          { "signal": "Apply-patch engine", "value": "dedicated crate", "evidence": "OS/codex/codex-rs/apply-patch/" },
+          { "signal": "Language coverage", "value": "agnóstico (Rust runtime)", "evidence": "OS/codex/codex-rs/cli/" }
+        ],
+        "aider": [
+          { "signal": "Singularity 88%", "value": "88% do novo código escrito pelo aider", "evidence": "OS/aider/README.md:35-37" },
+          { "signal": "100+ languages", "value": "tree-sitter queries", "evidence": "OS/aider/aider/queries/" },
+          { "signal": "38 coders (edit modes)", "value": "editblock/whole/patch/search-replace/architect", "evidence": "OS/aider/aider/coders/" }
+        ],
+        "OpenHands": [
+          { "signal": "SWE-bench 77.6", "value": "badge README", "evidence": "OS/OpenHands/README.md:11" },
+          { "signal": "6 agents in AgentHub", "value": "codeact, loc, browsing etc", "evidence": "OS/OpenHands/openhands/agenthub/" },
+          { "signal": "Tech report arxiv", "value": "arxiv.org/abs/2511.03690", "evidence": "OS/OpenHands/README.md:14" }
+        ],
+        "gsd-2": [
+          { "signal": "UOK reactive/parallel", "value": "default execution path with plan-v2", "evidence": "OS/gsd-2/README.md:80" },
+          { "signal": "pi-coding-agent package", "value": "dedicated coding agent package", "evidence": "OS/gsd-2/packages/pi-coding-agent/" }
+        ],
+        "gstack": [
+          { "signal": "/ship + /autoplan workflow", "value": "release skill", "evidence": "OS/gstack/ship/" },
+          { "signal": "Own LLM evals", "value": "LLM-judge + E2E", "evidence": "OS/gstack/test/skill-llm-eval.test.ts" }
+        ],
+        "superpowers": [
+          { "signal": "SDD skill", "value": "subagent-driven development", "evidence": "OS/superpowers/skills/subagent-driven-development/" },
+          { "signal": "TDD skill", "value": "test-driven-development", "evidence": "OS/superpowers/skills/test-driven-development/" }
+        ],
+        "ai-website-cloner-template": [
+          { "signal": "Multi-phase pipeline", "value": "recon→foundation→specs→build→assembly", "evidence": "OS/ai-website-cloner-template/README.md:72-82" }
+        ]
+      },
+      "confidence": "HIGH",
+      "justification": {
+        "claude-code-main": "88: 43 tools, 101 commands, LSP integration; benchmark not published in mirror",
+        "codex": "82: Rust apply-patch + code-mode robust; no published bench in repo",
+        "aider": "85: 38 coders, 100+ langs, Singularity 88% autoreferente",
+        "OpenHands": "92: SWE-bench 77.6 publicado + 6 agents + arxiv paper",
+        "gsd-2": "84: pi-coding-agent + UOK reactive/parallel",
+        "gstack": "70: depende do host; own evals contam",
+        "superpowers": "72: SDD + TDD skills fortes, mas depende do host",
+        "ai-website-cloner-template": "55: template focado, não runtime genérico"
+      }
+    },
+    {
+      "id": "autonomy",
+      "name": "Autonomy",
+      "weight": 0.15,
+      "scores": {
+        "claude-code-main": 72,
+        "codex": 70,
+        "aider": 55,
+        "OpenHands": 85,
+        "gsd-2": 93,
+        "gstack": 70,
+        "superpowers": 88,
+        "ai-website-cloner-template": 75
+      },
+      "signals_observed": {
+        "claude-code-main": [
+          { "signal": "Plan mode", "value": "EnterPlanModeTool", "evidence": "OS/claude-code-main/src/tools/EnterPlanModeTool" },
+          { "signal": "Sub-agents", "value": "AgentTool + Team", "evidence": "OS/claude-code-main/src/tools/AgentTool" }
+        ],
+        "codex": [
+          { "signal": "Cloud tasks", "value": "async task engine", "evidence": "OS/codex/codex-rs/cloud-tasks/" }
+        ],
+        "aider": [
+          { "signal": "Single-turn", "value": "interactive pair-programming", "evidence": "OS/aider/README.md" }
+        ],
+        "OpenHands": [
+          { "signal": "Controller event-loop", "value": "long-horizon agent", "evidence": "OS/OpenHands/openhands/controller/" },
+          { "signal": "Runtime sandbox", "value": "isolated long-running", "evidence": "OS/OpenHands/openhands/runtime/" }
+        ],
+        "gsd-2": [
+          { "signal": "Auto-mode end-to-end", "value": "1 command → full milestone", "evidence": "OS/gsd-2/README.md:14-23" },
+          { "signal": "Stuck-loop detection", "value": "#4414", "evidence": "OS/gsd-2/README.md:66" },
+          { "signal": "Model fallback on limits", "value": "#4373", "evidence": "OS/gsd-2/README.md:69" }
+        ],
+        "gstack": [
+          { "signal": "/autoplan → implement → /ship", "value": "pipeline skill", "evidence": "OS/gstack/autoplan/" }
+        ],
+        "superpowers": [
+          { "signal": "SDD autonomia horas", "value": "agents work without deviating", "evidence": "OS/superpowers/README.md:13-16" },
+          { "signal": "verification-before-completion", "value": "gating skill", "evidence": "OS/superpowers/skills/verification-before-completion/" }
+        ],
+        "ai-website-cloner-template": [
+          { "signal": "Multi-phase pipeline", "value": "recon to assembly", "evidence": "OS/ai-website-cloner-template/README.md:72-82" }
+        ]
+      },
+      "confidence": "HIGH",
+      "justification": {
+        "claude-code-main": "72: Plan mode + Agent tools bounded, sem auto-mode explicit",
+        "codex": "70: cloud-tasks async existe, mas sem auto-mode no repo visível",
+        "aider": "55: single-turn focado, sem long-horizon",
+        "OpenHands": "85: controller event-loop genuinamente long-horizon",
+        "gsd-2": "93: auto-mode end-to-end + stuck-loop + model fallback — 3 signals únicos",
+        "gstack": "70: autoplan→ship pipeline bom, mas gated por host",
+        "superpowers": "88: SDD explicitamente horas sem HITL + verification skill",
+        "ai-website-cloner-template": "75: pipeline multi-fase real (recon→build→assembly)"
+      }
+    },
+    {
+      "id": "context_mgmt",
+      "name": "Context Mgmt",
+      "weight": 0.13,
+      "scores": {
+        "claude-code-main": 90,
+        "codex": 55,
+        "aider": 80,
+        "OpenHands": 75,
+        "gsd-2": 94,
+        "gstack": 50,
+        "superpowers": 50,
+        "ai-website-cloner-template": 45
+      },
+      "signals_observed": {
+        "claude-code-main": [
+          { "signal": "/compact + services/compact", "value": "compression command", "evidence": "OS/claude-code-main/src/commands/compact" },
+          { "signal": "memdir + team-mem-sync", "value": "persistent memory with relevance", "evidence": "OS/claude-code-main/src/memdir/" },
+          { "signal": "MCP integration (RAG-ish)", "value": "MCPTool for external context", "evidence": "OS/claude-code-main/src/tools/MCPTool" }
+        ],
+        "codex": [],
+        "aider": [
+          { "signal": "Repomap", "value": "full codebase map", "evidence": "OS/aider/aider/repomap.py" }
+        ],
+        "OpenHands": [
+          { "signal": "memory/ module", "value": "persistent memory layer", "evidence": "OS/OpenHands/openhands/memory/" }
+        ],
+        "gsd-2": [
+          { "signal": "KG memory 5-phase", "value": "capture_thought/memory_query/gsd_graph", "evidence": "OS/gsd-2/README.md:32-38" },
+          { "signal": "Hybrid retrieval", "value": "keyword + semantic", "evidence": "OS/gsd-2/README.md:35" },
+          { "signal": "Context clear/inject", "value": "explicit context lifecycle", "evidence": "OS/gsd-2/README.md:16" }
+        ],
+        "gstack": [
+          { "signal": "via host", "value": "depende do host agent", "evidence": "OS/gstack/CLAUDE.md" }
+        ],
+        "superpowers": [
+          { "signal": "via host", "value": "plugin depends on host", "evidence": "OS/superpowers/README.md:27-117" }
+        ],
+        "ai-website-cloner-template": [
+          { "signal": "docs/research artifacts", "value": "persisted specs", "evidence": "OS/ai-website-cloner-template/docs/research/" }
+        ]
+      },
+      "confidence": "HIGH",
+      "justification": {
+        "claude-code-main": "90: 3 signals fortes (compact + memdir + MCP)",
+        "codex": "55: sem evidência explícita de memory/compact",
+        "aider": "80: repomap é diferencial mas single-feature",
+        "OpenHands": "75: memory/ module genérico",
+        "gsd-2": "94: KG 5-phase + hybrid retrieval + explicit lifecycle — 3 signals únicos",
+        "gstack": "50: depende do host (Claude Code mesmo)",
+        "superpowers": "50: idem (via host)",
+        "ai-website-cloner-template": "45: artifacts são output-side, não memory layer"
+      }
+    },
+    {
+      "id": "git_integration",
+      "name": "Git Integration",
+      "weight": 0.10,
+      "scores": {
+        "claude-code-main": 88,
+        "codex": 65,
+        "aider": 92,
+        "OpenHands": 80,
+        "gsd-2": 85,
+        "gstack": 82,
+        "superpowers": 78,
+        "ai-website-cloner-template": 70
+      },
+      "signals_observed": {
+        "claude-code-main": [
+          { "signal": "/commit", "value": "commit command", "evidence": "OS/claude-code-main/src/commands/commit.ts" },
+          { "signal": "Enter/Exit WorktreeTool", "value": "worktree isolation", "evidence": "OS/claude-code-main/src/tools/EnterWorktreeTool" }
+        ],
+        "codex": [
+          { "signal": "via SDK", "value": "no explicit git tooling in codex-rs root", "evidence": "OS/codex/codex-rs/" }
+        ],
+        "aider": [
+          { "signal": "Auto-commit with messages", "value": "automatic sensible messages", "evidence": "OS/aider/aider/repo.py" },
+          { "signal": "Diff tooling + undo", "value": "familiar git tools", "evidence": "OS/aider/README.md:63-68" }
+        ],
+        "OpenHands": [
+          { "signal": "Resolver (issue→PR)", "value": "auto PR from issue", "evidence": "OS/OpenHands/openhands/resolver/" }
+        ],
+        "gsd-2": [
+          { "signal": "Branch isolation per milestone", "value": "isolation: branch mode", "evidence": "OS/gsd-2/README.md:68" },
+          { "signal": "Commits per unit", "value": "auto-mode commits", "evidence": "OS/gsd-2/README.md" }
+        ],
+        "gstack": [
+          { "signal": "/ship + /land-and-deploy", "value": "release workflow", "evidence": "OS/gstack/ship/" },
+          { "signal": "CHANGELOG/VERSION discipline", "value": "branch-scoped versioning", "evidence": "OS/gstack/CLAUDE.md" }
+        ],
+        "superpowers": [
+          { "signal": "using-git-worktrees skill", "value": "worktree pattern", "evidence": "OS/superpowers/skills/using-git-worktrees/" },
+          { "signal": "finishing-a-development-branch", "value": "branch-complete workflow", "evidence": "OS/superpowers/skills/finishing-a-development-branch/" }
+        ],
+        "ai-website-cloner-template": [
+          { "signal": "Parallel worktree dispatch", "value": "builders per section in worktrees", "evidence": "OS/ai-website-cloner-template/AGENTS.md" }
+        ]
+      },
+      "confidence": "HIGH",
+      "justification": {
+        "claude-code-main": "88: /commit + Worktree + Bash = full ops",
+        "codex": "65: via SDK apenas, sem tooling direto",
+        "aider": "92: auto-commit é feature-chave, messages idiomáticas, diff+undo (3 signals)",
+        "OpenHands": "80: resolver issue→PR é forte",
+        "gsd-2": "85: branch isolation + auto-commit per milestone",
+        "gstack": "82: /ship + /land-and-deploy + CHANGELOG discipline",
+        "superpowers": "78: 2 skills git-especializadas",
+        "ai-website-cloner-template": "70: parallel worktree dispatch é diferencial"
+      }
+    },
+    {
+      "id": "tdd",
+      "name": "TDD",
+      "weight": 0.10,
+      "scores": {
+        "claude-code-main": 55,
+        "codex": 50,
+        "aider": 82,
+        "OpenHands": 70,
+        "gsd-2": 80,
+        "gstack": 78,
+        "superpowers": 95,
+        "ai-website-cloner-template": 55
+      },
+      "signals_observed": {
+        "claude-code-main": [
+          { "signal": "Bash+hooks available", "value": "pode rodar testes mas sem skill TDD", "evidence": "OS/claude-code-main/src/hooks/" }
+        ],
+        "codex": [],
+        "aider": [
+          { "signal": "Auto-lint + auto-test after edit", "value": "automatic test loop", "evidence": "OS/aider/aider/linter.py" },
+          { "signal": "Fix problems detected", "value": "README.md:91-94", "evidence": "OS/aider/README.md:91-94" }
+        ],
+        "OpenHands": [
+          { "signal": "Runtime test tooling", "value": "pytest via runtime", "evidence": "OS/OpenHands/tests/" }
+        ],
+        "gsd-2": [
+          { "signal": "Verification gate", "value": "Python/Windows normalized", "evidence": "OS/gsd-2/README.md:67" },
+          { "signal": "Test suite internal", "value": "100+ tests", "evidence": "OS/gsd-2/package.json scripts" }
+        ],
+        "gstack": [
+          { "signal": "Own eval framework", "value": "LLM-judge + E2E 2-tier", "evidence": "OS/gstack/test/skill-llm-eval.test.ts" },
+          { "signal": "/qa with real browser", "value": "Playwright-backed", "evidence": "OS/gstack/qa/" }
+        ],
+        "superpowers": [
+          { "signal": "test-driven-development skill", "value": "true red/green enforcement", "evidence": "OS/superpowers/skills/test-driven-development/" },
+          { "signal": "verification-before-completion", "value": "gating skill", "evidence": "OS/superpowers/skills/verification-before-completion/" },
+          { "signal": "README explicit TDD stance", "value": "true red/green TDD, YAGNI, DRY", "evidence": "OS/superpowers/README.md:11" }
+        ],
+        "ai-website-cloner-template": [
+          { "signal": "QA visual diff phase", "value": "assembly phase verifies", "evidence": "OS/ai-website-cloner-template/README.md:72-82" }
+        ]
+      },
+      "confidence": "HIGH",
+      "justification": {
+        "claude-code-main": "55: ferramentas existem, sem skill explícita",
+        "codex": "50: sem evidência de TDD-specific tooling",
+        "aider": "82: auto-lint+auto-test é robusto (2 signals)",
+        "OpenHands": "70: runtime suporta, sem skill TDD explícita",
+        "gsd-2": "80: verification gate é signal forte",
+        "gstack": "78: own evals + /qa robustos",
+        "superpowers": "95: skill dedicada + enforcement real red/green + stance no README (3 signals)",
+        "ai-website-cloner-template": "55: visual diff é verify mas não TDD"
+      }
+    },
+    {
+      "id": "multi_agent",
+      "name": "Multi-agent",
+      "weight": 0.12,
+      "scores": {
+        "claude-code-main": 93,
+        "codex": 60,
+        "aider": 25,
+        "OpenHands": 90,
+        "gsd-2": 85,
+        "gstack": 78,
+        "superpowers": 90,
+        "ai-website-cloner-template": 80
+      },
+      "signals_observed": {
+        "claude-code-main": [
+          { "signal": "AgentTool + coordinator", "value": "sub-agent spawn + multi-agent coord", "evidence": "OS/claude-code-main/src/coordinator/coordinatorMode.ts" },
+          { "signal": "TeamCreate/DeleteTool", "value": "team-level parallel work", "evidence": "OS/claude-code-main/src/tools/TeamCreateTool" },
+          { "signal": "Worktree isolation", "value": "parallel safety", "evidence": "OS/claude-code-main/src/tools/EnterWorktreeTool" }
+        ],
+        "codex": [
+          { "signal": "Async Rust runtime", "value": "tokio-based", "evidence": "OS/codex/codex-rs/async-utils/" }
+        ],
+        "aider": [
+          { "signal": "Single-agent design", "value": "no multi-agent module", "evidence": "OS/aider/aider/" }
+        ],
+        "OpenHands": [
+          { "signal": "AgentHub 6 agents", "value": "codeact, browsing, visualbrowsing, loc, readonly, dummy", "evidence": "OS/OpenHands/openhands/agenthub/" },
+          { "signal": "Microagents", "value": "especializados pequenos", "evidence": "OS/OpenHands/openhands/microagent/" }
+        ],
+        "gsd-2": [
+          { "signal": "UOK reactive/parallel scheduling", "value": "orchestration kernel default path", "evidence": "OS/gsd-2/README.md:80" },
+          { "signal": "gsd-orchestrator/", "value": "dedicated orchestrator dir", "evidence": "OS/gsd-2/gsd-orchestrator/" }
+        ],
+        "gstack": [
+          { "signal": "/autoplan dispatches review agents", "value": "CEO→eng→design review pipeline", "evidence": "OS/gstack/autoplan/" },
+          { "signal": "23 role-specialized skills", "value": "virtual team", "evidence": "OS/gstack/README.md:51" }
+        ],
+        "superpowers": [
+          { "signal": "subagent-driven-development skill", "value": "SDD core methodology", "evidence": "OS/superpowers/skills/subagent-driven-development/" },
+          { "signal": "dispatching-parallel-agents skill", "value": "parallel via worktrees", "evidence": "OS/superpowers/skills/dispatching-parallel-agents/" }
+        ],
+        "ai-website-cloner-template": [
+          { "signal": "Orchestrator → builder agents per section", "value": "parallel worktree", "evidence": "OS/ai-website-cloner-template/AGENTS.md MOST IMPORTANT NOTES" },
+          { "signal": "README.md:77-80 parallel build phase", "value": "dispatches builders", "evidence": "OS/ai-website-cloner-template/README.md:77-80" }
+        ]
+      },
+      "confidence": "HIGH",
+      "justification": {
+        "claude-code-main": "93: AgentTool+coordinator+Team+Worktree — 3 signals robustos",
+        "codex": "60: async capable mas sem multi-agent module",
+        "aider": "25: explicitamente single-agent",
+        "OpenHands": "90: AgentHub 6 + microagents — signal duplo observável",
+        "gsd-2": "85: UOK parallel é forte",
+        "gstack": "78: 23 role-skills + /autoplan pipeline",
+        "superpowers": "90: 2 skills core (SDD + dispatching)",
+        "ai-website-cloner-template": "80: orchestrator→builders é o modelo padrão do template"
+      }
+    },
+    {
+      "id": "extensibility",
+      "name": "Extensibility",
+      "weight": 0.12,
+      "scores": {
+        "claude-code-main": 96,
+        "codex": 75,
+        "aider": 60,
+        "OpenHands": 88,
+        "gsd-2": 90,
+        "gstack": 85,
+        "superpowers": 80,
+        "ai-website-cloner-template": 62
+      },
+      "signals_observed": {
+        "claude-code-main": [
+          { "signal": "Plugin system", "value": "builtin + bundled", "evidence": "OS/claude-code-main/src/plugins/builtinPlugins.ts" },
+          { "signal": "Skill system + SkillTool", "value": "user-authored skills", "evidence": "OS/claude-code-main/src/skills/" },
+          { "signal": "MCP client + OAuth", "value": "full MCP", "evidence": "OS/claude-code-main/src/tools/MCPTool" },
+          { "signal": "Hooks", "value": "lifecycle + permission", "evidence": "OS/claude-code-main/src/hooks/" }
+        ],
+        "codex": [
+          { "signal": "MCP server crate", "value": "mcp-server", "evidence": "OS/codex/codex-rs/mcp-server/" },
+          { "signal": "SDK TS + Python", "value": "oficial", "evidence": "OS/codex/sdk/" },
+          { "signal": "codex-hooks crate", "value": "hooks JSON schema", "evidence": "OS/codex/package.json write-hooks-schema" }
+        ],
+        "aider": [
+          { "signal": "Coders pluggable (38)", "value": "edit modes", "evidence": "OS/aider/aider/coders/" }
+        ],
+        "OpenHands": [
+          { "signal": "AgentHub (6 agents extensible)", "value": "add agent via dir", "evidence": "OS/OpenHands/openhands/agenthub/" },
+          { "signal": "MCP client+server (fastmcp)", "value": "mcp>=1.25, fastmcp>=3.2", "evidence": "OS/OpenHands/pyproject.toml" },
+          { "signal": "Skills + microagents", "value": "dual extensibility", "evidence": "OS/OpenHands/skills/" }
+        ],
+        "gsd-2": [
+          { "signal": "Workflow plugin system", "value": "/gsd workflow commands", "evidence": "OS/gsd-2/README.md:46" },
+          { "signal": "Extension API 3rd party", "value": ".gsd/extensions/", "evidence": "OS/gsd-2/README.md:82" },
+          { "signal": "Own MCP server", "value": "packages/mcp-server", "evidence": "OS/gsd-2/packages/mcp-server/" }
+        ],
+        "gstack": [
+          { "signal": "23+ skills via gen-skill-docs.ts", "value": "skill generation pipeline", "evidence": "OS/gstack/scripts/gen-skill-docs.ts" },
+          { "signal": "Multi-host config (10 agents)", "value": "typed hosts/", "evidence": "OS/gstack/hosts/" },
+          { "signal": "ACP + ClawHub marketplace", "value": "3rd-party skill publishing", "evidence": "OS/gstack/openclaw/" }
+        ],
+        "superpowers": [
+          { "signal": "14 skills + 3 commands", "value": "composable", "evidence": "OS/superpowers/skills/" },
+          { "signal": "Multi-platform distribution", "value": "6 platforms (Claude + Codex + Cursor + OpenCode + Copilot + Gemini)", "evidence": "OS/superpowers/README.md:32-117" },
+          { "signal": "Hooks + agents dirs", "value": "session-start + code-reviewer", "evidence": "OS/superpowers/hooks/hooks.json" }
+        ],
+        "ai-website-cloner-template": [
+          { "signal": "/clone-website skill + sync-skills.mjs", "value": "skill generated for all platforms", "evidence": "OS/ai-website-cloner-template/scripts/sync-skills.mjs" },
+          { "signal": "AGENTS.md → 13 agents", "value": "sync-agent-rules.sh", "evidence": "OS/ai-website-cloner-template/scripts/sync-agent-rules.sh" }
+        ]
+      },
+      "confidence": "HIGH",
+      "justification": {
+        "claude-code-main": "96: 4 eixos de extensibilidade (plugin + skill + MCP + hooks)",
+        "codex": "75: MCP server + SDK + hooks — 3 signals",
+        "aider": "60: coders são pluggable mas single-axis",
+        "OpenHands": "88: agenthub + MCP + skills + microagents — 3 signals",
+        "gsd-2": "90: workflow plugins + Extension API + MCP — 3 signals",
+        "gstack": "85: 23 skills + multi-host + ACP — 3 signals",
+        "superpowers": "80: 14 skills + 6 platforms + hooks",
+        "ai-website-cloner-template": "62: dual (skill + agent rules) mas escopo domínio-único"
+      }
+    },
+    {
+      "id": "community",
+      "name": "Community",
+      "weight": 0.10,
+      "scores": {
+        "claude-code-main": 85,
+        "codex": 88,
+        "aider": 95,
+        "OpenHands": 90,
+        "gsd-2": 68,
+        "gstack": 62,
+        "superpowers": 80,
+        "ai-website-cloner-template": 45
+      },
+      "signals_observed": {
+        "claude-code-main": [
+          { "signal": "Mirror de ferramenta Anthropic oficial", "value": "ecosystem maior do nicho", "evidence": "OS/claude-code-main/README.md:1-30" }
+        ],
+        "codex": [
+          { "signal": "OpenAI oficial", "value": "npm @openai/codex + Homebrew", "evidence": "OS/codex/README.md:1-4" },
+          { "signal": "17 CI workflows", "value": "atividade engenharia ampla", "evidence": "OS/codex/.github/workflows/" }
+        ],
+        "aider": [
+          { "signal": "5.7M PyPI installs", "value": "cumulative", "evidence": "OS/aider/README.md:30" },
+          { "signal": "15B tokens/week", "value": "throughput de uso ativo", "evidence": "OS/aider/README.md:32" },
+          { "signal": "OpenRouter Top 20", "value": "ranking entre apps", "evidence": "OS/aider/README.md:34" }
+        ],
+        "OpenHands": [
+          { "signal": "SWE-bench 77.6 líder OSS", "value": "badge README", "evidence": "OS/OpenHands/README.md:11" },
+          { "signal": "Tech report arxiv", "value": "paper", "evidence": "OS/OpenHands/README.md:14" },
+          { "signal": "Trusted by TikTok/VMware/Roche/Amazon", "value": "enterprise adopters cited", "evidence": "OS/OpenHands/README.md:101-118" }
+        ],
+        "gsd-2": [
+          { "signal": "npm gsd-pi", "value": "published package", "evidence": "OS/gsd-2/package.json name" },
+          { "signal": "Discord invite", "value": "README badge", "evidence": "OS/gsd-2/README.md:10" }
+        ],
+        "gstack": [
+          { "signal": "MIT + Karpathy quote", "value": "README.md:3", "evidence": "OS/gstack/README.md:3" },
+          { "signal": "YC endorsement (Garry Tan)", "value": "President YC", "evidence": "OS/gstack/README.md:7" }
+        ],
+        "superpowers": [
+          { "signal": "Claude plugin marketplace (oficial Anthropic)", "value": "distribuição oficial", "evidence": "OS/superpowers/README.md:32-40" },
+          { "signal": "6 platforms distribution", "value": "multi-host", "evidence": "OS/superpowers/README.md:32-117" }
+        ],
+        "ai-website-cloner-template": [
+          { "signal": "Discord + stars badge", "value": "pequeno", "evidence": "OS/ai-website-cloner-template/README.md:3" }
+        ]
+      },
+      "confidence": "MEDIUM",
+      "justification": {
+        "claude-code-main": "85: ferramenta oficial Anthropic (ecossistema) mas mirror specific",
+        "codex": "88: OpenAI oficial + npm/Homebrew + 17 CI workflows",
+        "aider": "95: 3 signals fortes (5.7M installs + 15B tok/wk + OpenRouter Top 20)",
+        "OpenHands": "90: SWE-bench líder + paper + enterprise citadores (3 signals)",
+        "gsd-2": "68: npm + Discord, sem números de adoption no README",
+        "gstack": "62: YC endorsement forte mas é novo",
+        "superpowers": "80: marketplace oficial Anthropic + 6 platforms",
+        "ai-website-cloner-template": "45: pequeno, Discord + stars shield"
+      }
+    }
+  ],
+  "weighted_totals": {
+    "claude-code-main": 83.82,
+    "codex": 68.91,
+    "aider": 71.05,
+    "OpenHands": 84.42,
+    "gsd-2": 85.59,
+    "gstack": 71.36,
+    "superpowers": 78.36,
+    "ai-website-cloner-template": 61.04
+  },
+  "ranking": [
+    { "rank": 1, "subject": "gsd-2", "score": 85.59 },
+    { "rank": 2, "subject": "OpenHands", "score": 84.42 },
+    { "rank": 3, "subject": "claude-code-main", "score": 83.82 },
+    { "rank": 4, "subject": "superpowers", "score": 78.36 },
+    { "rank": 5, "subject": "gstack", "score": 71.36 },
+    { "rank": 6, "subject": "aider", "score": 71.05 },
+    { "rank": 7, "subject": "codex", "score": 68.91 },
+    { "rank": 8, "subject": "ai-website-cloner-template", "score": 61.04 }
+  ],
+  "dimension_winners": {
+    "coding_depth": "OpenHands (92)",
+    "autonomy": "gsd-2 (93)",
+    "context_mgmt": "gsd-2 (94)",
+    "git_integration": "aider (92)",
+    "tdd": "superpowers (95)",
+    "multi_agent": "claude-code-main (93)",
+    "extensibility": "claude-code-main (96)",
+    "community": "aider (95)"
+  },
+  "profile_breakdown": {
+    "solo_dev": {
+      "description": "Dev solo em projeto pessoal; prioriza autonomy, git, community (nice-to-have TDD)",
+      "weights_override": { "autonomy": 0.25, "git_integration": 0.2, "community": 0.15, "coding_depth": 0.15, "context_mgmt": 0.1, "tdd": 0.05, "multi_agent": 0.05, "extensibility": 0.05 },
+      "top3": [
+        { "rank": 1, "subject": "gsd-2", "score": 85.2 },
+        { "rank": 2, "subject": "OpenHands", "score": 84.45 },
+        { "rank": 3, "subject": "claude-code-main", "score": 82.75 }
+      ]
+    },
+    "team": {
+      "description": "Team/feature factory; prioriza multi-agent, TDD, extensibility, git",
+      "weights_override": { "multi_agent": 0.2, "tdd": 0.18, "extensibility": 0.17, "git_integration": 0.15, "coding_depth": 0.12, "autonomy": 0.08, "context_mgmt": 0.05, "community": 0.05 },
+      "top3": [
+        { "rank": 1, "subject": "gsd-2", "score": 85.07 },
+        { "rank": 2, "subject": "OpenHands", "score": 83.65 },
+        { "rank": 3, "subject": "claude-code-main", "score": 83.09 }
+      ]
+    },
+    "enterprise": {
+      "description": "Enterprise; prioriza extensibility (MCP/plugins), community, coding_depth, deploy maturity",
+      "weights_override": { "extensibility": 0.22, "coding_depth": 0.2, "community": 0.15, "tdd": 0.12, "git_integration": 0.1, "context_mgmt": 0.08, "multi_agent": 0.08, "autonomy": 0.05 },
+      "top3": [
+        { "rank": 1, "subject": "claude-code-main", "score": 85.11 },
+        { "rank": 1, "subject": "OpenHands", "score": 85.11 },
+        { "rank": 3, "subject": "gsd-2", "score": 83.87 }
+      ]
+    }
+  },
+  "confidence_overall": "HIGH",
+  "limitations": [
+    "Community scores são comparativos dentro do sample (READMEs variam no que expõem) — confidence MEDIUM nessa dimensão.",
+    "claude-code-main é mirror sem tests/CI — algumas capabilities são inferidas do código, não executadas.",
+    "Profile=quick: não foi feita varredura profunda de código; signals vêm de README/manifest/top-level ls."
+  ]
+}

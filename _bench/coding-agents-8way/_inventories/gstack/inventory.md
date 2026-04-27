@@ -1,0 +1,135 @@
+# Inventário: gstack
+
+**Path:** `OS/gstack/`
+**Date:** 2026-04-19
+**Extraction Method:** filesystem-scan + doc-scan
+**Confidence:** HIGH
+
+---
+
+## Identity
+
+| Field | Value |
+|-------|-------|
+| Slug | gstack |
+| Source URL | https://github.com/garrytan/gstack |
+| Primary language | TypeScript |
+| Stack | Bun, Playwright |
+| License | MIT |
+| Tagline | Garry Tan's open-source software factory — 23+ slash-command skills sobre Claude Code/Codex/OpenClaw |
+
+## Key Metrics
+
+| Metric | Value | Source |
+|--------|-------|--------|
+| LOC (ballpark) | ~40k (browse + design CLIs + scripts) | find |
+| Files .ts | 250 | find |
+| Top-level dirs | 73 | ls |
+| README length | 415 | wc -l |
+| Last commit | 2026-04-19 | git log |
+| CI workflows | 5 | .github/workflows |
+
+## Modules / Top-level Structure
+
+| Module | Path | Type | Loc estimate | Description |
+|--------|------|------|--------------|-------------|
+| browse | `browse/` | app | ~15k | Headless browser CLI (Playwright) |
+| design | `design/` | app | ~5k | Design generation CLI (GPT Image API) |
+| hosts | `hosts/` | library | ~2k | Typed host configs (10 AI agents) |
+| scripts | `scripts/` | library | ~5k | Build+DX tooling, gen-skill-docs |
+| extension | `extension/` | package | ~3k | Chrome extension + side panel |
+| skills (23) | `ship/, review/, qa/, cso/, autoplan/, ...` | library | — | 23 slash-command skills |
+
+## External Dependencies (top)
+
+| Package | Version | Purpose |
+|---------|---------|---------|
+| bun | >=1.0 | Runtime |
+| playwright | — | Browser (browse CLI) |
+
+## Entry Points
+
+| Entry | Path | Command |
+|-------|------|---------|
+| Skills | `{skill}/SKILL.md` | `/ship, /review, /qa, /cso, /autoplan, /office-hours, /codex, ...` |
+| Browser CLI | `browse/dist/browse` | `$B <cmd>` |
+| Design CLI | `design/dist/design` | `design ...` |
+
+## Capabilities (observed)
+
+### Core Capabilities
+
+| Capability | Evidence | Notes |
+|------------|----------|-------|
+| 23 slash-command skills | `OS/gstack/README.md:51`, `ship/`, `review/`, `qa/` etc. | Virtual engineering team |
+| /qa + /qa-only | `OS/gstack/qa/`, `OS/gstack/qa-only/` | Playwright-backed browser QA |
+| /ship (release) | `OS/gstack/ship/` | CHANGELOG + VERSION bump + merge+deploy |
+| /review (PR) | `OS/gstack/review/` | Code review workflow |
+| /autoplan + 4 plan-review | `OS/gstack/autoplan/`, `plan-ceo-review/`, `plan-eng-review/`, `plan-design-review/` | CEO → eng → design review pipeline |
+| Browser CLI | `OS/gstack/browse/src/commands.ts` | Own Playwright CLI |
+
+### Optional/Extensibility
+
+| Capability | Evidence | Notes |
+|------------|----------|-------|
+| Multi-host (10 agents) | `OS/gstack/hosts/`, README.md:113-119 | Claude Code, Codex, OpenCode, Cursor, Factory, Slate, OpenClaw, Hermes, gbrain, Kiro |
+| CSO (OWASP+STRIDE) | `OS/gstack/cso/` | Security audit skill |
+| /codex (2nd opinion) | `OS/gstack/codex/` | Calls OpenAI Codex CLI for review |
+| ACP/OpenClaw | `OS/gstack/openclaw/`, README.md:65-91 | ClawHub marketplace skills |
+| Team mode | `OS/gstack/README.md:53-64` | Auto-update throttled 1/h |
+| Evals (2-tier) | `OS/gstack/test/skill-llm-eval.test.ts`, `test/skill-e2e-*.test.ts` | LLM-judge + E2E diff-based |
+| Slop-scan | `OS/gstack/slop-scan.config.json` | AI code quality |
+| Chrome extension | `OS/gstack/extension/` | Side panel + CSS inspector |
+
+## Tests / Quality Signals
+
+| Signal | Value | Evidence |
+|--------|-------|----------|
+| Test framework | bun test + claude -p | `package.json scripts` |
+| Linter | actionlint | `actionlint.yaml` |
+| CI | GitHub Actions | 5 workflows (actionlint, ci-image, evals, evals-periodic, skill-docs) |
+
+## Documentation
+
+| Type | Path | Status |
+|------|------|--------|
+| README | `README.md` | 415 linhas |
+| CONTRIBUTING | `CONTRIBUTING.md` | presente |
+| Architecture | `ARCHITECTURE.md`, `DESIGN.md`, `ETHOS.md`, `BROWSER.md` | presentes |
+| TODOS | `TODOS.md` | presente |
+| CLAUDE.md | extenso (agent guide) | presente |
+
+## Extension Points
+
+| Extension Type | Where | How to extend |
+|----------------|-------|---------------|
+| Skills | Root dir + `SKILL.md.tmpl` + `scripts/gen-skill-docs.ts` | Add skill dir, regenerate |
+| Hosts | `hosts/` | Add typed host config |
+| MCP | — | Não tem |
+
+## Notable Design Decisions
+
+- Skills são templates Markdown gerados por script (single source of truth)
+- Multi-host por design: funciona em 10 agents via host configs
+- Zero dependency no repo do usuário (vendorização deprecated)
+- Writing style V1: jargon glossed, outcome-framed
+
+## Limitations
+
+- Sem MCP nativo (skill-oriented)
+- Depende do host agent pra executar
+- Skills são prompt templates, não código — comportamento varia por LLM
+
+## Unique Selling Points
+
+- Virtual engineering team (23 specialists)
+- Multi-host (único do benchmark em 10 agents)
+- CSO skill (OWASP+STRIDE, único)
+- Browser CLI próprio (/qa real)
+- Evals 2-tier (gate+periodic, diff-based)
+- Slop-scan integration
+- Team mode auto-update
+
+---
+
+_Generated by os-bench inventory task | Template v1.0_

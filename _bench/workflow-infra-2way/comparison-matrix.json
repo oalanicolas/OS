@@ -1,0 +1,243 @@
+{
+  "generatedAt": "2026-04-19T00:00:00Z",
+  "comparison_type": "pair",
+  "subjects": ["workflow", "gh-aw"],
+  "dimension_pack": "workflow-infra",
+  "sources": {
+    "workflow": ["OS/workflow/README.md", "OS/workflow/CLAUDE.md", "OS/workflow/packages/core/src/", "OS/workflow/packages/world/src/interfaces.ts", "OS/workflow/docs/content/docs/foundations/", "OS/workflow/docs/content/docs/how-it-works/"],
+    "gh-aw": ["OS/gh-aw/README.md", "OS/gh-aw/DEVGUIDE.md", "OS/gh-aw/CHANGELOG.md", "OS/gh-aw/pkg/workflow/", "OS/gh-aw/docs/src/content/docs/reference/", "OS/gh-aw/docs/src/content/docs/introduction/"]
+  },
+  "categories": [
+    {
+      "name": "Paradigm",
+      "features": [
+        {
+          "name": "Execution model",
+          "values": { "workflow": "Durable JS functions with event-sourced replay (node:vm sandbox + SWC-split step bundles)", "gh-aw": "Markdown with YAML frontmatter compiled to GitHub Actions .lock.yml; agent interprets NL body" },
+          "equivalence": 1,
+          "delta": "Entirely different paradigms: typed durable code vs declarative NL DSL compiled to CI jobs."
+        },
+        {
+          "name": "Primary runtime",
+          "values": { "workflow": "Node.js on Vercel / self-host (Postgres/local FS)", "gh-aw": "GitHub Actions runners" },
+          "equivalence": 1,
+          "delta": "Runtime substrates share almost no assumptions."
+        },
+        {
+          "name": "Author surface",
+          "values": { "workflow": "TypeScript / JavaScript source files with \"use workflow\" / \"use step\" directives", "gh-aw": "Markdown + YAML frontmatter; body is natural-language prompt" },
+          "equivalence": 1,
+          "delta": "Code vs prose DSL."
+        }
+      ]
+    },
+    {
+      "name": "Durability",
+      "features": [
+        {
+          "name": "Step persistence",
+          "values": { "workflow": "Every step input/output persisted to event log (core engine + world backends)", "gh-aw": "Persistence is Actions-level: job logs + artifacts; no per-LLM-turn event log" },
+          "equivalence": 1,
+          "delta": "workflow has a first-class durable step abstraction; gh-aw inherits Actions semantics."
+        },
+        {
+          "name": "Crash recovery",
+          "values": { "workflow": "Deterministic replay reconstructs state after cold start/scale event (docs: event-sourcing.mdx)", "gh-aw": "Replay = re-run the GitHub Actions workflow_run (workflow-level, not step-level)" },
+          "equivalence": 1,
+          "delta": "workflow recovers mid-function; gh-aw recovers by restarting the whole workflow_run."
+        },
+        {
+          "name": "Exactly-once side effects", "values": { "workflow": "Steps memoized by event log; author warned to keep step bodies idempotent (foundations/idempotency.mdx)", "gh-aw": "No framework-level memoization; responsibility sits in action implementations (safe-outputs handler has dedupe)" },
+          "equivalence": 3,
+          "delta": "Both rely on user-level idempotency, but workflow structurally memoizes successful steps."
+        }
+      ]
+    },
+    {
+      "name": "Retry semantics",
+      "features": [
+        {
+          "name": "Default retries",
+          "values": { "workflow": "3 retries per step by default; `fn.maxRetries = N` override (docs: errors-and-retries.mdx)", "gh-aw": "Inherits Actions `continue-on-error` / step-retry-action patterns; no framework default for LLM retries beyond `max-turns`/`max-continuations` knobs" },
+          "equivalence": 1,
+          "delta": "workflow has typed retry primitives; gh-aw delegates to Actions and per-engine knobs."
+        },
+        {
+          "name": "Typed error opt-outs",
+          "values": { "workflow": "`FatalError` (stop) / `RetryableError` (custom retryAfter, arbitrary backoff) — packages/errors", "gh-aw": "No equivalent error taxonomy; engines may abort via max-turns" },
+          "equivalence": 1,
+          "delta": "Only workflow ships typed retry controls."
+        },
+        {
+          "name": "Backoff / jitter",
+          "values": { "workflow": "Arbitrary user-supplied schedule: `retryAfter: (attempt ** 2) * 1000`; duration strings via ms (docs/foundations/errors-and-retries.mdx)", "gh-aw": "Delegated to Actions retry tooling" },
+          "equivalence": 1,
+          "delta": "workflow exposes programmable backoff; gh-aw depends on external action patterns."
+        }
+      ]
+    },
+    {
+      "name": "Event log & debugging",
+      "features": [
+        {
+          "name": "Append-only event log",
+          "values": { "workflow": "Yes — events-consumer.ts, per-world backend stores events (local FS / Postgres / Vercel)", "gh-aw": "No — Actions stores job logs; no per-step event stream" },
+          "equivalence": 1,
+          "delta": "workflow-only capability."
+        },
+        {
+          "name": "Deterministic replay",
+          "values": { "workflow": "First-class — docs/how-it-works/event-sourcing.mdx; seedrandom + ULID ensure determinism", "gh-aw": "N/A — each workflow_run is independent" },
+          "equivalence": 1,
+          "delta": "workflow-only capability."
+        },
+        {
+          "name": "Observability UI",
+          "values": { "workflow": "observability.ts hydrateResourceIO powers replay inspector (referenced in CLAUDE.md)", "gh-aw": "GitHub Actions run UI + `gh aw logs`" },
+          "equivalence": 3,
+          "delta": "Both have UIs; workflow's is step/event-aware, gh-aw's is job-aware."
+        },
+        {
+          "name": "Audit trail",
+          "values": { "workflow": "Event log doubles as audit trail", "gh-aw": "GitHub Actions audit + repo commit history of .lock.yml + `gh aw audit` command" },
+          "equivalence": 3,
+          "delta": "Different shapes of auditability; both credible."
+        }
+      ]
+    },
+    {
+      "name": "Parallelism",
+      "features": [
+        {
+          "name": "Fan-out primitive",
+          "values": { "workflow": "`Promise.all` on step invocations runs them in parallel, all persisted (docs/foundations/common-patterns.mdx)", "gh-aw": "`matrix:` strategy in compiled Actions YAML (inherited); `engine.concurrency` caps per engine" },
+          "equivalence": 3,
+          "delta": "Both support parallelism, but workflow parallelizes inside one function; gh-aw relies on Actions matrix per job." },
+        {
+          "name": "Race / timeout",
+          "values": { "workflow": "`Promise.race` + durable sleep for timeouts", "gh-aw": "`timeout-minutes` on Actions jobs + stop-after triggers" },
+          "equivalence": 3,
+          "delta": "Conceptually similar outcomes via different mechanisms." },
+        {
+          "name": "Concurrency limits",
+          "values": { "workflow": "Not prominently documented at framework level; worlds can throttle", "gh-aw": "Dual concurrency: per-workflow keyed by issue/PR/branch + per-engine `gh-aw-{engine-id}`" },
+          "equivalence": 1,
+          "delta": "gh-aw ships richer concurrency-group controls out of the box."
+        }
+      ]
+    },
+    {
+      "name": "Language support & DSL",
+      "features": [
+        {
+          "name": "Languages",
+          "values": { "workflow": "JavaScript / TypeScript only", "gh-aw": "Markdown DSL; agent prompts can invoke any language via shell/tools; native CLI in Go" },
+          "equivalence": 1,
+          "delta": "gh-aw is polyglot at the tool surface; workflow is JS-only." },
+        {
+          "name": "DSL richness",
+          "values": { "workflow": "None — idiomatic TS (directives only)", "gh-aw": "Rich YAML frontmatter + NL body; dedicated reference docs: triggers, safe-outputs, tools, engines, sandbox, concurrency" },
+          "equivalence": 1,
+          "delta": "gh-aw has a large DSL; workflow deliberately has none." },
+        {
+          "name": "Framework integrations",
+          "values": { "workflow": "Next.js, Nitro, Nuxt, SvelteKit, Astro, NestJS (6 packages)", "gh-aw": "N/A (runs on Actions)" },
+          "equivalence": 1,
+          "delta": "workflow-only category." },
+        {
+          "name": "IDE support",
+          "values": { "workflow": "TypeScript plugin package + TS types", "gh-aw": "WASM compiler for editor integration; schema-backed YAML" },
+          "equivalence": 5,
+          "delta": "Both invest in editor integration along the grain of their DSL." }
+      ]
+    },
+    {
+      "name": "Cloud lock-in / portability",
+      "features": [
+        {
+          "name": "Managed hosting",
+          "values": { "workflow": "First-class on Vercel (world-vercel); other worlds (local/postgres) exist but less battle-tested", "gh-aw": "Runs anywhere GitHub Actions runs (GitHub.com, GHES, self-hosted runners)" },
+          "equivalence": 1,
+          "delta": "workflow leans Vercel; gh-aw leans GitHub — both are major vendors, but GitHub Actions is more widely self-hosted." },
+        {
+          "name": "Self-host option",
+          "values": { "workflow": "@workflow/world-postgres (Drizzle) + @workflow/world-local for dev", "gh-aw": "GitHub Actions self-hosted runners; same compiled .lock.yml" },
+          "equivalence": 3,
+          "delta": "Both self-hostable with trade-offs." },
+        {
+          "name": "Portable artifact",
+          "values": { "workflow": "npm packages; portable JS source", "gh-aw": "Standard GitHub Actions YAML (.lock.yml) — portable across GH repos/orgs" },
+          "equivalence": 3,
+          "delta": "Different artifacts; both portable within their ecosystems." },
+        {
+          "name": "Vendor-neutral backend",
+          "values": { "workflow": "World abstraction allows new backends; PR-friendly", "gh-aw": "Bound to GitHub Actions semantics; companion firewall/gateway are GitHub projects" },
+          "equivalence": 3,
+          "delta": "workflow abstracts storage; gh-aw assumes Actions." }
+      ]
+    },
+    {
+      "name": "Safety / Governance",
+      "features": [
+        {
+          "name": "Sandboxing",
+          "values": { "workflow": "Workflow body runs in node:vm (determinism, not security)", "gh-aw": "AWF firewall (default), MCP Gateway, lockdown mode, tool allow-lists" },
+          "equivalence": 1,
+          "delta": "gh-aw explicitly targets adversarial safety; workflow's sandbox targets determinism." },
+        {
+          "name": "Approval gates",
+          "values": { "workflow": "Hooks can implement human-in-the-loop manually", "gh-aw": "`on.manual-approval` via GitHub Environments; skip-roles/skip-bots guards" },
+          "equivalence": 3,
+          "delta": "Both possible, gh-aw first-class." },
+        {
+          "name": "Output validation",
+          "values": { "workflow": "Return types / zod schemas if author chooses", "gh-aw": "Safe-outputs handler validates every side effect (comment/PR/issue/label)" },
+          "equivalence": 1,
+          "delta": "gh-aw enforces schema at write time by design." },
+        {
+          "name": "Secret redaction",
+          "values": { "workflow": "No built-in redaction layer", "gh-aw": "Built-in regex redactor for GitHub/Azure/Google/AWS/OpenAI/Anthropic keys" },
+          "equivalence": 1,
+          "delta": "gh-aw-only." },
+        {
+          "name": "Supply-chain hardening",
+          "values": { "workflow": "Standard npm; `pnpm.overrides` pin devalue/rfc6902", "gh-aw": "SHA-pinned Actions via pkg/actionpins + gosec + actionlint on compile" },
+          "equivalence": 3,
+          "delta": "Both invest; gh-aw is more automated/explicit." }
+      ]
+    },
+    {
+      "name": "Ecosystem & community",
+      "features": [
+        {
+          "name": "Sample workflows",
+          "values": { "workflow": "workbench/example + nextjs-turbopack demos", "gh-aw": "272 sample workflows in .github/workflows/ (smoke + agentics)" },
+          "equivalence": 1,
+          "delta": "gh-aw ships vastly more example surface." },
+        {
+          "name": "Community contributions",
+          "values": { "workflow": "Vercel team-led, open-source; initial core engineers list", "gh-aw": "Large community contributor list auto-tracked in README (100+ named)" },
+          "equivalence": 1,
+          "delta": "gh-aw has more visible community traction today." },
+        {
+          "name": "Skills for agent authoring",
+          "values": { "workflow": "3 skills (workflow, workflow-init, migrating-to-workflow-sdk)", "gh-aw": "22 skills covering authoring/debugging/safe-outputs" },
+          "equivalence": 3,
+          "delta": "Both offer skill packs; gh-aw has richer coverage." }
+      ]
+    }
+  ],
+  "summary": {
+    "total_features": 30,
+    "forte_count": 1,
+    "parcial_count": 10,
+    "sem_equiv_count": 19,
+    "a_only_count": 6,
+    "b_only_count": 9
+  },
+  "equivalence_breakdown": {
+    "forte": ["IDE support"],
+    "parcial": ["Exactly-once side effects", "Observability UI", "Audit trail", "Fan-out primitive", "Race / timeout", "Managed hosting (trade-offs)", "Self-host option", "Portable artifact", "Vendor-neutral backend", "Approval gates", "Supply-chain hardening", "Skills for agent authoring"],
+    "sem_equiv": ["Execution model", "Primary runtime", "Author surface", "Step persistence", "Crash recovery", "Default retries", "Typed error opt-outs", "Backoff / jitter", "Append-only event log", "Deterministic replay", "Languages", "DSL richness", "Framework integrations", "Concurrency limits", "Sandboxing", "Output validation", "Secret redaction", "Sample workflows", "Community contributions"]
+  }
+}

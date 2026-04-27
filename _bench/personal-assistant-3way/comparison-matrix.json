@@ -1,0 +1,437 @@
+{
+  "generatedAt": "2026-04-19T22:30:00Z",
+  "comparison_type": "nway",
+  "subjects": ["openclaw", "hermes-agent", "gbrain"],
+  "dimension_pack": "personal-assistant",
+  "categories": [
+    {
+      "name": "Channels",
+      "features": [
+        {
+          "name": "Bundled messaging channels (count)",
+          "values": {
+            "openclaw": "25 (whatsapp, telegram, slack, discord, signal, imessage, bluebubbles, matrix, irc, msteams, feishu, line, mattermost, nextcloud-talk, nostr, synology-chat, tlon, twitch, zalo, zalouser, googlechat, qqbot, qa-matrix, talk-voice, voice-call)",
+            "hermes-agent": "19 (telegram, discord, slack, whatsapp, signal, matrix, email, sms, homeassistant, feishu, wecom, weixin, qqbot, mattermost, bluebubbles, dingtalk, webhook, sticker, etc via gateway/platforms/)",
+            "gbrain": "0 native (brain layer — channels come from host agent platform)"
+          },
+          "evidence": {
+            "openclaw": ["OS/openclaw/extensions/whatsapp/", "OS/openclaw/extensions/telegram/", "OS/openclaw/extensions/slack/", "OS/openclaw/extensions/discord/", "OS/openclaw/extensions/signal/", "OS/openclaw/extensions/imessage/", "OS/openclaw/extensions/bluebubbles/", "OS/openclaw/extensions/matrix/"],
+            "hermes-agent": ["OS/hermes-agent/gateway/platforms/telegram.py", "OS/hermes-agent/gateway/platforms/discord.py", "OS/hermes-agent/gateway/platforms/slack.py", "OS/hermes-agent/gateway/platforms/whatsapp.py", "OS/hermes-agent/gateway/platforms/signal.py", "OS/hermes-agent/gateway/platforms/homeassistant.py", "OS/hermes-agent/gateway/platforms/sms.py"],
+            "gbrain": []
+          }
+        },
+        {
+          "name": "Email as first-class channel",
+          "values": {
+            "openclaw": "no (not in extensions/ list)",
+            "hermes-agent": "yes (gateway/platforms/email.py)",
+            "gbrain": "via recipes/email-to-brain.md (import only, not a chat channel)"
+          },
+          "evidence": {
+            "openclaw": [],
+            "hermes-agent": ["OS/hermes-agent/gateway/platforms/email.py"],
+            "gbrain": ["OS/gbrain/recipes/email-to-brain.md"]
+          }
+        },
+        {
+          "name": "SMS / Home Assistant",
+          "values": {
+            "openclaw": "no",
+            "hermes-agent": "yes (sms + homeassistant adapters)",
+            "gbrain": "via Twilio voice recipe only"
+          },
+          "evidence": {
+            "openclaw": [],
+            "hermes-agent": ["OS/hermes-agent/gateway/platforms/sms.py", "OS/hermes-agent/gateway/platforms/homeassistant.py"],
+            "gbrain": ["OS/gbrain/recipes/twilio-voice-brain.md"]
+          }
+        },
+        {
+          "name": "Voice wake / continuous voice",
+          "values": {
+            "openclaw": "yes (Voice Wake macOS/iOS + Talk Mode Android + ElevenLabs)",
+            "hermes-agent": "voice memo transcription + TTS samples (not continuous)",
+            "gbrain": "no (transcription lib only for ingest)"
+          },
+          "evidence": {
+            "openclaw": ["OS/openclaw/extensions/elevenlabs/", "OS/openclaw/extensions/talk-voice/", "OS/openclaw/extensions/voice-call/", "OS/openclaw/Swabble/"],
+            "hermes-agent": ["OS/hermes-agent/tools/neutts_synth.py", "OS/hermes-agent/tools/neutts_samples/"],
+            "gbrain": ["OS/gbrain/src/core/transcription.ts"]
+          }
+        },
+        {
+          "name": "Native companion apps (macOS/iOS/Android)",
+          "values": {
+            "openclaw": "yes (apps/macos SwiftUI, apps/ios, apps/android Kotlin)",
+            "hermes-agent": "no (terminal + web)",
+            "gbrain": "no (brain layer)"
+          },
+          "evidence": {
+            "openclaw": ["OS/openclaw/apps/macos/", "OS/openclaw/apps/ios/", "OS/openclaw/apps/android/"],
+            "hermes-agent": [],
+            "gbrain": []
+          }
+        },
+        {
+          "name": "Channel delivery from cron/scheduled tasks",
+          "values": {
+            "openclaw": "yes (src/cron/ delivery-plan, isolated-agent direct delivery)",
+            "hermes-agent": "yes (cron/jobs + deliver to any platform per README)",
+            "gbrain": "yes (skills/cron-scheduler + schedule staggering)"
+          },
+          "evidence": {
+            "openclaw": ["OS/openclaw/src/cron/delivery-plan.ts", "OS/openclaw/src/cron/isolated-agent.direct-delivery-core-channels.test.ts"],
+            "hermes-agent": ["OS/hermes-agent/cron/jobs.py", "OS/hermes-agent/cron/scheduler.py"],
+            "gbrain": ["OS/gbrain/skills/cron-scheduler/SKILL.md"]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Local-first",
+      "features": [
+        {
+          "name": "Runs entirely on-device",
+          "values": {
+            "openclaw": "yes (Gateway loopback-bound by default; all install paths local)",
+            "hermes-agent": "yes (local default); also designed for $5 VPS",
+            "gbrain": "yes (PGLite embedded Postgres default, no server)"
+          },
+          "evidence": {
+            "openclaw": ["OS/openclaw/AGENTS.md", "OS/openclaw/src/gateway/"],
+            "hermes-agent": ["OS/hermes-agent/README.md", "OS/hermes-agent/tools/environments/local.py"],
+            "gbrain": ["OS/gbrain/src/core/pglite-engine.ts", "OS/gbrain/README.md"]
+          }
+        },
+        {
+          "name": "Serverless / hibernation friendly",
+          "values": {
+            "openclaw": "partial (fly.toml, render.yaml present but primary story is device)",
+            "hermes-agent": "yes (Daytona + Modal backends with hibernation)",
+            "gbrain": "partial (can run in Render container with host agent)"
+          },
+          "evidence": {
+            "openclaw": ["OS/openclaw/fly.toml", "OS/openclaw/render.yaml"],
+            "hermes-agent": ["OS/hermes-agent/tools/environments/daytona.py", "OS/hermes-agent/tools/environments/modal.py", "OS/hermes-agent/tools/environments/managed_modal.py"],
+            "gbrain": ["OS/gbrain/README.md"]
+          }
+        },
+        {
+          "name": "Offline operation",
+          "values": {
+            "openclaw": "partial (tools require model provider; gateway itself local)",
+            "hermes-agent": "partial (needs model provider but local backend works)",
+            "gbrain": "mostly (PGLite runs offline; embeddings still need OpenAI unless swapped)"
+          },
+          "evidence": {
+            "openclaw": [],
+            "hermes-agent": [],
+            "gbrain": ["OS/gbrain/src/core/pglite-engine.ts"]
+          }
+        },
+        {
+          "name": "Docker sandboxing for untrusted code",
+          "values": {
+            "openclaw": "yes (Dockerfile.sandbox + sandbox-browser + sandbox-common)",
+            "hermes-agent": "yes (tools/environments/docker.py + singularity.py)",
+            "gbrain": "n/a (no code-exec surface)"
+          },
+          "evidence": {
+            "openclaw": ["OS/openclaw/Dockerfile.sandbox", "OS/openclaw/Dockerfile.sandbox-browser"],
+            "hermes-agent": ["OS/hermes-agent/tools/environments/docker.py", "OS/hermes-agent/tools/environments/singularity.py"],
+            "gbrain": []
+          }
+        }
+      ]
+    },
+    {
+      "name": "Memory",
+      "features": [
+        {
+          "name": "Memory architecture",
+          "values": {
+            "openclaw": "Single-slot pluggable (memory-core, memory-lancedb, memory-wiki, active-memory)",
+            "hermes-agent": "Agent-curated with periodic nudges + 8 pluggable providers + Honcho dialectic user modeling",
+            "gbrain": "Hybrid RAG + self-wiring knowledge graph with zero-LLM typed-edge auto-link"
+          },
+          "evidence": {
+            "openclaw": ["OS/openclaw/extensions/memory-core/", "OS/openclaw/extensions/memory-lancedb/", "OS/openclaw/extensions/memory-wiki/", "OS/openclaw/extensions/active-memory/", "OS/openclaw/packages/memory-host-sdk/", "OS/openclaw/VISION.md"],
+            "hermes-agent": ["OS/hermes-agent/agent/memory_manager.py", "OS/hermes-agent/agent/memory_provider.py", "OS/hermes-agent/plugins/memory/honcho/", "OS/hermes-agent/plugins/memory/mem0/", "OS/hermes-agent/plugins/memory/supermemory/"],
+            "gbrain": ["OS/gbrain/src/core/search/", "OS/gbrain/src/core/link-extraction.ts", "OS/gbrain/src/commands/graph-query.ts"]
+          }
+        },
+        {
+          "name": "Cross-session / cross-channel recall",
+          "values": {
+            "openclaw": "via memory plugin + sessions_history / sessions_search tools",
+            "hermes-agent": "FTS5 session search with LLM summarization (explicit cross-session recall)",
+            "gbrain": "yes (brain is the cross-session substrate by design)"
+          },
+          "evidence": {
+            "openclaw": ["OS/openclaw/src/channels/", "OS/openclaw/README.md"],
+            "hermes-agent": ["OS/hermes-agent/tools/session_search_tool.py"],
+            "gbrain": ["OS/gbrain/src/core/search/", "OS/gbrain/README.md"]
+          }
+        },
+        {
+          "name": "Vector index",
+          "values": {
+            "openclaw": "yes (memory-lancedb extension)",
+            "hermes-agent": "via chosen plugin (mem0, supermemory, holographic)",
+            "gbrain": "yes (pgvector HNSW on Postgres; PGLite also supports pgvector)"
+          },
+          "evidence": {
+            "openclaw": ["OS/openclaw/extensions/memory-lancedb/"],
+            "hermes-agent": ["OS/hermes-agent/plugins/memory/holographic/", "OS/hermes-agent/plugins/memory/mem0/"],
+            "gbrain": ["OS/gbrain/src/core/pglite-engine.ts", "OS/gbrain/src/core/postgres-engine.ts"]
+          }
+        },
+        {
+          "name": "Knowledge graph / typed edges",
+          "values": {
+            "openclaw": "memory-wiki extension suggests wiki-style links (observed name, not deeply verified)",
+            "hermes-agent": "no explicit KG (Honcho user model is relational about user, not graph-of-things)",
+            "gbrain": "yes — zero-LLM typed-edge auto-link on every write (attended/works_at/invested_in/founded/advises)"
+          },
+          "evidence": {
+            "openclaw": ["OS/openclaw/extensions/memory-wiki/"],
+            "hermes-agent": [],
+            "gbrain": ["OS/gbrain/src/core/link-extraction.ts"]
+          }
+        },
+        {
+          "name": "Published retrieval benchmark",
+          "values": {
+            "openclaw": "no (not observed)",
+            "hermes-agent": "no (not observed)",
+            "gbrain": "yes (BrainBench v1: R@5 83%→95%, graph-only F1 86.6% vs grep 57.8%)"
+          },
+          "evidence": {
+            "openclaw": [],
+            "hermes-agent": [],
+            "gbrain": ["OS/gbrain/docs/benchmarks/2026-04-18-brainbench-v1.md"]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Skills",
+      "features": [
+        {
+          "name": "Bundled skill count",
+          "values": {
+            "openclaw": "53 (skills/)",
+            "hermes-agent": "25 core + 15+ opt-in categories",
+            "gbrain": "26 (skills/)"
+          },
+          "evidence": {
+            "openclaw": ["OS/openclaw/skills/"],
+            "hermes-agent": ["OS/hermes-agent/skills/", "OS/hermes-agent/optional-skills/"],
+            "gbrain": ["OS/gbrain/skills/"]
+          }
+        },
+        {
+          "name": "Skill marketplace / hub",
+          "values": {
+            "openclaw": "yes (ClawHub — clawhub.ai per VISION.md)",
+            "hermes-agent": "yes (Skills Hub — agentskills.io open standard)",
+            "gbrain": "no (host agent provides marketplace; gbrain skills are shipped-with-tool)"
+          },
+          "evidence": {
+            "openclaw": ["OS/openclaw/VISION.md", "OS/openclaw/extensions/clawhub/"],
+            "hermes-agent": ["OS/hermes-agent/tools/skills_hub.py", "OS/hermes-agent/README.md"],
+            "gbrain": []
+          }
+        },
+        {
+          "name": "Autonomous skill creation",
+          "values": {
+            "openclaw": "no (skill authoring manual via ClawHub)",
+            "hermes-agent": "yes — agent creates skills from experience; skills self-improve during use",
+            "gbrain": "partial (skill-creator skill exists but agent-driven, not autonomous from experience)"
+          },
+          "evidence": {
+            "openclaw": [],
+            "hermes-agent": ["OS/hermes-agent/tools/skill_manager_tool.py", "OS/hermes-agent/tools/skills_tool.py", "OS/hermes-agent/README.md"],
+            "gbrain": ["OS/gbrain/skills/skill-creator/"]
+          }
+        },
+        {
+          "name": "MCP integration",
+          "values": {
+            "openclaw": "bridge only (via external mcporter, not first-class)",
+            "hermes-agent": "native server + client + OAuth manager",
+            "gbrain": "native server (stdio + HTTP, 41 ops exposed)"
+          },
+          "evidence": {
+            "openclaw": ["OS/openclaw/skills/mcporter/", "OS/openclaw/VISION.md"],
+            "hermes-agent": ["OS/hermes-agent/mcp_serve.py", "OS/hermes-agent/tools/mcp_tool.py", "OS/hermes-agent/tools/mcp_oauth.py", "OS/hermes-agent/tools/mcp_oauth_manager.py"],
+            "gbrain": ["OS/gbrain/src/mcp/server.ts", "OS/gbrain/docs/mcp/DEPLOY.md"]
+          }
+        },
+        {
+          "name": "Plugin SDK / versioned public contract",
+          "values": {
+            "openclaw": "yes (packages/plugin-sdk + plugin-package-contract; strict boundary rules in AGENTS.md)",
+            "hermes-agent": "partial (plugins/ with plugin.yaml per backend, no versioned SDK package observed)",
+            "gbrain": "partial (contract-first operations.ts, but contract is ops not plugins)"
+          },
+          "evidence": {
+            "openclaw": ["OS/openclaw/packages/plugin-sdk/", "OS/openclaw/packages/plugin-package-contract/", "OS/openclaw/src/plugin-sdk/", "OS/openclaw/AGENTS.md"],
+            "hermes-agent": ["OS/hermes-agent/plugins/memory/honcho/plugin.yaml"],
+            "gbrain": ["OS/gbrain/src/core/operations.ts"]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Cost",
+      "features": [
+        {
+          "name": "Default run environment",
+          "values": {
+            "openclaw": "on your devices (laptop + phone)",
+            "hermes-agent": "local, $5 VPS, GPU cluster, or serverless (author mentions $5 VPS path)",
+            "gbrain": "PGLite embedded (no DB server); or Supabase for larger brains"
+          },
+          "evidence": {
+            "openclaw": ["OS/openclaw/README.md"],
+            "hermes-agent": ["OS/hermes-agent/README.md"],
+            "gbrain": ["OS/gbrain/README.md"]
+          }
+        },
+        {
+          "name": "Serverless hibernation",
+          "values": {
+            "openclaw": "not the primary path",
+            "hermes-agent": "yes — Modal + Daytona hibernate when idle, 'costing nearly nothing between sessions'",
+            "gbrain": "not applicable (PGLite in-process)"
+          },
+          "evidence": {
+            "openclaw": [],
+            "hermes-agent": ["OS/hermes-agent/tools/environments/modal.py", "OS/hermes-agent/tools/environments/daytona.py", "OS/hermes-agent/README.md"],
+            "gbrain": []
+          }
+        },
+        {
+          "name": "Number of paid dependencies required for baseline",
+          "values": {
+            "openclaw": "1 (a model provider — OpenAI/Anthropic/etc); channel auth free for most platforms",
+            "hermes-agent": "1 (model provider); portal subscription optional",
+            "gbrain": "1 (OpenAI for text-embedding-3-large by default) + optional Groq/Supabase"
+          },
+          "evidence": {
+            "openclaw": ["OS/openclaw/README.md"],
+            "hermes-agent": ["OS/hermes-agent/README.md"],
+            "gbrain": ["OS/gbrain/src/core/embedding.ts"]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Privacy",
+      "features": [
+        {
+          "name": "Default network binding",
+          "values": {
+            "openclaw": "loopback (explicit in AGENTS.md restart command)",
+            "hermes-agent": "local default; remote via explicit gateway setup",
+            "gbrain": "stdio MCP by default; HTTP requires explicit serve + token + tunnel"
+          },
+          "evidence": {
+            "openclaw": ["OS/openclaw/AGENTS.md"],
+            "hermes-agent": ["OS/hermes-agent/README.md"],
+            "gbrain": ["OS/gbrain/src/mcp/server.ts", "OS/gbrain/README.md"]
+          }
+        },
+        {
+          "name": "DM pairing / untrusted inbound handling",
+          "values": {
+            "openclaw": "yes — pairing code for unknown senders; per-channel allowFrom",
+            "hermes-agent": "yes per docs (container isolation + command approval)",
+            "gbrain": "yes — OperationContext.remote flag + filesystem confinement for agent callers"
+          },
+          "evidence": {
+            "openclaw": ["OS/openclaw/src/channels/allowlists/", "OS/openclaw/README.md"],
+            "hermes-agent": ["OS/hermes-agent/README.md"],
+            "gbrain": ["OS/gbrain/src/core/operations.ts"]
+          }
+        },
+        {
+          "name": "Data ownership",
+          "values": {
+            "openclaw": "explicit — sessions in ~/.openclaw/agents/<id>/sessions/",
+            "hermes-agent": "explicit — configs/memory local, portable to another VPS",
+            "gbrain": "explicit — you own the Postgres/PGLite DB; brain repo is git-trackable"
+          },
+          "evidence": {
+            "openclaw": ["OS/openclaw/AGENTS.md"],
+            "hermes-agent": ["OS/hermes-agent/README.md"],
+            "gbrain": ["OS/gbrain/README.md"]
+          }
+        },
+        {
+          "name": "Explicit access-policy / identity system",
+          "values": {
+            "openclaw": "per-channel allowlists + sandbox.mode=non-main; no user-profile identity system",
+            "hermes-agent": "per-platform allowed users + command approval (per docs)",
+            "gbrain": "4-tier ACCESS_POLICY.md + SOUL.md + USER.md + HEARTBEAT.md from soul-audit"
+          },
+          "evidence": {
+            "openclaw": ["OS/openclaw/README.md", "OS/openclaw/src/channels/allowlists/"],
+            "hermes-agent": ["OS/hermes-agent/README.md"],
+            "gbrain": ["OS/gbrain/skills/soul-audit/SKILL.md", "OS/gbrain/templates/"]
+          }
+        },
+        {
+          "name": "PII redaction in logs / outputs",
+          "values": {
+            "openclaw": "no explicit redaction tool observed",
+            "hermes-agent": "yes (agent/redact.py)",
+            "gbrain": "partial (query sanitization for prompt-injection, not general PII)"
+          },
+          "evidence": {
+            "openclaw": [],
+            "hermes-agent": ["OS/hermes-agent/agent/redact.py"],
+            "gbrain": ["OS/gbrain/src/core/search/expansion.ts"]
+          }
+        }
+      ]
+    }
+  ],
+  "summary": {
+    "total_features": 26,
+    "note": "N-way; Forte/Parcial/Sem_Equiv not applied (pair-only per task spec). Leaders identified per feature."
+  },
+  "subject_only_capabilities": {
+    "openclaw": [
+      { "name": "25 bundled channel extensions (widest observed)", "category": "channels", "evidence": "OS/openclaw/extensions/" },
+      { "name": "Native companion apps (macOS SwiftUI, iOS, Android Kotlin)", "category": "channels", "evidence": "OS/openclaw/apps/" },
+      { "name": "Voice Wake + Talk Mode + Live Canvas (A2UI)", "category": "channels / ux", "evidence": "OS/openclaw/src/canvas-host/, OS/openclaw/extensions/elevenlabs/" },
+      { "name": "Versioned public Plugin SDK package", "category": "skills", "evidence": "OS/openclaw/packages/plugin-sdk/" },
+      { "name": "ClawHub marketplace", "category": "skills", "evidence": "OS/openclaw/extensions/clawhub/" }
+    ],
+    "hermes-agent": [
+      { "name": "Self-improving skills + autonomous skill creation from experience", "category": "skills", "evidence": "OS/hermes-agent/tools/skill_manager_tool.py" },
+      { "name": "FTS5 session search with LLM summarization", "category": "memory", "evidence": "OS/hermes-agent/tools/session_search_tool.py" },
+      { "name": "Honcho dialectic user modeling built-in", "category": "memory", "evidence": "OS/hermes-agent/plugins/memory/honcho/" },
+      { "name": "Six terminal backends including serverless hibernation (Modal, Daytona)", "category": "cost / local-first", "evidence": "OS/hermes-agent/tools/environments/modal.py" },
+      { "name": "Native MCP server + client + OAuth manager", "category": "skills", "evidence": "OS/hermes-agent/tools/mcp_oauth_manager.py" },
+      { "name": "Email + SMS + Home Assistant channels", "category": "channels", "evidence": "OS/hermes-agent/gateway/platforms/email.py, sms.py, homeassistant.py" },
+      { "name": "Mixture-of-agents tool", "category": "skills", "evidence": "OS/hermes-agent/tools/mixture_of_agents_tool.py" },
+      { "name": "Explicit PII redaction (agent/redact.py)", "category": "privacy", "evidence": "OS/hermes-agent/agent/redact.py" },
+      { "name": "Trajectory compression + Atropos RL training", "category": "core", "evidence": "OS/hermes-agent/trajectory_compressor.py, OS/hermes-agent/tinker-atropos/" }
+    ],
+    "gbrain": [
+      { "name": "Self-wiring knowledge graph with zero-LLM typed-edge auto-link", "category": "memory", "evidence": "OS/gbrain/src/core/link-extraction.ts" },
+      { "name": "Pluggable engines: PGLite (embedded) or Postgres + pgvector", "category": "memory / local-first", "evidence": "OS/gbrain/src/core/engine-factory.ts" },
+      { "name": "Hybrid RAG (vector + keyword + RRF + multi-query expansion) with published benchmark (BrainBench v1)", "category": "memory", "evidence": "OS/gbrain/docs/benchmarks/2026-04-18-brainbench-v1.md" },
+      { "name": "Contract-first 41 operations (single source → CLI + MCP)", "category": "skills", "evidence": "OS/gbrain/src/core/operations.ts" },
+      { "name": "Minions: durable Postgres-native job queue with cascade-kill + idempotency", "category": "core", "evidence": "OS/gbrain/src/core/minions/queue.ts" },
+      { "name": "4-tier identity system (SOUL/USER/ACCESS_POLICY/HEARTBEAT)", "category": "privacy", "evidence": "OS/gbrain/skills/soul-audit/SKILL.md" },
+      { "name": "Integration recipes (YAML+MD) for Twilio voice, email, calendar, X, meetings", "category": "channels", "evidence": "OS/gbrain/recipes/" },
+      { "name": "Trust-boundary-aware ops (OperationContext.remote)", "category": "privacy", "evidence": "OS/gbrain/src/core/operations.ts" },
+      { "name": "Agent-driven installation (~30 minutes)", "category": "ux", "evidence": "OS/gbrain/INSTALL_FOR_AGENTS.md" }
+    ]
+  }
+}

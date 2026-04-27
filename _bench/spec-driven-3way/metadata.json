@@ -1,0 +1,78 @@
+{
+  "$schema": "os-bench metadata v1.0",
+  "generatedAt": "2026-04-19T22:45:00Z",
+  "comparison_type": "nway",
+  "slug": "spec-driven-3way",
+  "subject_count": 3,
+  "subjects": [
+    {
+      "slug": "spec-kit",
+      "path": "OS/spec-kit/",
+      "source_url": "https://github.com/github/spec-kit",
+      "detected_stack": ["Python", "Typer", "Rich", "Markdown templates"],
+      "positioning": "GitHub methodology — executable specs (FR-### / SC-### / US#) + Spec → Plan → Tasks → Implement → Analyze pipeline"
+    },
+    {
+      "slug": "get-shit-done",
+      "path": "OS/get-shit-done/",
+      "source_url": "https://github.com/gsd-build/get-shit-done",
+      "detected_stack": ["Node.js", "TypeScript SDK", "Claude Code + 13 harnesses"],
+      "positioning": "Meta-prompting + context engineering to fight context rot — ambiguity-scored Socratic spec phase + 32 subagents + 12 hooks + drift detection"
+    },
+    {
+      "slug": "superpowers",
+      "path": "OS/superpowers/",
+      "source_url": "https://github.com/obra/superpowers",
+      "detected_stack": ["Claude Code plugin", "OpenCode", "Codex", "Cursor", "Gemini", "Copilot"],
+      "positioning": "Methodology plugin by Obra — red/green TDD Iron Law + subagent-driven development with two-stage review (spec compliance → code quality)"
+    }
+  ],
+  "dimension_pack": "spec-driven",
+  "scoring_dimensions": [
+    "spec_format",
+    "traceability",
+    "executable_specs",
+    "tdd_integration",
+    "roundtripping"
+  ],
+  "dimension_weights": {
+    "spec_format": 0.20,
+    "traceability": 0.20,
+    "executable_specs": 0.22,
+    "tdd_integration": 0.15,
+    "roundtripping": 0.23
+  },
+  "profile": "standard",
+  "skill_version": "1.0.0",
+  "output_root": "OS/_bench/spec-driven-3way/",
+  "artifacts_generated": [
+    "metadata.json",
+    "_inventories/spec-kit/inventory.json",
+    "_inventories/spec-kit/inventory.md",
+    "_inventories/get-shit-done/inventory.json",
+    "_inventories/get-shit-done/inventory.md",
+    "_inventories/superpowers/inventory.json",
+    "_inventories/superpowers/inventory.md",
+    "comparison-matrix.json",
+    "comparison-matrix.md",
+    "scorecard.json",
+    "scorecard.md",
+    "executive-report.md"
+  ],
+  "artifacts_skipped": [
+    "gap-analysis.{json,md}",
+    "battle-card.md"
+  ],
+  "artifacts_skipped_reason": "n-way benchmark (3 subjects) — gap-analysis and battle-card are pair-wise artefacts per os-bench SKILL.md. The executive-report covers strategic recommendations and 'when to pick which' for n-way.",
+  "confidence_overall": "HIGH",
+  "quality_gate_passed": true,
+  "principles_applied": [
+    "no-invented-claims",
+    "evidence-based-scoring",
+    "bidirectional-comparison",
+    "confidence-disclosure",
+    "local-first",
+    "deterministic-paths"
+  ],
+  "notes": "Trilingual summary: spec-kit delivers executable specs via the GitHub SDD methodology (spec-driven.md manifesto + /speckit.specify|plan|tasks pipeline). GSD is meta-prompting against context rot (ambiguity-scored spec phase + context-monitor hook + Nyquist auditor + 32 subagents). Superpowers enforces red/green TDD via subagents and auto-triggering skills (no structured spec artefact — spec emerges from brainstorming). None of the three implements full bidirectional roundtripping; GSD gets closest via schema-drift + STATE.md drift detection gates. Pack weights sum to 1.00 (verified: 0.20+0.20+0.22+0.15+0.23 = 1.00)."
+}

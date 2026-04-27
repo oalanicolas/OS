@@ -1,0 +1,86 @@
+{
+  "generatedAt": "2026-04-19T22:30:00Z",
+  "subject": "BMAD-METHOD",
+  "path": "OS/BMAD-METHOD/",
+  "primary_language": "JavaScript",
+  "secondary_languages": ["Markdown", "YAML"],
+  "stack": ["Node.js >=20", "bmad-cli (commander/clack)", "Astro (docs site)", "Python >=3.10 (opcional, uv)"],
+  "license": "MIT",
+  "tagline": "Breakthrough Method of Agile AI-driven Development — scale-adaptive agentic pipeline (analyst → PM → architect → dev → QA).",
+  "source_url": "https://github.com/bmad-code-org/BMAD-METHOD",
+  "metrics": {
+    "loc_estimate": 18493,
+    "file_count": 544,
+    "top_level_dirs": ["src", "tools", "docs", "test", "website"],
+    "readme_lines": 200,
+    "last_commit_date": "2026-04-19",
+    "github_stars": null,
+    "github_contributors": null
+  },
+  "modules": [
+    { "name": "bmm-skills", "path": "src/bmm-skills/", "type": "library", "loc_estimate": 0, "description": "Pipeline agile — 4 fases (analysis, plan, solutioning, implementation)" },
+    { "name": "core-skills", "path": "src/core-skills/", "type": "library", "loc_estimate": 0, "description": "Skills transversais (party-mode, brainstorming, review, help)" },
+    { "name": "installer", "path": "tools/installer/", "type": "app", "loc_estimate": 0, "description": "CLI de instalação (bmad install/uninstall)" },
+    { "name": "website", "path": "website/", "type": "app", "loc_estimate": 0, "description": "Docs site Astro/Starlight" },
+    { "name": "test", "path": "test/", "type": "library", "loc_estimate": 0, "description": "Testes de instalação e refs" }
+  ],
+  "external_dependencies_top10": [
+    { "package": "@clack/prompts", "version": "^1.0.0", "purpose": "Prompts interativos no installer" },
+    { "package": "commander", "version": "^14.0.0", "purpose": "CLI arg parsing" },
+    { "package": "glob", "version": "^11.0.3", "purpose": "File globs na instalação" },
+    { "package": "js-yaml", "version": "^4.1.0", "purpose": "Parse de skills/workflows YAML" },
+    { "package": "yaml", "version": "^2.7.0", "purpose": "YAML writer" },
+    { "package": "chalk", "version": "^4.1.2", "purpose": "Terminal colors" },
+    { "package": "semver", "version": "^7.6.3", "purpose": "Versionamento de módulos" },
+    { "package": "xml2js", "version": "^0.6.2", "purpose": "Parse de prompts XML" },
+    { "package": "@kayvan/markdown-tree-parser", "version": "^1.6.1", "purpose": "Parse de docs" },
+    { "package": "csv-parse", "version": "^6.1.0", "purpose": "Skill manifests CSV" }
+  ],
+  "entry_points": [
+    { "kind": "cli", "path": "tools/installer/bmad-cli.js", "command": "npx bmad-method install" },
+    { "kind": "npm_bin", "path": "package.json#bin", "command": "bmad / bmad-method" }
+  ],
+  "capabilities": [
+    { "name": "4-phase agile pipeline", "evidence_paths": ["OS/BMAD-METHOD/src/bmm-skills/1-analysis/", "OS/BMAD-METHOD/src/bmm-skills/2-plan-workflows/", "OS/BMAD-METHOD/src/bmm-skills/3-solutioning/", "OS/BMAD-METHOD/src/bmm-skills/4-implementation/"], "category": "core", "description": "Workflow sequencial analyst→PM→architect→dev/QA via skills numeradas" },
+    { "name": "Specialized agent roles (12+)", "evidence_paths": ["OS/BMAD-METHOD/src/bmm-skills/1-analysis/bmad-agent-analyst/", "OS/BMAD-METHOD/src/bmm-skills/4-implementation/bmad-agent-dev/"], "category": "core", "description": "PM, Architect, Dev, Analyst, Tech Writer, etc., cada um como skill separada" },
+    { "name": "Party Mode (multi-agent roundtable)", "evidence_paths": ["OS/BMAD-METHOD/src/core-skills/bmad-party-mode/SKILL.md"], "category": "core", "description": "Orquestra subagentes paralelos independentes para discussão multi-perspectiva" },
+    { "name": "Skills system (YAML+MD)", "evidence_paths": ["OS/BMAD-METHOD/src/core-skills/", "OS/BMAD-METHOD/tools/validate-skills.js"], "category": "extensibility", "description": "Cada capability é uma skill com frontmatter + MD validada" },
+    { "name": "Installer CLI + module ecosystem", "evidence_paths": ["OS/BMAD-METHOD/tools/installer/bmad-cli.js", "OS/BMAD-METHOD/package.json"], "category": "ux", "description": "npx bmad-method install com módulos opcionais (BMM, BMB, TEA, etc.)" },
+    { "name": "Brainstorming / elicitation skills", "evidence_paths": ["OS/BMAD-METHOD/src/core-skills/bmad-brainstorming/", "OS/BMAD-METHOD/src/core-skills/bmad-advanced-elicitation/"], "category": "core", "description": "Skills de ideação estruturada pré-código" },
+    { "name": "Review adversarial + edge case", "evidence_paths": ["OS/BMAD-METHOD/src/core-skills/bmad-review-adversarial-general/", "OS/BMAD-METHOD/src/core-skills/bmad-review-edge-case-hunter/"], "category": "governance", "description": "Skills de review agressivo executadas como subagents" },
+    { "name": "bmad-help onboarding", "evidence_paths": ["OS/BMAD-METHOD/src/core-skills/bmad-help/"], "category": "ux", "description": "Skill para orientar o que fazer a seguir no workflow" },
+    { "name": "Deterministic skill validator", "evidence_paths": ["OS/BMAD-METHOD/tools/validate-skills.js", "OS/BMAD-METHOD/tools/skill-validator.md"], "category": "governance", "description": "Lint estrito de skills no CI (npm run quality)" }
+  ],
+  "quality_signals": {
+    "test_framework": "jest + custom node scripts",
+    "test_file_count": 5,
+    "linter": "eslint + markdownlint-cli2 + prettier",
+    "ci_provider": "GitHub Actions",
+    "ci_workflow_count": 6
+  },
+  "documentation": {
+    "readme_sections": ["Why BMad", "Quick Start", "Modules", "Documentation", "Community"],
+    "has_contributing": true,
+    "has_architecture_doc": true,
+    "docs_page_count": 50
+  },
+  "extension_points": {
+    "plugins": { "mechanism": "external BMad modules (npm packages)", "path": "docs/how-to/ module ecosystem" },
+    "hooks": { "mechanism": "pre-commit / husky + skill validator", "events": ["pre-commit", "pre-push"] },
+    "mcp": { "client": false, "server": false }
+  },
+  "unique_selling_points": [
+    "Pipeline agile explícita (analysis → plan → solution → implementation) com skills numeradas",
+    "Scale-adaptive: workflow ajusta profundidade do bug fix ao enterprise",
+    "Party Mode: subagentes independentes reais (cada um um processo LLM separado) via tool Agent",
+    "Instalação single-command via npx e integração com Claude Code/Cursor nativa"
+  ],
+  "limitations": [
+    { "description": "Sem observabilidade embutida (tracing/cost) — depende do host IDE", "source": "ausência em src/ e package.json" },
+    { "description": "Sem runtime próprio — é um pacote de skills consumido por um coding agent (Claude Code/Cursor)", "source": "tools/installer/bmad-cli.js apenas instala artefatos" },
+    { "description": "Delegation é editorial (documentada em MD), não programática", "source": "src/bmm-skills/*.md" }
+  ],
+  "confidence": "HIGH",
+  "extraction_method": "filesystem-scan",
+  "skill_version": "1.0.0"
+}

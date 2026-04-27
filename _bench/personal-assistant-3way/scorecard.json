@@ -1,0 +1,280 @@
+{
+  "generatedAt": "2026-04-19T22:30:00Z",
+  "comparison_type": "nway",
+  "subjects": ["openclaw", "hermes-agent", "gbrain"],
+  "dimension_pack": "personal-assistant",
+  "methods": {
+    "openclaw": "installed",
+    "hermes-agent": "installed",
+    "gbrain": "installed"
+  },
+  "note": "gbrain is a brain-layer substrate, not a standalone personal assistant (README: 'Designed to be installed and operated by an AI agent'). Its 'channels' score reflects channel-coverage-as-assistant, which it does not natively provide; this is intended per its product position. Reader should weight Memory, Skills, Privacy for gbrain; Channels is a loser-dimension by design.",
+  "dimensions": [
+    {
+      "id": "channels",
+      "name": "Channels",
+      "weight": 0.20,
+      "scoring_scale_reference": "90-100: 15+ channels + native apps + voice; 60-89: 5-15; 30-59: 2-5; 0-29: 1",
+      "scores": {
+        "openclaw": 95,
+        "hermes-agent": 82,
+        "gbrain": 10
+      },
+      "signals_observed": {
+        "openclaw": [
+          { "signal": "bundled channel extensions", "value": "25 (whatsapp, telegram, slack, discord, signal, imessage, bluebubbles, matrix, irc, msteams, feishu, line, mattermost, nextcloud-talk, nostr, synology-chat, tlon, twitch, zalo, zalouser, googlechat, qqbot, qa-matrix, talk-voice, voice-call)", "evidence": "OS/openclaw/extensions/" },
+          { "signal": "native companion apps", "value": "macOS SwiftUI + iOS + Android Kotlin", "evidence": "OS/openclaw/apps/macos/, OS/openclaw/apps/ios/, OS/openclaw/apps/android/" },
+          { "signal": "voice support", "value": "Voice Wake + Talk Mode + ElevenLabs + TTS fallback", "evidence": "OS/openclaw/extensions/elevenlabs/, OS/openclaw/extensions/talk-voice/, OS/openclaw/Swabble/" },
+          { "signal": "Live Canvas (visual surface)", "value": "A2UI agent-driven workspace", "evidence": "OS/openclaw/src/canvas-host/a2ui/" }
+        ],
+        "hermes-agent": [
+          { "signal": "gateway platform adapters", "value": "19 (telegram, discord, slack, whatsapp, signal, matrix, email, sms, homeassistant, feishu, wecom, weixin, qqbot, mattermost, bluebubbles, dingtalk, webhook, etc)", "evidence": "OS/hermes-agent/gateway/platforms/" },
+          { "signal": "email/SMS/HomeAssistant as first-class", "value": "yes (unique)", "evidence": "OS/hermes-agent/gateway/platforms/email.py, sms.py, homeassistant.py" },
+          { "signal": "voice memo transcription", "value": "yes (not continuous voice)", "evidence": "OS/hermes-agent/tools/neutts_synth.py" },
+          { "signal": "native apps", "value": "none (terminal + TUI + web)", "evidence": "OS/hermes-agent/ui-tui/, OS/hermes-agent/website/" }
+        ],
+        "gbrain": [
+          { "signal": "bundled channels", "value": "0 (brain layer; host agent provides channels)", "evidence": "README.md" },
+          { "signal": "integration recipes (import-only)", "value": "7 (calendar, email, meeting-sync, ngrok, twilio-voice, x-to-brain, credential-gateway)", "evidence": "OS/gbrain/recipes/" }
+        ]
+      },
+      "confidence": "HIGH",
+      "justification": {
+        "openclaw": "25 bundled channels + native apps + voice + canvas — matches top band (15+ channels + native + voice) with clear evidence on all 4 signals.",
+        "hermes-agent": "19 channels with SMS/Email/HomeAssistant as unique tier, but no native companion apps and only voice memo (not continuous voice); upper 60-89 band, awarded 82.",
+        "gbrain": "Score reflects objective absence of native channel surface. By-design — it is a brain substrate, not an assistant. 10 captures that import recipes exist but are not conversational channels."
+      },
+      "leader": "openclaw"
+    },
+    {
+      "id": "local_first",
+      "name": "Local-first",
+      "weight": 0.18,
+      "scoring_scale_reference": "90-100: 100% on-device + offline + e2e; 60-89: local preferred, cloud opcional; 30-59: híbrido",
+      "scores": {
+        "openclaw": 82,
+        "hermes-agent": 80,
+        "gbrain": 80
+      },
+      "signals_observed": {
+        "openclaw": [
+          { "signal": "default network binding", "value": "loopback", "evidence": "OS/openclaw/AGENTS.md (openclaw gateway run --bind loopback)" },
+          { "signal": "on-device primary product", "value": "yes ('run on your own devices' per README)", "evidence": "OS/openclaw/README.md" },
+          { "signal": "Docker sandboxing", "value": "yes (Dockerfile.sandbox + sandbox-browser + sandbox-common)", "evidence": "OS/openclaw/Dockerfile.sandbox" },
+          { "signal": "offline mode", "value": "partial — tools need model provider", "evidence": "README.md model requirements" }
+        ],
+        "hermes-agent": [
+          { "signal": "6 runtime backends (incl. local)", "value": "local, Docker, SSH, Daytona, Singularity, Modal", "evidence": "OS/hermes-agent/tools/environments/" },
+          { "signal": "serverless hibernation story", "value": "Modal + Daytona idle-hibernate (unique)", "evidence": "OS/hermes-agent/tools/environments/modal.py, managed_modal.py" },
+          { "signal": "not tied to laptop", "value": "yes per README ('talk to it from Telegram while it works on a cloud VM')", "evidence": "OS/hermes-agent/README.md" }
+        ],
+        "gbrain": [
+          { "signal": "zero-config embedded DB", "value": "PGLite Postgres 17 via WASM, ready in 2s", "evidence": "OS/gbrain/src/core/pglite-engine.ts" },
+          { "signal": "offline engine", "value": "PGLite runs offline (embeddings still need provider)", "evidence": "OS/gbrain/src/core/pglite-engine.ts" },
+          { "signal": "default MCP transport", "value": "stdio (no network)", "evidence": "OS/gbrain/src/mcp/server.ts" }
+        ]
+      },
+      "confidence": "HIGH",
+      "justification": {
+        "openclaw": "Loopback default + on-device product + Docker sandboxing, but offline operation depends on model provider; upper 60-89 band, 82.",
+        "hermes-agent": "Local + 6 runtime backends, including two with serverless hibernation. 80 — slightly below openclaw on 'strictly local' axis since the story explicitly embraces cloud VMs.",
+        "gbrain": "PGLite embedded is the most local-first DB layer observed; stdio MCP default; offline-capable engine. 80 — matches hermes, different reason (DB layer vs runtime layer)."
+      },
+      "leader": "openclaw (narrow)"
+    },
+    {
+      "id": "memory",
+      "name": "Memory",
+      "weight": 0.15,
+      "scoring_scale_reference": "90-100: cross-channel rico + profile; 60-89: per-channel persistente; 30-59: session",
+      "scores": {
+        "openclaw": 68,
+        "hermes-agent": 85,
+        "gbrain": 92
+      },
+      "signals_observed": {
+        "openclaw": [
+          { "signal": "memory extensions", "value": "4 (memory-core, memory-lancedb, memory-wiki, active-memory)", "evidence": "OS/openclaw/extensions/memory-{core,lancedb,wiki}, OS/openclaw/extensions/active-memory/" },
+          { "signal": "memory host SDK", "value": "packages/memory-host-sdk", "evidence": "OS/openclaw/packages/memory-host-sdk/" },
+          { "signal": "single-slot constraint", "value": "only one memory plugin active", "evidence": "OS/openclaw/VISION.md" },
+          { "signal": "sessions tools", "value": "sessions_list, sessions_history, sessions_send, sessions_spawn", "evidence": "OS/openclaw/README.md" }
+        ],
+        "hermes-agent": [
+          { "signal": "agent-curated memory + nudges", "value": "yes (README + memory_manager.py)", "evidence": "OS/hermes-agent/agent/memory_manager.py" },
+          { "signal": "FTS5 session search + LLM summarization", "value": "yes (explicit cross-session recall)", "evidence": "OS/hermes-agent/tools/session_search_tool.py" },
+          { "signal": "Honcho dialectic user modeling", "value": "built-in", "evidence": "OS/hermes-agent/plugins/memory/honcho/" },
+          { "signal": "pluggable memory providers", "value": "8 (byterover, hindsight, holographic, honcho, mem0, openviking, retaindb, supermemory)", "evidence": "OS/hermes-agent/plugins/memory/" }
+        ],
+        "gbrain": [
+          { "signal": "hybrid RAG", "value": "vector + keyword + RRF + multi-query expansion + dedup", "evidence": "OS/gbrain/src/core/search/" },
+          { "signal": "self-wiring KG (zero-LLM auto-link)", "value": "typed edges attended/works_at/invested_in/founded/advises", "evidence": "OS/gbrain/src/core/link-extraction.ts" },
+          { "signal": "published retrieval benchmark", "value": "BrainBench v1: R@5 83%→95%, graph-only F1 86.6% vs grep 57.8%", "evidence": "OS/gbrain/docs/benchmarks/2026-04-18-brainbench-v1.md" },
+          { "signal": "vector index", "value": "pgvector HNSW on both engines (PGLite + Postgres)", "evidence": "OS/gbrain/src/core/pglite-engine.ts, postgres-engine.ts" },
+          { "signal": "retrieval eval harness", "value": "P@k, R@k, MRR, nDCG@k + A/B harness", "evidence": "OS/gbrain/src/core/search/eval.ts, OS/gbrain/src/commands/eval.ts" }
+        ]
+      },
+      "confidence": "HIGH",
+      "justification": {
+        "openclaw": "Pluggable memory is a first-class slot with 4 backends, but single-slot constraint + no KG + no published retrieval metric. 68 — solid but not differentiated on depth.",
+        "hermes-agent": "Explicit cross-session recall (FTS5+LLM summarization) + 8 pluggable providers + Honcho dialectic modeling. 85 — top of 60-89 band; the memory model is rich but less measurable than gbrain's.",
+        "gbrain": "Only subject with published retrieval benchmark + self-wiring KG + hybrid RAG + eval harness. 92 — enters 90+ band because the 4+ signals are independently verifiable."
+      },
+      "leader": "gbrain"
+    },
+    {
+      "id": "skills",
+      "name": "Skills",
+      "weight": 0.17,
+      "scoring_scale_reference": "90-100: auto-skill + marketplace + MCP; 60-89: skill system manual + MCP",
+      "scores": {
+        "openclaw": 78,
+        "hermes-agent": 92,
+        "gbrain": 75
+      },
+      "signals_observed": {
+        "openclaw": [
+          { "signal": "bundled skills", "value": "53", "evidence": "OS/openclaw/skills/" },
+          { "signal": "skill marketplace", "value": "ClawHub (clawhub.ai)", "evidence": "OS/openclaw/extensions/clawhub/, OS/openclaw/VISION.md" },
+          { "signal": "MCP integration", "value": "external bridge (mcporter) — not first-class", "evidence": "OS/openclaw/skills/mcporter/, OS/openclaw/VISION.md" },
+          { "signal": "versioned plugin SDK", "value": "packages/plugin-sdk + plugin-package-contract", "evidence": "OS/openclaw/packages/plugin-sdk/" },
+          { "signal": "auto-skill creation", "value": "no", "evidence": "not observed" }
+        ],
+        "hermes-agent": [
+          { "signal": "bundled skills", "value": "25 + 15 opt-in categories", "evidence": "OS/hermes-agent/skills/, OS/hermes-agent/optional-skills/" },
+          { "signal": "skill marketplace (open standard)", "value": "Skills Hub / agentskills.io", "evidence": "OS/hermes-agent/tools/skills_hub.py, README.md" },
+          { "signal": "autonomous skill creation", "value": "yes — 'Autonomous skill creation after complex tasks. Skills self-improve during use'", "evidence": "OS/hermes-agent/tools/skill_manager_tool.py, OS/hermes-agent/tools/skills_tool.py, OS/hermes-agent/README.md" },
+          { "signal": "MCP native (server + client + OAuth)", "value": "mcp_serve.py + mcp_tool.py + mcp_oauth_manager.py", "evidence": "OS/hermes-agent/mcp_serve.py, OS/hermes-agent/tools/mcp_oauth_manager.py" },
+          { "signal": "tool count", "value": "63 tools with registry", "evidence": "OS/hermes-agent/tools/, OS/hermes-agent/tools/registry.py" }
+        ],
+        "gbrain": [
+          { "signal": "bundled skills", "value": "26 + RESOLVER.md routing", "evidence": "OS/gbrain/skills/" },
+          { "signal": "MCP native server", "value": "stdio + HTTP, 41 ops exposed", "evidence": "OS/gbrain/src/mcp/server.ts" },
+          { "signal": "skill-creator skill", "value": "MECE-checked, conformance-tested, agent-driven (not experiential)", "evidence": "OS/gbrain/skills/skill-creator/" },
+          { "signal": "marketplace", "value": "none (shipped-with-tool)", "evidence": "not observed" },
+          { "signal": "contract-first ops", "value": "41 operations drive both CLI and MCP from src/core/operations.ts", "evidence": "OS/gbrain/src/core/operations.ts" }
+        ]
+      },
+      "confidence": "HIGH",
+      "justification": {
+        "openclaw": "53 bundled skills + ClawHub marketplace + versioned Plugin SDK, but MCP is bridge-only and no autonomous skill creation. 78 — upper 60-89 band.",
+        "hermes-agent": "Autonomous skill creation + agentskills.io standard + native MCP + 63 tools. 92 — meets 90+ band with 5 independently verified signals.",
+        "gbrain": "Native MCP + contract-first ops + 26 skills + resolver, but no marketplace and skill-creator is agent-driven not experiential. 75 — mid 60-89 band."
+      },
+      "leader": "hermes-agent"
+    },
+    {
+      "id": "cost",
+      "name": "Cost",
+      "weight": 0.13,
+      "scoring_scale_reference": "90-100: <$5/mo or serverless with hibernation; 60-89: $5-20/mo",
+      "scores": {
+        "openclaw": 75,
+        "hermes-agent": 92,
+        "gbrain": 85
+      },
+      "signals_observed": {
+        "openclaw": [
+          { "signal": "default runtime", "value": "your own device (no infra $)", "evidence": "OS/openclaw/README.md" },
+          { "signal": "serverless path", "value": "fly.toml + render.yaml present, not primary", "evidence": "OS/openclaw/fly.toml, OS/openclaw/render.yaml" },
+          { "signal": "paid deps baseline", "value": "1 (model provider); channels mostly free", "evidence": "README.md" }
+        ],
+        "hermes-agent": [
+          { "signal": "explicit $5 VPS path", "value": "yes — 'Run it on a $5 VPS, a GPU cluster, or serverless infrastructure that costs nearly nothing when idle'", "evidence": "OS/hermes-agent/README.md" },
+          { "signal": "serverless hibernation", "value": "Modal + Daytona hibernate when idle", "evidence": "OS/hermes-agent/tools/environments/modal.py, managed_modal.py" },
+          { "signal": "portal subscription optional", "value": "Nous Portal is optional; use any provider", "evidence": "OS/hermes-agent/hermes_cli/nous_subscription.py, README.md" }
+        ],
+        "gbrain": [
+          { "signal": "embedded DB (no server cost)", "value": "PGLite — zero infra until you outgrow it", "evidence": "OS/gbrain/src/core/pglite-engine.ts" },
+          { "signal": "tiered scaling", "value": "suggests Supabase for 1000+ files only", "evidence": "OS/gbrain/CLAUDE.md" },
+          { "signal": "paid deps", "value": "OpenAI embeddings by default (can swap)", "evidence": "OS/gbrain/src/core/embedding.ts" }
+        ]
+      },
+      "confidence": "HIGH",
+      "justification": {
+        "openclaw": "Your-device default is free, but the product implies running a mac or VPS somewhere + multiple model calls across channels. 75 — solid 60-89.",
+        "hermes-agent": "Explicit '$5 VPS' + serverless hibernation. Matches top band (<$5/mo or serverless with hibernation) with 2+ signals. 92.",
+        "gbrain": "PGLite adds zero infra cost; embeddings are a variable cost. 85 — upper 60-89, does not quite clear 90 because embeddings bill per page."
+      },
+      "leader": "hermes-agent"
+    },
+    {
+      "id": "privacy",
+      "name": "Privacy",
+      "weight": 0.17,
+      "scoring_scale_reference": "90-100: zero telemetry + ownership + PII redaction + audit; 60-89: no telemetry + ownership",
+      "scores": {
+        "openclaw": 82,
+        "hermes-agent": 80,
+        "gbrain": 85
+      },
+      "signals_observed": {
+        "openclaw": [
+          { "signal": "default loopback binding", "value": "explicit", "evidence": "OS/openclaw/AGENTS.md" },
+          { "signal": "DM pairing + per-channel allowFrom", "value": "pairing codes for unknown senders; openclaw pairing approve/allow", "evidence": "OS/openclaw/src/channels/allowlists/, OS/openclaw/README.md" },
+          { "signal": "Docker sandbox for non-main sessions", "value": "sandbox.mode=non-main; Dockerfile.sandbox*", "evidence": "OS/openclaw/Dockerfile.sandbox, OS/openclaw/README.md" },
+          { "signal": "data ownership", "value": "~/.openclaw/agents/<id>/sessions/", "evidence": "OS/openclaw/AGENTS.md" },
+          { "signal": "PII redaction", "value": "not explicit", "evidence": "not observed" }
+        ],
+        "hermes-agent": [
+          { "signal": "explicit PII redaction module", "value": "agent/redact.py", "evidence": "OS/hermes-agent/agent/redact.py" },
+          { "signal": "command approval + container isolation", "value": "per docs", "evidence": "OS/hermes-agent/README.md" },
+          { "signal": "data ownership", "value": "local config + memory, portable VPS", "evidence": "README.md" },
+          { "signal": "sandbox backends", "value": "docker + singularity", "evidence": "OS/hermes-agent/tools/environments/singularity.py" }
+        ],
+        "gbrain": [
+          { "signal": "4-tier ACCESS_POLICY", "value": "ACCESS_POLICY.md + SOUL.md + USER.md + HEARTBEAT.md from soul-audit", "evidence": "OS/gbrain/skills/soul-audit/SKILL.md, OS/gbrain/templates/" },
+          { "signal": "trust-boundary-aware ops", "value": "OperationContext.remote flag tightens filesystem confinement", "evidence": "OS/gbrain/src/core/operations.ts" },
+          { "signal": "stdio default (no network)", "value": "yes; HTTP requires explicit serve + token", "evidence": "OS/gbrain/src/mcp/server.ts" },
+          { "signal": "SSRF helpers", "value": "isInternalUrl, parseOctet, hostnameToOctets, isPrivateIpv4 in integrations.ts", "evidence": "OS/gbrain/src/commands/integrations.ts" },
+          { "signal": "query sanitization", "value": "prompt-injection stripping for LLM channel", "evidence": "OS/gbrain/src/core/search/expansion.ts" }
+        ]
+      },
+      "confidence": "HIGH",
+      "justification": {
+        "openclaw": "Loopback default + mature DM pairing + allowFrom + Docker sandbox + data ownership — but no explicit PII redaction. 82.",
+        "hermes-agent": "Explicit redact.py + command approval + sandbox — but less formalized inbound-policy story than openclaw. 80.",
+        "gbrain": "4-tier access policy + OperationContext.remote + SSRF helpers + stdio default + query sanitization. 85 — top of 60-89 band; does not clear 90 because no published audit log / zero-telemetry claim."
+      },
+      "leader": "gbrain (narrow)"
+    }
+  ],
+  "weighted_totals": {
+    "openclaw": 80.91,
+    "hermes-agent": 84.75,
+    "gbrain": 68.45
+  },
+  "weighted_totals_formula": {
+    "openclaw": "0.20*95 + 0.18*82 + 0.15*68 + 0.17*78 + 0.13*75 + 0.17*82 = 80.91",
+    "hermes-agent": "0.20*82 + 0.18*80 + 0.15*85 + 0.17*92 + 0.13*92 + 0.17*80 = 84.75",
+    "gbrain": "0.20*10 + 0.18*80 + 0.15*92 + 0.17*75 + 0.13*85 + 0.17*85 = 68.45"
+  },
+  "overall_winner": "hermes-agent",
+  "total_delta_vs_second": 3.84,
+  "dimension_wins": {
+    "openclaw": 2,
+    "hermes-agent": 3,
+    "gbrain": 2,
+    "ties_or_close": 1,
+    "note": "Channels=openclaw, Local-first=openclaw (narrow), Memory=gbrain, Skills=hermes-agent, Cost=hermes-agent, Privacy=gbrain (narrow). Openclaw+2, hermes+2, gbrain+2 with Skills decided narrowly; counting Local-first as openclaw edge and Privacy as gbrain edge gives openclaw 2, hermes 2, gbrain 2 — but under weighted total hermes wins."
+  },
+  "rankings": {
+    "openclaw_strongest": ["channels", "local_first", "privacy"],
+    "hermes_strongest": ["skills", "cost", "memory"],
+    "gbrain_strongest": ["memory", "privacy"],
+    "closest_dimensions": ["local_first (3-way cluster 80-82)", "privacy (80-85 cluster)"]
+  },
+  "confidence_overall": "HIGH",
+  "limitations": [
+    "gbrain's channels score is objectively low by design (brain substrate, not assistant). A pack-level weight redistribution would change the overall_winner if channels were excluded.",
+    "If we exclude channels (0.20) and rebalance, gbrain would lead on Memory (0.15) + Privacy (0.17); hermes would lead on Skills (0.17) + Cost (0.13). The pack's 0.20 channels weight drives the final ranking.",
+    "Numbers like 'GitHub stars' and 'release cadence' (community signals) were not measured — no web fetch performed per 'no invented claims'.",
+    "No actual performance measurement (latency, throughput) was run on any subject."
+  ],
+  "alternative_ranking_channels_excluded": {
+    "openclaw": 77.39,
+    "hermes-agent": 85.44,
+    "gbrain": 83.06,
+    "formula": "Weights excluding channels (0.20) rebalanced to sum to 1.0",
+    "interpretation": "If the reader positions gbrain fairly as a brain layer (not an assistant) and excludes the channel weight, gbrain (83.06) closes the gap to hermes-agent (85.44) and decisively overtakes openclaw (77.39)."
+  }
+}

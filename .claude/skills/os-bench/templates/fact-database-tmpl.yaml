@@ -1,0 +1,124 @@
+# Fact Database — Deep inventory em YAML estruturado
+# Gerado opcionalmente pela task inventory.md (profile=full)
+# Referenciado por: tasks/bench-matrix.md, tasks/bench-score.md quando profile=full
+
+extraction:
+  subject: "{subject_slug}"
+  path: "OS/{subject_slug}/"
+  date: "{ISO-8601}"
+  primary_language: "{lang}"
+  detected_stack: ["{framework1}", "{framework2}"]
+  tools_used: ["wc", "find", "grep", "git"]
+  skill_version: "1.0.0"
+
+modules:
+  - name: "{module_name}"
+    path: "{relative_path}"
+    type: "app | package | service | library | config"
+    language: "{lang}"
+    files_count: 0
+    loc_estimate: 0
+    entry_point: "{file_path_or_null}"
+    description: "{1_line}"
+
+dependencies:
+  internal:
+    - from: "{module_a}"
+      to: "{module_b}"
+      type: "import | call | data"
+      notes: "{optional}"
+  external:
+    - name: "{package_name}"
+      version: "{version}"
+      purpose: "{why_used}"
+      used_by: ["{module}"]
+
+data_model:
+  present: true
+  type: "relational | document | graph | vector | none"
+  schema_source: "{prisma | sqlalchemy | mongoose | inference | none}"
+  confidence: "HIGH | MEDIUM | LOW"
+  entities:
+    - name: "{entity_name}"
+      fields_count: 0
+      has_id: true
+      relationships:
+        - to: "{entity_b}"
+          type: "1:1 | 1:N | M:N"
+
+api_surface:
+  present: true
+  type: "rest | graphql | rpc | mcp | cli | sdk | none"
+  source: "{openapi | swagger | route_scan | mcp_manifest | cli_help | inference}"
+  confidence: "HIGH | MEDIUM | LOW"
+  endpoints:
+    - method: "{GET | POST | RPC_CALL | CLI}"
+      path: "{/api/... | command_name}"
+      handler: "{file_path}:{function_name}"
+      auth_required: true
+
+configuration:
+  config_files:
+    - path: "{relative_path}"
+      format: "yaml | json | toml | env"
+      purpose: "{what_it_configures}"
+  env_vars:
+    required: ["{VAR_1}", "{VAR_2}"]
+    optional: ["{VAR_3}"]
+
+extension_points:
+  plugins:
+    mechanism: "{plugin_dir | entry_point | interface | none}"
+    path: "{relative_path_or_null}"
+  hooks:
+    mechanism: "{lifecycle_events | pubsub | none}"
+    events: ["{event_1}", "{event_2}"]
+  skills:
+    mechanism: "{skill_loader | registry | none}"
+    path: "{relative_path_or_null}"
+  mcp:
+    mcp_client: false
+    mcp_server: false
+    transports: []
+
+quality_signals:
+  tests:
+    framework: "{vitest | jest | pytest | go test | none}"
+    test_files: 0
+    coverage_configured: false
+  linting:
+    linter: "{eslint | ruff | golangci-lint | none}"
+    config_file: "{path_or_null}"
+  ci_cd:
+    provider: "{github_actions | circleci | none}"
+    workflow_files: []
+  docs:
+    readme_lines: 0
+    has_contributing: false
+    has_architecture_doc: false
+    examples_present: false
+
+capabilities_observed:
+  - name: "{capability_name}"
+    evidence_paths: ["OS/{subject}/{path}"]
+    category: "{core | extensibility | integration | governance | ux}"
+    notes: "{detail}"
+
+unique_selling_points:
+  - "{usp_1_from_readme}"
+  - "{usp_2_from_readme}"
+
+limitations:
+  - description: "{limitation}"
+    source: "{readme_line | issue_url | code_comment}"
+
+import_map:
+  total_imports: 0
+  cross_module_imports: 0
+  circular_dependencies: []
+
+confidence_summary:
+  filesystem_coverage: "{percentage}%"
+  web_augmented: "{percentage}%"
+  overall: "HIGH | MEDIUM | LOW"
+  notes: "{freetext}"

@@ -1,0 +1,228 @@
+{
+  "generatedAt": "2026-04-19T22:45:00Z",
+  "comparison_type": "nway",
+  "subjects": ["spec-kit", "get-shit-done", "superpowers"],
+  "dimension_pack": "spec-driven",
+  "pack_weights_sum": 1.00,
+  "methods": {
+    "spec-kit": "installed",
+    "get-shit-done": "installed",
+    "superpowers": "installed"
+  },
+  "dimensions": [
+    {
+      "id": "spec_format",
+      "name": "Spec Format",
+      "weight": 0.20,
+      "scoring_scale_ref": "90-100: hybrid MD+YAML with schema + examples. 60-89: structured MD with schema. 30-59: free MD. 0-29: ad-hoc prompts.",
+      "scores": {
+        "spec-kit": 88,
+        "get-shit-done": 85,
+        "superpowers": 45
+      },
+      "signals_observed": {
+        "spec-kit": [
+          { "signal": "Structured MD template with mandatory sections", "value": "User Stories P1/P2/P3 + FR-### + SC-### + Edge Cases + Assumptions + Key Entities", "evidence": "OS/spec-kit/templates/spec-template.md" },
+          { "signal": "Validation checklist generated per spec", "value": "checklists/requirements.md (Content/Completeness/Readiness)", "evidence": "OS/spec-kit/templates/checklist-template.md" },
+          { "signal": "Requirement ID scheme (FR-/SC-/US#)", "value": "enforced in template + referenced in plan/tasks", "evidence": "OS/spec-kit/templates/spec-template.md" },
+          { "signal": "Examples library (user-story patterns, 3 priority tiers)", "value": "provided in template", "evidence": "OS/spec-kit/templates/spec-template.md" }
+        ],
+        "get-shit-done": [
+          { "signal": "Structured MD template with required fields", "value": "Goal, Background, Requirements with Current/Target/Acceptance, Boundaries (in/out-of-scope), Constraints, Acceptance Criteria, Ambiguity Report", "evidence": "OS/get-shit-done/get-shit-done/templates/spec.md" },
+          { "signal": "Quantitative gate before spec is locked", "value": "weighted 4-dim ambiguity score gate ≤0.20", "evidence": "OS/get-shit-done/get-shit-done/workflows/spec-phase.md" },
+          { "signal": "Rejects vague requirements explicitly", "value": "'The system should be fast' rejected in favour of '< 200ms at p95'", "evidence": "OS/get-shit-done/get-shit-done/workflows/spec-phase.md" },
+          { "signal": "Related contracts (UI-SPEC, AI-SPEC) with own templates", "value": "dedicated MD templates", "evidence": "OS/get-shit-done/get-shit-done/templates/UI-SPEC.md, AI-SPEC.md" }
+        ],
+        "superpowers": [
+          { "signal": "No typed spec artefact", "value": "spec emerges from brainstorming conversation", "evidence": "OS/superpowers/README.md, OS/superpowers/skills/brainstorming/" },
+          { "signal": "Plan-level placeholder rule", "value": "'No Placeholders' rule in writing-plans (not at spec level)", "evidence": "OS/superpowers/skills/writing-plans/SKILL.md" }
+        ]
+      },
+      "confidence": "HIGH",
+      "justification": {
+        "spec-kit": "Four strong signals including stable IDs and per-spec validation checklist → high band.",
+        "get-shit-done": "Four strong signals including quantitative ambiguity gate; slightly below spec-kit because IDs are less canonically stable across artefacts.",
+        "superpowers": "By design no typed spec; scored mid-band because the brainstorming skill does capture design but without a schema."
+      },
+      "advantage": "spec-kit"
+    },
+    {
+      "id": "traceability",
+      "name": "Traceability",
+      "weight": 0.20,
+      "scoring_scale_ref": "90-100: IDs + bidirectional code↔spec↔test links. 60-89: spec→code. 30-59: only code tags. 0-29: none.",
+      "scores": {
+        "spec-kit": 80,
+        "get-shit-done": 72,
+        "superpowers": 55
+      },
+      "signals_observed": {
+        "spec-kit": [
+          { "signal": "Stable requirement IDs (FR-###/SC-###/US#) referenced downstream", "value": "FR-001..N in spec, US# tags in tasks, plan.md references FR-###", "evidence": "OS/spec-kit/templates/spec-template.md, OS/spec-kit/templates/tasks-template.md" },
+          { "signal": "Issue export keeps IDs visible in external tracker", "value": "/speckit.taskstoissues", "evidence": "OS/spec-kit/templates/commands/taskstoissues.md" },
+          { "signal": "Plan template references spec by path", "value": "Input: Feature specification from /specs/[###-feature-name]/spec.md", "evidence": "OS/spec-kit/templates/plan-template.md" }
+        ],
+        "get-shit-done": [
+          { "signal": "Verification reports map acceptance criteria to pass/fail", "value": "verification-report.md template + gsd-verifier", "evidence": "OS/get-shit-done/get-shit-done/templates/verification-report.md" },
+          { "signal": "Requirements-coverage gate", "value": "FEATURES.md#21", "evidence": "OS/get-shit-done/docs/FEATURES.md" },
+          { "signal": "Claim-provenance tagging (v1.31)", "value": "tracks sources of claims through artefacts", "evidence": "OS/get-shit-done/docs/FEATURES.md#65-claim-provenance-tagging" }
+        ],
+        "superpowers": [
+          { "signal": "TDD ties every behaviour to a test (implicit spec↔test link)", "value": "every new function/method has a test — Verification Checklist in TDD skill", "evidence": "OS/superpowers/skills/test-driven-development/SKILL.md" },
+          { "signal": "No requirement IDs", "value": "not_observed", "evidence": "OS/superpowers/skills/" }
+        ]
+      },
+      "confidence": "HIGH",
+      "justification": {
+        "spec-kit": "Canonical ID scheme + external export → strong upper-60s/low-80s. Not 90+ because there's no continuous reverse link (code → FR-###).",
+        "get-shit-done": "Multiple gates + claim provenance, but IDs are not canonical.",
+        "superpowers": "No IDs, but tests function as traceability artefacts."
+      },
+      "advantage": "spec-kit"
+    },
+    {
+      "id": "executable_specs",
+      "name": "Executable Specs",
+      "weight": 0.22,
+      "scoring_scale_ref": "90-100: specs generate tests + scaffold + continuous validation. 60-89: specs generate tests. 30-59: specs generate scaffolding. 0-29: docs only.",
+      "scores": {
+        "spec-kit": 75,
+        "get-shit-done": 78,
+        "superpowers": 62
+      },
+      "signals_observed": {
+        "spec-kit": [
+          { "signal": "Spec → plan+research+data-model+quickstart+contracts scaffolding", "value": "/speckit.plan emits 5 artefacts", "evidence": "OS/spec-kit/templates/commands/plan.md, OS/spec-kit/templates/plan-template.md" },
+          { "signal": "Consistency analyzer across artefacts", "value": "/speckit.analyze + /speckit.clarify", "evidence": "OS/spec-kit/templates/commands/analyze.md, OS/spec-kit/templates/commands/clarify.md" },
+          { "signal": "Implement command", "value": "/speckit.implement", "evidence": "OS/spec-kit/templates/commands/implement.md" },
+          { "signal": "Tests are optional unless requested (weakens executable-spec claim)", "value": "tasks-template.md:11", "evidence": "OS/spec-kit/templates/tasks-template.md" }
+        ],
+        "get-shit-done": [
+          { "signal": "5-stage pipeline (spec→discuss→plan→execute→verify) with locked upstream", "value": "plan-phase + discuss-phase + execute-phase + verify-work", "evidence": "OS/get-shit-done/commands/gsd/plan-phase.md, OS/get-shit-done/commands/gsd/discuss-phase.md, OS/get-shit-done/commands/gsd/execute-phase.md" },
+          { "signal": "Requirements-coverage + cross-phase-regression gates", "value": "multiple continuous validation gates", "evidence": "OS/get-shit-done/docs/FEATURES.md#20,#21" },
+          { "signal": "Autonomous mode runs whole pipeline", "value": "/gsd-autonomous with --auto --to N --interactive", "evidence": "OS/get-shit-done/commands/gsd/autonomous.md" },
+          { "signal": "Add-tests command (not auto spec→test)", "value": "/gsd-add-tests is manual", "evidence": "OS/get-shit-done/commands/gsd/add-tests.md" }
+        ],
+        "superpowers": [
+          { "signal": "Plan → fresh subagent per task + two-stage review is the execution engine", "value": "subagent-driven-development", "evidence": "OS/superpowers/skills/subagent-driven-development/SKILL.md" },
+          { "signal": "TDD mandates failing test first — closest thing in the trio to spec→test", "value": "Iron Law", "evidence": "OS/superpowers/skills/test-driven-development/SKILL.md" },
+          { "signal": "No scaffolding of data-model/contracts from spec", "value": "not_observed", "evidence": "OS/superpowers/skills/writing-plans/SKILL.md" }
+        ]
+      },
+      "confidence": "HIGH",
+      "justification": {
+        "spec-kit": "Widest scaffold surface, but the optional-tests default costs executable-spec points.",
+        "get-shit-done": "Multiple continuous gates + autonomous end-to-end → slight edge over spec-kit.",
+        "superpowers": "TDD + subagent review is close to executable, but no scaffolding of non-test artefacts."
+      },
+      "advantage": "get-shit-done"
+    },
+    {
+      "id": "tdd_integration",
+      "name": "TDD Integration",
+      "weight": 0.15,
+      "scoring_scale_ref": "90-100: enforcement + subagents + failing-tests-first. 60-89: recommended. 30-59: tests after code. 0-29: none.",
+      "scores": {
+        "spec-kit": 30,
+        "get-shit-done": 62,
+        "superpowers": 95
+      },
+      "signals_observed": {
+        "spec-kit": [
+          { "signal": "Tests are OPTIONAL in tasks-template", "value": "'only include them if explicitly requested in the feature specification'", "evidence": "OS/spec-kit/templates/tasks-template.md:11" },
+          { "signal": "Acceptance scenarios exist in spec but are not mandatorily executed", "value": "User Stories specify Given/When/Then but tests are opt-in", "evidence": "OS/spec-kit/templates/spec-template.md" }
+        ],
+        "get-shit-done": [
+          { "signal": "TDD reference doc in references/", "value": "tdd.md reference", "evidence": "OS/get-shit-done/get-shit-done/references/tdd.md" },
+          { "signal": "Dedicated add-tests command and subagent", "value": "/gsd-add-tests + agent", "evidence": "OS/get-shit-done/commands/gsd/add-tests.md" },
+          { "signal": "Anti-pattern enforcement at CI level", "value": "tests/anti-pattern-enforcement.test.cjs", "evidence": "OS/get-shit-done/tests/anti-pattern-enforcement.test.cjs" },
+          { "signal": "Verification gate checks acceptance criteria", "value": "pass/fail checkboxes", "evidence": "OS/get-shit-done/agents/gsd-verifier.md" }
+        ],
+        "superpowers": [
+          { "signal": "TDD Iron Law explicit", "value": "'NO PRODUCTION CODE WITHOUT A FAILING TEST FIRST' + 'Write code before the test? Delete it. Start over.'", "evidence": "OS/superpowers/skills/test-driven-development/SKILL.md" },
+          { "signal": "Red/Green/Refactor cycle with mandatory verification", "value": "'Verify RED' and 'Verify GREEN' are marked MANDATORY", "evidence": "OS/superpowers/skills/test-driven-development/SKILL.md" },
+          { "signal": "Subagent prompts include TDD expectation", "value": "implementer-prompt.md + spec-reviewer checks test-first compliance", "evidence": "OS/superpowers/skills/subagent-driven-development/implementer-prompt.md" },
+          { "signal": "Testing anti-patterns reference bundled", "value": "testing-anti-patterns.md co-located with TDD skill", "evidence": "OS/superpowers/skills/test-driven-development/testing-anti-patterns.md" }
+        ]
+      },
+      "confidence": "HIGH",
+      "justification": {
+        "spec-kit": "Explicit opt-out is documented — score deliberately low.",
+        "get-shit-done": "TDD as philosophy + gate, not as red-green enforcement.",
+        "superpowers": "Four strong signals including enforcement + subagent ordering → 90+ band."
+      },
+      "advantage": "superpowers"
+    },
+    {
+      "id": "roundtripping",
+      "name": "Roundtripping",
+      "weight": 0.23,
+      "scoring_scale_ref": "90-100: bidirectional spec↔code + auto drift detection. 60-89: extraction OR drift detection. 30-59: manual sync. 0-29: spec goes stale.",
+      "scores": {
+        "spec-kit": 42,
+        "get-shit-done": 68,
+        "superpowers": 25
+      },
+      "signals_observed": {
+        "spec-kit": [
+          { "signal": "Consistency analyzer detects ambiguity/contradictions/gaps across spec/plan/tasks", "value": "/speckit.analyze", "evidence": "OS/spec-kit/templates/commands/analyze.md" },
+          { "signal": "Clarify loop resolves NEEDS CLARIFICATION markers", "value": "/speckit.clarify", "evidence": "OS/spec-kit/templates/commands/clarify.md" },
+          { "signal": "No code→spec extraction", "value": "not_observed", "evidence": "OS/spec-kit/src/specify_cli/" }
+        ],
+        "get-shit-done": [
+          { "signal": "Schema drift gate blocks execute if ORM changes miss migrations", "value": "FEATURES.md#59 / line 1440", "evidence": "OS/get-shit-done/docs/FEATURES.md:79,1440" },
+          { "signal": "STATE.md filesystem-drift detection (REQ-STATE-01)", "value": "'state validate' detects drift; Sync reconstructs from disk", "evidence": "OS/get-shit-done/docs/FEATURES.md:1635-1650" },
+          { "signal": "Codebase mapper seeds planning from existing code (closest thing to code→spec)", "value": "/gsd-map-codebase + /gsd-scan", "evidence": "OS/get-shit-done/commands/gsd/map-codebase.md, OS/get-shit-done/commands/gsd/scan.md" },
+          { "signal": "Scope reduction detection + extract-learnings", "value": "continuous feedback loop into planning context", "evidence": "OS/get-shit-done/commands/gsd/extract_learnings.md" }
+        ],
+        "superpowers": [
+          { "signal": "No drift detection or roundtripping skill", "value": "not_observed", "evidence": "OS/superpowers/skills/" }
+        ]
+      },
+      "confidence": "HIGH",
+      "justification": {
+        "spec-kit": "On-demand consistency analysis is half the problem; no continuous loop or code→spec path.",
+        "get-shit-done": "Two drift-detection layers + codebase mapper → best of the trio, solidly in 60-89 band.",
+        "superpowers": "Not addressed."
+      },
+      "advantage": "get-shit-done"
+    }
+  ],
+  "weighted_totals": {
+    "spec-kit": 64.26,
+    "get-shit-done": 73.50,
+    "superpowers": 53.64
+  },
+  "weighted_totals_calculation": {
+    "spec-kit": "88*0.20 + 80*0.20 + 75*0.22 + 30*0.15 + 42*0.23 = 17.60 + 16.00 + 16.50 + 4.50 + 9.66 = 64.26",
+    "get-shit-done": "85*0.20 + 72*0.20 + 78*0.22 + 62*0.15 + 68*0.23 = 17.00 + 14.40 + 17.16 + 9.30 + 15.64 = 73.50",
+    "superpowers": "45*0.20 + 55*0.20 + 62*0.22 + 95*0.15 + 25*0.23 = 9.00 + 11.00 + 13.64 + 14.25 + 5.75 = 53.64"
+  },
+  "overall_winner": "get-shit-done",
+  "total_delta_vs_second": 9.24,
+  "dimension_wins": {
+    "spec-kit": 2,
+    "get-shit-done": 2,
+    "superpowers": 1,
+    "ties": 0
+  },
+  "dimension_advantages": {
+    "spec_format": "spec-kit",
+    "traceability": "spec-kit",
+    "executable_specs": "get-shit-done",
+    "tdd_integration": "superpowers",
+    "roundtripping": "get-shit-done"
+  },
+  "rankings": {
+    "spec-kit_strongest": ["spec_format", "traceability"],
+    "get-shit-done_strongest": ["roundtripping", "executable_specs"],
+    "superpowers_strongest": ["tdd_integration"],
+    "closest_dimensions": ["spec_format (spec-kit 88 vs gsd 85 — delta 3)"]
+  },
+  "confidence_overall": "HIGH",
+  "limitations": [
+    "Pack weight for roundtripping (0.23) is the highest in the pack — this gives GSD's drift-detection an outsized effect on totals. If roundtripping weight were reduced to match spec_format/traceability (0.20), totals would shift 1–2 points but the ranking order would stay the same.",
+    "GitHub metrics (stars, contributors) were not retrieved from the web — scorecard relies on filesystem evidence only. This matches the local-first principle but means community health is not factored in.",
+    "Scores are calibrated against the pack's `scoring_scale` but bands still require human judgement on borderline values. Confidence reported is HIGH because every score has ≥2 evidence-linked signals (the one score ≥90 — superpowers on tdd_integration — has 4 signals)."
+  ]
+}

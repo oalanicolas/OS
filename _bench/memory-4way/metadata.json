@@ -1,0 +1,84 @@
+{
+  "$schema": "os-bench metadata v1.0",
+  "generatedAt": "2026-04-19T22:19:37Z",
+  "comparison_type": "nway",
+  "slug": "memory-4way",
+  "subject_count": 4,
+  "subjects": [
+    {
+      "slug": "gbrain",
+      "path": "OS/gbrain/",
+      "source_url": "https://github.com/garrytan/gbrain",
+      "detected_stack": ["TypeScript", "Bun", "PGLite", "Postgres", "pgvector", "MCP"]
+    },
+    {
+      "slug": "mempalace",
+      "path": "OS/mempalace/",
+      "source_url": "https://github.com/MemPalace/mempalace",
+      "detected_stack": ["Python 3.9+", "ChromaDB", "SQLite", "MCP"]
+    },
+    {
+      "slug": "mem0",
+      "path": "OS/mem0/",
+      "source_url": "https://github.com/mem0ai/mem0",
+      "detected_stack": ["Python 3.9+", "TypeScript", "FastAPI", "Qdrant", "Neo4j", "Pydantic v2", "Next.js 15"]
+    },
+    {
+      "slug": "gsd-2",
+      "path": "OS/gsd-2/",
+      "source_url": "https://github.com/gsd-build/GSD-2",
+      "detected_stack": ["TypeScript", "Node 22+", "Pi SDK", "SQLite", "MCP"]
+    }
+  ],
+  "dimension_pack": "memory",
+  "scoring_dimensions": [
+    "recall_accuracy",
+    "write_latency",
+    "read_latency",
+    "persistence",
+    "schema_flexibility",
+    "local_first",
+    "vector_support",
+    "graph_support"
+  ],
+  "profile": "quick",
+  "skill_version": "1.0.0",
+  "output_root": "OS/_bench/memory-4way/",
+  "artifacts_generated": [
+    "metadata.json",
+    "_inventories/gbrain/inventory.json",
+    "_inventories/gbrain/inventory.md",
+    "_inventories/mempalace/inventory.json",
+    "_inventories/mempalace/inventory.md",
+    "_inventories/mem0/inventory.json",
+    "_inventories/mem0/inventory.md",
+    "_inventories/gsd-2/inventory.json",
+    "_inventories/gsd-2/inventory.md",
+    "comparison-matrix.json",
+    "comparison-matrix.md",
+    "scorecard.json",
+    "scorecard.md",
+    "executive-report.md"
+  ],
+  "artifacts_skipped": [
+    "gap-analysis.{json,md}",
+    "battle-card.md"
+  ],
+  "artifacts_skipped_reason": "Pack nway: gap-analysis e battle-card sao opcionais (spec: scorecard n-columns + executive sao os core deliverables pra nway)",
+  "confidence_overall": "HIGH",
+  "quality_gate_passed": true,
+  "weighted_totals": {
+    "gbrain": 75.89,
+    "mempalace": 83.14,
+    "mem0": 76.36,
+    "gsd-2": 51.95
+  },
+  "overall_winner": "mempalace",
+  "dimension_wins": {
+    "gbrain": 3,
+    "mempalace": 3,
+    "mem0": 2,
+    "gsd-2": 0
+  },
+  "notes": "Benchmark memory-4way seguindo pack memory v1.0. mempalace lidera no total ponderado (83.14) por combinar recall publicado + verbatim + local-first. mem0 (76.36) vence vector e schema flex pelo ecossistema (30 stores, 15 embedders). gbrain (75.89) vence graph (zero-LLM auto-wiring), write e read latency. gsd-2 (51.95) nao compete como memory-first system (coding agent com memoria como layer). Todos os claims de benchmark (R@5, LoCoMo etc) estao citados com path de evidencia. gsd-2 foi marcado not_observed em recall_accuracy por ausencia de metric publico, nao por performance ruim."
+}

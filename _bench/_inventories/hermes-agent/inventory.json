@@ -1,0 +1,119 @@
+{
+  "generatedAt": "2026-04-19T22:30:00Z",
+  "subject": "hermes-agent",
+  "path": "OS/hermes-agent/",
+  "primary_language": "Python",
+  "secondary_languages": ["TypeScript (minor)", "Shell"],
+  "stack": ["Python 3.11", "uv / pip", "asyncio", "FastAPI-style gateway", "SQLite (FTS5)", "Honcho", "Modal", "Daytona", "Singularity", "Docker", "pytest"],
+  "license": "MIT",
+  "tagline": "Self-improving AI agent with built-in learning loop; skill creation, agent-curated memory, cross-channel CLI",
+  "metrics": {
+    "loc_estimate": null,
+    "file_count": null,
+    "top_level_dirs": ["agent", "gateway", "hermes_cli", "tools", "skills", "optional-skills", "plugins", "environments", "docs", "tests", "acp_adapter", "acp_registry", "web", "website", "ui-tui", "tui_gateway", "cron", "scripts", "docker", "packaging", "nix"],
+    "py_files": 981,
+    "readme_lines": 186,
+    "last_commit_date": "2026-04-19",
+    "github_stars": null,
+    "github_contributors": null,
+    "gateway_platforms_count": 19,
+    "tools_count": 63,
+    "skills_count": 25,
+    "optional_skills_categories": 15,
+    "memory_plugin_count": 8
+  },
+  "version": "1.0.0 (package.json) / v0.10.0 per RELEASE_v0.10.0.md",
+  "modules": [
+    { "name": "agent", "path": "OS/hermes-agent/agent/", "type": "app", "description": "Core agent loop, context engine, prompt builder, memory manager, model adapters" },
+    { "name": "gateway", "path": "OS/hermes-agent/gateway/", "type": "service", "description": "Messaging gateway with 19 platform adapters (Telegram, Discord, Slack, WhatsApp, Signal, Matrix, Email, SMS, Home Assistant, WeCom, WeChat, Feishu, etc)" },
+    { "name": "hermes_cli", "path": "OS/hermes-agent/hermes_cli/", "type": "app", "description": "CLI entry + setup wizard + OAuth + doctor + gateway subcommands" },
+    { "name": "tools", "path": "OS/hermes-agent/tools/", "type": "package", "description": "63 tools (browser, code exec, file ops, delegate, cron jobs, memory, skills, MCP, session search, image gen, mixture-of-agents)" },
+    { "name": "tools/environments", "path": "OS/hermes-agent/tools/environments/", "type": "package", "description": "6 terminal backends: local, docker, SSH (base), daytona, singularity, modal/managed_modal" },
+    { "name": "skills", "path": "OS/hermes-agent/skills/", "type": "package", "description": "25 bundled skill categories" },
+    { "name": "optional-skills", "path": "OS/hermes-agent/optional-skills/", "type": "package", "description": "15+ opt-in skill categories (autonomous agents, blockchain, creative, devops, email, mcp, migration, etc)" },
+    { "name": "plugins/memory", "path": "OS/hermes-agent/plugins/memory/", "type": "package", "description": "8 memory backends: byterover, hindsight, holographic, honcho, mem0, openviking, retaindb, supermemory" },
+    { "name": "plugins/context_engine", "path": "OS/hermes-agent/plugins/context_engine/", "type": "package", "description": "Pluggable context engine surface" },
+    { "name": "cron", "path": "OS/hermes-agent/cron/", "type": "service", "description": "Built-in cron scheduler (jobs, scheduler)" },
+    { "name": "run_agent.py", "path": "OS/hermes-agent/run_agent.py", "type": "app", "description": "12,218-line main agent loop script (single file)" },
+    { "name": "cli.py", "path": "OS/hermes-agent/cli.py", "type": "app", "description": "10,577-line CLI root" },
+    { "name": "hermes_state.py", "path": "OS/hermes-agent/hermes_state.py", "type": "library", "description": "1,293-line shared state" },
+    { "name": "batch_runner.py", "path": "OS/hermes-agent/batch_runner.py", "type": "app", "description": "Batch trajectory generation / RL data collection" },
+    { "name": "mcp_serve.py", "path": "OS/hermes-agent/mcp_serve.py", "type": "service", "description": "MCP server entry (867 lines)" },
+    { "name": "trajectory_compressor.py", "path": "OS/hermes-agent/trajectory_compressor.py", "type": "library", "description": "Trajectory compression for RL training" },
+    { "name": "tinker-atropos", "path": "OS/hermes-agent/tinker-atropos/", "type": "library", "description": "RL environment submodule (optional)" }
+  ],
+  "external_dependencies_top10": [
+    { "package": "agent-browser", "version": "^0.13.0", "purpose": "Browser automation" },
+    { "package": "@askjo/camofox-browser", "version": "^1.5.2", "purpose": "Stealth browser tool" },
+    { "package": "honcho", "version": "external", "purpose": "Dialectic user modeling (plugins/memory/honcho)" },
+    { "package": "uv", "version": "external", "purpose": "Python package manager" }
+  ],
+  "entry_points": [
+    { "kind": "cli", "path": "OS/hermes-agent/hermes", "command": "hermes" },
+    { "kind": "cli-main", "path": "OS/hermes-agent/cli.py", "command": "python cli.py" },
+    { "kind": "agent", "path": "OS/hermes-agent/run_agent.py", "command": "python run_agent.py" },
+    { "kind": "gateway", "path": "OS/hermes-agent/gateway/run.py", "command": "hermes gateway start" },
+    { "kind": "mcp-server", "path": "OS/hermes-agent/mcp_serve.py", "command": "hermes mcp serve" },
+    { "kind": "batch", "path": "OS/hermes-agent/batch_runner.py", "command": "python batch_runner.py" }
+  ],
+  "capabilities": [
+    { "name": "Messaging gateway (19 platforms)", "evidence_paths": ["OS/hermes-agent/gateway/platforms/bluebubbles.py", "OS/hermes-agent/gateway/platforms/dingtalk.py", "OS/hermes-agent/gateway/platforms/discord.py", "OS/hermes-agent/gateway/platforms/email.py", "OS/hermes-agent/gateway/platforms/feishu.py", "OS/hermes-agent/gateway/platforms/homeassistant.py", "OS/hermes-agent/gateway/platforms/matrix.py", "OS/hermes-agent/gateway/platforms/mattermost.py", "OS/hermes-agent/gateway/platforms/signal.py", "OS/hermes-agent/gateway/platforms/slack.py", "OS/hermes-agent/gateway/platforms/sms.py", "OS/hermes-agent/gateway/platforms/telegram.py", "OS/hermes-agent/gateway/platforms/webhook.py", "OS/hermes-agent/gateway/platforms/wecom.py", "OS/hermes-agent/gateway/platforms/weixin.py", "OS/hermes-agent/gateway/platforms/whatsapp.py", "OS/hermes-agent/gateway/platforms/qqbot/"], "category": "integration", "description": "19 platform adapters including Home Assistant and SMS" },
+    { "name": "Self-improving skill loop (auto-skill creation)", "evidence_paths": ["OS/hermes-agent/tools/skill_manager_tool.py", "OS/hermes-agent/tools/skills_tool.py", "OS/hermes-agent/tools/skills_sync.py", "OS/hermes-agent/tools/skills_hub.py", "OS/hermes-agent/skills/"], "category": "core", "description": "Autonomous skill creation after complex tasks; skills self-improve during use (per README); compatible with agentskills.io" },
+    { "name": "Agent-curated persistent memory with nudges", "evidence_paths": ["OS/hermes-agent/agent/memory_manager.py", "OS/hermes-agent/agent/memory_provider.py", "OS/hermes-agent/tools/memory_tool.py", "OS/hermes-agent/plugins/memory/honcho/"], "category": "core", "description": "Periodic nudges to persist knowledge; Honcho dialectic user modeling" },
+    { "name": "FTS5 session search with LLM summarization", "evidence_paths": ["OS/hermes-agent/tools/session_search_tool.py"], "category": "core", "description": "SQLite FTS5 full-text search across past sessions with summarization for cross-session recall" },
+    { "name": "Pluggable memory (8 providers)", "evidence_paths": ["OS/hermes-agent/plugins/memory/byterover/", "OS/hermes-agent/plugins/memory/hindsight/", "OS/hermes-agent/plugins/memory/holographic/", "OS/hermes-agent/plugins/memory/honcho/", "OS/hermes-agent/plugins/memory/mem0/", "OS/hermes-agent/plugins/memory/openviking/", "OS/hermes-agent/plugins/memory/retaindb/", "OS/hermes-agent/plugins/memory/supermemory/"], "category": "core", "description": "8 alternative memory plugins with yaml manifests" },
+    { "name": "Pluggable context engine", "evidence_paths": ["OS/hermes-agent/plugins/context_engine/", "OS/hermes-agent/agent/context_engine.py", "OS/hermes-agent/agent/context_compressor.py", "OS/hermes-agent/agent/context_references.py"], "category": "core", "description": "Pluggable context engine with compression + reference tracking" },
+    { "name": "Six terminal backends (incl. serverless)", "evidence_paths": ["OS/hermes-agent/tools/environments/local.py", "OS/hermes-agent/tools/environments/docker.py", "OS/hermes-agent/tools/environments/base.py", "OS/hermes-agent/tools/environments/daytona.py", "OS/hermes-agent/tools/environments/singularity.py", "OS/hermes-agent/tools/environments/modal.py", "OS/hermes-agent/tools/environments/managed_modal.py"], "category": "integration", "description": "Local, Docker, SSH (base), Daytona, Singularity, Modal — Daytona+Modal offer serverless hibernation" },
+    { "name": "Subagent delegation + mixture-of-agents", "evidence_paths": ["OS/hermes-agent/tools/delegate_tool.py", "OS/hermes-agent/tools/mixture_of_agents_tool.py"], "category": "core", "description": "Spawn isolated subagents + mixture-of-agents tool for parallel workstreams" },
+    { "name": "MCP server + client + OAuth", "evidence_paths": ["OS/hermes-agent/mcp_serve.py", "OS/hermes-agent/tools/mcp_tool.py", "OS/hermes-agent/tools/mcp_oauth.py", "OS/hermes-agent/tools/mcp_oauth_manager.py"], "category": "integration", "description": "Native MCP integration with OAuth manager" },
+    { "name": "Voice memo transcription (Whisper)", "evidence_paths": ["OS/hermes-agent/tools/", "OS/hermes-agent/tools/neutts_synth.py"], "category": "ux", "description": "Voice memo transcription + TTS samples per README" },
+    { "name": "Cron scheduler + automations", "evidence_paths": ["OS/hermes-agent/cron/jobs.py", "OS/hermes-agent/cron/scheduler.py", "OS/hermes-agent/tools/cronjob_tools.py"], "category": "core", "description": "Built-in cron with delivery to any messaging platform" },
+    { "name": "Multi-provider LLM (portal, openrouter, nim, z.ai, kimi, minimax, huggingface, openai)", "evidence_paths": ["OS/hermes-agent/agent/anthropic_adapter.py", "OS/hermes-agent/agent/bedrock_adapter.py", "OS/hermes-agent/agent/gemini_cloudcode_adapter.py", "OS/hermes-agent/agent/gemini_native_adapter.py", "OS/hermes-agent/tools/openrouter_client.py", "OS/hermes-agent/hermes_cli/nous_subscription.py", "OS/hermes-agent/hermes_cli/providers.py"], "category": "integration", "description": "Switch with `hermes model`; no code changes (per README)" },
+    { "name": "Toolsets system", "evidence_paths": ["OS/hermes-agent/toolsets.py", "OS/hermes-agent/toolset_distributions.py"], "category": "extensibility", "description": "Organize and manage tools into named toolsets" },
+    { "name": "Trajectory compression + RL training", "evidence_paths": ["OS/hermes-agent/trajectory_compressor.py", "OS/hermes-agent/batch_runner.py", "OS/hermes-agent/mini_swe_runner.py", "OS/hermes-agent/rl_cli.py", "OS/hermes-agent/tinker-atropos/", "OS/hermes-agent/tools/rl_training_tool.py"], "category": "core", "description": "Batch trajectory generation + Atropos RL environments" },
+    { "name": "25 bundled skills + 15 opt-in categories", "evidence_paths": ["OS/hermes-agent/skills/autonomous-ai-agents/", "OS/hermes-agent/skills/creative/", "OS/hermes-agent/skills/devops/", "OS/hermes-agent/skills/mcp/", "OS/hermes-agent/skills/software-development/", "OS/hermes-agent/optional-skills/"], "category": "extensibility", "description": "Bundled + optional skill libraries; Skills Hub (agentskills.io) compatible" },
+    { "name": "OpenClaw migration (import)", "evidence_paths": ["OS/hermes-agent/hermes_cli/claw.py", "OS/hermes-agent/README.md"], "category": "ux", "description": "`hermes claw migrate` imports OpenClaw settings, memories, skills, API keys" }
+  ],
+  "quality_signals": {
+    "test_framework": "pytest",
+    "test_file_count": null,
+    "linter": null,
+    "ci_provider": "GitHub Actions",
+    "ci_workflow_count": null,
+    "e2e_tests": true
+  },
+  "documentation": {
+    "readme_lines": 186,
+    "readme_sections": ["Quick Install", "Getting Started", "CLI vs Messaging", "Documentation", "Migrating from OpenClaw", "Contributing", "Community"],
+    "has_contributing": true,
+    "has_architecture_doc": true,
+    "docs_page_count": null,
+    "hosted_docs": "hermes-agent.nousresearch.com/docs"
+  },
+  "extension_points": {
+    "plugins": { "mechanism": "plugins/ with plugin.yaml manifest per backend (memory + context_engine)", "path": "OS/hermes-agent/plugins/" },
+    "tools": { "mechanism": "tools/ directory with registry (63 tools)", "path": "OS/hermes-agent/tools/registry.py" },
+    "skills": { "mechanism": "skills/ bundled + optional-skills/ + Skills Hub (agentskills.io)", "path": "OS/hermes-agent/skills/" },
+    "environments": { "mechanism": "tools/environments/ pluggable terminal backends", "path": "OS/hermes-agent/tools/environments/base.py" },
+    "mcp": { "client": true, "server": true, "note": "Native MCP (both) via mcp_serve.py + tools/mcp_tool.py" },
+    "acp": { "mechanism": "acp_adapter/ + acp_registry/", "path": "OS/hermes-agent/acp_adapter/" }
+  },
+  "unique_selling_points": [
+    "Self-improving agent: autonomous skill creation + skills that improve during use",
+    "Built-in learning loop with agent-curated memory + nudges",
+    "Six terminal backends including serverless (Daytona, Modal) with hibernation",
+    "FTS5 session search + LLM summarization for cross-session recall",
+    "Honcho dialectic user modeling built in",
+    "Research-ready: batch trajectory generation + Atropos RL + trajectory compression",
+    "Runs on $5 VPS or GPU cluster; not tied to your laptop",
+    "agentskills.io open-standard compatible"
+  ],
+  "limitations": [
+    { "description": "Native Windows not supported (WSL2 required)", "source": "OS/hermes-agent/README.md" },
+    { "description": "Android via Termux uses limited `.[termux]` extra, not full `.[all]`", "source": "OS/hermes-agent/README.md" },
+    { "description": "No native companion mobile apps (vs openclaw's SwiftUI/Kotlin)", "source": "observed — no apps/ dir" }
+  ],
+  "confidence": "HIGH",
+  "extraction_method": "filesystem-scan",
+  "skill_version": "1.0.0"
+}

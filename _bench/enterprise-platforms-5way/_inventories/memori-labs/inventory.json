@@ -1,0 +1,49 @@
+{
+  "subject": "memori-labs",
+  "path": "OS/memori-labs/",
+  "profile": "quick",
+  "positioning": "Agent-native memory infrastructure — 'Memory from what agents do, not just what they say.' LLM/datastore/framework-agnostic drop-in SDK; Cloud SaaS ou BYODB.",
+  "language_stack": {
+    "python_sdk": "pip install memori (Python >=3.10)",
+    "typescript_sdk": "@memorilabs/memori",
+    "core": "Rust core (memori-labs/core/Cargo.toml) com bindings para Python via setuptools-rust",
+    "storage": "SQLAlchemy / CockroachDB optional extras; BYODB via postgres/cockroach; sentence-transformers + faiss-cpu para vector search"
+  },
+  "license": "Apache-2.0",
+  "top_level": [
+    "README.md", "CHANGELOG.md", "CONTRIBUTING.md", "SECURITY.md",
+    "Dockerfile", "docker-compose.yml", "Makefile",
+    "MANIFEST.in", "pyproject.toml", "setup.cfg", "setup.py",
+    "core/ (Rust)", "memori/ (Python SDK)", "memori-ts/ (TS SDK)",
+    "benchmarks/", "docs/", "examples/", "integrations/openclaw/",
+    "tests/", "conftest.py"
+  ],
+  "python_sdk_modules": [
+    "memori/api/", "memori/embeddings/", "memori/llm/",
+    "memori/memory/ (augmentation, recall, _collector, _writer, _manager, _struct)",
+    "memori/search/ (_faiss, _lexical, _parsing, _core, _api)",
+    "memori/storage/"
+  ],
+  "differentiators_observable": [
+    "LoCoMo benchmark: 81.95% accuracy com 1,294 tokens avg (4.97% full-context)",
+    "Outperforma Zep/LangMem/Mem0 com 67% menos tokens vs Zep (README.md)",
+    "Attribution model com entity_id + process_id + session — multi-tenant por design",
+    "Advanced Augmentation: attributes, events, facts, people, preferences, relationships, rules, skills",
+    "LLM coverage: Anthropic, Bedrock, DeepSeek, Gemini, Grok, OpenAI (sync/async/streamed)",
+    "Framework coverage: Agno, LangChain, Pydantic AI",
+    "MCP transport support: Claude Code, Cursor, Codex, Warp, Antigravity",
+    "OpenClaw plugin nativo — drop-in memory para gateway (integrations/openclaw/)",
+    "Rust core com FFI bindings — performance-oriented",
+    "BYODB via pyproject extras: sqlalchemy, cockroachdb; supports postgres/cockroach"
+  ],
+  "evidence_paths": [
+    "OS/memori-labs/README.md",
+    "OS/memori-labs/README.md#L144-L152 (LoCoMo benchmark)",
+    "OS/memori-labs/README.md#L265-L282 (Advanced Augmentation)",
+    "OS/memori-labs/pyproject.toml",
+    "OS/memori-labs/memori/memory/",
+    "OS/memori-labs/memori/search/",
+    "OS/memori-labs/integrations/openclaw/",
+    "OS/memori-labs/core/Cargo.toml"
+  ]
+}

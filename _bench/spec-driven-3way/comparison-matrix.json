@@ -1,0 +1,443 @@
+{
+  "generatedAt": "2026-04-19T22:45:00Z",
+  "comparison_type": "nway",
+  "subjects": ["spec-kit", "get-shit-done", "superpowers"],
+  "dimension_pack": "spec-driven",
+  "categories": [
+    {
+      "name": "Spec Format",
+      "features": [
+        {
+          "name": "Structured spec template with typed sections",
+          "values": {
+            "spec-kit": "yes — User Stories P1-P3, FR-### Functional Requirements, SC-### Success Criteria, Edge Cases, Assumptions, Key Entities",
+            "get-shit-done": "yes — Goal, Background, Requirements (Current/Target/Acceptance), Boundaries (in-scope/out-of-scope), Constraints, Acceptance Criteria checkboxes, Ambiguity Report",
+            "superpowers": "no — spec emerges from brainstorming conversation; saved as a design document without a typed schema"
+          },
+          "evidence": {
+            "spec-kit": ["OS/spec-kit/templates/spec-template.md"],
+            "get-shit-done": ["OS/get-shit-done/get-shit-done/templates/spec.md"],
+            "superpowers": ["OS/superpowers/skills/brainstorming/", "OS/superpowers/README.md"]
+          },
+          "leaders": ["spec-kit", "get-shit-done"]
+        },
+        {
+          "name": "Requirement IDs (stable identifiers)",
+          "values": {
+            "spec-kit": "yes — FR-001/FR-002/…, SC-001/…, US1/US2/… referenced downstream",
+            "get-shit-done": "partial — REQ-STATE-01 style IDs appear in reference docs; SPEC.md numbers requirements (1., 2., …) but IDs aren't canonically stable across artefacts",
+            "superpowers": "no — no ID scheme"
+          },
+          "evidence": {
+            "spec-kit": ["OS/spec-kit/templates/spec-template.md"],
+            "get-shit-done": ["OS/get-shit-done/docs/FEATURES.md:1638"],
+            "superpowers": ["OS/superpowers/skills/writing-plans/SKILL.md"]
+          },
+          "leaders": ["spec-kit"]
+        },
+        {
+          "name": "Mandatory sections enforced by command",
+          "values": {
+            "spec-kit": "yes — /speckit.specify validates checklist (no [NEEDS CLARIFICATION], testable, measurable, bounded)",
+            "get-shit-done": "yes — /gsd-spec-phase enforces ambiguity gate ≤0.20 and rejects vague reqs",
+            "superpowers": "partial — writing-plans skill has 'No placeholders' rule but no spec-level validation"
+          },
+          "evidence": {
+            "spec-kit": ["OS/spec-kit/templates/commands/specify.md"],
+            "get-shit-done": ["OS/get-shit-done/get-shit-done/workflows/spec-phase.md"],
+            "superpowers": ["OS/superpowers/skills/writing-plans/SKILL.md"]
+          },
+          "leaders": ["spec-kit", "get-shit-done"]
+        },
+        {
+          "name": "Machine-readable schema (YAML frontmatter, JSON schema)",
+          "values": {
+            "spec-kit": "partial — slash-command files use YAML frontmatter; spec itself is MD-only",
+            "get-shit-done": "partial — templates are MD; SDK provides structured types for some artefacts",
+            "superpowers": "no — markdown-only"
+          },
+          "evidence": {
+            "spec-kit": ["OS/spec-kit/templates/commands/specify.md"],
+            "get-shit-done": ["OS/get-shit-done/sdk/"],
+            "superpowers": ["OS/superpowers/skills/"]
+          },
+          "leaders": []
+        }
+      ]
+    },
+    {
+      "name": "Traceability",
+      "features": [
+        {
+          "name": "Spec → plan ID references",
+          "values": {
+            "spec-kit": "yes — plan.md references FR-### and US# from spec",
+            "get-shit-done": "yes — plan-phase reads SPEC.md requirements and treats them as locked scope",
+            "superpowers": "partial — plans reference requirements from brainstorming doc informally"
+          },
+          "evidence": {
+            "spec-kit": ["OS/spec-kit/templates/plan-template.md", "OS/spec-kit/templates/commands/plan.md"],
+            "get-shit-done": ["OS/get-shit-done/commands/gsd/plan-phase.md"],
+            "superpowers": ["OS/superpowers/skills/writing-plans/SKILL.md"]
+          },
+          "leaders": ["spec-kit", "get-shit-done"]
+        },
+        {
+          "name": "Plan → tasks ID references",
+          "values": {
+            "spec-kit": "yes — tasks.md groups by User Story (US1/US2/…) with [Story] tag per task",
+            "get-shit-done": "yes — plan phase produces executor-ready plan tied to SPEC requirements",
+            "superpowers": "partial — writing-plans produces bite-sized tasks; no ID scheme but each task references exact files and spec items"
+          },
+          "evidence": {
+            "spec-kit": ["OS/spec-kit/templates/tasks-template.md"],
+            "get-shit-done": ["OS/get-shit-done/commands/gsd/plan-phase.md"],
+            "superpowers": ["OS/superpowers/skills/writing-plans/SKILL.md"]
+          },
+          "leaders": ["spec-kit"]
+        },
+        {
+          "name": "Test ↔ requirement mapping",
+          "values": {
+            "spec-kit": "partial — acceptance scenarios in spec become tests, but tasks-template.md states tests are OPTIONAL unless requested",
+            "get-shit-done": "partial — verification reports tie back to acceptance criteria; explicit requirements-coverage gate exists",
+            "superpowers": "yes — TDD enforcement means every behaviour has a test; tests ARE the traceability link to spec behaviour"
+          },
+          "evidence": {
+            "spec-kit": ["OS/spec-kit/templates/tasks-template.md:11"],
+            "get-shit-done": ["OS/get-shit-done/get-shit-done/templates/verification-report.md", "OS/get-shit-done/docs/FEATURES.md#21-requirements-coverage-gate"],
+            "superpowers": ["OS/superpowers/skills/test-driven-development/SKILL.md"]
+          },
+          "leaders": ["superpowers", "get-shit-done"]
+        },
+        {
+          "name": "Export to external tracker (issues, Jira, etc.)",
+          "values": {
+            "spec-kit": "yes — /speckit.taskstoissues exports task list as GitHub issues",
+            "get-shit-done": "no — no built-in issue export",
+            "superpowers": "no — no issue export"
+          },
+          "evidence": {
+            "spec-kit": ["OS/spec-kit/templates/commands/taskstoissues.md"],
+            "get-shit-done": [],
+            "superpowers": []
+          },
+          "leaders": ["spec-kit"]
+        }
+      ]
+    },
+    {
+      "name": "Executable Specs",
+      "features": [
+        {
+          "name": "Spec → scaffolding generation (plan, data-model, contracts)",
+          "values": {
+            "spec-kit": "yes — /speckit.plan generates plan.md + research.md + data-model.md + quickstart.md + contracts/",
+            "get-shit-done": "yes — plan-phase generates executor-ready plan with gates, rollback, and step-level detail",
+            "superpowers": "yes — /write-plan generates bite-sized task plan; does not generate data-model/contracts"
+          },
+          "evidence": {
+            "spec-kit": ["OS/spec-kit/templates/plan-template.md", "OS/spec-kit/templates/commands/plan.md"],
+            "get-shit-done": ["OS/get-shit-done/commands/gsd/plan-phase.md"],
+            "superpowers": ["OS/superpowers/skills/writing-plans/SKILL.md"]
+          },
+          "leaders": ["spec-kit", "get-shit-done"]
+        },
+        {
+          "name": "Spec → failing-test generation (RED auto-scaffolded)",
+          "values": {
+            "spec-kit": "no — acceptance scenarios must be converted to tests manually by implementer",
+            "get-shit-done": "no — acceptance criteria are pass/fail checkboxes, not executable tests; add-tests command exists but is not an automatic spec→test bridge",
+            "superpowers": "partial — TDD skill demands implementer writes the failing test before code; scaffolding is manual but the workflow mandates it"
+          },
+          "evidence": {
+            "spec-kit": ["OS/spec-kit/templates/tasks-template.md:11"],
+            "get-shit-done": ["OS/get-shit-done/commands/gsd/add-tests.md", "OS/get-shit-done/get-shit-done/references/tdd.md"],
+            "superpowers": ["OS/superpowers/skills/test-driven-development/SKILL.md"]
+          },
+          "leaders": []
+        },
+        {
+          "name": "Continuous consistency validation",
+          "values": {
+            "spec-kit": "yes — /speckit.analyze cross-validates spec/plan/tasks; /speckit.clarify loop resolves [NEEDS CLARIFICATION] markers",
+            "get-shit-done": "yes — multiple gates (requirements-coverage, cross-phase regression, scope reduction detection); continuous via hooks",
+            "superpowers": "partial — two-stage review (spec compliance THEN code quality) runs per task, not per spec"
+          },
+          "evidence": {
+            "spec-kit": ["OS/spec-kit/templates/commands/analyze.md", "OS/spec-kit/templates/commands/clarify.md"],
+            "get-shit-done": ["OS/get-shit-done/docs/FEATURES.md#20-cross-phase-regression-gate", "OS/get-shit-done/docs/FEATURES.md#21-requirements-coverage-gate"],
+            "superpowers": ["OS/superpowers/skills/subagent-driven-development/SKILL.md"]
+          },
+          "leaders": ["spec-kit", "get-shit-done"]
+        },
+        {
+          "name": "Implementation command (spec → code execution)",
+          "values": {
+            "spec-kit": "yes — /speckit.implement runs the tasks list against the plan",
+            "get-shit-done": "yes — /gsd-execute-phase and /gsd-autonomous run the plan under gate+hook enforcement",
+            "superpowers": "yes — /execute-plan + subagent-driven-development skill dispatches fresh subagents per task with two-stage review"
+          },
+          "evidence": {
+            "spec-kit": ["OS/spec-kit/templates/commands/implement.md"],
+            "get-shit-done": ["OS/get-shit-done/commands/gsd/execute-phase.md", "OS/get-shit-done/commands/gsd/autonomous.md"],
+            "superpowers": ["OS/superpowers/commands/execute-plan.md", "OS/superpowers/skills/subagent-driven-development/SKILL.md"]
+          },
+          "leaders": ["spec-kit", "get-shit-done", "superpowers"]
+        }
+      ]
+    },
+    {
+      "name": "TDD Integration",
+      "features": [
+        {
+          "name": "TDD as enforced law (not recommendation)",
+          "values": {
+            "spec-kit": "no — tasks-template.md explicitly makes tests OPTIONAL unless requested",
+            "get-shit-done": "partial — TDD is documented as philosophy (get-shit-done/references/tdd.md) and add-tests command exists; enforcement is via verification gate, not red-green cycle",
+            "superpowers": "yes — Iron Law: 'NO PRODUCTION CODE WITHOUT A FAILING TEST FIRST'; code written before test must be deleted"
+          },
+          "evidence": {
+            "spec-kit": ["OS/spec-kit/templates/tasks-template.md:11"],
+            "get-shit-done": ["OS/get-shit-done/get-shit-done/references/tdd.md", "OS/get-shit-done/commands/gsd/add-tests.md"],
+            "superpowers": ["OS/superpowers/skills/test-driven-development/SKILL.md"]
+          },
+          "leaders": ["superpowers"]
+        },
+        {
+          "name": "Red/Green/Refactor cycle",
+          "values": {
+            "spec-kit": "no — not mandated",
+            "get-shit-done": "partial — referenced in tdd.md; not structurally enforced by the workflow state machine",
+            "superpowers": "yes — RED (write failing test) → Verify RED (watch fail) → GREEN (minimal code) → Verify GREEN → REFACTOR; verification is MANDATORY"
+          },
+          "evidence": {
+            "spec-kit": [],
+            "get-shit-done": ["OS/get-shit-done/get-shit-done/references/tdd.md"],
+            "superpowers": ["OS/superpowers/skills/test-driven-development/SKILL.md"]
+          },
+          "leaders": ["superpowers"]
+        },
+        {
+          "name": "Subagents enforce TDD",
+          "values": {
+            "spec-kit": "no — implementation agent follows its own instructions",
+            "get-shit-done": "partial — executor subagent reads tdd.md reference; add-tests subagent exists",
+            "superpowers": "yes — subagent-driven-development dispatches fresh subagent per task; spec-reviewer subagent validates test-first; code-quality-reviewer validates quality"
+          },
+          "evidence": {
+            "spec-kit": [],
+            "get-shit-done": ["OS/get-shit-done/agents/gsd-executor.md", "OS/get-shit-done/commands/gsd/add-tests.md"],
+            "superpowers": ["OS/superpowers/skills/subagent-driven-development/SKILL.md", "OS/superpowers/skills/subagent-driven-development/implementer-prompt.md"]
+          },
+          "leaders": ["superpowers"]
+        },
+        {
+          "name": "Anti-patterns reference / testing hygiene",
+          "values": {
+            "spec-kit": "no — no dedicated anti-pattern reference",
+            "get-shit-done": "yes — planner-antipatterns.md, universal-anti-patterns.md references; anti-pattern-enforcement test",
+            "superpowers": "yes — testing-anti-patterns.md bundled with TDD skill"
+          },
+          "evidence": {
+            "spec-kit": [],
+            "get-shit-done": ["OS/get-shit-done/get-shit-done/references/planner-antipatterns.md", "OS/get-shit-done/get-shit-done/references/universal-anti-patterns.md", "OS/get-shit-done/tests/anti-pattern-enforcement.test.cjs"],
+            "superpowers": ["OS/superpowers/skills/test-driven-development/testing-anti-patterns.md"]
+          },
+          "leaders": ["get-shit-done", "superpowers"]
+        }
+      ]
+    },
+    {
+      "name": "Roundtripping",
+      "features": [
+        {
+          "name": "Code → spec extraction (reverse engineering)",
+          "values": {
+            "spec-kit": "no — no code→spec extractor",
+            "get-shit-done": "partial — /gsd-map-codebase and /gsd-scan seed planning context from existing codebase, which is the closest operation; does not emit a SPEC.md from code",
+            "superpowers": "no — no such capability"
+          },
+          "evidence": {
+            "spec-kit": [],
+            "get-shit-done": ["OS/get-shit-done/commands/gsd/map-codebase.md", "OS/get-shit-done/commands/gsd/scan.md"],
+            "superpowers": []
+          },
+          "leaders": ["get-shit-done"]
+        },
+        {
+          "name": "Drift detection (spec vs implementation)",
+          "values": {
+            "spec-kit": "partial — /speckit.analyze detects ambiguity/contradictions/gaps in spec/plan/tasks; does NOT continuously compare code to spec",
+            "get-shit-done": "yes — schema-drift detection (ORM vs migrations) + STATE.md filesystem-drift detection gate blocks execute-time violations",
+            "superpowers": "no — no drift-detection skill"
+          },
+          "evidence": {
+            "spec-kit": ["OS/spec-kit/templates/commands/analyze.md"],
+            "get-shit-done": ["OS/get-shit-done/docs/FEATURES.md:79", "OS/get-shit-done/docs/FEATURES.md:1440", "OS/get-shit-done/docs/FEATURES.md:1635-1650"],
+            "superpowers": []
+          },
+          "leaders": ["get-shit-done"]
+        },
+        {
+          "name": "Spec update from code change (forward sync)",
+          "values": {
+            "spec-kit": "no — specs are manually evolved; no auto-sync from code",
+            "get-shit-done": "partial — extract-learnings persists session learnings; STATE.md sync reconstructs from disk; full code→spec update not automated",
+            "superpowers": "no — not addressed"
+          },
+          "evidence": {
+            "spec-kit": [],
+            "get-shit-done": ["OS/get-shit-done/commands/gsd/extract_learnings.md", "OS/get-shit-done/docs/FEATURES.md:1650"],
+            "superpowers": []
+          },
+          "leaders": ["get-shit-done"]
+        },
+        {
+          "name": "Bidirectional link (spec ↔ code) explicit in artefacts",
+          "values": {
+            "spec-kit": "partial — FR-###/SC-### IDs create a one-way path (spec→tasks→code); no explicit back-link embedded in code",
+            "get-shit-done": "partial — claim provenance tagging (v1.31) tracks sources; requirement IDs referenced in verification reports",
+            "superpowers": "no — no bidirectional link"
+          },
+          "evidence": {
+            "spec-kit": ["OS/spec-kit/templates/tasks-template.md", "OS/spec-kit/templates/spec-template.md"],
+            "get-shit-done": ["OS/get-shit-done/docs/FEATURES.md#65-claim-provenance-tagging", "OS/get-shit-done/get-shit-done/templates/verification-report.md"],
+            "superpowers": []
+          },
+          "leaders": ["spec-kit", "get-shit-done"]
+        }
+      ]
+    },
+    {
+      "name": "Subagent Orchestration",
+      "features": [
+        {
+          "name": "Subagent count",
+          "values": {
+            "spec-kit": "0 dedicated subagents (slash-command-driven)",
+            "get-shit-done": "32 subagents (planner, executor, verifier, debugger, code-fixer, code-reviewer, 5× researcher, security-auditor, eval-auditor/planner, nyquist-auditor, UI agents, doc agents, …)",
+            "superpowers": "2–3 dedicated roles (implementer, spec-reviewer, code-quality-reviewer) + dispatching-parallel-agents skill"
+          },
+          "evidence": {
+            "spec-kit": [],
+            "get-shit-done": ["OS/get-shit-done/agents/"],
+            "superpowers": ["OS/superpowers/skills/subagent-driven-development/", "OS/superpowers/agents/code-reviewer.md", "OS/superpowers/skills/dispatching-parallel-agents/"]
+          },
+          "leaders": ["get-shit-done"]
+        },
+        {
+          "name": "Two-stage review (spec compliance → code quality)",
+          "values": {
+            "spec-kit": "no — /speckit.analyze is single-shot, not per-task",
+            "get-shit-done": "yes — multiple gates (plan-check, verify-work, code-review) with dedicated agents",
+            "superpowers": "yes — explicit two-stage: spec-reviewer subagent FIRST, then code-quality-reviewer subagent"
+          },
+          "evidence": {
+            "spec-kit": ["OS/spec-kit/templates/commands/analyze.md"],
+            "get-shit-done": ["OS/get-shit-done/agents/gsd-plan-checker.md", "OS/get-shit-done/agents/gsd-verifier.md", "OS/get-shit-done/agents/gsd-code-reviewer.md"],
+            "superpowers": ["OS/superpowers/skills/subagent-driven-development/spec-reviewer-prompt.md", "OS/superpowers/skills/subagent-driven-development/code-quality-reviewer-prompt.md"]
+          },
+          "leaders": ["superpowers", "get-shit-done"]
+        }
+      ]
+    },
+    {
+      "name": "Context Engineering",
+      "features": [
+        {
+          "name": "Context-rot mitigation",
+          "values": {
+            "spec-kit": "partial — air-gapped bundle avoids network overhead; no active context monitor",
+            "get-shit-done": "yes — context-monitor hook + Nyquist auditor + context-budget reference + thinning (THIS is the stated reason GSD exists: 'solves context rot')",
+            "superpowers": "partial — fresh subagent per task keeps context clean, but no active monitor"
+          },
+          "evidence": {
+            "spec-kit": [],
+            "get-shit-done": ["OS/get-shit-done/hooks/gsd-context-monitor.js", "OS/get-shit-done/agents/gsd-nyquist-auditor.md", "OS/get-shit-done/get-shit-done/references/context-budget.md", "OS/get-shit-done/README.md:10"],
+            "superpowers": ["OS/superpowers/skills/subagent-driven-development/SKILL.md"]
+          },
+          "leaders": ["get-shit-done"]
+        },
+        {
+          "name": "Runtime hook surface",
+          "values": {
+            "spec-kit": "4 hook events (before/after_specify, before/after_plan)",
+            "get-shit-done": "12 runtime hooks (prompt-guard, read-guard, workflow-guard, phase-boundary, validate-commit, session-state, statusline, check-update, read-injection-scanner, context-monitor, …)",
+            "superpowers": "1 hook (session-start)"
+          },
+          "evidence": {
+            "spec-kit": ["OS/spec-kit/src/specify_cli/extensions.py", "OS/spec-kit/templates/commands/specify.md"],
+            "get-shit-done": ["OS/get-shit-done/hooks/"],
+            "superpowers": ["OS/superpowers/hooks/"]
+          },
+          "leaders": ["get-shit-done"]
+        }
+      ]
+    },
+    {
+      "name": "Harness Integration",
+      "features": [
+        {
+          "name": "Coding-agent harnesses supported",
+          "values": {
+            "spec-kit": "12+ (Copilot, Claude, Cursor, Gemini, Codex, Qwen, Windsurf, Trae, Kilo, CodeBuddy, Augment, opencode)",
+            "get-shit-done": "14+ (Claude Code, OpenCode, Codex, Gemini CLI, Cursor, Windsurf, Kilo, Copilot, Antigravity, Augment, Trae, Qwen, Cline, CodeBuddy)",
+            "superpowers": "6 (Claude Code, OpenCode, Codex, Cursor, Gemini CLI, Copilot)"
+          },
+          "evidence": {
+            "spec-kit": ["OS/spec-kit/AGENTS.md", "OS/spec-kit/src/specify_cli/agents.py"],
+            "get-shit-done": ["OS/get-shit-done/bin/install.js", "OS/get-shit-done/docs/CLI-TOOLS.md"],
+            "superpowers": ["OS/superpowers/README.md", "OS/superpowers/.claude-plugin/", "OS/superpowers/.opencode/", "OS/superpowers/.codex/", "OS/superpowers/.cursor-plugin/"]
+          },
+          "leaders": ["get-shit-done", "spec-kit"]
+        },
+        {
+          "name": "Distribution channel",
+          "values": {
+            "spec-kit": "uv tool / uvx from GitHub; PyPI packages are explicitly unofficial",
+            "get-shit-done": "npm (get-shit-done-cc) via npx",
+            "superpowers": "Claude Code Official Marketplace (Anthropic) + per-harness mechanisms"
+          },
+          "evidence": {
+            "spec-kit": ["OS/spec-kit/README.md:50-90"],
+            "get-shit-done": ["OS/get-shit-done/package.json", "OS/get-shit-done/README.md"],
+            "superpowers": ["OS/superpowers/README.md:32-40"]
+          },
+          "leaders": ["superpowers"]
+        }
+      ]
+    }
+  ],
+  "summary": {
+    "total_features": 24,
+    "categories": 8
+  },
+  "subject_only_capabilities": {
+    "spec-kit": [
+      { "name": "SDD manifesto (spec-driven.md, 412 lines)", "category": "core", "evidence": "OS/spec-kit/spec-driven.md" },
+      { "name": "Tasks→issues export (/speckit.taskstoissues)", "category": "integration", "evidence": "OS/spec-kit/templates/commands/taskstoissues.md" },
+      { "name": "Constitution file with plan-time gates", "category": "governance", "evidence": "OS/spec-kit/templates/constitution-template.md" },
+      { "name": "Air-gapped wheel asset bundling", "category": "ux", "evidence": "OS/spec-kit/pyproject.toml" }
+    ],
+    "get-shit-done": [
+      { "name": "Ambiguity-scored Socratic spec gate (4 weighted dims, gate ≤0.20)", "category": "core", "evidence": "OS/get-shit-done/get-shit-done/workflows/spec-phase.md" },
+      { "name": "Context-monitor hook + Nyquist auditor", "category": "governance", "evidence": "OS/get-shit-done/hooks/gsd-context-monitor.js" },
+      { "name": "Schema-drift detection + STATE.md filesystem-drift detection", "category": "governance", "evidence": "OS/get-shit-done/docs/FEATURES.md:79,1635" },
+      { "name": "32 specialised subagents", "category": "core", "evidence": "OS/get-shit-done/agents/" },
+      { "name": "Scope-reduction detection", "category": "governance", "evidence": "OS/get-shit-done/docs/FEATURES.md" },
+      { "name": "UI-SPEC and AI-SPEC dedicated contracts", "category": "core", "evidence": "OS/get-shit-done/get-shit-done/templates/UI-SPEC.md, AI-SPEC.md" },
+      { "name": "Spike / sketch exploration", "category": "extensibility", "evidence": "OS/get-shit-done/commands/gsd/spike.md, sketch.md" },
+      { "name": "Extract-learnings global store", "category": "extensibility", "evidence": "OS/get-shit-done/commands/gsd/extract_learnings.md" },
+      { "name": "Cross-AI peer review / execution delegation", "category": "integration", "evidence": "OS/get-shit-done/docs/FEATURES.md" }
+    ],
+    "superpowers": [
+      { "name": "TDD Iron Law (delete code without failing test first)", "category": "core", "evidence": "OS/superpowers/skills/test-driven-development/SKILL.md" },
+      { "name": "Skill auto-triggering via session-start hook", "category": "core", "evidence": "OS/superpowers/hooks/session-start/" },
+      { "name": "Two-stage review (spec-reviewer → code-quality-reviewer) per task", "category": "core", "evidence": "OS/superpowers/skills/subagent-driven-development/spec-reviewer-prompt.md" },
+      { "name": "Zero-dependency plugin by design", "category": "governance", "evidence": "OS/superpowers/CLAUDE.md" },
+      { "name": "Claude Code Official Marketplace distribution", "category": "integration", "evidence": "OS/superpowers/README.md:32" },
+      { "name": "Testing anti-patterns reference bundled with TDD skill", "category": "core", "evidence": "OS/superpowers/skills/test-driven-development/testing-anti-patterns.md" }
+    ]
+  }
+}

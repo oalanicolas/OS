@@ -1,0 +1,176 @@
+{
+  "scale": "0-5 per cell (5 best)",
+  "dimensions": [
+    {
+      "id": "multi_tenancy",
+      "weight": 0.12,
+      "cells": {
+        "Clawith": {
+          "score": 5,
+          "evidence": [
+            "OS/Clawith/backend/app/models/tenant.py",
+            "OS/Clawith/backend/app/api/tenants.py",
+            "OS/Clawith/README.md#L48 organization-based isolation"
+          ]
+        },
+        "agent-governance-toolkit": {
+          "score": 3,
+          "evidence": [
+            "OS/agent-governance-toolkit/README.md#L154 zero-trust identity",
+            "library sem workspace/team concept"
+          ]
+        },
+        "memori-labs": {
+          "score": 4,
+          "evidence": [
+            "OS/memori-labs/README.md#L189-L235 attribution entity/process/session",
+            "BYODB isolamento por banco"
+          ]
+        },
+        "dify": {
+          "score": 4,
+          "evidence": [
+            "OS/dify/api/models/account.py#L19-L60 TenantAccountRole",
+            "OS/dify/api/models/account.py#L240-L391 Tenant, TenantAccountJoin, TenantPluginPermission"
+          ]
+        },
+        "paperclip": {
+          "score": 5,
+          "evidence": [
+            "OS/paperclip/README.md#L155 true multi-company isolation",
+            "OS/paperclip/server/src/routes/companies.ts"
+          ]
+        }
+      }
+    },
+    {
+      "id": "governance_audit",
+      "weight": 0.13,
+      "cells": {
+        "Clawith": {
+          "score": 4,
+          "evidence": [
+            "OS/Clawith/backend/app/models/audit.py",
+            "OS/Clawith/backend/app/services/audit_logger.py",
+            "OS/Clawith/README.md#L50-L51 approval workflows + audit logs"
+          ]
+        },
+        "agent-governance-toolkit": {
+          "score": 5,
+          "evidence": [
+            "OS/agent-governance-toolkit/README.md#L187-L201 OWASP Agentic Top 10 10/10",
+            "OS/agent-governance-toolkit/README.md#L21 9,500+ tests",
+            "OS/agent-governance-toolkit/README.md#L202 EU AI Act / NIST / SOC 2 mappings"
+          ]
+        },
+        "memori-labs": {
+          "score": 1,
+          "evidence": ["nao aplicavel ao escopo; SECURITY.md existe"]
+        },
+        "dify": {
+          "score": 3,
+          "evidence": [
+            "OS/dify/api/models/account.py#L359-L391 TenantPluginPermission",
+            "OS/dify/README.md#L63 Langfuse/Opik/Phoenix"
+          ]
+        },
+        "paperclip": {
+          "score": 4,
+          "evidence": [
+            "OS/paperclip/README.md#L152 governance with rollback",
+            "OS/paperclip/README.md#L108 immutable audit log",
+            "OS/paperclip/server/src/routes/approvals.ts"
+          ]
+        }
+      }
+    },
+    {
+      "id": "paradigm_flexibility",
+      "weight": 0.11,
+      "cells": {
+        "Clawith": { "score": 4, "evidence": ["digital-employee + A2A + plaza + 6 trigger types"] },
+        "agent-governance-toolkit": { "score": 5, "evidence": ["OS/agent-governance-toolkit/README.md#L168-L183 integra LangGraph/LangChain/CrewAI/AutoGen/OpenAI/Google ADK/Dify/LlamaIndex/Haystack"] },
+        "memori-labs": { "score": 4, "evidence": ["OS/memori-labs/README.md#L8 LLM/datastore/framework agnostic"] },
+        "dify": { "score": 2, "evidence": ["OS/dify/README.md#L93-L108 pipeline/workflow canvas paradigm travado"] },
+        "paperclip": { "score": 3, "evidence": ["OS/paperclip/README.md#L164-L167 'not an agent framework, not a workflow builder' — company-sim unico"] }
+      }
+    },
+    {
+      "id": "memory_architecture",
+      "weight": 0.11,
+      "cells": {
+        "Clawith": { "score": 4, "evidence": ["OS/Clawith/README.md#L56 soul.md + memory.md + private workspace", "Plaza knowledge feed"] },
+        "agent-governance-toolkit": { "score": 2, "evidence": ["OS/agent-governance-toolkit/README.md#L196 episodic memory integrity checks — apenas verificacao"] },
+        "memori-labs": { "score": 5, "evidence": ["OS/memori-labs/README.md#L265-L282 Advanced Augmentation 8 types", "OS/memori-labs/README.md#L144-L152 LoCoMo 81.95% outperforma Zep/LangMem/Mem0", "OS/memori-labs/memori/search/_faiss.py"] },
+        "dify": { "score": 3, "evidence": ["OS/dify/api/core/memory/", "OS/dify/api/core/rag/"] },
+        "paperclip": { "score": 1, "evidence": ["OS/paperclip/README.md#L262 Memory/Knowledge roadmap nao-shipped"] }
+      }
+    },
+    {
+      "id": "skill_marketplace",
+      "weight": 0.10,
+      "cells": {
+        "Clawith": { "score": 5, "evidence": ["OS/Clawith/backend/app/api/skills.py", "OS/Clawith/backend/app/services/skill_seeder.py", "OS/Clawith/README.md#L53 Smithery + ModelScope runtime discovery"] },
+        "agent-governance-toolkit": { "score": 3, "evidence": ["OS/agent-governance-toolkit/packages/agent-marketplace/ plugin lifecycle"] },
+        "memori-labs": { "score": 1, "evidence": ["nao aplicavel — memory library"] },
+        "dify": { "score": 4, "evidence": ["OS/dify/README.md#L107-L108 50+ built-in tools", "OS/dify/api/models/account.py#L359-L391 TenantPluginPermission + auto-upgrade"] },
+        "paperclip": { "score": 3, "evidence": ["OS/paperclip/README.md#L255 Skills Manager shipped", "OS/paperclip/server/src/routes/company-skills.ts", "OS/paperclip/skills/"] }
+      }
+    },
+    {
+      "id": "durability",
+      "weight": 0.09,
+      "cells": {
+        "Clawith": { "score": 4, "evidence": ["OS/Clawith/backend/alembic/", "OS/Clawith/README.md#L125-L127 agent_data/<uuid>/ persistent"] },
+        "agent-governance-toolkit": { "score": 5, "evidence": ["OS/agent-governance-toolkit/README.md#L199 flight recorder + replay debugging", "packages/agent-sre"] },
+        "memori-labs": { "score": 3, "evidence": ["Cloud + BYODB; memori/memory/_conversation_messages.py"] },
+        "dify": { "score": 4, "evidence": ["Celery + Redis", "OS/dify/api/migrations/", "OS/dify/CLAUDE.md async Celery"] },
+        "paperclip": { "score": 4, "evidence": ["OS/paperclip/README.md#L150 agents resume across heartbeats", "OS/paperclip/README.md#L134 sessions persist across reboots"] }
+      }
+    },
+    {
+      "id": "safety_sandboxing",
+      "weight": 0.09,
+      "cells": {
+        "Clawith": { "score": 4, "evidence": ["OS/Clawith/backend/app/services/sandbox/", "OS/Clawith/backend/app/services/quota_guard.py"] },
+        "agent-governance-toolkit": { "score": 5, "evidence": ["OS/agent-governance-toolkit/README.md#L154-L156 4-tier privilege rings + kill switch + hypervisor"] },
+        "memori-labs": { "score": 2, "evidence": ["nao aplicavel a execution"] },
+        "dify": { "score": 3, "evidence": ["OS/dify/api/core/moderation/"] },
+        "paperclip": { "score": 3, "evidence": ["OS/paperclip/server/src/routes/execution-workspaces.ts, workspace-command-authz.ts, workspace-runtime-service-authz.ts"] }
+      }
+    },
+    {
+      "id": "observability",
+      "weight": 0.09,
+      "cells": {
+        "Clawith": { "score": 3, "evidence": ["OS/Clawith/backend/app/services/activity_logger.py", "OS/Clawith/backend/app/api/activity.py"] },
+        "agent-governance-toolkit": { "score": 5, "evidence": ["OS/agent-governance-toolkit/README.md#L154 SLOs + error budgets + chaos", "OS/agent-governance-toolkit/demo/governance-dashboard/", "OS/agent-governance-toolkit/BENCHMARKS.md"] },
+        "memori-labs": { "score": 3, "evidence": ["OS/memori-labs/README.md#L136-L138 dashboard cloud"] },
+        "dify": { "score": 5, "evidence": ["OS/dify/README.md#L63 Opik/Langfuse/Arize Phoenix", "OS/dify/README.md#L157 Grafana", "OS/dify/README.md#L35-L40 LFX Health Score"] },
+        "paperclip": { "score": 4, "evidence": ["OS/paperclip/server/src/routes/dashboard.ts, costs.ts, activity.ts", "OS/paperclip/README.md#L101 cost control"] }
+      }
+    },
+    {
+      "id": "deployment_flex",
+      "weight": 0.08,
+      "cells": {
+        "Clawith": { "score": 5, "evidence": ["OS/Clawith/setup.sh one-command", "OS/Clawith/helm/clawith/", "OS/Clawith/docker-compose.yml"] },
+        "agent-governance-toolkit": { "score": 5, "evidence": ["OS/agent-governance-toolkit/README.md#L274 Azure/AWS/GCP/Docker Compose guides", "5 SDKs (Python/TS/.NET/Rust/Go)"] },
+        "memori-labs": { "score": 3, "evidence": ["OS/memori-labs/Dockerfile", "cloud-first"] },
+        "dify": { "score": 5, "evidence": ["OS/dify/README.md#L161-L200 Helm x5, Terraform Azure/GCP, AWS CDK EKS/ECS, Alibaba"] },
+        "paperclip": { "score": 4, "evidence": ["OS/paperclip/README.md#L172-L199 onboard + bind presets local/lan/tailnet", "Dockerfile"] }
+      }
+    },
+    {
+      "id": "community",
+      "weight": 0.08,
+      "cells": {
+        "Clawith": { "score": 4, "evidence": ["OS/Clawith/README.md 5 i18n READMEs + Discord + X"] },
+        "agent-governance-toolkit": { "score": 4, "evidence": ["OS/agent-governance-toolkit/README.md PyPI published + OpenSSF Scorecard + 6 release notes + ADOPTERS.md"] },
+        "memori-labs": { "score": 3, "evidence": ["OS/memori-labs/README.md PyPI + NPM + Discord + Trendshift"] },
+        "dify": { "score": 5, "evidence": ["OS/dify/README.md#L44-L60 17 README translations", "OS/dify/README.md#L35-L40 LFX Health/Contributors badges + Reddit + Docker Pulls"] },
+        "paperclip": { "score": 3, "evidence": ["OS/paperclip/README.md Discord + awesome-paperclip + star history"] }
+      }
+    }
+  ]
+}

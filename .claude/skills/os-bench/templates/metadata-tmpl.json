@@ -1,0 +1,47 @@
+{
+  "$schema": "os-bench metadata v1.0",
+  "generatedAt": "{ISO-8601 timestamp}",
+  "comparison_type": "pair | nway",
+  "slug": "{a-vs-b | topic-Nway}",
+  "subjects": [
+    {
+      "slug": "{subject_a}",
+      "path": "OS/{subject_a}/",
+      "source_url": "{github URL se houver}",
+      "detected_stack": ["{lang}", "{framework}"]
+    },
+    {
+      "slug": "{subject_b}",
+      "path": "OS/{subject_b}/",
+      "source_url": "{github URL se houver}",
+      "detected_stack": ["{lang}", "{framework}"]
+    }
+  ],
+  "dimension_pack": "{coding-agent | memory | orchestration | mcp | observability | spec-driven | personal-assistant | workflow-infra}",
+  "scoring_dimensions": [
+    "{dimension_id_1}",
+    "{dimension_id_2}"
+  ],
+  "profile": "quick | standard | full",
+  "skill_version": "1.0.0",
+  "output_root": "OS/_bench/{slug}/",
+  "artifacts_generated": [
+    "metadata.json",
+    "inventory-{a}.json",
+    "inventory-{a}.md",
+    "inventory-{b}.json",
+    "inventory-{b}.md",
+    "comparison-matrix.json",
+    "comparison-matrix.md",
+    "scorecard.json",
+    "scorecard.md",
+    "gap-analysis.json",
+    "gap-analysis.md",
+    "battle-card.md",
+    "executive-report.md"
+  ],
+  "artifacts_skipped": [],
+  "confidence_overall": "HIGH | MEDIUM | LOW",
+  "quality_gate_passed": false,
+  "notes": "Texto livre com observações da execução (ex: signals ausentes, fallbacks web usados)"
+}

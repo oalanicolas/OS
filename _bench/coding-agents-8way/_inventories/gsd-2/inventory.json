@@ -1,0 +1,100 @@
+{
+  "generatedAt": "2026-04-19T22:30:00Z",
+  "subject": "gsd-2",
+  "path": "OS/gsd-2/",
+  "primary_language": "TypeScript",
+  "secondary_languages": ["JavaScript"],
+  "stack": ["Node.js >=22", "Pi SDK", "npm workspaces", "MCP SDK"],
+  "license": "MIT",
+  "tagline": "GSD — coding agent standalone com auto-mode, memória persistente, knowledge graph e remote control",
+  "metrics": {
+    "loc_estimate": 250000,
+    "file_count": 1735,
+    "top_level_dirs": ["src", "packages", "studio", "web", "docs", "native", "scripts", "tests", "pkg", "mintlify-docs", "gitbook", "gsd-orchestrator", "vscode-extension", "docker"],
+    "readme_lines": 855,
+    "last_commit_date": "2026-04-19",
+    "github_stars": null,
+    "github_contributors": null
+  },
+  "modules": [
+    { "name": "src", "path": "src/", "type": "app", "loc_estimate": 120000 },
+    { "name": "packages/pi-coding-agent", "path": "packages/pi-coding-agent/", "type": "package", "loc_estimate": 50000 },
+    { "name": "packages/pi-tui", "path": "packages/pi-tui/", "type": "package", "loc_estimate": 20000 },
+    { "name": "packages/pi-ai", "path": "packages/pi-ai/", "type": "package", "loc_estimate": 20000 },
+    { "name": "packages/mcp-server", "path": "packages/mcp-server/", "type": "package", "loc_estimate": 5000 },
+    { "name": "packages/native", "path": "packages/native/", "type": "package", "loc_estimate": 10000 },
+    { "name": "web", "path": "web/", "type": "app", "loc_estimate": 15000 },
+    { "name": "studio", "path": "studio/", "type": "app", "loc_estimate": 10000 }
+  ],
+  "external_dependencies_top10": [
+    { "package": "@anthropic-ai/sdk", "version": "^0.90.0", "purpose": "LLM" },
+    { "package": "@anthropic-ai/vertex-sdk", "version": "^0.14.4", "purpose": "Vertex" },
+    { "package": "@aws-sdk/client-bedrock-runtime", "version": "^3.983.0", "purpose": "Bedrock" },
+    { "package": "@google/genai", "version": "^1.40.0", "purpose": "Gemini" },
+    { "package": "@mistralai/mistralai", "version": "^1.14.1", "purpose": "Mistral" },
+    { "package": "@modelcontextprotocol/sdk", "version": "^1.27.1", "purpose": "MCP" },
+    { "package": "@octokit/rest", "version": "^22.0.1", "purpose": "GitHub" },
+    { "package": "ajv", "version": "^8.17.1", "purpose": "JSON schema" },
+    { "package": "chalk", "version": "^5.6.2", "purpose": "Terminal colors" },
+    { "package": "chokidar", "version": "^5.0.0", "purpose": "File watch" }
+  ],
+  "entry_points": [
+    { "kind": "cli", "path": "dist/loader.js", "command": "gsd" },
+    { "kind": "http", "path": "web/", "command": "gsd web" },
+    { "kind": "mcp", "path": "packages/mcp-server/", "command": "gsd mcp" }
+  ],
+  "capabilities": [
+    { "name": "Auto-mode (long-horizon)", "evidence_paths": ["OS/gsd-2/README.md:14-23", "OS/gsd-2/src/"], "category": "core", "description": "Rodar 1 comando e sair — GSD auto-advances por um milestone completo" },
+    { "name": "Context management explícito", "evidence_paths": ["OS/gsd-2/README.md:16", "OS/gsd-2/context-save", "OS/gsd-2/context-restore"], "category": "core", "description": "Clears context between tasks, inject exact files at dispatch" },
+    { "name": "Git isolation (branch per milestone)", "evidence_paths": ["OS/gsd-2/README.md:68"], "category": "integration", "description": "isolation: branch mode cria branch no milestone entry" },
+    { "name": "Stuck-loop detection", "evidence_paths": ["OS/gsd-2/README.md:66"], "category": "core", "description": "Detecta unidades repetidas no stuck window" },
+    { "name": "Model fallback", "evidence_paths": ["OS/gsd-2/README.md:69"], "category": "governance", "description": "Auto-mode limit errors trigger model fallback" },
+    { "name": "Memory system persistente (KG)", "evidence_paths": ["OS/gsd-2/README.md:32-38"], "category": "core", "description": "capture_thought, memory_query, gsd_graph; scoped (project/milestone/slice), tags, hybrid retrieval keyword+semantic, graph relationships" },
+    { "name": "Progressive planning (ADR-011)", "evidence_paths": ["OS/gsd-2/README.md:40-43"], "category": "core", "description": "Sketch-then-refine; escalation mid-run com rollback" },
+    { "name": "Unified workflow plugin system", "evidence_paths": ["OS/gsd-2/README.md:46"], "category": "extensibility", "description": "/gsd workflow list|run|install|info|validate" },
+    { "name": "GSD Extension API", "evidence_paths": ["OS/gsd-2/README.md:82", ".gsd/extensions/"], "category": "extensibility", "description": "Third-party extensions em .gsd/extensions/ (#3338)" },
+    { "name": "MCP server", "evidence_paths": ["OS/gsd-2/packages/mcp-server/"], "category": "integration", "description": "Own MCP server crate" },
+    { "name": "Remote control", "evidence_paths": ["OS/gsd-2/README.md:51"], "category": "ux", "description": "Telegram + Slack + Discord command interface" },
+    { "name": "Multi-provider models", "evidence_paths": ["package.json dependencies"], "category": "integration", "description": "Anthropic/Vertex/Bedrock/Gemini/Mistral/OpenAI/DashScope/Ollama" },
+    { "name": "UOK (Unified Orchestration Kernel)", "evidence_paths": ["OS/gsd-2/README.md:80", "OS/gsd-2/gsd-orchestrator/"], "category": "core", "description": "Default execution path com plan-v2 compile gates e reactive/parallel scheduling" },
+    { "name": "Knowledge graph system", "evidence_paths": ["OS/gsd-2/README.md:79"], "category": "core", "description": "Structured KG from project artifacts; /gsd extract-learnings" },
+    { "name": "VS Code extension", "evidence_paths": ["OS/gsd-2/vscode-extension/"], "category": "integration", "description": "IDE integration" },
+    { "name": "Web UI + Studio", "evidence_paths": ["OS/gsd-2/web/", "OS/gsd-2/studio/"], "category": "ux", "description": "Web host + Studio UIs" },
+    { "name": "Single-writer DB invariant", "evidence_paths": ["OS/gsd-2/README.md:85"], "category": "governance", "description": "Engine DB enforces single-writer to prevent corruption" },
+    { "name": "Self-healing .gsd/", "evidence_paths": ["OS/gsd-2/README.md:70"], "category": "governance", "description": "Symlinked .gsd staging self-heals; stale OAuth recovery (#4399)" }
+  ],
+  "quality_signals": {
+    "test_framework": "node --test + c8 coverage",
+    "test_file_count": 100,
+    "linter": "tsc",
+    "ci_provider": "github_actions",
+    "ci_workflow_count": 11
+  },
+  "documentation": {
+    "readme_sections": ["What's New", "Memory System", "Progressive Planning", "Workflow & Onboarding", "Remote Control & TUI", "Models & Providers", "Auto-Mode & Reliability", "v2.75 / v2.74 / v2.73 highlights"],
+    "has_contributing": true,
+    "has_architecture_doc": true,
+    "docs_page_count": 0
+  },
+  "extension_points": {
+    "plugins": { "mechanism": "Workflow plugins + Extension API", "path": "OS/gsd-2/.gsd/extensions/" },
+    "hooks": { "mechanism": "pre-commit + DB write hooks", "events": ["pre-commit", "db-write"] },
+    "mcp": { "client": true, "server": true }
+  },
+  "unique_selling_points": [
+    "Auto-mode end-to-end — roda, sai, volta com PR",
+    "Memória persistente com knowledge graph (verbatim + scoped + hybrid retrieval)",
+    "Stuck-loop detection, model fallback, self-healing",
+    "Remote control via Telegram/Slack/Discord",
+    "Multi-provider (8+ providers) nativo",
+    "UOK (orchestration kernel) com parallel/reactive scheduling",
+    "Single-writer DB invariant e DB-authoritative milestone state"
+  ],
+  "limitations": [
+    { "description": "Requer Node >=22; setup pesado por ser polyglot (native + web + studio)", "source": "package.json" },
+    { "description": "README longo (855 linhas) e denso — curva de aprendizado", "source": "OS/gsd-2/README.md" }
+  ],
+  "confidence": "HIGH",
+  "extraction_method": "filesystem-scan",
+  "skill_version": "1.0.0"
+}

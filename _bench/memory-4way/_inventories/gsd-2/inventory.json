@@ -1,0 +1,94 @@
+{
+  "generatedAt": "2026-04-19T22:19:37Z",
+  "subject": "gsd-2",
+  "path": "OS/gsd-2/",
+  "primary_language": "TypeScript",
+  "secondary_languages": ["JavaScript", "Markdown", "Python"],
+  "stack": ["Node 22+", "Pi SDK (pi-mono)", "SQLite (gsd.db)", "tsup", "Vitest/Node test runner", "Next.js (web)", "Electron?/Native"],
+  "license": "MIT",
+  "tagline": "GSD 2 (Get Shit Done): coding agent standalone com Pi SDK; memoria persistente v2.76 (capture_thought, memory_query, gsd_graph)",
+  "metrics": {
+    "loc_estimate": 548101,
+    "file_count": 2937,
+    "top_level_dirs": ["docker", "docs", "gitbook", "gsd-orchestrator", "mintlify-docs", "native", "packages", "pkg", "scripts", "src", "studio", "tests", "vscode-extension", "web"],
+    "readme_lines": 200,
+    "last_commit_date": "2026-04-19T16:06:51-05:00",
+    "github_stars": null,
+    "github_contributors": null
+  },
+  "modules": [
+    { "name": "src/resources/extensions/gsd", "path": "src/resources/extensions/gsd/", "type": "library", "loc_estimate": 80000 },
+    { "name": "packages/pi-coding-agent", "path": "packages/pi-coding-agent/", "type": "package", "loc_estimate": 30000 },
+    { "name": "packages/native", "path": "packages/native/", "type": "package", "loc_estimate": 5000 },
+    { "name": "studio", "path": "studio/", "type": "package", "loc_estimate": 10000 },
+    { "name": "web", "path": "web/", "type": "app", "loc_estimate": 20000 },
+    { "name": "vscode-extension", "path": "vscode-extension/", "type": "app", "loc_estimate": 5000 },
+    { "name": "gsd-orchestrator", "path": "gsd-orchestrator/", "type": "library", "loc_estimate": 500 },
+    { "name": "docs", "path": "docs/", "type": "library", "loc_estimate": 0 }
+  ],
+  "external_dependencies_top10": [
+    { "package": "gsd-pi (self)", "version": "2.76.0", "purpose": "CLI principal coding agent" },
+    { "package": "Pi SDK (pi-mono)", "version": "workspace", "purpose": "agent harness TypeScript-native" },
+    { "package": "RTK binary (managed)", "version": "external", "purpose": "compressao de shell output (opt-out via GSD_RTK_DISABLED)" },
+    { "package": "@gsd/pi-tui", "version": "workspace", "purpose": "TUI layer" },
+    { "package": "@gsd/pi-ai", "version": "workspace", "purpose": "AI/LLM layer" },
+    { "package": "@gsd/pi-coding-agent", "version": "workspace", "purpose": "coding agent core" },
+    { "package": "@gsd/native", "version": "workspace", "purpose": "native bindings" },
+    { "package": "@gsd-build/mcp-server", "version": "workspace", "purpose": "MCP server para workflow tools" }
+  ],
+  "entry_points": [
+    { "kind": "cli", "path": "dist/loader.js", "command": "gsd | gsd-cli" },
+    { "kind": "mcp", "path": "packages/mcp-server/", "command": "built-in MCP server (6 read-only state tools + workflow)" }
+  ],
+  "capabilities": [
+    { "name": "Memory tools (capture_thought, memory_query, gsd_graph)", "evidence_paths": ["OS/gsd-2/src/resources/extensions/gsd/tools/memory-tools.ts", "OS/gsd-2/src/resources/extensions/gsd/memory-store.ts", "OS/gsd-2/src/resources/extensions/gsd/bootstrap/memory-tools.ts"], "category": "core", "description": "v2.76 Phase 1: 3 tools que LLM pode chamar a qualquer momento" },
+    { "name": "Scoped memories (project, milestone, slice) + tags", "evidence_paths": ["OS/gsd-2/src/resources/extensions/gsd/memory-store.ts"], "category": "core", "description": "Phase 2: scoping e tagging" },
+    { "name": "Hybrid retrieval (keyword + semantic)", "evidence_paths": ["OS/gsd-2/src/resources/extensions/gsd/commands-memory.ts"], "category": "core", "description": "Phase 3: keyword + semantic search" },
+    { "name": "Knowledge graph relationships", "evidence_paths": ["OS/gsd-2/src/resources/extensions/gsd/tests/memory-relations.test.ts"], "category": "core", "description": "Phase 4: memorias linkam em graph queryable, feed planning" },
+    { "name": "Memory maintenance (cap cascade, decay metrics, export/import)", "evidence_paths": ["OS/gsd-2/src/resources/extensions/gsd/memory-store.ts", "OS/gsd-2/src/resources/extensions/gsd/memory-backfill.ts"], "category": "governance", "description": "Phase 5: supersedeLowestRankedMemories, decayMemoriesBefore, hit_count" },
+    { "name": "Structured fields (ADR-013)", "evidence_paths": ["OS/gsd-2/src/resources/extensions/gsd/memory-store.ts"], "category": "core", "description": "Payload estruturado opcional para decisions backfill" },
+    { "name": "Extract learnings (decisions, patterns, lessons)", "evidence_paths": ["OS/gsd-2/src/resources/extensions/gsd/commands-extract-learnings.ts"], "category": "governance", "description": "/gsd extract-learnings gera LEARNINGS.md" },
+    { "name": "Unified Orchestration Kernel (UOK)", "evidence_paths": ["OS/gsd-2/src/resources/extensions/gsd/"], "category": "core", "description": "Plan-v2 compile gates, reactive/parallel scheduling (v2.75 default)" },
+    { "name": "Workflow plugin system", "evidence_paths": ["OS/gsd-2/src/resources/extensions/gsd/"], "category": "extensibility", "description": "gsd workflow list/run/install/info/validate com modes e remote install" },
+    { "name": "Extension API (.gsd/extensions/)", "evidence_paths": ["OS/gsd-2/src/resources/extensions/"], "category": "extensibility", "description": "Third-party extensions loadable" },
+    { "name": "MCP server (workflow tools over MCP)", "evidence_paths": ["OS/gsd-2/packages/mcp-server/"], "category": "integration", "description": "Slice replan, milestone mgmt, ask user questions via elicitation" },
+    { "name": "Single-writer DB invariant (gsd.db)", "evidence_paths": ["OS/gsd-2/src/resources/extensions/gsd/memory-store.ts", "OS/gsd-2/src/resources/extensions/gsd/db-writer.ts"], "category": "governance", "description": "Engine database enforce single-writer para prevenir corruption" },
+    { "name": "DB-authoritative milestone state", "evidence_paths": ["OS/gsd-2/src/resources/extensions/gsd/"], "category": "governance", "description": "v2.74: milestone completion derived from DB, nao file markers" }
+  ],
+  "quality_signals": {
+    "test_framework": "node:test + vitest + tsx",
+    "test_file_count": null,
+    "linter": null,
+    "ci_provider": "GitHub Actions",
+    "ci_workflow_count": null,
+    "test_coverage_config": "c8 40% statements/lines, 20% branches/functions"
+  },
+  "documentation": {
+    "readme_sections": ["What's New v2.76", "Documentation", "User Guides", "Developer Docs"],
+    "has_contributing": true,
+    "has_architecture_doc": true,
+    "docs_page_count": null
+  },
+  "extension_points": {
+    "plugins": { "mechanism": "GSD Extension API loaded from .gsd/extensions/", "path": ".gsd/extensions/" },
+    "hooks": { "mechanism": "workflow hooks + Claude Code hooks", "events": ["before_model_select", "after_slice", "milestone"] },
+    "mcp": { "client": true, "server": true }
+  },
+  "unique_selling_points": [
+    "Coding agent-integrated memory: memory nao e produto, e layer dentro de um coding agent",
+    "Pi SDK direct control: TypeScript direto no harness (context windows, sessions, execution)",
+    "One command walk-away: auto-mode com stuck detection, recovery, milestone branches",
+    "5-phase memory roadmap: captured + scoped + hybrid retrieval + KG + maintenance",
+    "Telegram/Slack/Discord remote control para auto-mode",
+    "30+ skill packs cobrindo frameworks, databases, clouds"
+  ],
+  "limitations": [
+    { "description": "Memoria e side-feature de coding agent, nao memory-first system", "source": "README.md" },
+    { "description": "Sem benchmarks publicos de recall/latencia de memoria (comparado a mem0/mempalace)", "source": "README.md" },
+    { "description": "Requer .gsd/ project inicializado (erro db_unavailable caso contrario)", "source": "src/resources/extensions/gsd/tools/memory-tools.ts" },
+    { "description": "RTK binary managed introduz dependencia externa (opt-out via env var)", "source": "README.md" }
+  ],
+  "confidence": "HIGH",
+  "extraction_method": "filesystem-scan",
+  "skill_version": "1.0.0"
+}

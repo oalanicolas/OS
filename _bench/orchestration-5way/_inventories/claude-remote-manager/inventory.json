@@ -1,0 +1,95 @@
+{
+  "generatedAt": "2026-04-19T22:30:00Z",
+  "subject": "claude-remote-manager",
+  "path": "OS/claude-remote-manager/",
+  "primary_language": "Bash",
+  "secondary_languages": ["Markdown"],
+  "stack": ["Bash", "tmux", "launchd (macOS)", "jq", "Telegram Bot API", "Claude Code CLI"],
+  "license": "unknown",
+  "tagline": "Persistent 24/7 Claude Code agents controlled from Telegram — persistência (launchd+tmux), hooks de permissão, bus de mensagens agent-to-agent e cron scheduling.",
+  "source_url": "https://github.com/grandamenium/claude-remote-manager",
+  "metrics": {
+    "loc_estimate": 3691,
+    "file_count": 60,
+    "top_level_dirs": ["core", "agents"],
+    "readme_lines": 200,
+    "last_commit_date": "2026-04-06",
+    "github_stars": null,
+    "github_contributors": null
+  },
+  "modules": [
+    { "name": "core/bus", "path": "core/bus/", "type": "library", "loc_estimate": 0, "description": "Message bus — Telegram I/O, inbox A2A, hooks (permission/ask/planmode)" },
+    { "name": "core/scripts", "path": "core/scripts/", "type": "library", "loc_estimate": 0, "description": "agent-wrapper, fast-checker, generate-launchd, crash-alert" },
+    { "name": "core/skills", "path": "core/skills/", "type": "library", "loc_estimate": 0, "description": "Skills transversais (comms, cron-management)" },
+    { "name": "agents/agent-template", "path": "agents/agent-template/", "type": "library", "loc_estimate": 0, "description": "Template de agent com CLAUDE.md + config.json + skills" },
+    { "name": "agents/aiox-master", "path": "agents/aiox-master/", "type": "app", "loc_estimate": 0, "description": "Agent master exemplo (CLAUDE.md + SOUL.md + skills)" },
+    { "name": "agents/frank", "path": "agents/frank/", "type": "app", "loc_estimate": 0, "description": "Agent exemplo — 'frank'" },
+    { "name": "agents/content-growth", "path": "agents/content-growth/", "type": "app", "loc_estimate": 0, "description": "Agent exemplo — content-growth" },
+    { "name": "agents/marketing-dev", "path": "agents/marketing-dev/", "type": "app", "loc_estimate": 0, "description": "Agent exemplo — marketing-dev" },
+    { "name": "agents/revenue-dev", "path": "agents/revenue-dev/", "type": "app", "loc_estimate": 0, "description": "Agent exemplo — revenue-dev" }
+  ],
+  "external_dependencies_top10": [
+    { "package": "tmux", "version": "brew", "purpose": "Sessões persistentes terminal" },
+    { "package": "jq", "version": "brew", "purpose": "Parse JSON (callbacks Telegram)" },
+    { "package": "curl", "version": "system", "purpose": "HTTP client Telegram" },
+    { "package": "claude (Claude Code CLI)", "version": "external", "purpose": "Execução real do agent" },
+    { "package": "launchd", "version": "macOS-system", "purpose": "Auto-restart + persistência" },
+    { "package": "cron (via Claude /loop)", "version": "in-session", "purpose": "Scheduling de tasks recorrentes" },
+    { "package": "Telegram Bot API", "version": "external", "purpose": "Control plane humano" }
+  ],
+  "entry_points": [
+    { "kind": "cli", "path": "bootstrap.sh", "command": "bash <(curl ... bootstrap.sh)" },
+    { "kind": "cli", "path": "install.sh", "command": "./install.sh" },
+    { "kind": "cli", "path": "setup.sh", "command": "./setup.sh" },
+    { "kind": "daemon", "path": "core/scripts/agent-wrapper.sh", "command": "agent-wrapper.sh (invocado por launchd)" },
+    { "kind": "daemon", "path": "core/scripts/fast-checker.sh", "command": "fast-checker.sh <agent> <tmux_session> <agent_dir> <template_root>" }
+  ],
+  "capabilities": [
+    { "name": "Persistent 24/7 session (launchd + tmux + auto-restart)", "evidence_paths": ["OS/claude-remote-manager/core/scripts/agent-wrapper.sh", "OS/claude-remote-manager/core/scripts/generate-launchd.sh", "OS/claude-remote-manager/core/bus/self-restart.sh"], "category": "core", "description": "Agent nunca morre — launchd restart + tmux + soft-restart a cada ~71h" },
+    { "name": "Telegram control plane (messages, callbacks, photos)", "evidence_paths": ["OS/claude-remote-manager/core/bus/send-telegram.sh", "OS/claude-remote-manager/core/bus/check-telegram.sh", "OS/claude-remote-manager/core/bus/send-voice.sh"], "category": "core", "description": "Control total via Telegram — send/check/voice" },
+    { "name": "Permission/Plan/Ask hooks via Telegram", "evidence_paths": ["OS/claude-remote-manager/core/bus/hook-permission-telegram.sh", "OS/claude-remote-manager/core/bus/hook-planmode-telegram.sh", "OS/claude-remote-manager/core/bus/hook-ask-telegram.sh", "OS/claude-remote-manager/core/bus/send-ask-question.sh"], "category": "governance", "description": "Claude Code hooks roteiam permissões/planos/perguntas pro Telegram com botões Approve/Deny" },
+    { "name": "Fast-checker daemon (real-time injection)", "evidence_paths": ["OS/claude-remote-manager/core/scripts/fast-checker.sh"], "category": "core", "description": "Polling Telegram + inbox, injeta msgs no tmux via send-keys, singleton lock atômico" },
+    { "name": "Agent-to-agent message bus (inbox + ACK)", "evidence_paths": ["OS/claude-remote-manager/core/bus/send-message.sh", "OS/claude-remote-manager/core/bus/check-inbox.sh", "OS/claude-remote-manager/core/bus/ack-inbox.sh"], "category": "core", "description": "A2A messaging com priorities, inflight state, redelivery após 5min sem ACK" },
+    { "name": "Scheduled tasks via cron loops", "evidence_paths": ["OS/claude-remote-manager/core/skills/cron-management/", "OS/claude-remote-manager/agents/agent-template/CLAUDE.md"], "category": "core", "description": "Crons definidos em config.json agent-side via /loop — sobrevivem a restarts" },
+    { "name": "Multi-agent skeleton (agent-template + exemplos)", "evidence_paths": ["OS/claude-remote-manager/agents/agent-template/", "OS/claude-remote-manager/agents/aiox-master/", "OS/claude-remote-manager/agents/frank/"], "category": "core", "description": "Template + 5 agents exemplo (aiox-master, frank, content-growth, marketing-dev, revenue-dev)" },
+    { "name": "Crash alerts", "evidence_paths": ["OS/claude-remote-manager/core/scripts/crash-alert.sh"], "category": "observability", "description": "Notifica Telegram em crash" },
+    { "name": "Instance ID isolation", "evidence_paths": ["OS/claude-remote-manager/core/bus/send-message.sh"], "category": "governance", "description": "CRM_INSTANCE_ID isola múltiplas instalações em ~/.claude-remote/{id}" },
+    { "name": "Voice support (Telegram)", "evidence_paths": ["OS/claude-remote-manager/core/bus/send-voice.sh"], "category": "ux", "description": "Envio de voice messages pro Telegram" },
+    { "name": "Bootstrap/install/uninstall scripts", "evidence_paths": ["OS/claude-remote-manager/bootstrap.sh", "OS/claude-remote-manager/install.sh", "OS/claude-remote-manager/setup.sh", "OS/claude-remote-manager/uninstall.sh", "OS/claude-remote-manager/enable-agent.sh", "OS/claude-remote-manager/disable-agent.sh"], "category": "ux", "description": "Setup one-liner via curl+bash" }
+  ],
+  "quality_signals": {
+    "test_framework": "none (shell project)",
+    "test_file_count": 0,
+    "linter": "none",
+    "ci_provider": "none",
+    "ci_workflow_count": 0
+  },
+  "documentation": {
+    "readme_sections": ["What This Does", "Requirements", "Quick Start", "How It Works", "Project Structure"],
+    "has_contributing": true,
+    "has_architecture_doc": true,
+    "docs_page_count": 2
+  },
+  "extension_points": {
+    "plugins": { "mechanism": "agents/ como dirs independentes com CLAUDE.md + skills/", "path": "agents/" },
+    "hooks": { "mechanism": "Claude Code hooks apontando pros scripts em core/bus/", "events": ["permission", "planmode", "ask", "stop"] },
+    "mcp": { "client": false, "server": false }
+  },
+  "unique_selling_points": [
+    "Persistência 24/7 real (launchd + tmux + auto-restart + 71h soft-reset) — agent nunca morre",
+    "Mobile-first via Telegram — inclui approvals, plano, perguntas, voz",
+    "Message bus A2A com semântica at-least-once (ACK + redelivery em 5min)",
+    "Zero servidor próprio — tudo em bash+tmux+launchd na máquina host",
+    "Cada agent é um dir isolado com CLAUDE.md — config por-agent simples"
+  ],
+  "limitations": [
+    { "description": "macOS-only (depende de launchd) — sem suporte Linux/Windows", "source": "README Requirements + core/scripts/generate-launchd.sh" },
+    { "description": "Sem UI além de Telegram/terminal", "source": "ausência de UI dir" },
+    { "description": "Sem CI, sem testes automatizados", "source": "ausência de .github/ e test/" },
+    { "description": "Stateless em disco fora do inbox — sem checkpoint rich", "source": "core/bus/ usa filesystem simples em ~/.claude-remote/" },
+    { "description": "Parallelism = N tmux sessions independentes (não há fan-out coordenado)", "source": "design shell scripts" }
+  ],
+  "confidence": "HIGH",
+  "extraction_method": "filesystem-scan",
+  "skill_version": "1.0.0"
+}

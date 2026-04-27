@@ -1,0 +1,101 @@
+{
+  "generatedAt": "2026-04-19T22:30:00Z",
+  "subject": "spec-kit",
+  "path": "OS/spec-kit/",
+  "primary_language": "Python",
+  "secondary_languages": ["Markdown", "Bash", "PowerShell"],
+  "stack": ["Typer CLI", "Rich", "PyYAML", "Hatchling"],
+  "license": "MIT",
+  "tagline": "Build high-quality software faster — open-source toolkit for Spec-Driven Development where specifications become executable and generate implementations.",
+  "metrics": {
+    "loc_estimate": 51903,
+    "file_count": 262,
+    "top_level_dirs": [".devcontainer", ".github", "docs", "extensions", "integrations", "media", "newsletters", "presets", "scripts", "src", "templates", "tests", "workflows"],
+    "readme_lines": 778,
+    "last_commit_date": "2026-04-17T14:33:38-05:00",
+    "github_stars": null,
+    "github_contributors": null,
+    "source_url": "https://github.com/github/spec-kit"
+  },
+  "modules": [
+    { "name": "specify_cli", "path": "src/specify_cli/", "type": "app", "description": "Python CLI that bootstraps SDD projects, initialises agent integrations, and injects command templates" },
+    { "name": "templates", "path": "templates/", "type": "library", "description": "Core templates: spec-template.md, plan-template.md, tasks-template.md, constitution-template.md, checklist-template.md + 9 slash-command templates" },
+    { "name": "commands-templates", "path": "templates/commands/", "type": "library", "description": "Speckit slash-commands: specify, clarify, plan, tasks, implement, analyze, checklist, constitution, taskstoissues" },
+    { "name": "scripts", "path": "scripts/", "type": "library", "description": "bash/ + powershell/ helper scripts invoked by commands" },
+    { "name": "extensions", "path": "extensions/", "type": "library", "description": "Extension catalog (community & official) with hook mechanism described in extensions.py" },
+    { "name": "presets", "path": "presets/", "type": "library", "description": "Tech-stack presets (Next.js, Django, etc.) layered on top of core spec-kit scaffold" },
+    { "name": "docs", "path": "docs/", "type": "library", "description": "Public docs rendered via docfx: quickstart, installation, local-development, upgrade, reference/" },
+    { "name": "tests", "path": "tests/", "type": "library", "description": "Pytest suite covering extensions, presets, workflows, branch numbering, CLI version, etc." }
+  ],
+  "external_dependencies_top10": [
+    { "package": "typer", "version": ">=0.24.0", "purpose": "CLI framework" },
+    { "package": "click", "version": ">=8.2.1", "purpose": "Underlying CLI parser used by Typer" },
+    { "package": "rich", "version": "", "purpose": "Terminal formatting / output" },
+    { "package": "platformdirs", "version": "", "purpose": "Cross-platform config dirs" },
+    { "package": "readchar", "version": "", "purpose": "Interactive prompts" },
+    { "package": "pyyaml", "version": ">=6.0", "purpose": "YAML parsing (extensions.yml, preset manifests)" },
+    { "package": "packaging", "version": ">=23.0", "purpose": "Version handling" },
+    { "package": "pathspec", "version": ">=0.12.0", "purpose": "Ignore-file matching" },
+    { "package": "json5", "version": ">=0.13.0", "purpose": "Lenient JSON parsing" },
+    { "package": "hatchling", "version": "", "purpose": "Build backend" }
+  ],
+  "entry_points": [
+    { "kind": "cli", "path": "src/specify_cli/__init__.py", "command": "specify", "notes": "Exposed via [project.scripts] in pyproject.toml" },
+    { "kind": "commands", "path": "templates/commands/specify.md", "command": "/speckit.specify", "notes": "Agent-driven slash command; injects spec-template.md into the feature directory" },
+    { "kind": "commands", "path": "templates/commands/plan.md", "command": "/speckit.plan", "notes": "Turns spec into technical plan + research.md + data-model.md + contracts/" },
+    { "kind": "commands", "path": "templates/commands/tasks.md", "command": "/speckit.tasks", "notes": "Generates tasks.md grouped by user story" },
+    { "kind": "commands", "path": "templates/commands/implement.md", "command": "/speckit.implement", "notes": "Executes tasks per plan" },
+    { "kind": "commands", "path": "templates/commands/analyze.md", "command": "/speckit.analyze", "notes": "Consistency analysis across spec/plan/tasks" }
+  ],
+  "capabilities": [
+    { "name": "Executable spec format", "evidence_paths": ["OS/spec-kit/templates/spec-template.md", "OS/spec-kit/spec-driven.md"], "category": "core", "description": "Structured markdown spec (User Stories P1..P3, FR-### requirements, SC-### success criteria, Assumptions, Key Entities)" },
+    { "name": "Requirement IDs (FR-###, SC-###, US#)", "evidence_paths": ["OS/spec-kit/templates/spec-template.md"], "category": "core", "description": "Explicit identifiers that downstream plan/tasks reference back" },
+    { "name": "Spec → Plan → Tasks pipeline", "evidence_paths": ["OS/spec-kit/templates/commands/specify.md", "OS/spec-kit/templates/commands/plan.md", "OS/spec-kit/templates/commands/tasks.md"], "category": "core", "description": "Deterministic 3-stage generation: spec.md → plan.md + research.md + data-model.md + contracts/ → tasks.md" },
+    { "name": "Consistency analyzer", "evidence_paths": ["OS/spec-kit/templates/commands/analyze.md"], "category": "core", "description": "/speckit.analyze cross-validates spec/plan/tasks for ambiguity, contradictions, gaps" },
+    { "name": "Clarify loop", "evidence_paths": ["OS/spec-kit/templates/commands/clarify.md"], "category": "core", "description": "Max-3 [NEEDS CLARIFICATION] markers reconciled interactively before plan" },
+    { "name": "Constitution / principles file", "evidence_paths": ["OS/spec-kit/templates/constitution-template.md", "OS/spec-kit/templates/commands/constitution.md"], "category": "governance", "description": "Project-level principles enforced as gates at plan time" },
+    { "name": "Quality checklist auto-generation", "evidence_paths": ["OS/spec-kit/templates/checklist-template.md", "OS/spec-kit/templates/commands/checklist.md"], "category": "core", "description": "checklists/requirements.md per feature validated against Content/Completeness/Readiness criteria" },
+    { "name": "Issue export (tasks → GitHub issues)", "evidence_paths": ["OS/spec-kit/templates/commands/taskstoissues.md"], "category": "integration", "description": "Task list exported as issues to keep GitHub workflow as the roundtrip surface" },
+    { "name": "Multi-agent integration", "evidence_paths": ["OS/spec-kit/AGENTS.md", "OS/spec-kit/src/specify_cli/agents.py"], "category": "integration", "description": "Bootstraps Copilot, Claude, Cursor, Gemini, Codex, Qwen, Windsurf, Trae, Kilo, CodeBuddy, Augment, opencode" },
+    { "name": "Extension hooks (before/after_specify, before/after_plan)", "evidence_paths": ["OS/spec-kit/src/specify_cli/extensions.py", "OS/spec-kit/templates/commands/specify.md"], "category": "extensibility", "description": ".specify/extensions.yml declares hooks invoked around core commands" },
+    { "name": "Preset system", "evidence_paths": ["OS/spec-kit/presets/", "OS/spec-kit/src/specify_cli/presets.py"], "category": "extensibility", "description": "Stack presets bundled and applied at init time" },
+    { "name": "Branch numbering / directory naming", "evidence_paths": ["OS/spec-kit/tests/test_branch_numbering.py", "OS/spec-kit/tests/test_timestamp_branches.py"], "category": "ux", "description": "Sequential NNN or timestamp-prefix feature dirs under specs/" },
+    { "name": "Offline / air-gapped assets", "evidence_paths": ["OS/spec-kit/pyproject.toml"], "category": "ux", "description": "Templates, commands, scripts bundled in wheel for enterprise install" },
+    { "name": "CI / pytest suite", "evidence_paths": ["OS/spec-kit/tests/", "OS/spec-kit/.github/workflows/"], "category": "core", "description": "Pytest coverage of CLI, extensions, presets, workflows" }
+  ],
+  "quality_signals": {
+    "test_framework": "pytest",
+    "test_file_count": 13,
+    "linter": "markdownlint-cli2 (.markdownlint-cli2.jsonc)",
+    "ci_provider": "GitHub Actions",
+    "ci_workflow_count_path": "OS/spec-kit/.github/workflows/"
+  },
+  "documentation": {
+    "readme_sections": ["What is SDD", "Get Started", "Community Extensions", "Presets", "AI Agents", "CLI Reference", "Core Philosophy", "Phases", "Experimental Goals", "Detailed Process"],
+    "has_contributing": true,
+    "has_architecture_doc": true,
+    "has_sdd_manifesto": true,
+    "manifesto_path": "OS/spec-kit/spec-driven.md",
+    "docs_page_count": 8
+  },
+  "extension_points": {
+    "plugins": { "mechanism": "Extensions catalog + .specify/extensions.yml hooks", "path": "OS/spec-kit/extensions/" },
+    "hooks": { "mechanism": "before_/after_ hooks per command", "events": ["before_specify", "after_specify", "before_plan", "after_plan"] },
+    "presets": { "mechanism": "stack preset packs applied at init", "path": "OS/spec-kit/presets/" },
+    "mcp": { "client": false, "server": false }
+  },
+  "unique_selling_points": [
+    "Canonical SDD methodology (spec-driven.md manifesto + concrete template set)",
+    "12+ AI-agent harnesses supported from a single CLI",
+    "Spec/plan/tasks/analyze pipeline with requirement IDs (FR-###/SC-###)",
+    "Works offline via bundled wheel assets"
+  ],
+  "limitations": [
+    { "description": "No automatic code → spec roundtripping; drift detection happens manually via /speckit.analyze on demand", "source": "templates/commands/analyze.md (analysis is explicit, not continuous)" },
+    { "description": "Tests in generated specs are optional — 'only include them if explicitly requested'", "source": "OS/spec-kit/templates/tasks-template.md:11" },
+    { "description": "No enforced red/green TDD loop — TDD is the agent's discipline, not a gate", "source": "templates/commands/implement.md, templates/commands/tasks.md" }
+  ],
+  "confidence": "HIGH",
+  "extraction_method": "filesystem-scan",
+  "skill_version": "1.0.0"
+}

@@ -1,0 +1,426 @@
+{
+  "generatedAt": "2026-04-19T22:45:00Z",
+  "comparison_type": "nway",
+  "subjects": ["claude-code-main", "codex", "aider", "OpenHands", "gsd-2", "gstack", "superpowers", "ai-website-cloner-template"],
+  "dimension_pack": "coding-agent",
+  "categories": [
+    {
+      "name": "Coding Depth",
+      "features": [
+        {
+          "name": "Multi-file edits / refactor",
+          "values": {
+            "claude-code-main": "yes (FileEditTool, FileWriteTool, AgentTool)",
+            "codex": "yes (apply-patch crate + code-mode)",
+            "aider": "yes (editblock/whole/patch/search_replace — 38 coders)",
+            "OpenHands": "yes (codeact_agent + loc_agent)",
+            "gsd-2": "yes (pi-coding-agent + UOK)",
+            "gstack": "via host agent",
+            "superpowers": "via host agent (subagent-driven)",
+            "ai-website-cloner-template": "via host (parallel worktree builders)"
+          },
+          "evidence": {
+            "claude-code-main": ["OS/claude-code-main/src/tools/FileEditTool"],
+            "codex": ["OS/codex/codex-rs/apply-patch/"],
+            "aider": ["OS/aider/aider/coders/"],
+            "OpenHands": ["OS/OpenHands/openhands/agenthub/codeact_agent/"],
+            "gsd-2": ["OS/gsd-2/packages/pi-coding-agent/"],
+            "gstack": ["OS/gstack/ship/"],
+            "superpowers": ["OS/superpowers/skills/subagent-driven-development/"],
+            "ai-website-cloner-template": ["OS/ai-website-cloner-template/AGENTS.md"]
+          },
+          "leaders": ["claude-code-main", "aider", "codex", "OpenHands"]
+        },
+        {
+          "name": "Benchmark score published",
+          "values": {
+            "claude-code-main": "no (mirror)",
+            "codex": "no public bench in repo",
+            "aider": "Singularity 88%, Tokens/week 15B, 5.7M PyPI (README.md:28-37)",
+            "OpenHands": "SWE-bench 77.6 (README badge)",
+            "gsd-2": "internal evals (#/tests/ dir)",
+            "gstack": "own eval framework (LLM-judge + E2E)",
+            "superpowers": "no",
+            "ai-website-cloner-template": "no"
+          },
+          "evidence": {
+            "aider": ["OS/aider/README.md:28-37"],
+            "OpenHands": ["OS/OpenHands/README.md:11"],
+            "gstack": ["OS/gstack/test/skill-llm-eval.test.ts"]
+          },
+          "leaders": ["OpenHands", "aider"]
+        },
+        {
+          "name": "Language coverage",
+          "values": {
+            "claude-code-main": "generic (via Bash/LSP)",
+            "codex": "generic (Rust runtime, agnostic)",
+            "aider": "100+ (tree-sitter queries)",
+            "OpenHands": "generic + Python-first",
+            "gsd-2": "generic",
+            "gstack": "generic",
+            "superpowers": "generic",
+            "ai-website-cloner-template": "TypeScript/React-only (template)"
+          },
+          "evidence": {
+            "aider": ["OS/aider/aider/queries/"],
+            "claude-code-main": ["OS/claude-code-main/src/tools/LSPTool"]
+          },
+          "leaders": ["aider"]
+        }
+      ]
+    },
+    {
+      "name": "Autonomy",
+      "features": [
+        {
+          "name": "Long-horizon auto-mode",
+          "values": {
+            "claude-code-main": "Plan mode + AgentTool (bounded)",
+            "codex": "via SDK + cloud-tasks (auto tasks)",
+            "aider": "single-turn focused",
+            "OpenHands": "controller event-loop (long-horizon agent)",
+            "gsd-2": "auto-mode end-to-end (entire milestone)",
+            "gstack": "autoplan → /ship (guided pipeline)",
+            "superpowers": "SDD horas sem HITL",
+            "ai-website-cloner-template": "multi-phase pipeline (recon→build→assembly)"
+          },
+          "evidence": {
+            "claude-code-main": ["OS/claude-code-main/src/tools/EnterPlanModeTool"],
+            "codex": ["OS/codex/codex-rs/cloud-tasks/"],
+            "OpenHands": ["OS/OpenHands/openhands/controller/"],
+            "gsd-2": ["OS/gsd-2/README.md:14-23"],
+            "gstack": ["OS/gstack/autoplan/"],
+            "superpowers": ["OS/superpowers/skills/subagent-driven-development/"],
+            "ai-website-cloner-template": ["OS/ai-website-cloner-template/README.md:72-82"]
+          },
+          "leaders": ["gsd-2", "superpowers", "OpenHands"]
+        },
+        {
+          "name": "Stuck-loop / self-correction",
+          "values": {
+            "claude-code-main": "not explicit",
+            "codex": "not explicit in repo",
+            "aider": "linter+tests re-run on fail",
+            "OpenHands": "event loop retry (controller)",
+            "gsd-2": "stuck-loop detection (#4414) + model fallback (#4373)",
+            "gstack": "via /investigate skill",
+            "superpowers": "systematic-debugging skill",
+            "ai-website-cloner-template": "visual diff QA phase"
+          },
+          "evidence": {
+            "gsd-2": ["OS/gsd-2/README.md:66-69"],
+            "aider": ["OS/aider/aider/linter.py"],
+            "gstack": ["OS/gstack/investigate/"],
+            "superpowers": ["OS/superpowers/skills/systematic-debugging/"]
+          },
+          "leaders": ["gsd-2"]
+        }
+      ]
+    },
+    {
+      "name": "Context Mgmt",
+      "features": [
+        {
+          "name": "Context compression",
+          "values": {
+            "claude-code-main": "yes (/compact + services/compact/)",
+            "codex": "implicit (Rust native)",
+            "aider": "repomap (context-efficient)",
+            "OpenHands": "memory + controller",
+            "gsd-2": "context clear/inject + /gsd scan",
+            "gstack": "via host",
+            "superpowers": "via host",
+            "ai-website-cloner-template": "via host"
+          },
+          "evidence": {
+            "claude-code-main": ["OS/claude-code-main/src/commands/compact"],
+            "aider": ["OS/aider/aider/repomap.py"],
+            "gsd-2": ["OS/gsd-2/README.md:49"]
+          },
+          "leaders": ["claude-code-main", "aider", "gsd-2"]
+        },
+        {
+          "name": "Persistent memory layer",
+          "values": {
+            "claude-code-main": "memdir (relevance + team-mem-sync)",
+            "codex": "none evident",
+            "aider": "session-only",
+            "OpenHands": "memory/ module",
+            "gsd-2": "KG memory (5 phases) + hybrid retrieval",
+            "gstack": "via host",
+            "superpowers": "via host",
+            "ai-website-cloner-template": "docs/research/ artifacts"
+          },
+          "evidence": {
+            "claude-code-main": ["OS/claude-code-main/src/memdir/"],
+            "OpenHands": ["OS/OpenHands/openhands/memory/"],
+            "gsd-2": ["OS/gsd-2/README.md:32-38"]
+          },
+          "leaders": ["gsd-2", "claude-code-main"]
+        }
+      ]
+    },
+    {
+      "name": "Git Integration",
+      "features": [
+        {
+          "name": "Auto-commit",
+          "values": {
+            "claude-code-main": "/commit command",
+            "codex": "via SDK (not explicit in repo)",
+            "aider": "auto-commit with messages (README.md:63)",
+            "OpenHands": "via resolver (issue→PR)",
+            "gsd-2": "commits per milestone",
+            "gstack": "/ship + /land-and-deploy",
+            "superpowers": "finishing-a-development-branch skill",
+            "ai-website-cloner-template": "via host"
+          },
+          "evidence": {
+            "claude-code-main": ["OS/claude-code-main/src/commands/commit.ts"],
+            "aider": ["OS/aider/aider/repo.py"],
+            "gstack": ["OS/gstack/ship/", "OS/gstack/land-and-deploy/"],
+            "superpowers": ["OS/superpowers/skills/finishing-a-development-branch/"]
+          },
+          "leaders": ["aider", "claude-code-main", "gstack"]
+        },
+        {
+          "name": "Worktree support",
+          "values": {
+            "claude-code-main": "Enter/Exit WorktreeTool",
+            "codex": "not explicit",
+            "aider": "no",
+            "OpenHands": "not explicit",
+            "gsd-2": "worktree routing (#3658)",
+            "gstack": "via host",
+            "superpowers": "using-git-worktrees skill",
+            "ai-website-cloner-template": "parallel worktree dispatch (AGENTS.md)"
+          },
+          "evidence": {
+            "claude-code-main": ["OS/claude-code-main/src/tools/EnterWorktreeTool"],
+            "superpowers": ["OS/superpowers/skills/using-git-worktrees/"],
+            "ai-website-cloner-template": ["OS/ai-website-cloner-template/AGENTS.md"]
+          },
+          "leaders": ["claude-code-main", "superpowers", "ai-website-cloner-template"]
+        },
+        {
+          "name": "PR creation",
+          "values": {
+            "claude-code-main": "via Bash + /pr_comments",
+            "codex": "via SDK",
+            "aider": "no explicit",
+            "OpenHands": "resolver creates PRs",
+            "gsd-2": "auto-mode closes PR",
+            "gstack": "/ship + /land-and-deploy",
+            "superpowers": "requesting-code-review skill",
+            "ai-website-cloner-template": "via host"
+          },
+          "evidence": {
+            "OpenHands": ["OS/OpenHands/openhands/resolver/"],
+            "gstack": ["OS/gstack/ship/", "OS/gstack/land-and-deploy/"]
+          },
+          "leaders": ["OpenHands", "gstack"]
+        }
+      ]
+    },
+    {
+      "name": "TDD",
+      "features": [
+        {
+          "name": "TDD red-green enforcement",
+          "values": {
+            "claude-code-main": "not explicit (tools available)",
+            "codex": "not explicit",
+            "aider": "auto-lint + auto-test after edit",
+            "OpenHands": "test tooling via runtime",
+            "gsd-2": "verification gate (Python/Windows normalized)",
+            "gstack": "own eval infrastructure",
+            "superpowers": "test-driven-development skill + red/green",
+            "ai-website-cloner-template": "QA visual diff phase"
+          },
+          "evidence": {
+            "aider": ["OS/aider/aider/linter.py", "OS/aider/README.md:91-94"],
+            "superpowers": ["OS/superpowers/skills/test-driven-development/"],
+            "gsd-2": ["OS/gsd-2/README.md:67"]
+          },
+          "leaders": ["superpowers", "aider"]
+        },
+        {
+          "name": "Verification before completion",
+          "values": {
+            "claude-code-main": "via hooks/toolPermission",
+            "codex": "not explicit",
+            "aider": "re-run tests post-edit",
+            "OpenHands": "controller verifies via event",
+            "gsd-2": "verification gate mandatory",
+            "gstack": "/qa + /canary + /cso skills",
+            "superpowers": "verification-before-completion skill",
+            "ai-website-cloner-template": "visual diff assembly phase"
+          },
+          "evidence": {
+            "gsd-2": ["OS/gsd-2/README.md:67-69"],
+            "gstack": ["OS/gstack/qa/", "OS/gstack/canary/", "OS/gstack/cso/"],
+            "superpowers": ["OS/superpowers/skills/verification-before-completion/"]
+          },
+          "leaders": ["superpowers", "gstack", "gsd-2"]
+        }
+      ]
+    },
+    {
+      "name": "Multi-agent",
+      "features": [
+        {
+          "name": "Sub-agent orchestration",
+          "values": {
+            "claude-code-main": "AgentTool + coordinator + Team tools",
+            "codex": "via SDK async tasks",
+            "aider": "single-agent",
+            "OpenHands": "AgentHub 6 agents + microagents",
+            "gsd-2": "UOK reactive/parallel scheduling",
+            "gstack": "/autoplan dispatches via host",
+            "superpowers": "subagent-driven-development + dispatching-parallel-agents skills",
+            "ai-website-cloner-template": "orchestrator → builder agents per section"
+          },
+          "evidence": {
+            "claude-code-main": ["OS/claude-code-main/src/coordinator/coordinatorMode.ts"],
+            "OpenHands": ["OS/OpenHands/openhands/agenthub/", "OS/OpenHands/openhands/microagent/"],
+            "gsd-2": ["OS/gsd-2/README.md:80", "OS/gsd-2/gsd-orchestrator/"],
+            "superpowers": ["OS/superpowers/skills/subagent-driven-development/", "OS/superpowers/skills/dispatching-parallel-agents/"],
+            "ai-website-cloner-template": ["OS/ai-website-cloner-template/AGENTS.md"]
+          },
+          "leaders": ["claude-code-main", "OpenHands", "superpowers"]
+        },
+        {
+          "name": "Parallel execution",
+          "values": {
+            "claude-code-main": "TeamCreateTool + worktree isolation",
+            "codex": "Rust async",
+            "aider": "no",
+            "OpenHands": "async runtime sandbox",
+            "gsd-2": "UOK parallel scheduling",
+            "gstack": "via host worktrees",
+            "superpowers": "dispatching-parallel-agents (worktrees)",
+            "ai-website-cloner-template": "parallel builders per section"
+          },
+          "evidence": {
+            "claude-code-main": ["OS/claude-code-main/src/tools/TeamCreateTool"],
+            "gsd-2": ["OS/gsd-2/README.md:80"],
+            "superpowers": ["OS/superpowers/skills/dispatching-parallel-agents/"],
+            "ai-website-cloner-template": ["OS/ai-website-cloner-template/README.md:77-80"]
+          },
+          "leaders": ["claude-code-main", "gsd-2", "superpowers", "ai-website-cloner-template"]
+        }
+      ]
+    },
+    {
+      "name": "Extensibility",
+      "features": [
+        {
+          "name": "Plugin / skill system",
+          "values": {
+            "claude-code-main": "Skill + Plugin systems (src/skills, src/plugins)",
+            "codex": "SDK-based",
+            "aider": "coders são pluggable (38)",
+            "OpenHands": "AgentHub + microagents + skills/",
+            "gsd-2": "workflow plugins + Extension API",
+            "gstack": "23+ skills + scripts/gen-skill-docs.ts",
+            "superpowers": "14 skills + hooks + agents",
+            "ai-website-cloner-template": "/clone-website skill + sync-skills.mjs"
+          },
+          "evidence": {
+            "claude-code-main": ["OS/claude-code-main/src/skills/", "OS/claude-code-main/src/plugins/"],
+            "gsd-2": ["OS/gsd-2/README.md:46,82"],
+            "gstack": ["OS/gstack/README.md:51"],
+            "superpowers": ["OS/superpowers/skills/"]
+          },
+          "leaders": ["claude-code-main", "gstack", "gsd-2"]
+        },
+        {
+          "name": "MCP support",
+          "values": {
+            "claude-code-main": "MCP client + OAuth",
+            "codex": "MCP server (mcp-server crate)",
+            "aider": "no",
+            "OpenHands": "mcp + fastmcp client+server",
+            "gsd-2": "own mcp-server package",
+            "gstack": "no (skill-oriented)",
+            "superpowers": "no (zero-dep by design)",
+            "ai-website-cloner-template": "Chrome MCP client (host-provided)"
+          },
+          "evidence": {
+            "claude-code-main": ["OS/claude-code-main/src/tools/MCPTool"],
+            "codex": ["OS/codex/codex-rs/mcp-server/"],
+            "OpenHands": ["OS/OpenHands/openhands/mcp/"],
+            "gsd-2": ["OS/gsd-2/packages/mcp-server/"]
+          },
+          "leaders": ["claude-code-main", "OpenHands", "gsd-2", "codex"]
+        },
+        {
+          "name": "Hooks / lifecycle",
+          "values": {
+            "claude-code-main": "hooks/ (permission, lifecycle)",
+            "codex": "codex-hooks crate (JSON schema)",
+            "aider": "no",
+            "OpenHands": "events bus",
+            "gsd-2": "pre-commit + DB write hooks",
+            "gstack": "no",
+            "superpowers": "session-start hooks",
+            "ai-website-cloner-template": "no"
+          },
+          "evidence": {
+            "claude-code-main": ["OS/claude-code-main/src/hooks/"],
+            "codex": ["OS/codex/package.json (write-hooks-schema)"],
+            "superpowers": ["OS/superpowers/hooks/hooks.json"]
+          },
+          "leaders": ["claude-code-main", "codex"]
+        }
+      ]
+    },
+    {
+      "name": "Community",
+      "features": [
+        {
+          "name": "Community signals (stars/installs/downloads)",
+          "values": {
+            "claude-code-main": "mirror (Anthropic official tool — ecosystem huge)",
+            "codex": "OpenAI official (ecosystem huge)",
+            "aider": "5.7M PyPI installs, 15B tokens/week, OpenRouter Top 20",
+            "OpenHands": "SWE-bench leader, arxiv paper, Slack community",
+            "gsd-2": "npm gsd-pi + Discord invite",
+            "gstack": "MIT, free, solo + YC-endorsed",
+            "superpowers": "Anthropic official marketplace + 6 other platforms",
+            "ai-website-cloner-template": "small; Discord + GitHub"
+          },
+          "evidence": {
+            "aider": ["OS/aider/README.md:28-37"],
+            "OpenHands": ["OS/OpenHands/README.md:11,14,30"],
+            "gsd-2": ["OS/gsd-2/README.md:7-11"],
+            "superpowers": ["OS/superpowers/README.md:32-117"],
+            "ai-website-cloner-template": ["OS/ai-website-cloner-template/README.md:3"]
+          },
+          "leaders": ["aider", "claude-code-main", "codex", "OpenHands", "superpowers"]
+        }
+      ]
+    }
+  ],
+  "summary": {
+    "total_features": 16,
+    "dimensions": 8,
+    "subjects": 8
+  },
+  "subject_only_capabilities": {
+    "claude-code-main": ["Team tools", "IDE Bridge (bidirectional VS Code/JetBrains)", "memdir team-mem-sync", "101 slash commands", "43 tools"],
+    "codex": ["Rust-native runtime", "ChatGPT Plan auth", "Cloud tasks bridge", "Bazel+Nix reproducible build", "TS+Python SDK oficial"],
+    "aider": ["Repomap", "100+ linguagens via tree-sitter", "Voice-to-code", "Copy/paste web-chat mode", "5.7M PyPI installs documented"],
+    "OpenHands": ["SWE-bench 77.6 published", "browsing+visualbrowsing agents (Playwright)", "docker/k8s runtime sandbox", "Enterprise source-available", "arxiv tech report", "Slack/Jira/Linear integrations"],
+    "gsd-2": ["Auto-mode end-to-end", "KG memory (5-phase) com hybrid retrieval", "Stuck-loop detection + model fallback", "Remote control Telegram/Slack/Discord", "Self-healing .gsd/ + OAuth", "UOK orchestration kernel", "8+ provedores nativos"],
+    "gstack": ["CSO (OWASP+STRIDE) skill", "Multi-host (10 agents) typed config", "Own browser CLI (Playwright)", "Evals 2-tier diff-based", "Slop-scan integration", "Team mode auto-update", "ACP/ClawHub skills"],
+    "superpowers": ["Distribuído no marketplace Anthropic oficial", "94% PR rejection rate (curadoria)", "Zero-dependency design", "session-start hooks auto-inject"],
+    "ai-website-cloner-template": ["Escopo domínio-específico (website clone)", "5-phase inspection guide", "Next.js 16 + React 19 + Tailwind v4 template pronto"]
+  },
+  "method": {
+    "profile": "quick",
+    "inputs_read": ["README.md", "package.json / pyproject.toml / Cargo.toml", "top-level ls", "CLAUDE.md when present"],
+    "comparison_type": "nway (matrix with 8 columns, leaders per feature)"
+  }
+}

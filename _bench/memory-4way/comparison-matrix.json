@@ -1,0 +1,370 @@
+{
+  "generatedAt": "2026-04-19T22:19:37Z",
+  "comparison_type": "nway",
+  "subjects": ["gbrain", "mempalace", "mem0", "gsd-2"],
+  "dimension_pack": "memory",
+  "categories": [
+    {
+      "name": "Recall Accuracy",
+      "features": [
+        {
+          "name": "Public benchmark score (R@5 or equivalent)",
+          "values": {
+            "gbrain": "R@5 95% (hybrid+graph) vs 83% baseline em BrainBench 240-page Opus corpus",
+            "mempalace": "R@5 96.6% raw (LongMemEval 500q) + 98.4% hybrid v4 held-out",
+            "mem0": "LongMemEval 93.4 (+26), LoCoMo 91.6 (+20), BEAM(1M) 64.1",
+            "gsd-2": "no public recall benchmark"
+          },
+          "evidence": {
+            "gbrain": ["OS/gbrain/docs/benchmarks/2026-04-18-brainbench-v1.md"],
+            "mempalace": ["OS/mempalace/benchmarks/BENCHMARKS.md", "OS/mempalace/benchmarks/longmemeval_bench.py"],
+            "mem0": ["OS/mem0/README.md", "OS/mem0/evaluation/"],
+            "gsd-2": []
+          },
+          "leaders": ["mempalace", "mem0"],
+          "delta": "mempalace e mem0 reportam em benchmarks publicos padroes (LongMemEval/LoCoMo); gbrain reporta em dataset proprio; gsd-2 nao tem benchmark publico"
+        },
+        {
+          "name": "Eval harness incluso",
+          "values": {
+            "gbrain": "yes (src/core/search/eval.ts + gbrain eval com P@k, R@k, MRR, nDCG)",
+            "mempalace": "yes (benchmarks/*.py reproduciveis)",
+            "mem0": "yes (evaluation/ + memory-benchmarks repo OSS)",
+            "gsd-2": "no"
+          },
+          "evidence": {
+            "gbrain": ["OS/gbrain/src/core/search/eval.ts", "OS/gbrain/src/commands/eval.ts"],
+            "mempalace": ["OS/mempalace/benchmarks/longmemeval_bench.py"],
+            "mem0": ["OS/mem0/evaluation/"],
+            "gsd-2": []
+          },
+          "leaders": ["gbrain", "mempalace", "mem0"],
+          "delta": "gsd-2 e o unico sem eval harness dedicado"
+        }
+      ]
+    },
+    {
+      "name": "Write/Read Latency",
+      "features": [
+        {
+          "name": "Documented p50/p99 latency",
+          "values": {
+            "gbrain": "no p50/p99 explicito para write/query; statement_timeout scoping no Postgres",
+            "mempalace": "performance budgets declarados (hooks <500ms, startup injection <100ms)",
+            "mem0": "latency p50 reportada em benchmarks (0.88s LoCoMo, 1.09s LongMemEval, end-to-end)",
+            "gsd-2": "no"
+          },
+          "evidence": {
+            "gbrain": ["OS/gbrain/src/core/postgres-engine.ts"],
+            "mempalace": ["OS/mempalace/CLAUDE.md"],
+            "mem0": ["OS/mem0/README.md"],
+            "gsd-2": []
+          },
+          "leaders": ["mem0", "mempalace"],
+          "delta": "mem0 publica p50 end-to-end; mempalace declara budgets; gbrain/gsd-2 nao expoem"
+        },
+        {
+          "name": "Batch/async write support",
+          "values": {
+            "gbrain": "yes (addLinksBatch, addTimelineEntriesBatch via unnest; Minions job queue durable background)",
+            "mempalace": "incremental only (append-only), sem batch explicito documentado",
+            "mem0": "AsyncMemory/AsyncMemoryClient full async",
+            "gsd-2": "memory writes sync em SQLite (single-writer invariant)"
+          },
+          "evidence": {
+            "gbrain": ["OS/gbrain/src/core/pglite-engine.ts", "OS/gbrain/src/core/minions/queue.ts"],
+            "mempalace": ["OS/mempalace/CLAUDE.md"],
+            "mem0": ["OS/mem0/mem0/memory/main.py"],
+            "gsd-2": ["OS/gsd-2/src/resources/extensions/gsd/memory-store.ts"]
+          },
+          "leaders": ["gbrain", "mem0"],
+          "delta": "gbrain tem batch + job queue durable; mem0 tem async; mempalace e gsd-2 sincronos"
+        }
+      ]
+    },
+    {
+      "name": "Persistence (Verbatim vs Paraphrase)",
+      "features": [
+        {
+          "name": "Storage strategy",
+          "values": {
+            "gbrain": "paraphrase-first (compiled_truth primario, raw em raw_data JSONB)",
+            "mempalace": "VERBATIM (politica nao-negociavel no CLAUDE.md CONTRIBUTING)",
+            "mem0": "paraphrase (ADD-only extraction LLM fatos)",
+            "gsd-2": "structured fields (categoria + content) per memory row"
+          },
+          "evidence": {
+            "gbrain": ["OS/gbrain/src/core/operations.ts"],
+            "mempalace": ["OS/mempalace/CLAUDE.md", "OS/mempalace/mempalace/palace.py"],
+            "mem0": ["OS/mem0/mem0/memory/main.py", "OS/mem0/mem0/configs/prompts.py"],
+            "gsd-2": ["OS/gsd-2/src/resources/extensions/gsd/memory-store.ts"]
+          },
+          "leaders": ["mempalace"],
+          "delta": "MemPalace e o unico com verbatim-only como principio de design; gbrain/mem0 paraphrasam; gsd-2 usa categorias rigidas"
+        },
+        {
+          "name": "Durable backend",
+          "values": {
+            "gbrain": "yes (PGLite WASM Postgres ou Supabase Postgres)",
+            "mempalace": "yes (ChromaDB + SQLite KG, local)",
+            "mem0": "yes (Qdrant + Neo4j via docker-compose ou hosted)",
+            "gsd-2": "yes (SQLite single-writer)"
+          },
+          "evidence": {
+            "gbrain": ["OS/gbrain/src/core/pglite-engine.ts"],
+            "mempalace": ["OS/mempalace/mempalace/knowledge_graph.py"],
+            "mem0": ["OS/mem0/server/docker-compose.yml"],
+            "gsd-2": ["OS/gsd-2/src/resources/extensions/gsd/db-writer.ts"]
+          },
+          "leaders": ["gbrain", "mempalace", "mem0", "gsd-2"],
+          "delta": "Todos tem backend durable; difere apenas a tecnologia"
+        }
+      ]
+    },
+    {
+      "name": "Schema Flexibility",
+      "features": [
+        {
+          "name": "Schema model",
+          "values": {
+            "gbrain": "pages + chunks + links + timeline (schema rigido mas extensivel via frontmatter JSONB)",
+            "mempalace": "drawers schemaless + entity registry + typed predicates na KG",
+            "mem0": "memories com metadata flexivel + entity linking + graph (Neo4j)",
+            "gsd-2": "memory rows com categoria enum (architecture/convention/gotcha/preference/environment/pattern) + structured_fields JSON"
+          },
+          "evidence": {
+            "gbrain": ["OS/gbrain/src/schema.sql"],
+            "mempalace": ["OS/mempalace/mempalace/palace.py", "OS/mempalace/mempalace/entity_registry.py"],
+            "mem0": ["OS/mem0/mem0/configs/base.py"],
+            "gsd-2": ["OS/gsd-2/src/resources/extensions/gsd/tools/memory-tools.ts"]
+          },
+          "leaders": ["mempalace", "mem0"],
+          "delta": "mempalace e mem0 tem schema mais flexivel (metadata + entity types); gbrain fixa page types; gsd-2 fixa categorias"
+        }
+      ]
+    },
+    {
+      "name": "Local-first",
+      "features": [
+        {
+          "name": "Zero API keys no core path",
+          "values": {
+            "gbrain": "NO (OpenAI embeddings padrao obrigatorio pra embed/search)",
+            "mempalace": "YES (raw 96.6% R@5 sem LLM em nenhum estagio, zero API keys)",
+            "mem0": "NO (OpenAI default LLM+embedding, PostHog telemetry core)",
+            "gsd-2": "Depende (Pi SDK pode rodar via Ollama; memory core SQLite local)"
+          },
+          "evidence": {
+            "gbrain": ["OS/gbrain/src/core/embedding.ts"],
+            "mempalace": ["OS/mempalace/README.md"],
+            "mem0": ["OS/mem0/pyproject.toml", "OS/mem0/README.md"],
+            "gsd-2": ["OS/gsd-2/README.md"]
+          },
+          "leaders": ["mempalace"],
+          "delta": "Apenas mempalace roda core path sem nenhuma API key; gbrain e mem0 dependem de OpenAI; gsd-2 e hibrido"
+        },
+        {
+          "name": "Telemetry default",
+          "values": {
+            "gbrain": "no telemetry detectado nas deps core",
+            "mempalace": "zero telemetry (privacy by architecture)",
+            "mem0": "posthog em deps core (telemetry on by default)",
+            "gsd-2": "RTK_TELEMETRY_DISABLED=1 forced; sem telemetria no core memory"
+          },
+          "evidence": {
+            "gbrain": ["OS/gbrain/package.json"],
+            "mempalace": ["OS/mempalace/CLAUDE.md"],
+            "mem0": ["OS/mem0/pyproject.toml"],
+            "gsd-2": ["OS/gsd-2/README.md"]
+          },
+          "leaders": ["mempalace", "gbrain", "gsd-2"],
+          "delta": "mem0 e o unico com telemetria default on; mempalace tem politica explicita zero-telemetry"
+        },
+        {
+          "name": "Works offline",
+          "values": {
+            "gbrain": "parcial (PGLite local, mas embedding requer OpenAI)",
+            "mempalace": "YES (ChromaDB local + embed local)",
+            "mem0": "parcial (Qdrant docker ou fastembed extra)",
+            "gsd-2": "parcial (Ollama possivel via extension; memory local)"
+          },
+          "evidence": {
+            "gbrain": ["OS/gbrain/src/core/pglite-engine.ts"],
+            "mempalace": ["OS/mempalace/README.md"],
+            "mem0": ["OS/mem0/mem0/embeddings/fastembed.py"],
+            "gsd-2": ["OS/gsd-2/README.md"]
+          },
+          "leaders": ["mempalace"],
+          "delta": "Apenas mempalace tem caminho 100% offline documentado"
+        }
+      ]
+    },
+    {
+      "name": "Vector Support",
+      "features": [
+        {
+          "name": "Embedding providers",
+          "values": {
+            "gbrain": "1 (OpenAI text-embedding-3-large)",
+            "mempalace": "1 default (ChromaDB default ~300MB model); pluggable via backend",
+            "mem0": "15 providers (OpenAI, Azure, Gemini, HF, FastEmbed, Together, Bedrock, Ollama, VertexAI, ...)",
+            "gsd-2": "via Pi SDK (model-agnostic, provider-routed)"
+          },
+          "evidence": {
+            "gbrain": ["OS/gbrain/src/core/embedding.ts"],
+            "mempalace": ["OS/mempalace/pyproject.toml"],
+            "mem0": ["OS/mem0/mem0/embeddings/"],
+            "gsd-2": ["OS/gsd-2/packages/pi-coding-agent/"]
+          },
+          "leaders": ["mem0"],
+          "delta": "mem0 domina vastamente (15 providers); gbrain e mempalace usam um default; gsd-2 deriva do Pi SDK"
+        },
+        {
+          "name": "Vector store flexibility",
+          "values": {
+            "gbrain": "2 engines (PGLite/pgvector + Postgres/pgvector)",
+            "mempalace": "1 default (Chroma) + pluggable interface (backends/base.py)",
+            "mem0": "30 vector stores (Qdrant, Pinecone, Chroma, Weaviate, Milvus, MongoDB, Redis, ES, pgvector, Supabase, Faiss, ...)",
+            "gsd-2": "SQLite embeddings local (nao multi-store)"
+          },
+          "evidence": {
+            "gbrain": ["OS/gbrain/src/core/engine-factory.ts"],
+            "mempalace": ["OS/mempalace/mempalace/backends/"],
+            "mem0": ["OS/mem0/mem0/vector_stores/"],
+            "gsd-2": ["OS/gsd-2/src/resources/extensions/gsd/memory-store.ts"]
+          },
+          "leaders": ["mem0"],
+          "delta": "mem0 tem 30 stores, lider absoluto; gbrain 2 engines Postgres; mempalace 1 default pluggable; gsd-2 fixa SQLite"
+        }
+      ]
+    },
+    {
+      "name": "Graph Support",
+      "features": [
+        {
+          "name": "Knowledge graph native",
+          "values": {
+            "gbrain": "YES self-wiring sem LLM (typed edges: attended/works_at/invested_in/founded/advises/source/mentions), 3+ hop traversal via gbrain graph-query",
+            "mempalace": "YES temporal KG (SQLite; entities + typed predicates + valid_from/valid_to)",
+            "mem0": "YES graph memory layer opcional (Neo4j/Memgraph/Kuzu/AGE externo)",
+            "gsd-2": "YES memory relations graph (Phase 4), memories linkam feed planning"
+          },
+          "evidence": {
+            "gbrain": ["OS/gbrain/src/core/link-extraction.ts", "OS/gbrain/src/commands/graph-query.ts"],
+            "mempalace": ["OS/mempalace/mempalace/knowledge_graph.py"],
+            "mem0": ["OS/mem0/mem0/graphs/"],
+            "gsd-2": ["OS/gsd-2/src/resources/extensions/gsd/tests/memory-relations.test.ts"]
+          },
+          "leaders": ["gbrain", "mempalace"],
+          "delta": "gbrain diferencia via auto-wiring SEM LLM; mempalace tem temporal validity; mem0 requer graph DB externa; gsd-2 e mais simples"
+        },
+        {
+          "name": "Entity extraction + auto-linking",
+          "values": {
+            "gbrain": "heuristic entity ref extractor (zero-LLM) + auto-link on put_page",
+            "mempalace": "entity_detector.py auto people/projects com disambiguation",
+            "mem0": "entity extraction via LLM batch + entity linking multi-signal",
+            "gsd-2": "manual (LLM decide via capture_thought)"
+          },
+          "evidence": {
+            "gbrain": ["OS/gbrain/src/core/link-extraction.ts"],
+            "mempalace": ["OS/mempalace/mempalace/entity_detector.py", "OS/mempalace/mempalace/entity_registry.py"],
+            "mem0": ["OS/mem0/mem0/utils/entity_extraction.py"],
+            "gsd-2": []
+          },
+          "leaders": ["gbrain", "mempalace", "mem0"],
+          "delta": "gbrain unico com zero-LLM auto-linking; mempalace e mem0 usam extracao; gsd-2 depende do caller LLM"
+        }
+      ]
+    },
+    {
+      "name": "Extensibility / Integration",
+      "features": [
+        {
+          "name": "MCP server",
+          "values": {
+            "gbrain": "YES (~41 MCP tools via stdio + HTTP, OAuth token mgmt)",
+            "mempalace": "YES (29 MCP tools)",
+            "mem0": "YES (9 MCP tools via openmemory + mem0-plugin)",
+            "gsd-2": "YES (6 read-only state + workflow tools)"
+          },
+          "evidence": {
+            "gbrain": ["OS/gbrain/src/mcp/server.ts"],
+            "mempalace": ["OS/mempalace/mempalace/mcp_server.py"],
+            "mem0": ["OS/mem0/openmemory/api/main.py", "OS/mem0/mem0-plugin/"],
+            "gsd-2": ["OS/gsd-2/packages/mcp-server/"]
+          },
+          "leaders": ["gbrain", "mempalace"],
+          "delta": "gbrain e mempalace expoe mais tools; mem0 tem 9; gsd-2 e workflow-focused"
+        },
+        {
+          "name": "SDK breadth",
+          "values": {
+            "gbrain": "TypeScript CLI + MCP + contratos operations.ts",
+            "mempalace": "Python CLI + MCP + Python API",
+            "mem0": "Python + TypeScript SDKs + CLIs Node+Python + Vercel AI provider + OpenClaw plugin + hosted platform",
+            "gsd-2": "TypeScript (via Pi SDK)"
+          },
+          "evidence": {
+            "gbrain": ["OS/gbrain/package.json"],
+            "mempalace": ["OS/mempalace/pyproject.toml"],
+            "mem0": ["OS/mem0/mem0-ts/", "OS/mem0/vercel-ai-sdk/", "OS/mem0/openclaw/", "OS/mem0/cli/"],
+            "gsd-2": ["OS/gsd-2/package.json"]
+          },
+          "leaders": ["mem0"],
+          "delta": "mem0 lidera absolutamente: SDKs duais + CLIs duais + Vercel + OpenClaw + hosted"
+        }
+      ]
+    }
+  ],
+  "summary": {
+    "total_features": 14,
+    "leader_counts": {
+      "gbrain": 5,
+      "mempalace": 8,
+      "mem0": 6,
+      "gsd-2": 1
+    }
+  },
+  "subject_only_capabilities": {
+    "gbrain": [
+      { "name": "Zero-LLM auto-wiring knowledge graph", "category": "Graph Support", "evidence": "OS/gbrain/src/core/link-extraction.ts" },
+      { "name": "Minions durable job queue (Postgres-native, 753ms vs 10s+ sub-agents)", "category": "Write Latency", "evidence": "OS/gbrain/src/core/minions/queue.ts" },
+      { "name": "PGLite WASM embedded Postgres (2s startup)", "category": "Persistence", "evidence": "OS/gbrain/src/core/pglite-engine.ts" },
+      { "name": "26 fat-skills markdown com thin-harness", "category": "Extensibility", "evidence": "OS/gbrain/skills/RESOLVER.md" }
+    ],
+    "mempalace": [
+      { "name": "Verbatim-only storage policy (nao-negociavel)", "category": "Persistence", "evidence": "OS/mempalace/CLAUDE.md" },
+      { "name": "100% local-first sem API keys no core path", "category": "Local-first", "evidence": "OS/mempalace/README.md" },
+      { "name": "AAAK symbolic compression dialect", "category": "Schema Flexibility", "evidence": "OS/mempalace/mempalace/dialect.py" },
+      { "name": "Wings/Rooms/Drawers scoped search hierarchy", "category": "Schema Flexibility", "evidence": "OS/mempalace/mempalace/palace.py" },
+      { "name": "Temporal KG valid_from/valid_to em SQLite local", "category": "Graph Support", "evidence": "OS/mempalace/mempalace/knowledge_graph.py" },
+      { "name": "Performance budgets explicitos (<500ms hooks, <100ms startup)", "category": "Write/Read Latency", "evidence": "OS/mempalace/CLAUDE.md" }
+    ],
+    "mem0": [
+      { "name": "30 vector stores + 24 LLMs + 15 embeddings + 4 graphs + 5 rerankers", "category": "Vector Support", "evidence": "OS/mem0/mem0/" },
+      { "name": "Hosted platform (SaaS mem0.ai)", "category": "Extensibility", "evidence": "OS/mem0/mem0/client/" },
+      { "name": "Vercel AI SDK provider", "category": "Extensibility", "evidence": "OS/mem0/vercel-ai-sdk/" },
+      { "name": "OpenMemory full-stack docker-compose (API+UI+MCP+Qdrant)", "category": "Extensibility", "evidence": "OS/mem0/openmemory/" },
+      { "name": "Arxiv paper + OSS eval framework (memory-benchmarks)", "category": "Recall Accuracy", "evidence": "OS/mem0/evaluation/" },
+      { "name": "Async APIs (AsyncMemory, AsyncMemoryClient)", "category": "Write Latency", "evidence": "OS/mem0/mem0/memory/main.py" }
+    ],
+    "gsd-2": [
+      { "name": "Memory tools como extension de coding agent (capture_thought feed planning)", "category": "Integration", "evidence": "OS/gsd-2/src/resources/extensions/gsd/tools/memory-tools.ts" },
+      { "name": "Single-writer SQLite invariant", "category": "Persistence", "evidence": "OS/gsd-2/src/resources/extensions/gsd/db-writer.ts" },
+      { "name": "Categoria enum rigida (architecture/convention/gotcha/preference/environment/pattern)", "category": "Schema Flexibility", "evidence": "OS/gsd-2/src/resources/extensions/gsd/tools/memory-tools.ts" },
+      { "name": "Extract learnings -> LEARNINGS.md", "category": "Extensibility", "evidence": "OS/gsd-2/src/resources/extensions/gsd/commands-extract-learnings.ts" }
+    ]
+  },
+  "method": {
+    "comparison_date": "2026-04-19",
+    "dimension_pack": "memory v1.0",
+    "items_compared": 14,
+    "sources": {
+      "gbrain": "filesystem scan OS/gbrain/ + CLAUDE.md + README.md + benchmarks",
+      "mempalace": "filesystem scan OS/mempalace/ + CLAUDE.md + README.md + benchmarks",
+      "mem0": "filesystem scan OS/mem0/ + CLAUDE.md + README.md (paper references)",
+      "gsd-2": "filesystem scan OS/gsd-2/ + README.md + memory-store.ts + memory-tools.ts"
+    }
+  }
+}

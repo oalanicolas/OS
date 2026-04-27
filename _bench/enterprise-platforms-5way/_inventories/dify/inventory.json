@@ -1,0 +1,57 @@
+{
+  "subject": "dify",
+  "path": "OS/dify/",
+  "profile": "quick",
+  "positioning": "Open-source LLM app development platform — visual workflow canvas, RAG pipeline, agent capabilities (ReAct/function-calling), model management, LLMOps, BaaS.",
+  "maintainer": "LangGenius",
+  "language_stack": {
+    "backend": "Python Flask (DDD/Clean Architecture), Celery + Redis, SQLAlchemy, pytest",
+    "frontend": "Next.js + TypeScript + React (web/)",
+    "monorepo": "pnpm workspaces (pnpm@10.33.0), packages/dify-ui, packages/iconify-collections",
+    "packaging": "uv on api/ (uv.lock), Python 3.x"
+  },
+  "license": "Apache-2.0 with extra conditions (check LICENSE)",
+  "top_level": [
+    "README.md", "CLAUDE.md", "AGENTS.md", "CONTRIBUTING.md",
+    "Makefile", "package.json", "pnpm-workspace.yaml",
+    "api/", "web/", "docker/", "docs/", "e2e/",
+    "packages/", "sdks/", "scripts/", "dev/", "images/"
+  ],
+  "backend_core_modules": [
+    "core/agent/", "core/app/", "core/memory/", "core/workflow/",
+    "core/rag/", "core/tools/", "core/plugin/", "core/mcp/",
+    "core/moderation/", "core/ops/", "core/trigger/",
+    "core/telemetry/", "core/model_manager.py", "core/provider_manager.py"
+  ],
+  "key_dift_models": [
+    "Tenant, TenantAccountRole (OWNER/ADMIN/EDITOR/NORMAL/DATASET_OPERATOR)",
+    "TenantAccountJoin, TenantPluginPermission, TenantPluginAutoUpgradeStrategy",
+    "TenantCreditPool, TenantDefaultModel, TenantPreferredModelProvider"
+  ],
+  "differentiators_observable": [
+    "Community scale: 30+ README translations (en, zh-CN, zh-TW, ja, es, fr, de, it, ko, pt-BR, klingon, hindi, bangla, slovenian, vietnamese, turkish, arabic)",
+    "Visual workflow canvas (AI workflows on drag-and-drop canvas)",
+    "RAG pipeline out-of-box (PDF/PPT/etc document extraction)",
+    "50+ built-in tools (Google Search, DALL-E, Stable Diffusion, WolframAlpha)",
+    "Model providers: hundreds of proprietary/open LLMs (GPT, Mistral, Llama3, OpenAI-compatible)",
+    "LLMOps: logs, performance analytics, prompt/dataset/model improvement",
+    "Observability nativo: Opik, Langfuse, Arize Phoenix integrados",
+    "BaaS — every feature tem API correspondente",
+    "Multi-tenant com 5 roles (OWNER/ADMIN/EDITOR/NORMAL/DATASET_OPERATOR) em TenantAccountRole",
+    "Plugin permission system (TenantPluginPermission, TenantPluginAutoUpgradeStrategy)",
+    "Enterprise edition separada (api/enterprise/ stub + business@dify.ai)",
+    "Deployment: Docker Compose, Kubernetes (5+ community Helm charts), Terraform (Azure/GCP), AWS CDK (EKS/ECS), Alibaba Cloud one-click",
+    "Community-contributed Grafana dashboard",
+    "LFX Health Score, LFX Contributors badges (Linux Foundation Insights)"
+  ],
+  "evidence_paths": [
+    "OS/dify/README.md",
+    "OS/dify/CLAUDE.md",
+    "OS/dify/api/models/account.py#L19-L60 (TenantAccountRole)",
+    "OS/dify/api/models/account.py#L240-L400 (Tenant, TenantAccountJoin, TenantPluginPermission)",
+    "OS/dify/api/core/",
+    "OS/dify/api/enterprise/",
+    "OS/dify/docker/",
+    "OS/dify/package.json"
+  ]
+}

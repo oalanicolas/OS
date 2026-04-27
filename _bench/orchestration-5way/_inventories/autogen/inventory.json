@@ -1,0 +1,98 @@
+{
+  "generatedAt": "2026-04-19T22:30:00Z",
+  "subject": "autogen",
+  "path": "OS/autogen/",
+  "primary_language": "Python",
+  "secondary_languages": ["C# (.NET)", "TypeScript (frontend Studio)"],
+  "stack": ["Python >=3.10 (monorepo uv)", "Pydantic 2", ".NET", "gRPC / CloudEvents", "OpenTelemetry"],
+  "license": "MIT + CLA",
+  "tagline": "Framework da Microsoft para aplicações multi-agente conversacionais (chat-centric); em maintenance mode — sucessor é Microsoft Agent Framework.",
+  "source_url": "https://github.com/microsoft/autogen",
+  "metrics": {
+    "loc_estimate": 112463,
+    "file_count": 1837,
+    "top_level_dirs": ["python", "dotnet", "docs", "protos"],
+    "readme_lines": 400,
+    "last_commit_date": "2026-04-06",
+    "github_stars": null,
+    "github_contributors": null
+  },
+  "modules": [
+    { "name": "autogen-core", "path": "python/packages/autogen-core/", "type": "package", "loc_estimate": 0, "description": "Agent runtime, messaging, subscriptions, serialization" },
+    { "name": "autogen-agentchat", "path": "python/packages/autogen-agentchat/", "type": "package", "loc_estimate": 0, "description": "API conversacional alto-nível (AssistantAgent, teams, group chat)" },
+    { "name": "autogen-ext", "path": "python/packages/autogen-ext/", "type": "package", "loc_estimate": 0, "description": "Extensões — modelos, runtimes gRPC, MCP tools, memória, code executors, auth" },
+    { "name": "autogen-studio", "path": "python/packages/autogen-studio/", "type": "app", "loc_estimate": 0, "description": "UI no-code para designer de agentes (React + FastAPI)" },
+    { "name": "autogen-magentic-one", "path": "python/packages/autogen-magentic-one/", "type": "package", "loc_estimate": 0, "description": "Magentic-One — orquestrador generalista (Orchestrator + WebSurfer + FileSurfer + Coder)" },
+    { "name": "magentic-one-cli", "path": "python/packages/magentic-one-cli/", "type": "app", "loc_estimate": 0, "description": "CLI Magentic-One" },
+    { "name": "agbench", "path": "python/packages/agbench/", "type": "package", "loc_estimate": 0, "description": "Benchmark harness para agents" },
+    { "name": "dotnet", "path": "dotnet/", "type": "package", "loc_estimate": 0, "description": "Implementação .NET paralela" },
+    { "name": "protos", "path": "protos/", "type": "library", "loc_estimate": 0, "description": "agent_worker.proto, cloudevent.proto (runtime distribuído)" }
+  ],
+  "external_dependencies_top10": [
+    { "package": "pydantic", "version": ">=2.10.0,<3.0.0", "purpose": "Core models" },
+    { "package": "protobuf", "version": "~=5.29.3", "purpose": "Runtime gRPC serialization" },
+    { "package": "opentelemetry-api", "version": ">=1.34.1", "purpose": "Tracing" },
+    { "package": "pillow", "version": ">=11.0.0", "purpose": "Image content handling" },
+    { "package": "typing-extensions", "version": ">=4.0.0", "purpose": "Typing" },
+    { "package": "jsonref", "version": "~=1.1.0", "purpose": "JSON schema resolution" },
+    { "package": "openai", "version": "optional (autogen-ext[openai])", "purpose": "OpenAI client" },
+    { "package": "anthropic", "version": "optional (autogen-ext)", "purpose": "Anthropic client" },
+    { "package": "mcp", "version": "optional (autogen-ext)", "purpose": "MCP workbench/tools" },
+    { "package": "azure-identity", "version": "optional", "purpose": "Azure auth" }
+  ],
+  "entry_points": [
+    { "kind": "python_api", "path": "python/packages/autogen-agentchat/src/autogen_agentchat/agents/", "command": "from autogen_agentchat.agents import AssistantAgent" },
+    { "kind": "python_api", "path": "python/packages/autogen-core/src/autogen_core/_single_threaded_agent_runtime.py", "command": "SingleThreadedAgentRuntime()" },
+    { "kind": "cli", "path": "python/packages/magentic-one-cli/", "command": "m1" },
+    { "kind": "gui_app", "path": "python/packages/autogen-studio/", "command": "autogenstudio ui" }
+  ],
+  "capabilities": [
+    { "name": "Conversational agent abstraction", "evidence_paths": ["OS/autogen/python/packages/autogen-agentchat/src/autogen_agentchat/agents/", "OS/autogen/python/packages/autogen-agentchat/src/autogen_agentchat/base/_chat_agent.py"], "category": "core", "description": "AssistantAgent, UserProxyAgent, SocietyOfMindAgent etc. expostos como chat" },
+    { "name": "Group chat teams (round-robin/selector/swarm/magentic)", "evidence_paths": ["OS/autogen/python/packages/autogen-agentchat/src/autogen_agentchat/teams/_group_chat/_round_robin_group_chat.py", "OS/autogen/python/packages/autogen-agentchat/src/autogen_agentchat/teams/_group_chat/_selector_group_chat.py", "OS/autogen/python/packages/autogen-agentchat/src/autogen_agentchat/teams/_group_chat/_swarm_group_chat.py", "OS/autogen/python/packages/autogen-agentchat/src/autogen_agentchat/teams/_group_chat/_magentic_one/"], "category": "core", "description": "4+ topologias de time embutidas: round-robin, selector LLM-driven, swarm, magentic-one" },
+    { "name": "Graph-based team workflow", "evidence_paths": ["OS/autogen/python/packages/autogen-agentchat/src/autogen_agentchat/teams/_group_chat/_graph/"], "category": "core", "description": "Grafos DAG de fluxo entre agents" },
+    { "name": "Runtime distribuído gRPC", "evidence_paths": ["OS/autogen/python/packages/autogen-ext/src/autogen_ext/runtimes/grpc/", "OS/autogen/protos/agent_worker.proto", "OS/autogen/protos/cloudevent.proto"], "category": "core", "description": "Runtime multi-worker via gRPC + CloudEvents — escalável horizontalmente" },
+    { "name": "Topic-based subscriptions", "evidence_paths": ["OS/autogen/python/packages/autogen-core/src/autogen_core/_topic.py", "OS/autogen/python/packages/autogen-core/src/autogen_core/_type_subscription.py"], "category": "core", "description": "Pub/sub de mensagens com topic + type subscriptions" },
+    { "name": "State checkpoint / save-load", "evidence_paths": ["OS/autogen/python/packages/autogen-agentchat/src/autogen_agentchat/state/"], "category": "core", "description": "save_state/load_state em agents e teams" },
+    { "name": "Memory & model-context abstractions", "evidence_paths": ["OS/autogen/python/packages/autogen-core/src/autogen_core/memory/", "OS/autogen/python/packages/autogen-core/src/autogen_core/model_context/", "OS/autogen/python/packages/autogen-ext/src/autogen_ext/memory/"], "category": "core", "description": "Memory protocol + implementações Redis/mem0/ChromaDB (via ext)" },
+    { "name": "MCP workbench / tools", "evidence_paths": ["OS/autogen/python/packages/autogen-ext/src/autogen_ext/tools/"], "category": "integration", "description": "McpWorkbench, StdioServerParams — integra MCP servers como tools" },
+    { "name": "Code executors (Docker/local)", "evidence_paths": ["OS/autogen/python/packages/autogen-ext/src/autogen_ext/code_executors/", "OS/autogen/python/packages/autogen-core/src/autogen_core/code_executor/"], "category": "integration", "description": "Execução sandboxed (Docker, Jupyter, local)" },
+    { "name": "AutoGen Studio UI", "evidence_paths": ["OS/autogen/python/packages/autogen-studio/"], "category": "ux", "description": "No-code GUI (React+FastAPI) para desenhar teams" },
+    { "name": "Magentic-One generalist orchestrator", "evidence_paths": ["OS/autogen/python/packages/autogen-magentic-one/", "OS/autogen/python/packages/autogen-agentchat/src/autogen_agentchat/teams/_group_chat/_magentic_one/"], "category": "core", "description": "Orquestrador open-ended com subagentes especialistas (web/file/coder)" },
+    { "name": "OTel tracing embutido", "evidence_paths": ["OS/autogen/python/packages/autogen-core/src/autogen_core/_telemetry/"], "category": "governance", "description": "Tracing nativo de messaging e model calls" },
+    { "name": "Intervention handlers", "evidence_paths": ["OS/autogen/python/packages/autogen-core/src/autogen_core/_intervention.py"], "category": "governance", "description": "Hook pra interceptar/modificar mensagens em tempo de execução" },
+    { "name": ".NET parity", "evidence_paths": ["OS/autogen/dotnet/AutoGen.sln"], "category": "core", "description": "Implementação .NET paralela da mesma API" }
+  ],
+  "quality_signals": {
+    "test_framework": "pytest + pytest-asyncio",
+    "test_file_count": 117,
+    "linter": "ruff + mypy + pyright",
+    "ci_provider": "GitHub Actions",
+    "ci_workflow_count": 25
+  },
+  "documentation": {
+    "readme_sections": ["Installation", "Quickstart", "Why", "Ecosystem", "Maintenance Notice"],
+    "has_contributing": true,
+    "has_architecture_doc": true,
+    "docs_page_count": 200
+  },
+  "extension_points": {
+    "plugins": { "mechanism": "autogen-ext packages + Component protocol", "path": "python/packages/autogen-ext/" },
+    "hooks": { "mechanism": "Intervention handlers + subscriptions", "events": ["on_message", "on_publish", "on_rpc"] },
+    "mcp": { "client": true, "server": false }
+  },
+  "unique_selling_points": [
+    "Runtime distribuído de verdade (gRPC + CloudEvents) — escala horizontal",
+    "4+ topologias embutidas (round-robin, selector LLM-driven, swarm, magentic, graph)",
+    "Paridade .NET + Python",
+    "AutoGen Studio UI no-code",
+    "Research-grade — Magentic-One, agbench, estudos pub"
+  ],
+  "limitations": [
+    { "description": "Maintenance mode — sem novas features, sucessor é Microsoft Agent Framework", "source": "README.md banner" },
+    { "description": "Curva de aprendizado alta — 3 pacotes (core/agentchat/ext) + C# separado", "source": "python/packages/ multiplicidade" },
+    { "description": "Sem DSL visual declarativa (só código Python/C#)", "source": "ausência de DSL YAML" }
+  ],
+  "confidence": "HIGH",
+  "extraction_method": "filesystem-scan",
+  "skill_version": "1.0.0"
+}

@@ -1,0 +1,166 @@
+{
+  "generatedAt": "2026-04-19T00:00:00Z",
+  "comparison_type": "pair",
+  "subjects": ["workflow", "gh-aw"],
+  "dimension_pack": "workflow-infra",
+  "dimension_pack_version": "1.0",
+  "dimensions": [
+    {
+      "id": "durability",
+      "name": "Durability",
+      "weight": 0.22,
+      "scores": { "workflow": 92, "gh-aw": 45 },
+      "signals": {
+        "workflow": [
+          "Per-step persistence via events-consumer.ts — OS/workflow/packages/core/src/events-consumer.ts",
+          "Event-sourced deterministic replay documented in OS/workflow/docs/content/docs/how-it-works/event-sourcing.mdx",
+          "Successful steps structurally memoized; idempotency guidance in docs/foundations/idempotency.mdx",
+          "Four world backends (local/postgres/vercel/testing) all implement event persistence — OS/workflow/packages/world*/"
+        ],
+        "gh-aw": [
+          "Persistence = GitHub Actions job logs + artifacts, inherited from Actions runtime",
+          "No per-LLM-step event log: replay = re-run full workflow_run — OS/gh-aw/docs/src/content/docs/reference/",
+          "safe-outputs handler has per-output dedupe for writes but no memoization of LLM turns — OS/gh-aw/pkg/workflow/safe_outputs_validation.go"
+        ]
+      },
+      "confidence": "HIGH",
+      "delta": 47,
+      "winner": "workflow"
+    },
+    {
+      "id": "retry_semantics",
+      "name": "Retry Semantics",
+      "weight": 0.15,
+      "scores": { "workflow": 90, "gh-aw": 45 },
+      "signals": {
+        "workflow": [
+          "Default 3 retries; `fn.maxRetries = N` override — OS/workflow/docs/content/docs/foundations/errors-and-retries.mdx",
+          "Typed FatalError / RetryableError with `retryAfter` (duration string or ms) — OS/workflow/packages/errors/",
+          "Exponential backoff example shipped: `retryAfter: (metadata.attempt ** 2) * 1000` via getStepMetadata"
+        ],
+        "gh-aw": [
+          "No framework-level retry primitives for LLM steps; relies on Actions patterns (`continue-on-error`, nick-fields/retry action, etc.)",
+          "Per-engine knobs: `max-turns` (Claude), `max-continuations` (Copilot) — OS/gh-aw/docs/src/content/docs/reference/engines.md",
+          "No typed RetryableError / FatalError equivalent observed"
+        ]
+      },
+      "confidence": "HIGH",
+      "delta": 45,
+      "winner": "workflow"
+    },
+    {
+      "id": "event_log",
+      "name": "Event Log",
+      "weight": 0.18,
+      "scores": { "workflow": 95, "gh-aw": 35 },
+      "signals": {
+        "workflow": [
+          "Append-only event log is the persistence model; entity state derived by replay — OS/workflow/docs/content/docs/how-it-works/event-sourcing.mdx",
+          "Four entity types (runs/steps/hooks/waits) managed through events — documented in same file",
+          "Deterministic replay guaranteed via seedrandom + ULID monotonic IDs — OS/workflow/packages/core/src/workflow.ts",
+          "hydrateResourceIO observability helper exposes event stream — OS/workflow/packages/core/src/observability.ts"
+        ],
+        "gh-aw": [
+          "No append-only event log at the framework level",
+          "Audit is composition of .lock.yml commits + GitHub Actions audit log + `gh aw audit` command — OS/gh-aw/docs/src/content/docs/reference/audit.md",
+          "No time-travel replay; a re-run is a fresh workflow_run"
+        ]
+      },
+      "confidence": "HIGH",
+      "delta": 60,
+      "winner": "workflow"
+    },
+    {
+      "id": "parallelism",
+      "name": "Parallelism",
+      "weight": 0.13,
+      "scores": { "workflow": 78, "gh-aw": 80 },
+      "signals": {
+        "workflow": [
+          "`Promise.all` / `Promise.race` work durably across steps — OS/workflow/docs/content/docs/foundations/common-patterns.mdx",
+          "Durable sleep + hooks compose with Promise.race for timeouts — OS/workflow/packages/core/src/sleep.ts",
+          "No first-class concurrency-limits primitive at the framework layer (worlds can throttle)"
+        ],
+        "gh-aw": [
+          "Inherits Actions `matrix:` strategy for fan-out",
+          "Dual concurrency control: per-workflow (issue/PR/branch-keyed) + per-engine (`gh-aw-{engine-id}`) — OS/gh-aw/docs/src/content/docs/reference/concurrency.md",
+          "Cancel-in-progress on PR pushes; label-specific groups to avoid cross-label cancellation"
+        ]
+      },
+      "confidence": "HIGH",
+      "delta": -2,
+      "winner": "gh-aw"
+    },
+    {
+      "id": "language_support",
+      "name": "Language Support",
+      "weight": 0.15,
+      "scores": { "workflow": 45, "gh-aw": 75 },
+      "signals": {
+        "workflow": [
+          "JavaScript / TypeScript only — OS/workflow/packages/core/package.json",
+          "Six first-party framework integrations (Next/Nitro/Nuxt/SvelteKit/Astro/Nest) — OS/workflow/packages/",
+          "No markdown or non-JS DSL"
+        ],
+        "gh-aw": [
+          "Markdown + YAML frontmatter is the DSL — OS/gh-aw/docs/src/content/docs/introduction/how-they-work.mdx",
+          "Agent prompts can invoke any language via shell/tools",
+          "Compiler itself written in Go; also ships a WASM build for browser/editor embedding — OS/gh-aw/cmd/gh-aw-wasm/",
+          "Per-engine feature matrix documented — OS/gh-aw/docs/src/content/docs/reference/engines.md"
+        ]
+      },
+      "confidence": "HIGH",
+      "delta": -30,
+      "winner": "gh-aw"
+    },
+    {
+      "id": "cloud_lock_in",
+      "name": "Cloud Lock-in (inverse)",
+      "weight": 0.17,
+      "scores": { "workflow": 55, "gh-aw": 80 },
+      "signals": {
+        "workflow": [
+          "Production path is @workflow/world-vercel (Vercel-native) — OS/workflow/packages/world-vercel/",
+          "Self-host backends exist: @workflow/world-postgres (Drizzle), @workflow/world-local — OS/workflow/packages/",
+          "Abstract World interface allows new backends — OS/workflow/packages/world/src/interfaces.ts"
+        ],
+        "gh-aw": [
+          "Runs on GitHub.com, GHES, self-hosted runners — zero extra runtime",
+          "Compiled artifact is standard GitHub Actions YAML (`.lock.yml`) — portable across repos/orgs — OS/gh-aw/.github/workflows/",
+          "Companion projects (gh-aw-firewall, gh-aw-mcpg, gh-aw-actions) are optional add-ons, not required — OS/gh-aw/README.md",
+          "Still bound to GitHub Actions semantics; not portable to GitLab/Jenkins without adaptation"
+        ]
+      },
+      "confidence": "HIGH",
+      "delta": -25,
+      "winner": "gh-aw"
+    }
+  ],
+  "weighted_totals": { "workflow": 77.08, "gh-aw": 58.20 },
+  "dimension_wins": { "workflow": 3, "gh-aw": 3, "ties": 0 },
+  "overall_winner": "workflow",
+  "overall_delta": 18.88,
+  "confidence_overall": "HIGH",
+  "score_distribution": {
+    "workflow": {
+      "strongest": { "dimension": "event_log", "score": 95 },
+      "weakest": { "dimension": "language_support", "score": 45 },
+      "unweighted_average": 75.83,
+      "range": [45, 95]
+    },
+    "gh-aw": {
+      "strongest": { "dimension": "parallelism", "score": 80 },
+      "weakest": { "dimension": "event_log", "score": 35 },
+      "unweighted_average": 60.00,
+      "range": [35, 80]
+    }
+  },
+  "competitive_dimensions": [
+    { "dimension": "parallelism", "workflow": 78, "gh-aw": 80, "delta": -2 }
+  ],
+  "known_limitations": [
+    "No reproducible throughput benchmark across the two: workflow ships `pnpm bench` for its runtime; gh-aw is bound to Actions' scheduling latency, which is environment-dependent.",
+    "Community metrics (stars, downloads) not pulled — local-first policy; gh-aw's README lists 100+ contributors but quantitative stars not collected.",
+    "gh-aw is pre-1.0 (v0.40.1); workflow core is beta (5.0.0-beta.2). Neither has GA stability signals at time of measurement."
+  ]
+}

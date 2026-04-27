@@ -1,0 +1,53 @@
+{
+  "subject": "agent-governance-toolkit",
+  "path": "OS/agent-governance-toolkit/",
+  "profile": "quick",
+  "positioning": "Runtime governance for AI agents — deterministic policy enforcement, zero-trust identity, execution sandboxing, Agent SRE. Maintained by Microsoft.",
+  "language_stack": {
+    "primary": "Python (PyPI: agent-governance-toolkit[full])",
+    "secondary": "TypeScript (@microsoft/agentmesh-sdk), .NET (Microsoft.AgentGovernance), Rust (agentmesh), Go",
+    "runtime": "Library / middleware / sidecar — no platform UI"
+  },
+  "license": "MIT",
+  "top_level": [
+    "README.md", "QUICKSTART.md", "QUICKSTART.ja.md",
+    "CHANGELOG.md", "SECURITY.md", "BENCHMARKS.md",
+    "ADOPTERS.md", "COMMUNITY.md", "INDEPENDENCE.md",
+    "RELEASE_NOTES_v{1.0.0,2.1.0,2.2.0,2.3.0,3.0.0,3.1.0}.md",
+    "action/", "benchmarks/", "demo/", "docs/", "examples/",
+    "fuzz/", "notebooks/", "packages/", "pipelines/",
+    "requirements/", "scripts/", "site/", "mkdocs.yml",
+    "Dockerfile", "docker-compose.yml"
+  ],
+  "packages": [
+    "agent-compliance", "agent-discovery", "agent-governance-dotnet",
+    "agent-hypervisor", "agent-lightning", "agent-marketplace",
+    "agent-mcp-governance", "agent-mesh", "agent-os", "agent-os-vscode",
+    "agent-runtime", "agent-sre", "agentmesh-integrations"
+  ],
+  "differentiators_observable": [
+    "OWASP Agentic Top 10 — 10/10 covered com mapping por ASI-ID (README table)",
+    "Policy engine deterministico < 0.1ms por acao (BENCHMARKS.md reclamado)",
+    "9,500+ tests declarados, CI via GitHub Actions, OpenSSF Scorecard badge",
+    "Zero-trust identity: Ed25519 + quantum-safe ML-DSA-65, trust scoring 0-1000, SPIFFE/SVID",
+    "Execution sandboxing com 4-tier privilege rings, saga orchestration, kill switch",
+    "Agent SRE: SLOs, error budgets, replay debugging, chaos engineering, circuit breakers",
+    "Shadow AI Discovery para achar agentes nao registrados",
+    "MCP Security Scanner (tool poisoning, typosquatting, hidden instructions)",
+    "Unified CLI 'agt' — agt verify, agt doctor, agt lint-policy",
+    "Agent Marketplace package para plugin lifecycle management",
+    "Integracoes: Microsoft Agent Framework (native), Semantic Kernel, AutoGen, LangGraph/LangChain, CrewAI, OpenAI Agents, Google ADK, LlamaIndex, Haystack, Dify (plugin)",
+    "Compliance mapping: EU AI Act, NIST AI RMF, SOC 2, Colorado AI Act",
+    "Public Preview — Microsoft-signed releases, may break before GA"
+  ],
+  "evidence_paths": [
+    "OS/agent-governance-toolkit/README.md#L21",
+    "OS/agent-governance-toolkit/README.md#L187-L201 (OWASP 10/10 table)",
+    "OS/agent-governance-toolkit/packages/agent-os/",
+    "OS/agent-governance-toolkit/packages/agent-mesh/",
+    "OS/agent-governance-toolkit/packages/agent-sre/",
+    "OS/agent-governance-toolkit/packages/agent-marketplace/",
+    "OS/agent-governance-toolkit/BENCHMARKS.md",
+    "OS/agent-governance-toolkit/ADOPTERS.md"
+  ]
+}

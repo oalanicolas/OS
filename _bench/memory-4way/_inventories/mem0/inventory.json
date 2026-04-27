@@ -1,0 +1,103 @@
+{
+  "generatedAt": "2026-04-19T22:19:37Z",
+  "subject": "mem0",
+  "path": "OS/mem0/",
+  "primary_language": "Python",
+  "secondary_languages": ["TypeScript", "JavaScript", "Markdown"],
+  "stack": ["Python 3.9+", "Node 20/22", "FastAPI", "Qdrant", "pgvector", "Neo4j", "Pydantic v2", "Next.js 15", "React 19"],
+  "license": "Apache-2.0",
+  "tagline": "Intelligent memory layer para AI agents; 91.6 LoCoMo, 93.4 LongMemEval, 64.1 BEAM (1M); hosted + self-hosted; YC S24",
+  "metrics": {
+    "loc_estimate": 125381,
+    "file_count": 1274,
+    "top_level_dirs": ["cli", "cookbooks", "docs", "embedchain", "evaluation", "examples", "mem0-plugin", "mem0-ts", "mem0", "openclaw", "openmemory", "scripts", "server", "skills", "tests", "vercel-ai-sdk"],
+    "readme_lines": 200,
+    "last_commit_date": "2026-04-18T11:42:37+05:30",
+    "github_stars": null,
+    "github_contributors": null
+  },
+  "modules": [
+    { "name": "mem0", "path": "mem0/", "type": "package", "loc_estimate": 60000 },
+    { "name": "mem0-ts", "path": "mem0-ts/", "type": "package", "loc_estimate": 10000 },
+    { "name": "cli/python", "path": "cli/python/", "type": "app", "loc_estimate": 5000 },
+    { "name": "cli/node", "path": "cli/node/", "type": "app", "loc_estimate": 3000 },
+    { "name": "server", "path": "server/", "type": "service", "loc_estimate": 4000 },
+    { "name": "openmemory", "path": "openmemory/", "type": "service", "loc_estimate": 15000 },
+    { "name": "vercel-ai-sdk", "path": "vercel-ai-sdk/", "type": "package", "loc_estimate": 2500 },
+    { "name": "openclaw", "path": "openclaw/", "type": "package", "loc_estimate": 2000 },
+    { "name": "evaluation", "path": "evaluation/", "type": "library", "loc_estimate": 6000 }
+  ],
+  "external_dependencies_top10": [
+    { "package": "qdrant-client", "version": ">=1.12.0", "purpose": "vector store default (core dep)" },
+    { "package": "openai", "version": ">=1.90.0", "purpose": "LLM + embedding default" },
+    { "package": "pydantic", "version": ">=2.7.3", "purpose": "data models + config v2" },
+    { "package": "posthog", "version": ">=4.5.0", "purpose": "telemetry (core dep, anti-local-first)" },
+    { "package": "pytz", "version": ">=2024.1", "purpose": "timezones" },
+    { "package": "sqlalchemy", "version": ">=2.0.31", "purpose": "storage metadata SQLite" },
+    { "package": "protobuf", "version": ">=5.29.6,<7.0.0", "purpose": "protocol buffers" },
+    { "package": "spacy", "version": ">=3.7.0", "purpose": "nlp extra: entity extraction BM25" },
+    { "package": "chromadb", "version": ">=0.4.24", "purpose": "vector store optional" },
+    { "package": "litellm", "version": ">=1.74.0", "purpose": "llms extra: multi-provider router" }
+  ],
+  "entry_points": [
+    { "kind": "cli", "path": "cli/python/src/mem0_cli/app.py", "command": "mem0" },
+    { "kind": "cli", "path": "cli/node/src/index.ts", "command": "mem0 (npm @mem0/cli)" },
+    { "kind": "http", "path": "server/main.py", "command": "uvicorn main:app" },
+    { "kind": "http", "path": "openmemory/api/main.py", "command": "uvicorn main:app (inclui MCP server)" },
+    { "kind": "library", "path": "mem0/memory/main.py", "command": "from mem0 import Memory" }
+  ],
+  "capabilities": [
+    { "name": "ADD-only single-pass extraction (New algorithm April 2026)", "evidence_paths": ["OS/mem0/mem0/memory/main.py", "OS/mem0/mem0/configs/prompts.py"], "category": "core", "description": "Uma chamada LLM, sem UPDATE/DELETE; memories acumulam, nada sobrescrito" },
+    { "name": "Multi-signal retrieval (semantic + BM25 + entity)", "evidence_paths": ["OS/mem0/mem0/memory/main.py", "OS/mem0/mem0/utils/scoring.py", "OS/mem0/mem0/utils/lemmatization.py"], "category": "core", "description": "3 sinais scored em paralelo e fused; ENTITY_BOOST_WEIGHT explicito" },
+    { "name": "30 vector store providers", "evidence_paths": ["OS/mem0/mem0/vector_stores/"], "category": "extensibility", "description": "Qdrant, Pinecone, Chroma, Weaviate, Milvus, MongoDB, Redis, Elasticsearch, pgvector, Supabase, Faiss, etc" },
+    { "name": "24 LLM providers", "evidence_paths": ["OS/mem0/mem0/llms/"], "category": "extensibility", "description": "OpenAI, Anthropic, Bedrock, Azure, Gemini, Groq, Ollama, vLLM, LiteLLM, xAI, DeepSeek" },
+    { "name": "15 embedding providers", "evidence_paths": ["OS/mem0/mem0/embeddings/"], "category": "extensibility", "description": "OpenAI, Azure, Gemini, HF, FastEmbed, Together, Bedrock, Ollama, VertexAI" },
+    { "name": "4 graph stores (Neo4j, Memgraph, Kuzu, Apache AGE)", "evidence_paths": ["OS/mem0/mem0/graphs/"], "category": "extensibility", "description": "Graph memory layer sobre vector; Neo4j default" },
+    { "name": "5 rerankers", "evidence_paths": ["OS/mem0/mem0/reranker/"], "category": "core", "description": "Cohere, HuggingFace, LLM-based, Sentence Transformer, Zero Entropy" },
+    { "name": "Multi-Level Memory (User, Session, Agent)", "evidence_paths": ["OS/mem0/mem0/memory/main.py"], "category": "core", "description": "Scoped memory via user_id/agent_id/run_id" },
+    { "name": "Hosted platform client", "evidence_paths": ["OS/mem0/mem0/client/", "OS/mem0/mem0-ts/src/client/"], "category": "integration", "description": "MemoryClient SaaS em mem0.ai" },
+    { "name": "OpenMemory self-hosted (UI + API + MCP)", "evidence_paths": ["OS/mem0/openmemory/api/main.py", "OS/mem0/openmemory/ui/"], "category": "integration", "description": "FastAPI + Next.js + Qdrant + MCP server stack docker-compose" },
+    { "name": "Evaluation framework open-sourced", "evidence_paths": ["OS/mem0/evaluation/"], "category": "governance", "description": "LOCOMO evals + experiment runner; reproducivel em memory-benchmarks repo" },
+    { "name": "TypeScript SDK (mem0ai npm)", "evidence_paths": ["OS/mem0/mem0-ts/src/oss/", "OS/mem0/mem0-ts/src/client/"], "category": "integration", "description": "SDK full TS para Node + Edge + Vercel AI SDK" },
+    { "name": "Vercel AI SDK provider", "evidence_paths": ["OS/mem0/vercel-ai-sdk/"], "category": "integration", "description": "@mem0/vercel-ai-provider" },
+    { "name": "OpenClaw plugin (MCP for Claude Code/Cursor/Codex)", "evidence_paths": ["OS/mem0/openclaw/", "OS/mem0/mem0-plugin/"], "category": "integration", "description": "9 MCP tools + skills; connection + lifecycle hooks" },
+    { "name": "Async APIs (AsyncMemory, AsyncMemoryClient)", "evidence_paths": ["OS/mem0/mem0/memory/main.py"], "category": "core", "description": "Async-first implementations para scale" },
+    { "name": "Paraphrase-first extraction", "evidence_paths": ["OS/mem0/mem0/configs/prompts.py"], "category": "core", "description": "LLM extrai fatos e arma-zena summarized memories, nao verbatim" }
+  ],
+  "quality_signals": {
+    "test_framework": "pytest + jest + vitest (polyglot)",
+    "test_file_count": null,
+    "linter": "ruff (Python) + Biome (Node CLI) + ESLint (Vercel) + Prettier",
+    "ci_provider": "GitHub Actions",
+    "ci_workflow_count": null
+  },
+  "documentation": {
+    "readme_sections": ["New Memory Algorithm", "Introduction", "Quickstart", "Integrations", "Citation"],
+    "has_contributing": true,
+    "has_architecture_doc": true,
+    "docs_page_count": null,
+    "has_arxiv_paper": true
+  },
+  "extension_points": {
+    "plugins": { "mechanism": "provider pattern (base.py + configs.py) em 5 categorias", "path": "mem0/{llms,embeddings,vector_stores,graphs,reranker}/base.py" },
+    "hooks": { "mechanism": "plugin lifecycle hooks", "events": ["auto-capture via MCP"] },
+    "mcp": { "client": false, "server": true }
+  },
+  "unique_selling_points": [
+    "Benchmarks publicados top-of-class: 91.6 LoCoMo (+20 vs old), 93.4 LongMemEval (+26), 64.1 BEAM (1M)",
+    "Maior ecossistema de providers: 24 LLMs + 30 vector stores + 15 embeddings + 4 graphs + 5 rerankers",
+    "Hosted + self-hosted: escolher managed service ou rodar local/docker",
+    "Polyglot monorepo: Python core + TS SDK + CLIs + UI + Vercel + OpenClaw",
+    "YC S24 com arxiv paper e eval framework open-source",
+    "Entity linking: entities extraidas, embedded e linkadas across memories pra boost retrieval"
+  ],
+  "limitations": [
+    { "description": "Telemetry core (posthog em dependencies core, nao extra)", "source": "pyproject.toml" },
+    { "description": "OpenAI default para LLM + embedding, requer API key pra caminho happy", "source": "README.md" },
+    { "description": "Paraphrase-first: summarized memories, nao armazenamento verbatim", "source": "mem0/configs/prompts.py" },
+    { "description": "Graph memory requer Neo4j/Memgraph externo (nao embutido)", "source": "mem0/graphs/" }
+  ],
+  "confidence": "HIGH",
+  "extraction_method": "filesystem-scan",
+  "skill_version": "1.0.0"
+}

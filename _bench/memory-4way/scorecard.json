@@ -1,0 +1,382 @@
+{
+  "generatedAt": "2026-04-19T22:19:37Z",
+  "comparison_type": "nway",
+  "subjects": ["gbrain", "mempalace", "mem0", "gsd-2"],
+  "dimension_pack": "memory",
+  "methods": {
+    "gbrain": "installed",
+    "mempalace": "installed",
+    "mem0": "installed",
+    "gsd-2": "installed"
+  },
+  "dimensions": [
+    {
+      "id": "recall_accuracy",
+      "name": "Recall Accuracy",
+      "weight": 0.22,
+      "scores": {
+        "gbrain": 78,
+        "mempalace": 92,
+        "mem0": 90,
+        "gsd-2": 35
+      },
+      "signals_observed": {
+        "gbrain": [
+          {"signal": "R@5 metric", "value": "95% em BrainBench proprio (240-page Opus corpus)", "evidence": "OS/gbrain/docs/benchmarks/2026-04-18-brainbench-v1.md"},
+          {"signal": "Eval harness", "value": "P@k/R@k/MRR/nDCG@k", "evidence": "OS/gbrain/src/core/search/eval.ts"},
+          {"signal": "Benchmark dataset", "value": "custom corpus (nao LongMemEval/LoCoMo padrao)", "evidence": "OS/gbrain/docs/benchmarks/2026-04-18-brainbench-v1.md"}
+        ],
+        "mempalace": [
+          {"signal": "R@5 metric", "value": "96.6% raw + 98.4% hybrid held-out", "evidence": "OS/mempalace/benchmarks/BENCHMARKS.md"},
+          {"signal": "Benchmark dataset", "value": "LongMemEval (500q) + LoCoMo + ConvoMem + MemBench", "evidence": "OS/mempalace/benchmarks/longmemeval_bench.py"},
+          {"signal": "Eval harness", "value": "reproduciveis com comandos documentados", "evidence": "OS/mempalace/benchmarks/BENCHMARKS.md"},
+          {"signal": "R@10 metric", "value": "88.9% LoCoMo hybrid v5", "evidence": "OS/mempalace/benchmarks/BENCHMARKS.md"}
+        ],
+        "mem0": [
+          {"signal": "LongMemEval", "value": "93.4 (+26 vs old)", "evidence": "OS/mem0/README.md"},
+          {"signal": "LoCoMo", "value": "91.6 (+20)", "evidence": "OS/mem0/README.md"},
+          {"signal": "BEAM (1M)", "value": "64.1", "evidence": "OS/mem0/README.md"},
+          {"signal": "Eval framework OSS", "value": "memory-benchmarks repo + evaluation/", "evidence": "OS/mem0/evaluation/"}
+        ],
+        "gsd-2": [
+          {"signal": "Nenhum benchmark de recall publicado", "value": "not_observed", "evidence": ""}
+        ]
+      },
+      "confidence": "HIGH",
+      "justification": {
+        "gbrain": "Dataset proprio Opus-generated limita comparabilidade (nao LongMemEval/LoCoMo padrao); score forte mas menor que peers por dataset idiosincratico",
+        "mempalace": "Benchmarks industria-padrao (LongMemEval) com score lider + reproducibilidade em-tree; penaliza apenas por nao cobrir BEAM",
+        "mem0": "Scores muito altos em 3 benchmarks industria (LongMemEval/LoCoMo/BEAM) + arxiv paper + OSS eval framework",
+        "gsd-2": "Sem metric de recall publicada; score reflete ausencia de measurement"
+      },
+      "leader": "mempalace",
+      "advantage_delta": "mempalace 92 vs mem0 90 (2) vs gbrain 78 (14) vs gsd-2 35 (57)"
+    },
+    {
+      "id": "write_latency",
+      "name": "Write Latency",
+      "weight": 0.10,
+      "scores": {
+        "gbrain": 80,
+        "mempalace": 65,
+        "mem0": 78,
+        "gsd-2": 55
+      },
+      "signals_observed": {
+        "gbrain": [
+          {"signal": "Batch support", "value": "addLinksBatch/addTimelineEntriesBatch via unnest, 4-5 array params regardless of batch size", "evidence": "OS/gbrain/src/core/postgres-engine.ts"},
+          {"signal": "Async writes", "value": "Minions job queue durable (753ms vs 10s+ sub-agents)", "evidence": "OS/gbrain/src/core/minions/queue.ts"},
+          {"signal": "No explicit p50/p99", "value": "not_observed", "evidence": ""}
+        ],
+        "mempalace": [
+          {"signal": "Performance budget", "value": "hooks <500ms, startup injection <100ms", "evidence": "OS/mempalace/CLAUDE.md"},
+          {"signal": "Incremental only (append-only)", "value": "yes", "evidence": "OS/mempalace/CLAUDE.md"}
+        ],
+        "mem0": [
+          {"signal": "Async APIs", "value": "AsyncMemory, AsyncMemoryClient", "evidence": "OS/mem0/mem0/memory/main.py"},
+          {"signal": "p50 end-to-end", "value": "0.88s LoCoMo, 1.09s LongMemEval (inclui LLM call)", "evidence": "OS/mem0/README.md"}
+        ],
+        "gsd-2": [
+          {"signal": "Single-writer SQLite", "value": "sync writes", "evidence": "OS/gsd-2/src/resources/extensions/gsd/db-writer.ts"},
+          {"signal": "No latency metric", "value": "not_observed", "evidence": ""}
+        ]
+      },
+      "confidence": "MEDIUM",
+      "justification": {
+        "gbrain": "Batch + Minions queue documentados, sem p50 explicito pra single write; score reflete batch infra forte",
+        "mempalace": "Budget declarado mas sem batch/async explicito; score reflete design soundness",
+        "mem0": "Async APIs + p50 publicado (mas inclui LLM call end-to-end, nao puro write)",
+        "gsd-2": "Sync writes sem metric; single-writer e correto mas nao performante"
+      },
+      "leader": "gbrain",
+      "advantage_delta": "gbrain 80 vs mem0 78 (2) vs mempalace 65 (15) vs gsd-2 55 (25)"
+    },
+    {
+      "id": "read_latency",
+      "name": "Read Latency",
+      "weight": 0.12,
+      "scores": {
+        "gbrain": 78,
+        "mempalace": 75,
+        "mem0": 72,
+        "gsd-2": 60
+      },
+      "signals_observed": {
+        "gbrain": [
+          {"signal": "Index type", "value": "HNSW via pgvector", "evidence": "OS/gbrain/src/core/pglite-schema.ts"},
+          {"signal": "Statement timeout scoping", "value": "SET LOCAL per transaction (v0.12.3)", "evidence": "OS/gbrain/src/core/postgres-engine.ts"},
+          {"signal": "clampSearchLimit", "value": "per-operation caps", "evidence": "OS/gbrain/src/core/engine.ts"}
+        ],
+        "mempalace": [
+          {"signal": "Startup injection", "value": "<100ms budget", "evidence": "OS/mempalace/CLAUDE.md"},
+          {"signal": "BM25 re-rank", "value": "small candidate set over vector retrieval", "evidence": "OS/mempalace/mempalace/searcher.py"}
+        ],
+        "mem0": [
+          {"signal": "p50 search", "value": "latency p50 1.00s-1.09s end-to-end (inclui LLM)", "evidence": "OS/mem0/README.md"},
+          {"signal": "Caching layer", "value": "not_observed explicit", "evidence": ""}
+        ],
+        "gsd-2": [
+          {"signal": "SQLite local queries", "value": "simples", "evidence": "OS/gsd-2/src/resources/extensions/gsd/memory-store.ts"}
+        ]
+      },
+      "confidence": "MEDIUM",
+      "justification": {
+        "gbrain": "HNSW + timeout scoping + clampSearchLimit mostram cuidado com latencia",
+        "mempalace": "Budget <100ms declarado e BM25 sobre small candidate set",
+        "mem0": "p50 publicado mas inclui LLM latency (nao query pura); caching nao explicito",
+        "gsd-2": "SQLite local e rapido mas nao otimizado para large corpora"
+      },
+      "leader": "gbrain",
+      "advantage_delta": "gbrain 78, mempalace 75, mem0 72, gsd-2 60"
+    },
+    {
+      "id": "persistence",
+      "name": "Persistence",
+      "weight": 0.12,
+      "scores": {
+        "gbrain": 80,
+        "mempalace": 95,
+        "mem0": 72,
+        "gsd-2": 65
+      },
+      "signals_observed": {
+        "gbrain": [
+          {"signal": "Durable backend", "value": "PGLite OU Postgres/Supabase", "evidence": "OS/gbrain/src/core/engine-factory.ts"},
+          {"signal": "Paraphrase + raw backup", "value": "compiled_truth + raw_data JSONB", "evidence": "OS/gbrain/src/core/operations.ts"},
+          {"signal": "Snapshot", "value": "page_versions table", "evidence": "OS/gbrain/src/core/pglite-engine.ts"}
+        ],
+        "mempalace": [
+          {"signal": "Verbatim storage", "value": "policy non-negotiable", "evidence": "OS/mempalace/CLAUDE.md"},
+          {"signal": "Durable backend", "value": "ChromaDB + SQLite KG", "evidence": "OS/mempalace/mempalace/knowledge_graph.py"},
+          {"signal": "Crash-safe", "value": "crash mid-op leaves palace untouched", "evidence": "OS/mempalace/CLAUDE.md"},
+          {"signal": "Append-only", "value": "incremental only", "evidence": "OS/mempalace/CLAUDE.md"}
+        ],
+        "mem0": [
+          {"signal": "Paraphrase", "value": "LLM extracts facts ADD-only", "evidence": "OS/mem0/mem0/configs/prompts.py"},
+          {"signal": "Durable backend", "value": "Qdrant + Neo4j (docker) ou hosted", "evidence": "OS/mem0/server/"},
+          {"signal": "History API", "value": "history(memory_id)", "evidence": "OS/mem0/mem0/memory/main.py"}
+        ],
+        "gsd-2": [
+          {"signal": "SQLite single-writer", "value": "corruption prevention", "evidence": "OS/gsd-2/src/resources/extensions/gsd/db-writer.ts"},
+          {"signal": "Structured content", "value": "category + content (nao verbatim full conversation)", "evidence": "OS/gsd-2/src/resources/extensions/gsd/memory-store.ts"}
+        ]
+      },
+      "confidence": "HIGH",
+      "justification": {
+        "gbrain": "Durable engines + raw backup (raw_data JSONB) + versioning; perde pontos por paraphrase-first",
+        "mempalace": "Unico com verbatim + durable + append-only + crash-safe explicitos (banda 90-100)",
+        "mem0": "Paraphrase reduz fidelidade semantica ao ditto pelo user; durable backend solido",
+        "gsd-2": "SQLite e durable mas content e categoria-scoped, nao conversas inteiras"
+      },
+      "leader": "mempalace",
+      "advantage_delta": "mempalace 95 vs gbrain 80 (15) vs mem0 72 (23) vs gsd-2 65 (30)"
+    },
+    {
+      "id": "schema_flexibility",
+      "name": "Schema Flexibility",
+      "weight": 0.10,
+      "scores": {
+        "gbrain": 75,
+        "mempalace": 80,
+        "mem0": 85,
+        "gsd-2": 55
+      },
+      "signals_observed": {
+        "gbrain": [
+          {"signal": "Schema rigido", "value": "pages + chunks + links + timeline", "evidence": "OS/gbrain/src/schema.sql"},
+          {"signal": "Frontmatter JSONB", "value": "metadata arbitrario", "evidence": "OS/gbrain/src/core/markdown.ts"}
+        ],
+        "mempalace": [
+          {"signal": "Schemaless drawers", "value": "verbatim content sem estrutura forcada", "evidence": "OS/mempalace/mempalace/palace.py"},
+          {"signal": "Entity registry", "value": "disambiguation por DOB/ID/context", "evidence": "OS/mempalace/mempalace/entity_registry.py"},
+          {"signal": "Typed predicates KG", "value": "flexivel", "evidence": "OS/mempalace/mempalace/knowledge_graph.py"}
+        ],
+        "mem0": [
+          {"signal": "Flexivel metadata Pydantic", "value": "user_id, agent_id, run_id, metadata", "evidence": "OS/mem0/mem0/configs/base.py"},
+          {"signal": "Entity linking multi-signal", "value": "cross-memory entity embedding", "evidence": "OS/mem0/mem0/memory/main.py"},
+          {"signal": "Graph Neo4j opcional", "value": "schema emergente", "evidence": "OS/mem0/mem0/graphs/"}
+        ],
+        "gsd-2": [
+          {"signal": "Categoria enum fixa", "value": "6 values", "evidence": "OS/gsd-2/src/resources/extensions/gsd/tools/memory-tools.ts"},
+          {"signal": "Structured fields JSON", "value": "optional payload", "evidence": "OS/gsd-2/src/resources/extensions/gsd/memory-store.ts"}
+        ]
+      },
+      "confidence": "HIGH",
+      "justification": {
+        "gbrain": "Schema fixo mas frontmatter JSONB permite extensao",
+        "mempalace": "Schemaless drawers + entity registry flexivel",
+        "mem0": "Metadata Pydantic + multi-level scoping + graph externa = mais flexivel",
+        "gsd-2": "Enum fixa 6 categorias restringe; structured_fields mitiga parcialmente"
+      },
+      "leader": "mem0",
+      "advantage_delta": "mem0 85, mempalace 80, gbrain 75, gsd-2 55"
+    },
+    {
+      "id": "local_first",
+      "name": "Local-first",
+      "weight": 0.13,
+      "scores": {
+        "gbrain": 55,
+        "mempalace": 95,
+        "mem0": 40,
+        "gsd-2": 60
+      },
+      "signals_observed": {
+        "gbrain": [
+          {"signal": "PGLite embutido local", "value": "yes (WASM)", "evidence": "OS/gbrain/src/core/pglite-engine.ts"},
+          {"signal": "OpenAI embedding required", "value": "core path nao funciona sem API key", "evidence": "OS/gbrain/src/core/embedding.ts"},
+          {"signal": "No telemetry detected", "value": "clean", "evidence": "OS/gbrain/package.json"}
+        ],
+        "mempalace": [
+          {"signal": "Zero API keys core", "value": "96.6% R@5 raw sem nenhuma API key", "evidence": "OS/mempalace/README.md"},
+          {"signal": "Offline", "value": "works 100% offline", "evidence": "OS/mempalace/README.md"},
+          {"signal": "Zero telemetry policy", "value": "privacy by architecture", "evidence": "OS/mempalace/CLAUDE.md"},
+          {"signal": "Data ownership", "value": "nothing leaves machine unless opt-in", "evidence": "OS/mempalace/README.md"}
+        ],
+        "mem0": [
+          {"signal": "OpenAI default obrigatorio", "value": "API key para caminho happy", "evidence": "OS/mem0/README.md"},
+          {"signal": "PostHog telemetry core", "value": "em dependencies core", "evidence": "OS/mem0/pyproject.toml"},
+          {"signal": "Offline possivel", "value": "fastembed + Ollama (extras)", "evidence": "OS/mem0/mem0/embeddings/fastembed.py"}
+        ],
+        "gsd-2": [
+          {"signal": "SQLite local", "value": "yes", "evidence": "OS/gsd-2/src/resources/extensions/gsd/db-writer.ts"},
+          {"signal": "RTK telemetry forced off", "value": "RTK_TELEMETRY_DISABLED=1", "evidence": "OS/gsd-2/README.md"},
+          {"signal": "Ollama via Pi SDK", "value": "possivel", "evidence": "OS/gsd-2/README.md"}
+        ]
+      },
+      "confidence": "HIGH",
+      "justification": {
+        "gbrain": "Local DB mas embedding cloud obrigatorio quebra local-first puro",
+        "mempalace": "Unico projeto 100% local-first no caminho core, zero API, zero telemetry, offline (banda 90-100)",
+        "mem0": "Telemetry core + OpenAI default + Qdrant/Neo4j external = hibrido local+cloud",
+        "gsd-2": "DB local mas LLM via provider (qualquer); telemetry disabled forced"
+      },
+      "leader": "mempalace",
+      "advantage_delta": "mempalace 95 vs gsd-2 60 (35) vs gbrain 55 (40) vs mem0 40 (55)"
+    },
+    {
+      "id": "vector_support",
+      "name": "Vector Support",
+      "weight": 0.11,
+      "scores": {
+        "gbrain": 72,
+        "mempalace": 65,
+        "mem0": 98,
+        "gsd-2": 45
+      },
+      "signals_observed": {
+        "gbrain": [
+          {"signal": "Embedding providers", "value": "1 (OpenAI text-embedding-3-large)", "evidence": "OS/gbrain/src/core/embedding.ts"},
+          {"signal": "Index HNSW", "value": "pgvector HNSW", "evidence": "OS/gbrain/src/core/pglite-schema.ts"},
+          {"signal": "Vector stores", "value": "2 (PGLite, Postgres)", "evidence": "OS/gbrain/src/core/engine-factory.ts"}
+        ],
+        "mempalace": [
+          {"signal": "Vector store default", "value": "ChromaDB + pluggable interface", "evidence": "OS/mempalace/mempalace/backends/base.py"},
+          {"signal": "Embedding", "value": "default ~300MB model (ChromaDB)", "evidence": "OS/mempalace/README.md"},
+          {"signal": "Index HNSW", "value": "ChromaDB HNSW", "evidence": "OS/mempalace/mempalace/backends/chroma.py"}
+        ],
+        "mem0": [
+          {"signal": "Vector stores", "value": "30 providers (Qdrant/Pinecone/Chroma/Weaviate/Milvus/Mongo/Redis/ES/pgvector/Supabase/Faiss/...)", "evidence": "OS/mem0/mem0/vector_stores/"},
+          {"signal": "Embedding providers", "value": "15 (OpenAI/Azure/Gemini/HF/FastEmbed/Together/Bedrock/Ollama/VertexAI)", "evidence": "OS/mem0/mem0/embeddings/"},
+          {"signal": "Index HNSW + IVF", "value": "per-provider", "evidence": "OS/mem0/mem0/vector_stores/"},
+          {"signal": "Dim flexibility", "value": "config per-provider", "evidence": "OS/mem0/mem0/embeddings/configs.py"}
+        ],
+        "gsd-2": [
+          {"signal": "SQLite embeddings", "value": "simples", "evidence": "OS/gsd-2/src/resources/extensions/gsd/memory-store.ts"},
+          {"signal": "Not multi-provider", "value": "via Pi SDK model", "evidence": ""}
+        ]
+      },
+      "confidence": "HIGH",
+      "justification": {
+        "gbrain": "HNSW + 1 embedding provider + 2 engines — solido mas lock-in em OpenAI",
+        "mempalace": "ChromaDB default + pluggable — score medio (apenas 1 provider default)",
+        "mem0": "30 + 15 + HNSW/IVF + dim flex = 4 signals fortes (banda 90-100)",
+        "gsd-2": "SQLite simples para memorias de coding agent; nao e vector-optimized"
+      },
+      "leader": "mem0",
+      "advantage_delta": "mem0 98 vs gbrain 72 (26) vs mempalace 65 (33) vs gsd-2 45 (53)"
+    },
+    {
+      "id": "graph_support",
+      "name": "Graph Support",
+      "weight": 0.10,
+      "scores": {
+        "gbrain": 92,
+        "mempalace": 85,
+        "mem0": 70,
+        "gsd-2": 55
+      },
+      "signals_observed": {
+        "gbrain": [
+          {"signal": "Auto-wiring sem LLM", "value": "regex typed edges attended/works_at/invested_in/founded/advises/source/mentions", "evidence": "OS/gbrain/src/core/link-extraction.ts"},
+          {"signal": "Traversal queries", "value": "gbrain graph-query --depth N --direction in/out/both", "evidence": "OS/gbrain/src/commands/graph-query.ts"},
+          {"signal": "3+ hop traversal", "value": "supported via recursive CTE", "evidence": "OS/gbrain/src/commands/graph-query.ts"}
+        ],
+        "mempalace": [
+          {"signal": "Temporal KG", "value": "valid_from/valid_to fields", "evidence": "OS/mempalace/mempalace/knowledge_graph.py"},
+          {"signal": "Entity + predicate", "value": "SQLite local", "evidence": "OS/mempalace/mempalace/knowledge_graph.py"},
+          {"signal": "As-of queries", "value": "query_entity(as_of=date)", "evidence": "OS/mempalace/mempalace/knowledge_graph.py"}
+        ],
+        "mem0": [
+          {"signal": "Graph opcional", "value": "Neo4j/Memgraph/Kuzu/Apache AGE external", "evidence": "OS/mem0/mem0/graphs/"},
+          {"signal": "Entity extraction LLM", "value": "batch via LLM", "evidence": "OS/mem0/mem0/utils/entity_extraction.py"},
+          {"signal": "Requer backend externo", "value": "yes", "evidence": "OS/mem0/mem0/graphs/"}
+        ],
+        "gsd-2": [
+          {"signal": "Memory relations graph", "value": "Phase 4", "evidence": "OS/gsd-2/src/resources/extensions/gsd/tests/memory-relations.test.ts"},
+          {"signal": "traverseGraph", "value": "present", "evidence": "OS/gsd-2/src/resources/extensions/gsd/tools/memory-tools.ts"}
+        ]
+      },
+      "confidence": "HIGH",
+      "justification": {
+        "gbrain": "Auto-wiring sem LLM + 3+ hop traversal + typed edges = banda 90-100",
+        "mempalace": "Temporal KG com as-of queries e unico no grupo; manual wiring",
+        "mem0": "Graph forte mas requer DB externo (Neo4j etc); LLM-driven extraction",
+        "gsd-2": "Phase 4 presente mas mais simples; feed planning interno"
+      },
+      "leader": "gbrain",
+      "advantage_delta": "gbrain 92 vs mempalace 85 (7) vs mem0 70 (22) vs gsd-2 55 (37)"
+    }
+  ],
+  "weighted_totals": {
+    "gbrain": 75.89,
+    "mempalace": 83.14,
+    "mem0": 76.36,
+    "gsd-2": 51.95
+  },
+  "overall_winner": "mempalace",
+  "total_delta": "mempalace +6.78 vs mem0, +7.25 vs gbrain, +31.19 vs gsd-2",
+  "dimension_wins": {
+    "gbrain": 3,
+    "mempalace": 3,
+    "mem0": 2,
+    "gsd-2": 0,
+    "ties": 0
+  },
+  "rankings": {
+    "strongest_per_subject": {
+      "gbrain": ["graph_support (92)", "write_latency (80)", "persistence (80)"],
+      "mempalace": ["recall_accuracy (92)", "local_first (95)", "persistence (95)"],
+      "mem0": ["vector_support (98)", "recall_accuracy (90)", "schema_flexibility (85)"],
+      "gsd-2": ["read_latency (60)", "schema_flexibility (55)", "persistence (65)"]
+    },
+    "weakest_per_subject": {
+      "gbrain": ["local_first (55)"],
+      "mempalace": ["vector_support (65)", "write_latency (65)"],
+      "mem0": ["local_first (40)"],
+      "gsd-2": ["recall_accuracy (35)", "vector_support (45)"]
+    },
+    "closest_competitive_dimensions": [
+      "recall_accuracy (mempalace 92 vs mem0 90, delta 2)",
+      "write_latency (gbrain 80 vs mem0 78, delta 2)",
+      "read_latency (gbrain 78 vs mempalace 75, delta 3)"
+    ]
+  },
+  "confidence_overall": "HIGH",
+  "limitations": [
+    "Benchmarks de recall citados sao self-reported pelos projetos (gbrain BrainBench proprio, mempalace LongMemEval in-tree, mem0 README)",
+    "gsd-2 nao expõe p50/p99 nem recall metric, penalizando scores por ausencia de measurement",
+    "Latency p50 do mem0 (README) e end-to-end (inclui LLM), nao write/read puro",
+    "'Local-first' foi pontuado por zero API keys + zero telemetry + offline; mempalace lidera nos tres"
+  ]
+}

@@ -1,0 +1,79 @@
+{
+  "generatedAt": "2026-04-19T22:30:00Z",
+  "subject": "codex",
+  "path": "OS/codex/",
+  "primary_language": "Rust",
+  "secondary_languages": ["TypeScript", "Python", "Shell"],
+  "stack": ["Rust (Cargo workspace)", "Bazel", "pnpm", "Nix flake"],
+  "license": "Apache-2.0",
+  "tagline": "OpenAI Codex CLI — coding agent local que roda no terminal e integra com IDEs",
+  "metrics": {
+    "loc_estimate": 400000,
+    "file_count": 1493,
+    "top_level_dirs": ["codex-rs", "codex-cli", "sdk", "docs", "scripts", "tools", "patches", "third_party"],
+    "readme_lines": 60,
+    "last_commit_date": "2026-04-08",
+    "github_stars": null,
+    "github_contributors": null
+  },
+  "modules": [
+    { "name": "codex-rs", "path": "codex-rs/", "type": "app", "loc_estimate": 350000 },
+    { "name": "codex-cli", "path": "codex-cli/", "type": "package", "loc_estimate": 5000 },
+    { "name": "sdk", "path": "sdk/", "type": "package", "loc_estimate": 20000 },
+    { "name": "docs", "path": "docs/", "type": "library", "loc_estimate": 0 }
+  ],
+  "external_dependencies_top10": [
+    { "package": "prettier", "version": "^3.5.3", "purpose": "Formatter" }
+  ],
+  "entry_points": [
+    { "kind": "cli", "path": "codex-rs/cli/", "command": "codex" },
+    { "kind": "package", "path": "codex-cli/bin/", "command": "npm i -g @openai/codex" },
+    { "kind": "sdk", "path": "sdk/typescript/", "command": "Codex SDK (TS/Py)" }
+  ],
+  "capabilities": [
+    { "name": "Native Rust runtime", "evidence_paths": ["OS/codex/codex-rs/Cargo.toml", "OS/codex/codex-rs/cli/"], "category": "core", "description": "Core agent em Rust — performance + distribuição como binário" },
+    { "name": "Multi-platform binaries", "evidence_paths": ["OS/codex/README.md:37-43"], "category": "ux", "description": "Binários macOS (arm/x64), Linux musl, Windows" },
+    { "name": "ChatGPT OAuth auth", "evidence_paths": ["OS/codex/codex-rs/chatgpt/"], "category": "integration", "description": "Sign-in with ChatGPT (Plus/Pro/Team/Edu/Enterprise) ou API key" },
+    { "name": "MCP server + client", "evidence_paths": ["OS/codex/codex-rs/mcp-server/"], "category": "integration", "description": "MCP server nativo (codex-rs/mcp-server/)" },
+    { "name": "App-server + app-server-client", "evidence_paths": ["OS/codex/codex-rs/app-server/", "OS/codex/codex-rs/app-server-client/"], "category": "core", "description": "Arquitetura client/server pra UI remota ou IDEs" },
+    { "name": "Cloud tasks", "evidence_paths": ["OS/codex/codex-rs/cloud-tasks/", "OS/codex/codex-rs/cloud-tasks-client/"], "category": "integration", "description": "Integra com Codex Web (chatgpt.com/codex)" },
+    { "name": "SDK TS + Python", "evidence_paths": ["OS/codex/sdk/typescript/", "OS/codex/sdk/python/"], "category": "extensibility", "description": "SDKs oficiais em TS e Python" },
+    { "name": "Apply-patch engine", "evidence_paths": ["OS/codex/codex-rs/apply-patch/"], "category": "core", "description": "Engine próprio de aplicação de patches" },
+    { "name": "Analytics layer", "evidence_paths": ["OS/codex/codex-rs/analytics/"], "category": "governance", "description": "Telemetria" },
+    { "name": "Code-mode", "evidence_paths": ["OS/codex/codex-rs/code-mode/"], "category": "core", "description": "Modo de execução de código isolado" },
+    { "name": "Bazel + Nix build", "evidence_paths": ["OS/codex/BUILD.bazel", "OS/codex/flake.nix"], "category": "governance", "description": "Reprodutibilidade de build enterprise-grade" },
+    { "name": "IDE extensions", "evidence_paths": ["OS/codex/README.md:7"], "category": "integration", "description": "VS Code, Cursor, Windsurf integrations via developers.openai.com/codex/ide" }
+  ],
+  "quality_signals": {
+    "test_framework": "cargo test + tests/ dirs across workspace crates",
+    "test_file_count": 100,
+    "linter": "clippy (clippy.toml)",
+    "ci_provider": "github_actions",
+    "ci_workflow_count": 17
+  },
+  "documentation": {
+    "readme_sections": ["Quickstart", "Installing and running", "Using Codex with ChatGPT plan", "Docs"],
+    "has_contributing": true,
+    "has_architecture_doc": false,
+    "docs_page_count": 0
+  },
+  "extension_points": {
+    "plugins": { "mechanism": "unknown (no explicit plugin dir)", "path": null },
+    "hooks": { "mechanism": "codex-rs/hooks (cited in package.json write-hooks-schema)", "events": [] },
+    "mcp": { "client": true, "server": true }
+  },
+  "unique_selling_points": [
+    "Rust nativo (único do benchmark) — binário leve, sem Node runtime",
+    "ChatGPT Plan auth além de API key",
+    "Cloud tasks (integra Codex Web)",
+    "SDK oficial TS + Python",
+    "Build reprodutível via Bazel + Nix"
+  ],
+  "limitations": [
+    { "description": "README é curto (60 linhas), detalhes espalhados em docs externos", "source": "OS/codex/README.md" },
+    { "description": "Sem sistema de plugins/skills declarado — extensibilidade via SDK", "source": "filesystem-scan" }
+  ],
+  "confidence": "HIGH",
+  "extraction_method": "filesystem-scan",
+  "skill_version": "1.0.0"
+}

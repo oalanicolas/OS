@@ -1,0 +1,102 @@
+{
+  "generatedAt": "2026-04-19T22:30:00Z",
+  "subject": "superpowers",
+  "path": "OS/superpowers/",
+  "primary_language": "Markdown",
+  "secondary_languages": ["JavaScript", "Bash"],
+  "stack": ["Claude Code plugin", "OpenCode plugin", "Cursor plugin", "Codex plugin", "Gemini extension", "Copilot plugin"],
+  "license": "MIT",
+  "tagline": "Complete software-development methodology for coding agents built on composable skills + initial instructions that ensure the agent uses them — red/green TDD, YAGNI, DRY, subagent-driven execution.",
+  "metrics": {
+    "loc_estimate": 21078,
+    "file_count": 142,
+    "top_level_dirs": [".claude-plugin", ".codex", ".cursor-plugin", ".github", ".opencode", "agents", "commands", "docs", "hooks", "scripts", "skills", "tests"],
+    "readme_lines": 198,
+    "last_commit_date": "2026-04-16T12:50:46-07:00",
+    "github_stars": null,
+    "github_contributors": null,
+    "source_url": "https://github.com/obra/superpowers",
+    "plugin_version": "5.0.7",
+    "author": "Jesse Vincent (Prime Radiant)"
+  },
+  "modules": [
+    { "name": "skills", "path": "skills/", "type": "library", "description": "14 composable skills that auto-trigger: brainstorming, using-git-worktrees, writing-plans, executing-plans, subagent-driven-development, test-driven-development, systematic-debugging, verification-before-completion, requesting-code-review, receiving-code-review, finishing-a-development-branch, dispatching-parallel-agents, writing-skills, using-superpowers" },
+    { "name": "commands", "path": "commands/", "type": "library", "description": "3 slash commands: brainstorm, write-plan, execute-plan" },
+    { "name": "agents", "path": "agents/", "type": "library", "description": "code-reviewer agent" },
+    { "name": "hooks", "path": "hooks/", "type": "library", "description": "session-start hook + hooks.json + run-hook.cmd for Claude Code" },
+    { "name": ".claude-plugin", "path": ".claude-plugin/", "type": "config", "description": "Claude Code plugin manifest (plugin.json v5.0.7) + marketplace.json" },
+    { "name": ".opencode", "path": ".opencode/", "type": "config", "description": "OpenCode plugin including plugins/superpowers.js (package main)" },
+    { "name": ".codex", "path": ".codex/", "type": "config", "description": "Codex plugin packaging" },
+    { "name": ".cursor-plugin", "path": ".cursor-plugin/", "type": "config", "description": "Cursor plugin packaging" },
+    { "name": "docs", "path": "docs/", "type": "library", "description": "README.codex.md, README.opencode.md, testing.md, plans/ (example plans), superpowers/ (internal docs), windows/" },
+    { "name": "tests", "path": "tests/", "type": "library", "description": "brainstorm-server, claude-code, explicit-skill-requests, opencode, skill-triggering, subagent-driven-dev test dirs" }
+  ],
+  "external_dependencies_top10": [
+    { "package": "(none)", "version": "", "purpose": "Zero runtime dependencies — CLAUDE.md: 'Superpowers is a zero-dependency plugin by design'" }
+  ],
+  "entry_points": [
+    { "kind": "plugin", "path": ".claude-plugin/plugin.json", "command": "/plugin install superpowers@claude-plugins-official", "notes": "Claude Code official marketplace" },
+    { "kind": "plugin", "path": ".opencode/plugins/superpowers.js", "command": "(OpenCode autoload)", "notes": "package.json#main points here" },
+    { "kind": "commands", "path": "commands/brainstorm.md", "command": "/brainstorm", "notes": "Socratic design refinement entry point" },
+    { "kind": "commands", "path": "commands/write-plan.md", "command": "/write-plan", "notes": "Invokes writing-plans skill" },
+    { "kind": "commands", "path": "commands/execute-plan.md", "command": "/execute-plan", "notes": "Invokes executing-plans or subagent-driven-development" },
+    { "kind": "skills", "path": "skills/test-driven-development/SKILL.md", "command": "(auto-trigger)", "notes": "'NO PRODUCTION CODE WITHOUT A FAILING TEST FIRST' — the Iron Law" }
+  ],
+  "capabilities": [
+    { "name": "Red/Green/Refactor TDD enforcement (Iron Law)", "evidence_paths": ["OS/superpowers/skills/test-driven-development/SKILL.md"], "category": "core", "description": "Explicit 'NO PRODUCTION CODE WITHOUT A FAILING TEST FIRST' rule; Watch-fail → minimal code → watch-pass cycle mandatory; 'Code before test? Delete it. Start over.'" },
+    { "name": "Testing anti-patterns reference", "evidence_paths": ["OS/superpowers/skills/test-driven-development/testing-anti-patterns.md"], "category": "core", "description": "Common TDD pitfalls (mock-only tests, test-only methods, mocking without understanding deps)" },
+    { "name": "Brainstorming → spec extraction (Socratic)", "evidence_paths": ["OS/superpowers/skills/brainstorming/", "OS/superpowers/commands/brainstorm.md"], "category": "core", "description": "Teases spec from conversation, presents design in chunks short enough to read, waits for sign-off" },
+    { "name": "Writing plans with bite-sized tasks", "evidence_paths": ["OS/superpowers/skills/writing-plans/SKILL.md", "OS/superpowers/skills/writing-plans/plan-document-reviewer-prompt.md"], "category": "core", "description": "Plans target 2–5-min tasks, exact file paths, complete code, verification steps; 'No placeholders' rule (TBD/TODO/'similar to Task N' are plan failures)" },
+    { "name": "Subagent-driven development with two-stage review", "evidence_paths": ["OS/superpowers/skills/subagent-driven-development/SKILL.md", "OS/superpowers/skills/subagent-driven-development/implementer-prompt.md", "OS/superpowers/skills/subagent-driven-development/spec-reviewer-prompt.md", "OS/superpowers/skills/subagent-driven-development/code-quality-reviewer-prompt.md"], "category": "core", "description": "Fresh subagent per task; spec-compliance review THEN code-quality review; explicit DONE/DONE_WITH_CONCERNS/NEEDS_CONTEXT/BLOCKED status handling" },
+    { "name": "Executing plans (batched + checkpoints)", "evidence_paths": ["OS/superpowers/skills/executing-plans/"], "category": "core", "description": "Alternative to subagent-driven for parallel sessions" },
+    { "name": "Git worktrees for isolated workspace", "evidence_paths": ["OS/superpowers/skills/using-git-worktrees/"], "category": "core", "description": "Mandatory isolated workspace on new branch before implementation" },
+    { "name": "Dispatching parallel agents", "evidence_paths": ["OS/superpowers/skills/dispatching-parallel-agents/"], "category": "core", "description": "Concurrent subagent workflows" },
+    { "name": "Systematic debugging (4-phase root cause)", "evidence_paths": ["OS/superpowers/skills/systematic-debugging/"], "category": "core", "description": "Includes root-cause-tracing, defense-in-depth, condition-based-waiting" },
+    { "name": "Verification before completion", "evidence_paths": ["OS/superpowers/skills/verification-before-completion/"], "category": "core", "description": "Ensures fix is actually fixed before claiming done" },
+    { "name": "Requesting / receiving code review", "evidence_paths": ["OS/superpowers/skills/requesting-code-review/", "OS/superpowers/skills/receiving-code-review/", "OS/superpowers/agents/code-reviewer.md"], "category": "core", "description": "Pre-review checklist + feedback loop; code-reviewer agent" },
+    { "name": "Finishing a dev branch", "evidence_paths": ["OS/superpowers/skills/finishing-a-development-branch/"], "category": "core", "description": "Merge/PR/keep/discard decision workflow" },
+    { "name": "Writing skills (meta)", "evidence_paths": ["OS/superpowers/skills/writing-skills/"], "category": "extensibility", "description": "Creating new skills with testing methodology" },
+    { "name": "Skill auto-triggering on context", "evidence_paths": ["OS/superpowers/hooks/session-start/", "OS/superpowers/skills/using-superpowers/"], "category": "core", "description": "'The skills trigger automatically' — session-start hook + skill discovery ensure mandatory workflows activate without user prompting" },
+    { "name": "Cross-harness plugin packaging", "evidence_paths": ["OS/superpowers/.claude-plugin/plugin.json", "OS/superpowers/.opencode/", "OS/superpowers/.codex/", "OS/superpowers/.cursor-plugin/", "OS/superpowers/gemini-extension.json"], "category": "integration", "description": "Claude Code, OpenCode, Codex, Cursor, Gemini CLI, Copilot — shipped as plugin across 6 harnesses" },
+    { "name": "Zero-dependency design", "evidence_paths": ["OS/superpowers/CLAUDE.md", "OS/superpowers/package.json"], "category": "governance", "description": "Explicitly 'zero-dependency plugin by design' — PRs adding third-party deps rejected" }
+  ],
+  "quality_signals": {
+    "test_framework": "custom + per-harness",
+    "test_categories": ["brainstorm-server", "claude-code", "explicit-skill-requests", "opencode", "skill-triggering", "subagent-driven-dev"],
+    "linter": "(n/a)",
+    "ci_provider": "GitHub Actions",
+    "ci_workflow_count_path": "OS/superpowers/.github/workflows/",
+    "release_notes_size_bytes": 57999,
+    "plugin_version": "5.0.7"
+  },
+  "documentation": {
+    "readme_sections": ["How it works", "Sponsorship", "Installation (per harness)", "The Basic Workflow (7 steps)", "What's Inside — Skills Library", "Philosophy", "Contributing", "Updating"],
+    "has_contributing": true,
+    "has_architecture_doc": false,
+    "has_release_notes": true,
+    "docs_page_count": 4,
+    "agents_md_symlink": "AGENTS.md -> CLAUDE.md",
+    "contributor_guidelines_path": "OS/superpowers/CLAUDE.md"
+  },
+  "extension_points": {
+    "plugins": { "mechanism": "Superpowers IS the plugin; extension is via 'writing-skills' in a separate plugin", "path": "OS/superpowers/skills/writing-skills/" },
+    "hooks": { "mechanism": "session-start hook + skill auto-trigger", "events": ["session-start"] },
+    "mcp": { "client": false, "server": false }
+  },
+  "unique_selling_points": [
+    "TDD is not recommended — it is enforced (the Iron Law; delete code written before tests)",
+    "Subagent-driven development with fresh context per task + TWO-stage review (spec compliance THEN code quality)",
+    "Skills auto-trigger — user does not need to remember to invoke them",
+    "Zero runtime dependencies by design",
+    "Published to Claude Code official marketplace"
+  ],
+  "limitations": [
+    { "description": "No structured executable-spec format — spec emerges from brainstorming dialogue, saved as a design document, not a typed artefact with IDs", "source": "README.md (spec 'teased out of conversation'); no spec-template.md" },
+    { "description": "No drift detection / roundtripping — once a plan is executed, there is no explicit artifact that tracks spec↔code divergence", "source": "skills/ contents (no drift/sync/roundtrip skill)" },
+    { "description": "Narrow command surface (3 slash commands) — methodology relies on auto-triggering vs explicit commands", "source": "commands/ (brainstorm, write-plan, execute-plan)" },
+    { "description": "Strict PR policy: 94% rejection rate for external PRs; contributors shaped by CLAUDE.md", "source": "OS/superpowers/CLAUDE.md" }
+  ],
+  "confidence": "HIGH",
+  "extraction_method": "filesystem-scan",
+  "skill_version": "1.0.0"
+}

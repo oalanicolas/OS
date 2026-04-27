@@ -1,0 +1,77 @@
+{
+  "generatedAt": "2026-04-19T22:30:00Z",
+  "subject": "superpowers",
+  "path": "OS/superpowers/",
+  "primary_language": "Markdown",
+  "secondary_languages": ["JavaScript"],
+  "stack": ["Node (via plugin)", "OpenCode plugin model"],
+  "license": "see LICENSE",
+  "tagline": "Superpowers — complete software development methodology for coding agents via composable skills",
+  "metrics": {
+    "loc_estimate": 20000,
+    "file_count": 45,
+    "top_level_dirs": ["agents", "commands", "docs", "hooks", "scripts", "skills", "tests"],
+    "readme_lines": 198,
+    "last_commit_date": "2026-04-16",
+    "github_stars": null,
+    "github_contributors": null
+  },
+  "modules": [
+    { "name": "skills (14)", "path": "skills/", "type": "library", "loc_estimate": 0 },
+    { "name": "commands (3)", "path": "commands/", "type": "library", "loc_estimate": 0 },
+    { "name": "agents", "path": "agents/", "type": "library", "loc_estimate": 0 },
+    { "name": "hooks", "path": "hooks/", "type": "library", "loc_estimate": 0 }
+  ],
+  "external_dependencies_top10": [],
+  "entry_points": [
+    { "kind": "plugin", "path": ".opencode/plugins/superpowers.js", "command": "auto-triggered" }
+  ],
+  "capabilities": [
+    { "name": "Subagent-driven development (SDD)", "evidence_paths": ["OS/superpowers/skills/subagent-driven-development/"], "category": "core", "description": "Agents work via subagent loops inspecting/reviewing work — trabalha autonomamente horas" },
+    { "name": "Red/Green TDD enforcement", "evidence_paths": ["OS/superpowers/skills/test-driven-development/"], "category": "core", "description": "True red/green, YAGNI, DRY" },
+    { "name": "Systematic debugging", "evidence_paths": ["OS/superpowers/skills/systematic-debugging/"], "category": "core", "description": "Skill dedicada a root-cause debugging" },
+    { "name": "Brainstorming → plan → execute", "evidence_paths": ["OS/superpowers/skills/brainstorming/", "OS/superpowers/skills/writing-plans/", "OS/superpowers/skills/executing-plans/", "OS/superpowers/commands/"], "category": "core", "description": "Spec→chunks→plan→execute pipeline" },
+    { "name": "Git worktree parallelism", "evidence_paths": ["OS/superpowers/skills/using-git-worktrees/", "OS/superpowers/skills/dispatching-parallel-agents/"], "category": "integration", "description": "Dispatch parallel agents em worktrees" },
+    { "name": "Verification before completion", "evidence_paths": ["OS/superpowers/skills/verification-before-completion/"], "category": "governance", "description": "Skill que força verify antes de declarar done" },
+    { "name": "Code review skills (giving + receiving)", "evidence_paths": ["OS/superpowers/skills/requesting-code-review/", "OS/superpowers/skills/receiving-code-review/"], "category": "core", "description": "Bidirectional review workflow" },
+    { "name": "Finishing a dev branch", "evidence_paths": ["OS/superpowers/skills/finishing-a-development-branch/"], "category": "core", "description": "Branch-completion workflow" },
+    { "name": "Writing skills (meta)", "evidence_paths": ["OS/superpowers/skills/writing-skills/"], "category": "extensibility", "description": "Skill para escrever skills" },
+    { "name": "Multi-platform distribution", "evidence_paths": ["OS/superpowers/README.md:32-117"], "category": "integration", "description": "Claude Code (official + 3p marketplace), Codex CLI, Codex App, Cursor, OpenCode, Copilot CLI, Gemini CLI" },
+    { "name": "Session-start hooks", "evidence_paths": ["OS/superpowers/hooks/session-start", "OS/superpowers/hooks/hooks.json"], "category": "governance", "description": "Auto-trigger hooks que injetam skills" },
+    { "name": "Code-reviewer agent", "evidence_paths": ["OS/superpowers/agents/code-reviewer.md"], "category": "extensibility", "description": "Agent especializado em review" }
+  ],
+  "quality_signals": {
+    "test_framework": "unknown",
+    "test_file_count": 0,
+    "linter": "unknown",
+    "ci_provider": "none",
+    "ci_workflow_count": 0
+  },
+  "documentation": {
+    "readme_sections": ["How it works", "Sponsorship", "Installation (Claude Code / Codex / Cursor / OpenCode / Copilot / Gemini)", "Basic Workflow"],
+    "has_contributing": true,
+    "has_architecture_doc": false,
+    "docs_page_count": 0
+  },
+  "extension_points": {
+    "plugins": { "mechanism": "OpenCode plugin + Claude plugin marketplace + Gemini extensions", "path": ".opencode/plugins/superpowers.js" },
+    "hooks": { "mechanism": "session-start hooks via hooks.json", "events": ["session-start"] },
+    "mcp": { "client": false, "server": false }
+  },
+  "unique_selling_points": [
+    "Subagent-driven development (SDD) — autonomia horas sem HITL",
+    "TDD enforcement real (red/green)",
+    "Zero-dependency plugin por design (README CLAUDE.md rules)",
+    "Distribuição oficial em Anthropic marketplace",
+    "Skills triggadas automaticamente via session-start hooks",
+    "94% PR rejection rate (sinal de curadoria rígida)"
+  ],
+  "limitations": [
+    { "description": "É plugin — não roda sozinho, precisa de host (Claude Code, Codex, Cursor, Gemini etc.)", "source": "README.md:27-117" },
+    { "description": "Sem tests, sem CI no repo (skills são prompt templates)", "source": "filesystem-scan" },
+    { "description": "Zero-dependency por design — não tem MCP, browser, voice etc.", "source": "CLAUDE.md" }
+  ],
+  "confidence": "HIGH",
+  "extraction_method": "filesystem-scan",
+  "skill_version": "1.0.0"
+}

@@ -1,0 +1,102 @@
+{
+  "generatedAt": "2026-04-19T22:54:14Z",
+  "comparison_type": "nway",
+  "slug": "enterprise-platforms-5way",
+  "subject_count": 5,
+  "subjects": [
+    { "slug": "Clawith", "path": "OS/Clawith/" },
+    { "slug": "agent-governance-toolkit", "path": "OS/agent-governance-toolkit/" },
+    { "slug": "memori-labs", "path": "OS/memori-labs/" },
+    { "slug": "dify", "path": "OS/dify/" },
+    { "slug": "paperclip", "path": "OS/paperclip/" }
+  ],
+  "dimension_pack": {
+    "id": "enterprise-agents-10d",
+    "description": "Pacote customizado de 10 dimensoes para avaliar plataformas opensource cujo alvo e 'agentes de IA servindo multiplas equipes/projetos numa empresa sem perder contexto'. Pesos somam 1.00.",
+    "dimensions": [
+      {
+        "id": "multi_tenancy",
+        "label": "Multi-tenancy",
+        "weight": 0.12,
+        "description": "Isolamento real entre teams/workspaces, com permissions e privacy walls entre agentes e dados."
+      },
+      {
+        "id": "governance_audit",
+        "label": "Governance & Audit",
+        "weight": 0.13,
+        "description": "Audit trail imutavel, policy enforcement em runtime, approval gates e aderencia ao OWASP Agentic Top 10."
+      },
+      {
+        "id": "paradigm_flexibility",
+        "label": "Paradigm flexibility",
+        "weight": 0.11,
+        "description": "Suporte a multiplos paradigmas (pipeline, role-play, company-sim, digital-employee) ou lock-in em um so."
+      },
+      {
+        "id": "memory_architecture",
+        "label": "Memory architecture",
+        "weight": 0.11,
+        "description": "Memory tipado em graph + vector + verbatim; atribuicao por entity/process; isolamento multi-tenant."
+      },
+      {
+        "id": "skill_marketplace",
+        "label": "Skill marketplace",
+        "weight": 0.10,
+        "description": "Packaging, share, approval workflow e distribuicao org-wide de skills/tools."
+      },
+      {
+        "id": "durability",
+        "label": "Durability",
+        "weight": 0.09,
+        "description": "Event-sourced replay, crash recovery, persistencia de sessoes longas e checkpoint."
+      },
+      {
+        "id": "safety_sandboxing",
+        "label": "Safety & sandboxing",
+        "weight": 0.09,
+        "description": "Sandboxed execution, safe-outputs handler, permission gates e privilege rings."
+      },
+      {
+        "id": "observability",
+        "label": "Observability",
+        "weight": 0.09,
+        "description": "Traces, custo por team, eval metrics, dashboards e SLOs integrados."
+      },
+      {
+        "id": "deployment_flex",
+        "label": "Deployment flex",
+        "weight": 0.08,
+        "description": "Self-host, cloud, hybrid; containerizacao; zero cloud lock-in."
+      },
+      {
+        "id": "community",
+        "label": "Community",
+        "weight": 0.08,
+        "description": "Tracao observavel (releases, i18n, discord, docs, adopters) — apenas o que o README/package.json atesta."
+      }
+    ],
+    "weights_sum": 1.00
+  },
+  "profile": "quick",
+  "skill_version": "1.0.0",
+  "output_root": "OS/_bench/enterprise-platforms-5way/",
+  "artifacts_generated": [
+    "metadata.json",
+    "_inventories/Clawith/inventory.json",
+    "_inventories/Clawith/inventory.md",
+    "_inventories/agent-governance-toolkit/inventory.json",
+    "_inventories/agent-governance-toolkit/inventory.md",
+    "_inventories/memori-labs/inventory.json",
+    "_inventories/memori-labs/inventory.md",
+    "_inventories/dify/inventory.json",
+    "_inventories/dify/inventory.md",
+    "_inventories/paperclip/inventory.json",
+    "_inventories/paperclip/inventory.md",
+    "comparison-matrix.md",
+    "comparison-matrix.json",
+    "scorecard.md",
+    "scorecard.json",
+    "executive-report.md"
+  ],
+  "quality_gate_passed": true
+}

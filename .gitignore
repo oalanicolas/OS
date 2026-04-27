@@ -1,0 +1,16 @@
+# Estratégia: ignorar tudo no top-level por padrão; só rastrear o que está
+# explicitamente liberado abaixo. Repos opensource clonados ficam de fora —
+# baixe-os com `./update.sh` (lê `repos.tsv`).
+
+/*
+
+# Rastreados explicitamente
+!/.gitignore
+!/.claude/
+!/_bench/
+!/README.md
+!/repos.tsv
+!/update.sh
+
+# Sempre ignorar (recursivo)
+.DS_Store

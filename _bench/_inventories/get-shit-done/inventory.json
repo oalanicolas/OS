@@ -1,0 +1,114 @@
+{
+  "generatedAt": "2026-04-19T22:30:00Z",
+  "subject": "get-shit-done",
+  "path": "OS/get-shit-done/",
+  "primary_language": "JavaScript/TypeScript",
+  "secondary_languages": ["Markdown", "Bash"],
+  "stack": ["Node.js", "Vitest", "SDK (TS)", "Claude Code / OpenCode / Codex / Gemini CLI / Cursor / Windsurf / Cline / Copilot / Kilo / Qwen / CodeBuddy / Antigravity / Augment / Trae"],
+  "license": "MIT",
+  "tagline": "Light-weight and powerful meta-prompting, context engineering and spec-driven development system — solves context rot (quality degradation as Claude fills its context window).",
+  "metrics": {
+    "loc_estimate": 146206,
+    "file_count": 808,
+    "top_level_dirs": [".github", ".plans", "agents", "assets", "bin", "commands", "docs", "get-shit-done", "hooks", "scripts", "sdk", "tests"],
+    "readme_lines": 928,
+    "last_commit_date": "2026-04-19T15:58:17-05:00",
+    "github_stars": null,
+    "github_contributors": null,
+    "source_url": "https://github.com/gsd-build/get-shit-done",
+    "npm_package": "get-shit-done-cc",
+    "npm_version": "1.37.1"
+  },
+  "modules": [
+    { "name": "commands", "path": "commands/gsd/", "type": "library", "description": "100+ slash commands for Claude Code (new-project, spec-phase, plan-phase, execute-phase, verify-work, ...)" },
+    { "name": "agents", "path": "agents/", "type": "library", "description": "32 specialized subagents (planner, executor, verifier, debugger, code-reviewer, researcher, nyquist-auditor, etc.)" },
+    { "name": "hooks", "path": "hooks/", "type": "library", "description": "12 runtime hooks: context-monitor, prompt-guard, read-guard, workflow-guard, phase-boundary, validate-commit, session-state, statusline, check-update, read-injection-scanner" },
+    { "name": "workflows", "path": "get-shit-done/workflows/", "type": "library", "description": "Workflow definitions that command files delegate to (plan-phase, execute-phase, spec-phase, etc.)" },
+    { "name": "templates", "path": "get-shit-done/templates/", "type": "library", "description": "Canonical artefact templates: spec.md, requirements.md, project.md, discovery.md, phase-prompt.md, verification-report.md, planner-subagent-prompt.md, UI-SPEC.md, AI-SPEC.md, SECURITY.md, UAT.md, VALIDATION.md, etc." },
+    { "name": "references", "path": "get-shit-done/references/", "type": "library", "description": "50+ reference docs (thinking-models, gates, TDD, context-budget, planner-antipatterns, model-profiles, ...)" },
+    { "name": "contexts", "path": "get-shit-done/contexts/", "type": "library", "description": "Context profiles: dev, research, review" },
+    { "name": "sdk", "path": "sdk/", "type": "package", "description": "TypeScript SDK exposing GSD primitives (query, workstream, planning)" },
+    { "name": "bin/install.js", "path": "bin/install.js", "type": "app", "description": "Installer invoked via npx get-shit-done-cc@latest across 14 runtimes" },
+    { "name": "tests", "path": "tests/", "type": "library", "description": "213+ vitest test files covering agents, hooks, commands, gates, SDK" }
+  ],
+  "external_dependencies_top10": [
+    { "package": "(see package.json)", "version": "", "purpose": "Runtime deps primarily devDependencies; GSD ships as a zero-runtime-dep installer + prompt/template bundle" }
+  ],
+  "entry_points": [
+    { "kind": "installer", "path": "bin/install.js", "command": "npx get-shit-done-cc@latest", "notes": "Selects runtime (Claude Code, OpenCode, Codex, Gemini, Cursor, Windsurf, Cline, Copilot, Kilo, Qwen, CodeBuddy, Antigravity, Augment, Trae) and copies commands/agents/hooks" },
+    { "kind": "commands", "path": "commands/gsd/spec-phase.md", "command": "/gsd-spec-phase <N>", "notes": "Socratic ambiguity-scored interview → SPEC.md per phase" },
+    { "kind": "commands", "path": "commands/gsd/plan-phase.md", "command": "/gsd-plan-phase <N>", "notes": "Executor-ready plan with checklists, gates, rollback" },
+    { "kind": "commands", "path": "commands/gsd/execute-phase.md", "command": "/gsd-execute-phase <N>", "notes": "Carries out plan under gate + hook enforcement" },
+    { "kind": "commands", "path": "commands/gsd/verify-work.md", "command": "/gsd-verify-work", "notes": "Acceptance criteria resolved to pass/fail" },
+    { "kind": "commands", "path": "commands/gsd/new-project.md", "command": "/gsd-new-project", "notes": "Greenfield init" },
+    { "kind": "commands", "path": "commands/gsd/map-codebase.md", "command": "/gsd-map-codebase", "notes": "Brownfield import — scan codebase to seed planning context" },
+    { "kind": "commands", "path": "commands/gsd/autonomous.md", "command": "/gsd-autonomous", "notes": "Run multiple phases end-to-end (--auto, --to N, --interactive flags)" }
+  ],
+  "capabilities": [
+    { "name": "Ambiguity-scored Socratic spec phase", "evidence_paths": ["OS/get-shit-done/get-shit-done/workflows/spec-phase.md", "OS/get-shit-done/get-shit-done/templates/spec.md"], "category": "core", "description": "4-dimension weighted ambiguity score (Goal 35%/Boundary 25%/Constraint 20%/Acceptance 20%) with gate ≤0.20 before SPEC.md is locked" },
+    { "name": "Falsifiable requirements with current/target/acceptance", "evidence_paths": ["OS/get-shit-done/get-shit-done/templates/spec.md", "OS/get-shit-done/get-shit-done/workflows/spec-phase.md"], "category": "core", "description": "Every requirement has Current state / Target state / pass-fail Acceptance criterion. Vague requirements rejected" },
+    { "name": "Spec → discuss → plan → execute → verify pipeline", "evidence_paths": ["OS/get-shit-done/commands/gsd/spec-phase.md", "OS/get-shit-done/commands/gsd/discuss-phase.md", "OS/get-shit-done/commands/gsd/plan-phase.md", "OS/get-shit-done/commands/gsd/execute-phase.md", "OS/get-shit-done/commands/gsd/verify-work.md"], "category": "core", "description": "5-stage pipeline with explicit handoffs; downstream agents treat upstream artefacts as locked" },
+    { "name": "32 specialized subagents", "evidence_paths": ["OS/get-shit-done/agents/"], "category": "core", "description": "Planner, Executor, Verifier, Debugger, Code-fixer, Code-reviewer, Researchers (advisor/domain/project/phase/ai), Security-auditor, Eval-auditor/planner, Nyquist-auditor (context compression), UI-auditor/checker/researcher, Doc-writer/verifier/synthesizer/classifier, Integration-checker, Roadmapper, Pattern-mapper, Plan-checker, Assumptions-analyzer, Framework-selector, Debug-session-manager, User-profiler, Intel-updater" },
+    { "name": "Context rot mitigation (context-monitor hook)", "evidence_paths": ["OS/get-shit-done/hooks/gsd-context-monitor.js", "OS/get-shit-done/docs/context-monitor.md"], "category": "core", "description": "Active context-window monitoring with thinning + escalation (the stated reason GSD exists)" },
+    { "name": "XML-prompt meta-prompting", "evidence_paths": ["OS/get-shit-done/README.md:70-83"], "category": "core", "description": "README declares: 'Behind the scenes: context engineering, XML prompt formatting, subagent orchestration, state management'" },
+    { "name": "Schema drift detection", "evidence_paths": ["OS/get-shit-done/docs/FEATURES.md:79", "OS/get-shit-done/docs/FEATURES.md:1440"], "category": "governance", "description": "ORM changes missing migrations are flagged at execute-time; gate blocks execution" },
+    { "name": "STATE.md filesystem drift detection", "evidence_paths": ["OS/get-shit-done/docs/FEATURES.md:1635-1650"], "category": "governance", "description": "REQ-STATE-01: `state validate` detects drift between STATE.md and filesystem, Sync mode reconstructs from disk" },
+    { "name": "Nyquist audit (context sampling/compression check)", "evidence_paths": ["OS/get-shit-done/agents/gsd-nyquist-auditor.md"], "category": "governance", "description": "Dedicated subagent auditing context compression quality" },
+    { "name": "Scope reduction detection", "evidence_paths": ["OS/get-shit-done/docs/FEATURES.md"], "category": "governance", "description": "Catches silent requirement drops between SPEC and plan" },
+    { "name": "Security enforcement gate", "evidence_paths": ["OS/get-shit-done/agents/gsd-security-auditor.md", "OS/get-shit-done/get-shit-done/templates/SECURITY.md"], "category": "governance", "description": "Anchors verification to threat model" },
+    { "name": "UI design contract phase", "evidence_paths": ["OS/get-shit-done/commands/gsd/ui-phase.md", "OS/get-shit-done/get-shit-done/templates/UI-SPEC.md"], "category": "core", "description": "UI-SPEC artefact type, with UI auditor/checker/researcher agents" },
+    { "name": "AI integration phase wizard", "evidence_paths": ["OS/get-shit-done/commands/gsd/ai-integration-phase.md", "OS/get-shit-done/get-shit-done/templates/AI-SPEC.md"], "category": "core", "description": "Dedicated AI-SPEC contract with eval-planner/eval-auditor" },
+    { "name": "Spike / sketch exploration", "evidence_paths": ["OS/get-shit-done/commands/gsd/spike.md", "OS/get-shit-done/commands/gsd/sketch.md", "OS/get-shit-done/commands/gsd/spike-wrap-up.md", "OS/get-shit-done/commands/gsd/sketch-wrap-up.md"], "category": "extensibility", "description": "2–5 focused experiments (spike) or 2–3 interactive HTML mockup variants (sketch), artefacts stored in .planning/" },
+    { "name": "Codebase map (brownfield)", "evidence_paths": ["OS/get-shit-done/commands/gsd/map-codebase.md", "OS/get-shit-done/commands/gsd/scan.md"], "category": "extensibility", "description": "Scan and index existing codebase to bootstrap planning context" },
+    { "name": "Extract learnings", "evidence_paths": ["OS/get-shit-done/commands/gsd/extract_learnings.md"], "category": "extensibility", "description": "Global learnings store across sessions" },
+    { "name": "Autonomous mode with checkpoints", "evidence_paths": ["OS/get-shit-done/commands/gsd/autonomous.md"], "category": "core", "description": "--auto / --to N / --interactive; runs multi-phase end-to-end" },
+    { "name": "Hook system (12 hooks)", "evidence_paths": ["OS/get-shit-done/hooks/"], "category": "extensibility", "description": "prompt-guard, read-guard, workflow-guard, phase-boundary, validate-commit, session-state, statusline, check-update, read-injection-scanner, context-monitor, commit-docs guard" },
+    { "name": "Multi-runtime installer (14+ harnesses)", "evidence_paths": ["OS/get-shit-done/bin/install.js", "OS/get-shit-done/docs/CLI-TOOLS.md"], "category": "integration", "description": "Claude Code, OpenCode, Codex, Gemini CLI, Cursor, Windsurf, Kilo, Copilot, Antigravity, Augment, Trae, Qwen Code, Cline, CodeBuddy" },
+    { "name": "Cross-AI peer review / execution delegation", "evidence_paths": ["OS/get-shit-done/docs/FEATURES.md", "OS/get-shit-done/commands/gsd/code-review.md"], "category": "integration", "description": "Cross-AI peer review + cross-AI execution delegation features" },
+    { "name": "Agent size-budget enforcement", "evidence_paths": ["OS/get-shit-done/tests/agent-size-budget.test.cjs"], "category": "governance", "description": "XL/Large/Default line-count limits enforced in CI" },
+    { "name": "TypeScript SDK", "evidence_paths": ["OS/get-shit-done/sdk/"], "category": "integration", "description": "Programmatic access to GSD primitives via TS SDK" },
+    { "name": "Response language config (i18n)", "evidence_paths": ["OS/get-shit-done/docs/FEATURES.md#83-response-language-config"], "category": "ux", "description": "User-facing text localised while code/paths stay English" },
+    { "name": "Vitest test suite (213+ files)", "evidence_paths": ["OS/get-shit-done/tests/", "OS/get-shit-done/vitest.config.ts"], "category": "core", "description": "Massive test matrix: agent frontmatter, agent-skills, architecture, atomic writes, anti-pattern enforcement, ai-evals, etc." }
+  ],
+  "quality_signals": {
+    "test_framework": "vitest",
+    "test_file_count": 213,
+    "linter": "(implicit via CI)",
+    "ci_provider": "GitHub Actions",
+    "ci_workflow_count_path": "OS/get-shit-done/.github/workflows/",
+    "hooks_count": 12,
+    "commands_count": 100,
+    "agents_count": 32,
+    "references_count": 50
+  },
+  "documentation": {
+    "readme_sections": ["Why I Built This", "Who This Is For", "Getting Started", "How It Works", "Commands", "Why It Works", "v1.37.0 Highlights"],
+    "has_contributing": true,
+    "has_architecture_doc": true,
+    "docs_page_count": 20,
+    "i18n_readmes": ["pt-BR", "zh-CN", "ja-JP", "ko-KR"],
+    "changelog_length": 126221
+  },
+  "extension_points": {
+    "plugins": { "mechanism": "Slash-command pack + agents pack + hooks pack installed per harness", "path": "OS/get-shit-done/commands/, agents/, hooks/" },
+    "hooks": { "mechanism": "Runtime hooks intercept read/prompt/workflow events", "events": ["prompt", "read", "workflow", "phase-boundary", "session-start", "commit", "context-threshold"] },
+    "mcp": { "client": false, "server": false },
+    "sdk": { "language": "TypeScript", "path": "OS/get-shit-done/sdk/" }
+  },
+  "unique_selling_points": [
+    "Explicitly solves 'context rot' via context-monitor hook + Nyquist auditor",
+    "Meta-prompting with XML-formatted prompts + 32 subagents + state management",
+    "Falsifiable requirements with ambiguity-scoring gate (4 weighted dimensions)",
+    "Two drift detection layers: schema drift (ORM vs migrations) + STATE.md filesystem drift",
+    "Works across 14+ coding harnesses from a single npm package",
+    "Governance features: size-budget enforcement, scope reduction detection, security gates, claim provenance"
+  ],
+  "limitations": [
+    { "description": "No executable-spec → test generation — specs define acceptance criteria but do not auto-generate failing tests", "source": "get-shit-done/templates/spec.md (acceptance criteria are checkboxes, not executable)" },
+    { "description": "Not a plugin inside a host runtime — installer-driven copy into each harness", "source": "bin/install.js" },
+    { "description": "Spec format is GSD-specific; not aligned with spec-kit requirement-ID conventions", "source": "get-shit-done/templates/spec.md vs spec-kit/templates/spec-template.md" }
+  ],
+  "confidence": "HIGH",
+  "extraction_method": "filesystem-scan",
+  "skill_version": "1.0.0"
+}

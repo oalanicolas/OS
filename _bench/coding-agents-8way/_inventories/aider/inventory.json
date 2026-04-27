@@ -1,0 +1,81 @@
+{
+  "generatedAt": "2026-04-19T22:30:00Z",
+  "subject": "aider",
+  "path": "OS/aider/",
+  "primary_language": "Python",
+  "secondary_languages": [],
+  "stack": ["Python 3.10-3.14", "litellm", "setuptools"],
+  "license": "Apache-2.0",
+  "tagline": "AI pair programming no terminal — funciona com qualquer LLM, mapeia o codebase, integra com git, voice-to-code",
+  "metrics": {
+    "loc_estimate": 60000,
+    "file_count": 80,
+    "top_level_dirs": ["aider", "benchmark", "docker", "requirements", "scripts", "tests"],
+    "readme_lines": 180,
+    "last_commit_date": "2026-04-19",
+    "github_stars": null,
+    "github_contributors": null
+  },
+  "modules": [
+    { "name": "aider", "path": "aider/", "type": "package", "loc_estimate": 60000 },
+    { "name": "benchmark", "path": "benchmark/", "type": "library", "loc_estimate": 0 },
+    { "name": "tests", "path": "tests/", "type": "library", "loc_estimate": 0 }
+  ],
+  "external_dependencies_top10": [
+    { "package": "litellm", "version": "unknown", "purpose": "LLM router multi-provider" },
+    { "package": "aiohttp", "version": "3.13.3", "purpose": "HTTP async client" }
+  ],
+  "entry_points": [
+    { "kind": "cli", "path": "aider/main.py", "command": "aider" }
+  ],
+  "capabilities": [
+    { "name": "100+ linguagens suportadas", "evidence_paths": ["OS/aider/aider/queries", "OS/aider/README.md:56"], "category": "core", "description": "Tree-sitter queries por linguagem" },
+    { "name": "Repomap", "evidence_paths": ["OS/aider/aider/repomap.py"], "category": "core", "description": "Mapeia o codebase inteiro para contexto RAG eficiente" },
+    { "name": "Git integration (auto-commit)", "evidence_paths": ["OS/aider/aider/repo.py", "OS/aider/README.md:63-68"], "category": "integration", "description": "Commits automáticos com mensagens sensatas, diffs navegáveis" },
+    { "name": "Multi-LLM via litellm", "evidence_paths": ["OS/aider/aider/llm.py", "OS/aider/aider/models.py"], "category": "integration", "description": "Claude, DeepSeek, OpenAI (o1, o3-mini, gpt-4o), Ollama local" },
+    { "name": "Coders (38 modos de edit)", "evidence_paths": ["OS/aider/aider/coders/"], "category": "core", "description": "Editblock, whole-file, patch, search-replace, architect, ask, help, context, editor_* variants" },
+    { "name": "Voice-to-code", "evidence_paths": ["OS/aider/aider/voice.py"], "category": "ux", "description": "Comando por voz" },
+    { "name": "Watch mode (IDE integration)", "evidence_paths": ["OS/aider/aider/watch.py", "OS/aider/aider/watch_prompts.py"], "category": "integration", "description": "Comentários no código triggam aider (use em qualquer IDE)" },
+    { "name": "Linting & testing auto", "evidence_paths": ["OS/aider/aider/linter.py", "OS/aider/README.md:91-94"], "category": "core", "description": "Auto-lint + auto-test após edits, fixa problemas detectados" },
+    { "name": "Image & web-page input", "evidence_paths": ["OS/aider/aider/scrape.py"], "category": "ux", "description": "Adiciona imagens/URLs ao contexto" },
+    { "name": "Copy/paste web-chat mode", "evidence_paths": ["OS/aider/aider/copypaste.py"], "category": "ux", "description": "Use LLM via web chat, aider orquestra copy/paste" },
+    { "name": "Onboarding wizard", "evidence_paths": ["OS/aider/aider/onboarding.py"], "category": "ux", "description": "Setup guiado" },
+    { "name": "Benchmark suite", "evidence_paths": ["OS/aider/benchmark/"], "category": "governance", "description": "Benchmark infra (Aider tem SWE-bench tracking)" },
+    { "name": "Singularity metric", "evidence_paths": ["OS/aider/README.md:35-37"], "category": "governance", "description": "88% do código novo escrito pelo próprio Aider" }
+  ],
+  "quality_signals": {
+    "test_framework": "pytest",
+    "test_file_count": 50,
+    "linter": "codespell + ruff (pyproject)",
+    "ci_provider": "github_actions",
+    "ci_workflow_count": 9
+  },
+  "documentation": {
+    "readme_sections": ["Features", "Cloud & local LLMs", "Repomap", "Git integration", "IDE", "Images & web", "Voice", "Linting", "Copy-paste"],
+    "has_contributing": true,
+    "has_architecture_doc": false,
+    "docs_page_count": 0
+  },
+  "extension_points": {
+    "plugins": { "mechanism": "coders are pluggable (38 variants)", "path": "OS/aider/aider/coders/" },
+    "hooks": { "mechanism": "none explicit", "events": [] },
+    "mcp": { "client": false, "server": false }
+  },
+  "unique_selling_points": [
+    "Repomap: contexto do codebase inteiro sem estourar tokens",
+    "100+ linguagens via tree-sitter",
+    "Git auto-commit idiomático",
+    "Multi-LLM via litellm (inclui local/Ollama)",
+    "5.7M installs PyPI (shield no README)",
+    "Voice-to-code nativo",
+    "Watch mode pra qualquer IDE via comentários no código"
+  ],
+  "limitations": [
+    { "description": "Sem MCP, sem plugins, sem skill system", "source": "filesystem-scan" },
+    { "description": "Single-agent (não tem subagents/multi-agent)", "source": "filesystem-scan" },
+    { "description": "Sem plan mode explícito", "source": "filesystem-scan" }
+  ],
+  "confidence": "HIGH",
+  "extraction_method": "filesystem-scan",
+  "skill_version": "1.0.0"
+}

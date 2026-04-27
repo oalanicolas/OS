@@ -1,0 +1,78 @@
+{
+  "scale": "0-100 weighted (cell 0-5 * weight * 20)",
+  "pack": "enterprise-agents-10d",
+  "overall": [
+    { "rank": 1, "subject": "Clawith", "score": 84.20 },
+    { "rank": 2, "subject": "agent-governance-toolkit", "score": 83.00 },
+    { "rank": 3, "subject": "dify", "score": 74.00 },
+    { "rank": 4, "subject": "paperclip", "score": 68.20 },
+    { "rank": 5, "subject": "memori-labs", "score": 58.00 }
+  ],
+  "per_dimension_weighted": {
+    "Clawith": {
+      "multi_tenancy": 12.0, "governance_audit": 10.4, "paradigm_flexibility": 8.8,
+      "memory_architecture": 8.8, "skill_marketplace": 10.0, "durability": 7.2,
+      "safety_sandboxing": 7.2, "observability": 5.4, "deployment_flex": 8.0,
+      "community": 6.4, "total": 84.2
+    },
+    "agent-governance-toolkit": {
+      "multi_tenancy": 7.2, "governance_audit": 13.0, "paradigm_flexibility": 11.0,
+      "memory_architecture": 4.4, "skill_marketplace": 6.0, "durability": 9.0,
+      "safety_sandboxing": 9.0, "observability": 9.0, "deployment_flex": 8.0,
+      "community": 6.4, "total": 83.0
+    },
+    "memori-labs": {
+      "multi_tenancy": 9.6, "governance_audit": 2.6, "paradigm_flexibility": 8.8,
+      "memory_architecture": 11.0, "skill_marketplace": 2.0, "durability": 5.4,
+      "safety_sandboxing": 3.6, "observability": 5.4, "deployment_flex": 4.8,
+      "community": 4.8, "total": 58.0
+    },
+    "dify": {
+      "multi_tenancy": 9.6, "governance_audit": 7.8, "paradigm_flexibility": 4.4,
+      "memory_architecture": 6.6, "skill_marketplace": 8.0, "durability": 7.2,
+      "safety_sandboxing": 5.4, "observability": 9.0, "deployment_flex": 8.0,
+      "community": 8.0, "total": 74.0
+    },
+    "paperclip": {
+      "multi_tenancy": 12.0, "governance_audit": 10.4, "paradigm_flexibility": 6.6,
+      "memory_architecture": 2.2, "skill_marketplace": 6.0, "durability": 7.2,
+      "safety_sandboxing": 5.4, "observability": 7.2, "deployment_flex": 6.4,
+      "community": 4.8, "total": 68.2
+    }
+  },
+  "focus_breakdowns": {
+    "engineering_team": {
+      "dimensions": ["paradigm_flexibility","skill_marketplace","deployment_flex","observability","community"],
+      "weight_sum": 0.46,
+      "ranking": [
+        { "rank": 1, "subject": "agent-governance-toolkit", "score": 87.83 },
+        { "rank": 2, "subject": "Clawith", "score": 83.91 },
+        { "rank": 3, "subject": "dify", "score": 81.30 },
+        { "rank": 4, "subject": "paperclip", "score": 67.39 },
+        { "rank": 5, "subject": "memori-labs", "score": 56.09 }
+      ]
+    },
+    "product_team": {
+      "dimensions": ["multi_tenancy","skill_marketplace","memory_architecture","observability","community"],
+      "weight_sum": 0.50,
+      "ranking": [
+        { "rank": 1, "subject": "Clawith", "score": 85.20 },
+        { "rank": 2, "subject": "dify", "score": 82.40 },
+        { "rank": 3, "subject": "agent-governance-toolkit", "score": 66.00 },
+        { "rank": 4, "subject": "memori-labs", "score": 65.60 },
+        { "rank": 5, "subject": "paperclip", "score": 64.40 }
+      ]
+    },
+    "enterprise_governance": {
+      "dimensions": ["governance_audit","multi_tenancy","safety_sandboxing","durability","observability"],
+      "weight_sum": 0.52,
+      "ranking": [
+        { "rank": 1, "subject": "agent-governance-toolkit", "score": 90.77 },
+        { "rank": 2, "subject": "Clawith", "score": 81.15 },
+        { "rank": 2, "subject": "paperclip", "score": 81.15 },
+        { "rank": 4, "subject": "dify", "score": 75.00 },
+        { "rank": 5, "subject": "memori-labs", "score": 51.15 }
+      ]
+    }
+  }
+}

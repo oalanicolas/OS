@@ -1,0 +1,92 @@
+{
+  "generatedAt": "2026-04-19T22:30:00Z",
+  "subject": "OpenHands",
+  "path": "OS/OpenHands/",
+  "primary_language": "Python",
+  "secondary_languages": ["TypeScript (frontend)"],
+  "stack": ["Python 3.12-3.14", "Poetry", "FastAPI", "docker", "kubernetes", "React frontend"],
+  "license": "MIT (core); source-available for enterprise/",
+  "tagline": "AI-Driven Development — SDK + CLI + GUI + Cloud; SWE-bench 77.6",
+  "metrics": {
+    "loc_estimate": 200000,
+    "file_count": 484,
+    "top_level_dirs": ["openhands", "frontend", "enterprise", "tests", "skills", "third_party", "containers", "dev_config", "openhands-ui", "kind", "scripts"],
+    "readme_lines": 153,
+    "last_commit_date": "2026-04-19",
+    "github_stars": null,
+    "github_contributors": null
+  },
+  "modules": [
+    { "name": "openhands", "path": "openhands/", "type": "package", "loc_estimate": 180000 },
+    { "name": "frontend", "path": "frontend/", "type": "app", "loc_estimate": 40000 },
+    { "name": "enterprise", "path": "enterprise/", "type": "service", "loc_estimate": 30000 },
+    { "name": "skills", "path": "skills/", "type": "library", "loc_estimate": 0 },
+    { "name": "tests", "path": "tests/", "type": "library", "loc_estimate": 20000 }
+  ],
+  "external_dependencies_top10": [
+    { "package": "anthropic[vertex]", "version": "—", "purpose": "LLM" },
+    { "package": "litellm", "version": ">=1.74.3", "purpose": "LLM router" },
+    { "package": "fastapi", "version": "—", "purpose": "HTTP API" },
+    { "package": "mcp", "version": ">=1.25", "purpose": "MCP protocol" },
+    { "package": "fastmcp", "version": ">=3.2,<4", "purpose": "MCP server helpers" },
+    { "package": "docker", "version": "—", "purpose": "Runtime sandbox" },
+    { "package": "kubernetes", "version": ">=33.1", "purpose": "K8s deploy" },
+    { "package": "playwright", "version": ">=1.55", "purpose": "Browser automation" },
+    { "package": "sqlalchemy[asyncio]", "version": ">=2.0.40", "purpose": "DB ORM" },
+    { "package": "redis", "version": ">=5.2,<7", "purpose": "State store" }
+  ],
+  "entry_points": [
+    { "kind": "cli", "path": "openhands/", "command": "openhands CLI" },
+    { "kind": "http", "path": "openhands/server/", "command": "FastAPI server" },
+    { "kind": "sdk", "path": "openhands-sdk==1.17", "command": "pip install openhands-ai" }
+  ],
+  "capabilities": [
+    { "name": "AgentHub (6 agents)", "evidence_paths": ["OS/OpenHands/openhands/agenthub/"], "category": "core", "description": "browsing_agent, codeact_agent, dummy_agent, loc_agent, readonly_agent, visualbrowsing_agent" },
+    { "name": "Runtime sandbox (docker/k8s)", "evidence_paths": ["OS/OpenHands/openhands/runtime/", "OS/OpenHands/docker-compose.yml"], "category": "core", "description": "Isolated execution sandbox; deployável via docker ou k8s" },
+    { "name": "Controller/event loop", "evidence_paths": ["OS/OpenHands/openhands/controller/", "OS/OpenHands/openhands/events/"], "category": "core", "description": "Event-driven agent loop" },
+    { "name": "SWE-bench 77.6", "evidence_paths": ["OS/OpenHands/README.md:11"], "category": "governance", "description": "Badge README. Benchmark tracking" },
+    { "name": "Memory system", "evidence_paths": ["OS/OpenHands/openhands/memory/"], "category": "core", "description": "Persistent memory" },
+    { "name": "MCP integration", "evidence_paths": ["OS/OpenHands/openhands/mcp/", "pyproject.toml mcp>=1.25, fastmcp"], "category": "integration", "description": "MCP client/server helpers" },
+    { "name": "Microagents", "evidence_paths": ["OS/OpenHands/openhands/microagent/"], "category": "extensibility", "description": "Pequenos agents especializados" },
+    { "name": "Security module", "evidence_paths": ["OS/OpenHands/openhands/security/"], "category": "governance", "description": "Security layer" },
+    { "name": "Resolver (issue-to-PR)", "evidence_paths": ["OS/OpenHands/openhands/resolver/"], "category": "integration", "description": "Auto-resolver para issues GitHub" },
+    { "name": "Skills", "evidence_paths": ["OS/OpenHands/skills/"], "category": "extensibility", "description": "Skill system" },
+    { "name": "Local GUI + REST API", "evidence_paths": ["OS/OpenHands/openhands/server/", "OS/OpenHands/frontend/"], "category": "ux", "description": "React SPA + FastAPI" },
+    { "name": "Enterprise deploy (k8s VPC)", "evidence_paths": ["OS/OpenHands/enterprise/", "OS/OpenHands/kind/"], "category": "governance", "description": "Self-host em VPC via k8s" },
+    { "name": "Integrations: Slack/Jira/Linear", "evidence_paths": ["OS/OpenHands/openhands/integrations/"], "category": "integration", "description": "Connectors corporativos" },
+    { "name": "Tech report (arxiv)", "evidence_paths": ["OS/OpenHands/README.md:14"], "category": "governance", "description": "arxiv.org/abs/2511.03690" }
+  ],
+  "quality_signals": {
+    "test_framework": "pytest + pytest-asyncio + pytest-playwright",
+    "test_file_count": 400,
+    "linter": "ruff 0.12.5 + mypy 1.17",
+    "ci_provider": "github_actions",
+    "ci_workflow_count": 19
+  },
+  "documentation": {
+    "readme_sections": ["OpenHands SDK", "OpenHands CLI", "Local GUI", "Cloud", "Enterprise", "Contributors"],
+    "has_contributing": true,
+    "has_architecture_doc": true,
+    "docs_page_count": 0
+  },
+  "extension_points": {
+    "plugins": { "mechanism": "agenthub agents", "path": "OS/OpenHands/openhands/agenthub/" },
+    "hooks": { "mechanism": "events bus", "events": ["agent", "runtime", "action"] },
+    "mcp": { "client": true, "server": true }
+  },
+  "unique_selling_points": [
+    "Deploy model completo: SDK + CLI + GUI + Cloud + Enterprise",
+    "SWE-bench 77.6 (líder entre os open-source)",
+    "Sandbox em docker/k8s nativo",
+    "Integrations corporativas (Slack/Jira/Linear)",
+    "RBAC + multi-user em Cloud/Enterprise",
+    "Playwright + browsing_agent + visualbrowsing_agent (web ops)"
+  ],
+  "limitations": [
+    { "description": "Enterprise é source-available, não MIT — requer licença após 1 mês", "source": "OS/OpenHands/README.md:68-69" },
+    { "description": "Runtime mais pesado (docker/k8s) — setup complexo", "source": "inference" }
+  ],
+  "confidence": "HIGH",
+  "extraction_method": "filesystem-scan",
+  "skill_version": "1.0.0"
+}

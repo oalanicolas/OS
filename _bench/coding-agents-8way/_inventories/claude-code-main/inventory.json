@@ -1,0 +1,84 @@
+{
+  "generatedAt": "2026-04-19T22:30:00Z",
+  "subject": "claude-code-main",
+  "path": "OS/claude-code-main/",
+  "primary_language": "TypeScript",
+  "secondary_languages": ["TSX"],
+  "stack": ["Bun", "React", "Ink", "Zod", "Commander.js", "MCP SDK"],
+  "license": "unknown (research-mirror)",
+  "tagline": "Anthropic's CLI for coding — tool-rich, agent-swarm capable, plugin/skill driven (public source snapshot)",
+  "metrics": {
+    "loc_estimate": 512000,
+    "file_count": 1884,
+    "top_level_dirs": ["src", "doc"],
+    "readme_lines": 280,
+    "last_commit_date": "not-a-git-repo",
+    "github_stars": null,
+    "github_contributors": null
+  },
+  "modules": [
+    { "name": "src", "path": "src/", "type": "app", "loc_estimate": 512000 },
+    { "name": "doc", "path": "doc/", "type": "library", "loc_estimate": 0 }
+  ],
+  "external_dependencies_top10": [
+    { "package": "@anthropic-ai/sdk", "version": "unknown", "purpose": "LLM API client" },
+    { "package": "@modelcontextprotocol/sdk", "version": "unknown", "purpose": "MCP protocol" },
+    { "package": "commander", "version": "unknown", "purpose": "CLI parsing" },
+    { "package": "ink", "version": "unknown", "purpose": "Terminal UI (React)" },
+    { "package": "react", "version": "unknown", "purpose": "UI framework" },
+    { "package": "zod", "version": "v4", "purpose": "Schema validation" }
+  ],
+  "entry_points": [
+    { "kind": "cli", "path": "src/main.tsx", "command": "claude (via Bun bundle)" }
+  ],
+  "capabilities": [
+    { "name": "Tool system (43 tools)", "evidence_paths": ["OS/claude-code-main/src/tools/"], "category": "core", "description": "Self-contained tool modules: Bash, FileRead/Write/Edit, Glob, Grep, Agent, Skill, MCP, LSP, Notebook, TaskCreate/Update, Team, Plan, Worktree, Cron, RemoteTrigger, Sleep, etc." },
+    { "name": "Slash commands (101)", "evidence_paths": ["OS/claude-code-main/src/commands/"], "category": "ux", "description": "Registered commands like /commit, /review, /compact, /mcp, /memory, /skills, /tasks, /vim, /desktop, /mobile" },
+    { "name": "Agent swarms / sub-agents", "evidence_paths": ["OS/claude-code-main/src/tools/AgentTool", "OS/claude-code-main/src/coordinator/coordinatorMode.ts"], "category": "core", "description": "AgentTool spawns sub-agents; coordinator/ handles multi-agent orchestration; TeamCreateTool for team-level parallel work" },
+    { "name": "Skill system", "evidence_paths": ["OS/claude-code-main/src/skills/", "OS/claude-code-main/src/tools/SkillTool"], "category": "extensibility", "description": "User-authored skills loaded via SkillTool with bundled skill loader" },
+    { "name": "Plugin architecture", "evidence_paths": ["OS/claude-code-main/src/plugins/builtinPlugins.ts", "OS/claude-code-main/src/plugins/bundled/"], "category": "extensibility", "description": "Built-in and third-party plugins via plugins/ subsystem" },
+    { "name": "MCP client and server", "evidence_paths": ["OS/claude-code-main/src/tools/MCPTool", "OS/claude-code-main/src/tools/ListMcpResourcesTool"], "category": "integration", "description": "Full MCP client (tools + resources + auth) with OAuth support" },
+    { "name": "Persistent memory (memdir)", "evidence_paths": ["OS/claude-code-main/src/memdir/memdir.ts", "OS/claude-code-main/src/memdir/findRelevantMemories.ts"], "category": "core", "description": "Memdir with age tracking, relevance scoring, team-mem sync" },
+    { "name": "Context compression", "evidence_paths": ["OS/claude-code-main/src/commands/compact"], "category": "core", "description": "/compact command backed by services/compact/" },
+    { "name": "Git worktree isolation", "evidence_paths": ["OS/claude-code-main/src/tools/EnterWorktreeTool", "OS/claude-code-main/src/tools/ExitWorktreeTool"], "category": "integration", "description": "Enter/Exit worktree tools for parallel agent work" },
+    { "name": "Plan mode", "evidence_paths": ["OS/claude-code-main/src/tools/EnterPlanModeTool", "OS/claude-code-main/src/tools/ExitPlanModeTool"], "category": "core", "description": "Toggleable planning phase" },
+    { "name": "Bridge (IDE + REPL)", "evidence_paths": ["OS/claude-code-main/src/bridge/"], "category": "integration", "description": "VS Code/JetBrains bidirectional bridge, REPL bridge, JWT auth, permission callbacks" },
+    { "name": "Remote sessions + desktop/mobile handoff", "evidence_paths": ["OS/claude-code-main/src/remote/", "OS/claude-code-main/src/commands/desktop", "OS/claude-code-main/src/commands/mobile"], "category": "ux", "description": "Remote session management + handoff commands" },
+    { "name": "LSP integration", "evidence_paths": ["OS/claude-code-main/src/tools/LSPTool"], "category": "integration", "description": "Language Server Protocol manager" },
+    { "name": "Hooks + permission system", "evidence_paths": ["OS/claude-code-main/src/hooks/"], "category": "governance", "description": "Permission checks on every tool invocation; configurable modes (default, plan, bypass, auto)" },
+    { "name": "Feature flags (Bun bundle)", "evidence_paths": ["OS/claude-code-main/src/plugins/bundled/"], "category": "governance", "description": "bun:bundle feature flags strip code at build time: PROACTIVE, KAIROS, BRIDGE_MODE, DAEMON, VOICE_MODE" },
+    { "name": "Cost tracking", "evidence_paths": ["OS/claude-code-main/src/cost-tracker.ts"], "category": "governance", "description": "Token cost tracking; /cost command" }
+  ],
+  "quality_signals": {
+    "test_framework": "unknown",
+    "test_file_count": 0,
+    "linter": "unknown",
+    "ci_provider": "unknown",
+    "ci_workflow_count": 0
+  },
+  "documentation": {
+    "readme_sections": ["Research Context", "Directory Structure", "Architecture Summary", "Key Files", "Tech Stack", "Notable Design Patterns"],
+    "has_contributing": false,
+    "has_architecture_doc": true,
+    "docs_page_count": 0
+  },
+  "extension_points": {
+    "plugins": { "mechanism": "plugin loader", "path": "OS/claude-code-main/src/plugins/" },
+    "hooks": { "mechanism": "lifecycle hooks", "events": ["toolPermission", "session"] },
+    "mcp": { "client": true, "server": false }
+  },
+  "unique_selling_points": [
+    "43-tool, 101-command surface area (largest in sample)",
+    "Full MCP client + skills + plugins + hooks",
+    "Multi-agent coordinator and Team tools",
+    "Memdir persistent memory + team-mem sync",
+    "IDE bridge (VS Code, JetBrains) via bidirectional protocol"
+  ],
+  "limitations": [
+    { "description": "Repo is a source mirror from a leaked snapshot; not officially Anthropic-maintained", "source": "OS/claude-code-main/README.md:1-47" },
+    { "description": "No test files or CI workflows in the mirror", "source": "filesystem-scan" }
+  ],
+  "confidence": "HIGH",
+  "extraction_method": "filesystem-scan",
+  "skill_version": "1.0.0"
+}

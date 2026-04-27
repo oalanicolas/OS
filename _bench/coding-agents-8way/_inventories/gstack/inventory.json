@@ -1,0 +1,89 @@
+{
+  "generatedAt": "2026-04-19T22:30:00Z",
+  "subject": "gstack",
+  "path": "OS/gstack/",
+  "primary_language": "TypeScript",
+  "secondary_languages": ["Shell", "Markdown"],
+  "stack": ["Bun", "Playwright (browser CLI)"],
+  "license": "MIT",
+  "tagline": "Garry Tan's open-source software factory — 23 slash-command skills on top of Claude Code/OpenClaw/Codex etc.",
+  "metrics": {
+    "loc_estimate": 40000,
+    "file_count": 250,
+    "top_level_dirs": ["browse", "hosts", "scripts", "test", "qa-only", "plan-design-review", "design-review", "ship", "review", "plan-ceo-review", "plan-eng-review", "autoplan", "benchmark", "canary", "codex", "land-and-deploy", "office-hours", "investigate", "retro", "bin", "document-release", "cso", "design-consultation", "design-shotgun", "open-gstack-browser", "design", "extension", "lib", "docs", "setup-deploy", "contrib"],
+    "readme_lines": 415,
+    "last_commit_date": "2026-04-19",
+    "github_stars": null,
+    "github_contributors": null
+  },
+  "modules": [
+    { "name": "browse", "path": "browse/", "type": "app", "loc_estimate": 15000 },
+    { "name": "design", "path": "design/", "type": "app", "loc_estimate": 5000 },
+    { "name": "skills (23 top-level dirs)", "path": "qa/,ship/,review/,plan-ceo-review/,...", "type": "library", "loc_estimate": 0 },
+    { "name": "hosts", "path": "hosts/", "type": "library", "loc_estimate": 2000 },
+    { "name": "scripts", "path": "scripts/", "type": "library", "loc_estimate": 5000 },
+    { "name": "extension", "path": "extension/", "type": "package", "loc_estimate": 3000 }
+  ],
+  "external_dependencies_top10": [
+    { "package": "bun", "version": ">=1.0", "purpose": "Runtime" },
+    { "package": "playwright", "version": "—", "purpose": "Browser (browse CLI)" }
+  ],
+  "entry_points": [
+    { "kind": "skill", "path": "SKILL.md", "command": "/office-hours, /plan-ceo-review, /plan-eng-review, /plan-design-review, /design-consultation, /design-shotgun, /design-html, /review, /ship, /land-and-deploy, /canary, /benchmark, /browse, /connect-chrome, /qa, /qa-only, /design-review, /setup-browser-cookies, /setup-deploy, /retro, /investigate, /document-release, /codex, /cso, /autoplan, /plan-devex-review, /devex-review, /careful, /freeze, /guard, /unfreeze, /gstack-upgrade, /learn" },
+    { "kind": "cli", "path": "browse/dist/browse", "command": "browse" },
+    { "kind": "cli", "path": "design/dist/design", "command": "design" }
+  ],
+  "capabilities": [
+    { "name": "23 slash-command skills", "evidence_paths": ["OS/gstack/SKILL.md", "OS/gstack/ship/", "OS/gstack/review/", "OS/gstack/qa/"], "category": "extensibility", "description": "Skills como /ship, /review, /qa, /cso (security), /autoplan, /office-hours, /benchmark, /canary etc." },
+    { "name": "Multi-host support (10 agents)", "evidence_paths": ["OS/gstack/hosts/", "OS/gstack/README.md:113-119"], "category": "integration", "description": "Claude Code, OpenAI Codex CLI, OpenCode, Cursor, Factory Droid, Slate, OpenClaw, Hermes, gbrain, Kiro" },
+    { "name": "CSO — OWASP Top 10 + STRIDE audit", "evidence_paths": ["OS/gstack/cso/"], "category": "governance", "description": "Security audit skill" },
+    { "name": "/qa + /qa-only (real browser)", "evidence_paths": ["OS/gstack/qa/", "OS/gstack/qa-only/", "OS/gstack/browse/"], "category": "core", "description": "Playwright-driven QA against live URLs" },
+    { "name": "/ship — release workflow", "evidence_paths": ["OS/gstack/ship/"], "category": "core", "description": "Release engineering with CHANGELOG + VERSION bump" },
+    { "name": "/review — code review", "evidence_paths": ["OS/gstack/review/"], "category": "core", "description": "PR review skill" },
+    { "name": "/autoplan + /plan-ceo-review + /plan-eng-review + /plan-design-review", "evidence_paths": ["OS/gstack/autoplan/", "OS/gstack/plan-ceo-review/", "OS/gstack/plan-eng-review/", "OS/gstack/plan-design-review/"], "category": "core", "description": "4-lane plan review (CEO/eng/design/devex)" },
+    { "name": "/office-hours (YC diagnostic)", "evidence_paths": ["OS/gstack/office-hours/"], "category": "core", "description": "Product interrogation 6 forcing questions" },
+    { "name": "/codex (second opinion via OpenAI Codex CLI)", "evidence_paths": ["OS/gstack/codex/"], "category": "integration", "description": "Multi-AI second opinion" },
+    { "name": "Browser CLI (Playwright)", "evidence_paths": ["OS/gstack/browse/src/commands.ts"], "category": "core", "description": "Own headless browser CLI" },
+    { "name": "Design CLI (GPT Image API)", "evidence_paths": ["OS/gstack/design/"], "category": "extensibility", "description": "Design generation" },
+    { "name": "Chrome extension + sidebar", "evidence_paths": ["OS/gstack/extension/"], "category": "integration", "description": "Side panel + activity feed + CSS inspector" },
+    { "name": "Evals (LLM-judge + E2E)", "evidence_paths": ["OS/gstack/test/skill-llm-eval.test.ts", "OS/gstack/test/skill-e2e-*.test.ts"], "category": "governance", "description": "2-tier eval (gate vs periodic), diff-based selection" },
+    { "name": "Slop-scan integration", "evidence_paths": ["OS/gstack/slop-scan.config.json", "OS/gstack/CLAUDE.md:slop-scan section"], "category": "governance", "description": "AI code quality scanner" },
+    { "name": "OpenClaw integration (ACP)", "evidence_paths": ["OS/gstack/openclaw/", "OS/gstack/README.md:65-91"], "category": "integration", "description": "ClawHub skills: office-hours, ceo-review, investigate, retro" },
+    { "name": "Team mode auto-update", "evidence_paths": ["OS/gstack/README.md:53-64"], "category": "integration", "description": "./setup --team → auto-update throttled 1/h" }
+  ],
+  "quality_signals": {
+    "test_framework": "bun test + claude -p (E2E)",
+    "test_file_count": 30,
+    "linter": "actionlint",
+    "ci_provider": "github_actions",
+    "ci_workflow_count": 5
+  },
+  "documentation": {
+    "readme_sections": ["Who this is for", "Quick start", "Install", "Team mode", "OpenClaw", "Native OpenClaw Skills", "Other AI agents"],
+    "has_contributing": true,
+    "has_architecture_doc": true,
+    "docs_page_count": 0
+  },
+  "extension_points": {
+    "plugins": { "mechanism": "add new skill dir + gen-skill-docs.ts", "path": "OS/gstack/scripts/gen-skill-docs.ts" },
+    "hooks": { "mechanism": "none", "events": [] },
+    "mcp": { "client": false, "server": false }
+  },
+  "unique_selling_points": [
+    "Engineering team as slash-commands (23 specialists)",
+    "Multi-host: 10 coding agents (não só Claude Code)",
+    "CSO: OWASP + STRIDE audit skill (único do benchmark)",
+    "/qa com browser real via Playwright CLI",
+    "ACP/OpenClaw dispatch + ClawHub marketplace skills",
+    "Team mode auto-update pra repos compartilhados",
+    "Evals próprios (LLM-judge + E2E) diff-based, 2-tier",
+    "Slop-scan integration pra AI code quality"
+  ],
+  "limitations": [
+    { "description": "Skills são Markdown/bash — depende do host agent", "source": "CLAUDE.md" },
+    { "description": "Sem MCP nativo (skill-oriented, não tool-oriented)", "source": "filesystem-scan" }
+  ],
+  "confidence": "HIGH",
+  "extraction_method": "filesystem-scan",
+  "skill_version": "1.0.0"
+}

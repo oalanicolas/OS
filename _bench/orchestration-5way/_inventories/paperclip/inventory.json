@@ -1,0 +1,104 @@
+{
+  "generatedAt": "2026-04-19T22:30:00Z",
+  "subject": "paperclip",
+  "path": "OS/paperclip/",
+  "primary_language": "TypeScript",
+  "secondary_languages": ["React", "SQL"],
+  "stack": ["Node.js >=20", "TypeScript", "pnpm monorepo", "React (UI)", "Drizzle ORM", "embedded-postgres", "tsx", "Vitest + Playwright", "MCP SDK"],
+  "license": "MIT",
+  "tagline": "Orquestração open-source para 'zero-human companies' — plataforma que coordena agentes heterogêneos (OpenClaw, Claude Code, Codex, Cursor) numa estrutura org-chart com metas, orçamentos e governança.",
+  "source_url": "https://github.com/paperclipai/paperclip",
+  "metrics": {
+    "loc_estimate": 279802,
+    "file_count": 1650,
+    "top_level_dirs": ["server", "ui", "cli", "packages", "docs", "tests", "evals", "skills", "adapter-plugin.md"],
+    "readme_lines": 500,
+    "last_commit_date": "2026-04-17",
+    "github_stars": null,
+    "github_contributors": null
+  },
+  "modules": [
+    { "name": "@paperclipai/server", "path": "server/", "type": "app", "loc_estimate": 0, "description": "Node HTTP server — routes, services, realtime, Drizzle ORM" },
+    { "name": "@paperclipai/ui", "path": "ui/", "type": "app", "loc_estimate": 0, "description": "React SPA dashboard" },
+    { "name": "@paperclipai/cli", "path": "cli/", "type": "app", "loc_estimate": 0, "description": "Paperclipai CLI" },
+    { "name": "@paperclipai/db", "path": "packages/db/", "type": "package", "loc_estimate": 0, "description": "Schemas Drizzle + migrations embedded-postgres" },
+    { "name": "@paperclipai/mcp-server", "path": "packages/mcp-server/", "type": "package", "loc_estimate": 0, "description": "MCP server — wrapper do REST Paperclip para agentes consumirem via protocol" },
+    { "name": "adapters", "path": "packages/adapters/", "type": "package", "loc_estimate": 0, "description": "Adapters para runtimes (claude-local, codex-local, cursor-local, gemini-local, openclaw-gateway, opencode-local, pi-local)" },
+    { "name": "adapter-utils", "path": "packages/adapter-utils/", "type": "package", "loc_estimate": 0, "description": "Utilitários compartilhados entre adapters" },
+    { "name": "plugins", "path": "packages/plugins/", "type": "package", "loc_estimate": 0, "description": "Plugin system" },
+    { "name": "skills", "path": "skills/", "type": "library", "loc_estimate": 0, "description": "Company/agent skill packages" },
+    { "name": "docker", "path": "docker/", "type": "service", "loc_estimate": 0, "description": "Dockerfile + compose" },
+    { "name": "evals", "path": "evals/", "type": "library", "loc_estimate": 0, "description": "Promptfoo evals" },
+    { "name": "tests", "path": "tests/", "type": "library", "loc_estimate": 0, "description": "E2E Playwright + release-smoke" }
+  ],
+  "external_dependencies_top10": [
+    { "package": "@paperclipai/db (drizzle-orm)", "version": "workspace", "purpose": "Persistência relacional (companies, agents, goals, heartbeats)" },
+    { "package": "embedded-postgres", "version": "18.1.0-beta", "purpose": "Postgres embutido para dev zero-config" },
+    { "package": "tsx", "version": "vendored em cli/", "purpose": "TS runtime" },
+    { "package": "typescript", "version": "^5.7.3", "purpose": "Type system" },
+    { "package": "vitest", "version": "^3.0.5", "purpose": "Unit tests" },
+    { "package": "@playwright/test", "version": "^1.58.2", "purpose": "E2E" },
+    { "package": "@modelcontextprotocol/sdk", "version": "presumed em mcp-server/package.json", "purpose": "MCP protocol" },
+    { "package": "esbuild", "version": "^0.27.3", "purpose": "Bundler" },
+    { "package": "cross-env", "version": "^10.1.0", "purpose": "Env vars cross-platform" },
+    { "package": "promptfoo", "version": "^0.103.3", "purpose": "Eval framework" }
+  ],
+  "entry_points": [
+    { "kind": "cli", "path": "cli/src/index.ts", "command": "pnpm paperclipai" },
+    { "kind": "http_server", "path": "server/src/index.ts", "command": "pnpm dev:server" },
+    { "kind": "mcp_server", "path": "packages/mcp-server/src/stdio.ts", "command": "npx -y @paperclipai/mcp-server" },
+    { "kind": "docker", "path": "Dockerfile", "command": "docker build ." }
+  ],
+  "capabilities": [
+    { "name": "Company-sim abstraction (org chart)", "evidence_paths": ["OS/paperclip/server/src/services/companies.ts", "OS/paperclip/server/src/services/company-member-roles.ts", "OS/paperclip/server/src/routes/companies.ts", "OS/paperclip/server/src/routes/org-chart-svg.ts"], "category": "core", "description": "Companies, roles, org-chart como abstração de orquestração (CEO, CTO, engineers, etc.)" },
+    { "name": "Heterogeneous agent adapters", "evidence_paths": ["OS/paperclip/packages/adapters/claude-local/", "OS/paperclip/packages/adapters/codex-local/", "OS/paperclip/packages/adapters/cursor-local/", "OS/paperclip/packages/adapters/gemini-local/", "OS/paperclip/packages/adapters/openclaw-gateway/"], "category": "integration", "description": "Adapter per runtime — qualquer agent que receba heartbeat é 'hired'" },
+    { "name": "Goal + budget governance", "evidence_paths": ["OS/paperclip/server/src/services/budgets.ts", "OS/paperclip/server/src/services/goals.ts", "OS/paperclip/server/src/services/finance.ts", "OS/paperclip/server/src/services/costs.ts"], "category": "governance", "description": "Budgets, goals, finance, costs — governança tipo empresa" },
+    { "name": "Agent approval workflow", "evidence_paths": ["OS/paperclip/server/src/services/approvals.ts", "OS/paperclip/server/src/routes/approvals.ts"], "category": "governance", "description": "Human-in-the-loop approvals com aprovação/negação no dashboard e mobile" },
+    { "name": "Execution workspaces (git worktrees)", "evidence_paths": ["OS/paperclip/server/src/services/execution-workspaces.ts", "OS/paperclip/server/src/routes/execution-workspaces.ts"], "category": "core", "description": "Workspaces isolados por agent/tarefa (git worktrees)" },
+    { "name": "Heartbeat run summaries", "evidence_paths": ["OS/paperclip/server/src/services/heartbeat-run-summary.ts"], "category": "observability", "description": "Resumos truncados por run + comments (monitoramento persistente)" },
+    { "name": "Realtime WebSocket live events", "evidence_paths": ["OS/paperclip/server/src/realtime/live-events-ws.ts"], "category": "observability", "description": "WS push de eventos live pro dashboard/mobile" },
+    { "name": "Routines (cron scheduled agents)", "evidence_paths": ["OS/paperclip/server/src/routes/routines.ts", "OS/paperclip/server/src/services/cron.ts"], "category": "core", "description": "Tasks agendadas recorrentes por cron" },
+    { "name": "MCP server (external tool surface)", "evidence_paths": ["OS/paperclip/packages/mcp-server/src/tools.ts", "OS/paperclip/packages/mcp-server/README.md"], "category": "extensibility", "description": "MCP wrapper do REST — agentes consomem Paperclip como tool MCP" },
+    { "name": "Plugin system", "evidence_paths": ["OS/paperclip/packages/plugins/", "OS/paperclip/server/src/routes/plugins.ts", "OS/paperclip/server/src/routes/plugin-ui-static.ts"], "category": "extensibility", "description": "Plugins server-side + plugin UI static" },
+    { "name": "Company portability (import/export)", "evidence_paths": ["OS/paperclip/server/src/services/company-portability.ts", "OS/paperclip/server/src/services/company-export-readme.ts"], "category": "extensibility", "description": "Pacotes de empresa importáveis/exportáveis — roadmap Clipmart" },
+    { "name": "Telegram mobile approvals (via adapters)", "evidence_paths": ["OS/paperclip/doc/assets/header.png (README claim)", "OS/paperclip/server/src/routes/inbox-dismissals.ts"], "category": "ux", "description": "Gerenciar empresas do celular (Telegram/mobile)" },
+    { "name": "Embedded Postgres", "evidence_paths": ["OS/paperclip/patches/embedded-postgres@18.1.0-beta.16.patch"], "category": "integration", "description": "DB durável zero-config (Drizzle ORM + embedded Postgres)" },
+    { "name": "Promptfoo evals", "evidence_paths": ["OS/paperclip/evals/promptfoo/"], "category": "governance", "description": "Smoke evals de prompts no CI" },
+    { "name": "Docker deployment", "evidence_paths": ["OS/paperclip/Dockerfile", "OS/paperclip/docker/"], "category": "integration", "description": "Imagem Docker pronta + compose" },
+    { "name": "Log redaction + PII handling", "evidence_paths": ["OS/paperclip/server/src/log-redaction.ts", "OS/paperclip/server/src/redaction.ts", "OS/paperclip/server/src/services/feedback-redaction.ts"], "category": "governance", "description": "Redação automática de segredos/PII em logs" }
+  ],
+  "quality_signals": {
+    "test_framework": "Vitest + Playwright",
+    "test_file_count": 255,
+    "linter": "typescript (tsc) + eslint (presumido)",
+    "ci_provider": "GitHub Actions",
+    "ci_workflow_count": 6
+  },
+  "documentation": {
+    "readme_sections": ["What is Paperclip", "Quickstart", "Paperclip is right for you if", "Works with"],
+    "has_contributing": true,
+    "has_architecture_doc": true,
+    "docs_page_count": 80
+  },
+  "extension_points": {
+    "plugins": { "mechanism": "adapter plugins + server plugins", "path": "packages/plugins/ + packages/adapters/" },
+    "hooks": { "mechanism": "routes + service hooks + WS", "events": ["heartbeat", "approval", "goal-update", "budget-alert"] },
+    "mcp": { "client": false, "server": true }
+  },
+  "unique_selling_points": [
+    "Company-sim: abstração 'empresa' (org-chart + budgets + goals) é diferencial único vs frameworks puramente de chat",
+    "Agent-agnostic: orquestra Claude Code, Codex, Cursor, OpenClaw, bash HTTP — 'se recebe heartbeat, está contratado'",
+    "Full-stack (server+UI+CLI+DB embutido+MCP+Docker) — pronto para auto-hosting",
+    "Governança embutida (approvals + budgets + audit + cost tracking) — nível 'empresa'",
+    "Mobile-first (dashboard + Telegram approvals) — gerencie empresas do celular",
+    "Clipmart roadmap — marketplace de empresas importáveis"
+  ],
+  "limitations": [
+    { "description": "Não é framework-lib para criar agents do zero (é control plane) — depende de adapters externos", "source": "README 'Works with' + packages/adapters/" },
+    { "description": "TypeScript/Node-only no servidor — sem SDK Python nativo", "source": "package.json monorepo" },
+    { "description": "Complexidade alta de stack (server+UI+DB+MCP) vs frameworks single-file", "source": "packages/ monorepo" }
+  ],
+  "confidence": "HIGH",
+  "extraction_method": "filesystem-scan",
+  "skill_version": "1.0.0"
+}

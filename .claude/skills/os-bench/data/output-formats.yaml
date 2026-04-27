@@ -1,0 +1,91 @@
+# os-bench Output Formats v1.0
+# Formatos disponíveis pra artefatos de benchmark.
+# Referenciado por: tasks/bench-*.md
+
+formats:
+
+  metadata:
+    description: "Machine-readable header do benchmark (tipo, subjects, pack, date, versão)"
+    template: templates/metadata-tmpl.json
+    extensions: [json]
+    when: "Sempre — primeiro artefato gerado em qualquer *bench-*"
+
+  inventory:
+    description: "Fact-extraction de 1 subject (filesystem scan + doc scan)"
+    template: templates/inventory-tmpl.md
+    extensions: [json, md]
+    when: "Sempre — 1 inventário por subject comparado"
+
+  comparison_matrix:
+    description: "Matriz de features/capabilities com classes de equivalência (Forte/Parcial/Sem_Equiv)"
+    template: templates/comparison-matrix-tmpl.md
+    extensions: [json, md]
+    when: "Sempre — core output"
+
+  scorecard:
+    description: "Scoring ponderado multi-dimensão por pack (Forrester-style)"
+    template: templates/scorecard-tmpl.md
+    extensions: [json, md]
+    when: "Sempre — core output"
+
+  gap_analysis:
+    description: "Análise bidirecional de gaps com severidade/complexidade/prioridade"
+    template: templates/gap-analysis-tmpl.md
+    extensions: [json, md]
+    when: "Apenas em 2-way (*bench-pair); skipped em n-way (seria N² pares)"
+
+  battle_card:
+    description: "Resumo 1-page pra decisão executiva"
+    template: templates/battle-card-tmpl.md
+    extensions: [md]
+    when: "Apenas em 2-way"
+
+  executive_report:
+    description: "Narrativa completa com recomendações e metodologia"
+    template: templates/executive-report-tmpl.md
+    extensions: [md]
+    when: "Sempre (2-way e n-way) — output final"
+
+  absorption_roadmap:
+    description: "Roadmap priorizado de features do subject B pra absorver em A"
+    template: templates/absorption-roadmap-tmpl.md
+    extensions: [md]
+    when: "Apenas quando *bench-absorb é invocado; salvo em deep/"
+
+  fact_database:
+    description: "Inventário deep em YAML estruturado (modules, deps, data_model, api_surface)"
+    template: templates/fact-database-tmpl.yaml
+    extensions: [yaml]
+    when: "Opcional — gerado junto ao inventory quando profile=full"
+
+  rule_catalog:
+    description: "Catálogo de invariantes/regras extraídas do subject (simplificado)"
+    template: templates/rule-catalog-tmpl.md
+    extensions: [md]
+    when: "Opcional — gerar apenas se subject tem policies/rules formais (ex: orchestration frameworks)"
+
+  decision_model:
+    description: "Modelagem de decisões (DMN-lite) quando o subject expõe decision tables"
+    template: templates/decision-model-tmpl.yaml
+    extensions: [yaml]
+    when: "Opcional — raro em OS; gerar se e só se subject modela decisões formalmente"
+
+profiles:
+
+  quick:
+    description: "Benchmark rápido — só core artifacts"
+    includes: [metadata, inventory, comparison_matrix, scorecard, battle_card]
+    excludes: [gap_analysis, executive_report, fact_database, rule_catalog, decision_model]
+    when: "Decisão rápida, 20–40 min"
+
+  standard:
+    description: "Benchmark completo — todos os core + gap + executive"
+    includes: [metadata, inventory, comparison_matrix, scorecard, gap_analysis, battle_card, executive_report]
+    excludes: [fact_database, rule_catalog, decision_model]
+    when: "Default — 1–2h"
+
+  full:
+    description: "Benchmark completo + deep artifacts"
+    includes: [metadata, inventory, comparison_matrix, scorecard, gap_analysis, battle_card, executive_report, fact_database, absorption_roadmap]
+    excludes: []
+    when: "Decisão estratégica de absorção — 2–4h"

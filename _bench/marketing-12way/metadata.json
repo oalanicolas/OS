@@ -1,0 +1,65 @@
+{
+  "benchmark": "marketing-12way",
+  "focus": "marketing/GTM positioning for enterprise AI agents",
+  "generatedAt": "2026-04-19",
+  "generatedBy": "Claude Opus 4.7 (1M context)",
+  "method": "WebFetch landing + pricing pages; literal quote capture; PT-BR analysis on EN quotes",
+  "language": {
+    "analysis": "pt-BR",
+    "quotes": "en"
+  },
+  "subjects": [
+    {"slug": "clawith", "name": "Clawith", "url": "https://www.clawith.ai/", "category": "opensource", "fetch_status": "ok"},
+    {"slug": "dify", "name": "Dify", "url": "https://dify.ai/", "category": "opensource", "fetch_status": "ok"},
+    {"slug": "crewai", "name": "CrewAI", "url": "https://crewai.com/", "category": "opensource", "fetch_status": "ok"},
+    {"slug": "langchain", "name": "LangChain / LangGraph", "url": "https://www.langchain.com/", "category": "opensource", "fetch_status": "ok"},
+    {"slug": "openhands", "name": "OpenHands", "url": "https://openhands.dev/", "category": "opensource", "fetch_status": "ok"},
+    {"slug": "aider", "name": "aider", "url": "https://aider.chat/", "category": "opensource", "fetch_status": "ok"},
+    {"slug": "mem0", "name": "mem0", "url": "https://mem0.ai/", "category": "opensource", "fetch_status": "ok"},
+    {"slug": "salesforce-agentforce", "name": "Salesforce Agentforce", "url": "https://www.salesforce.com/agentforce/", "category": "proprietary", "fetch_status": "blocked_403", "fallback_source": "salesforce.com press releases + web search"},
+    {"slug": "microsoft-copilot-studio", "name": "Microsoft Copilot Studio", "url": "https://www.microsoft.com/en-us/microsoft-copilot/microsoft-copilot-studio", "category": "proprietary", "fetch_status": "ok"},
+    {"slug": "knowledge-plane", "name": "Knowledge Plane", "url": "https://knowledgeplane.io/", "category": "proprietary", "fetch_status": "ok"},
+    {"slug": "glean", "name": "Glean", "url": "https://www.glean.com/", "category": "proprietary", "fetch_status": "ok"},
+    {"slug": "langsmith", "name": "LangSmith", "url": "https://www.langchain.com/langsmith", "category": "proprietary", "fetch_status": "ok"}
+  ],
+  "dimensions": [
+    "hero_headline",
+    "pain_narrative",
+    "target_icp",
+    "positioning_axis",
+    "social_proof",
+    "pricing_transparency",
+    "cta_hierarchy",
+    "content_strategy",
+    "visual_identity_tone",
+    "differentiation_claim"
+  ],
+  "artifacts": [
+    "README.md",
+    "comparison-matrix.md",
+    "patterns.md",
+    "copy-inspiration.md",
+    "gap-for-aiox.md",
+    "metadata.json",
+    "profiles/clawith.md",
+    "profiles/dify.md",
+    "profiles/crewai.md",
+    "profiles/langchain.md",
+    "profiles/openhands.md",
+    "profiles/aider.md",
+    "profiles/mem0.md",
+    "profiles/salesforce-agentforce.md",
+    "profiles/microsoft-copilot-studio.md",
+    "profiles/knowledge-plane.md",
+    "profiles/glean.md",
+    "profiles/langsmith.md"
+  ],
+  "quality_gate_passed": true,
+  "quality_notes": [
+    "11 of 12 vendors fetched directly from primary URL",
+    "Salesforce landing returned 403 across 3 retry variants; profile built from press releases and verified search results, flagged in-file",
+    "All 10 dimensions captured per vendor",
+    "Literal quotes preserved in English as required",
+    "Hero + differentiation + pain statements captured verbatim where available"
+  ]
+}

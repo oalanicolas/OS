@@ -1,0 +1,89 @@
+{
+  "generatedAt": "2026-04-19T22:19:37Z",
+  "subject": "mempalace",
+  "path": "OS/mempalace/",
+  "primary_language": "Python",
+  "secondary_languages": ["Shell", "Markdown"],
+  "stack": ["Python 3.9+", "ChromaDB", "SQLite", "MCP Protocol", "ruff", "hatch"],
+  "license": "MIT",
+  "tagline": "Local-first AI memory. Verbatim storage, pluggable backend, 96.6% R@5 raw em LongMemEval, zero API calls.",
+  "metrics": {
+    "loc_estimate": 35025,
+    "file_count": 231,
+    "top_level_dirs": ["assets", "benchmarks", "docs", "examples", "hooks", "integrations", "mempalace", "tests", "website"],
+    "readme_lines": 188,
+    "last_commit_date": "2026-04-17T00:37:45-03:00",
+    "github_stars": null,
+    "github_contributors": null
+  },
+  "modules": [
+    { "name": "mempalace", "path": "mempalace/", "type": "package", "loc_estimate": 30000 },
+    { "name": "mempalace/backends", "path": "mempalace/backends/", "type": "library", "loc_estimate": 1500 },
+    { "name": "hooks", "path": "hooks/", "type": "library", "loc_estimate": 100 },
+    { "name": "benchmarks", "path": "benchmarks/", "type": "library", "loc_estimate": 3000 },
+    { "name": "tests", "path": "tests/", "type": "library", "loc_estimate": 0 },
+    { "name": "integrations", "path": "integrations/", "type": "library", "loc_estimate": 0 }
+  ],
+  "external_dependencies_top10": [
+    { "package": "chromadb", "version": ">=0.5.0", "purpose": "vector store default (pluggable)" },
+    { "package": "pyyaml", "version": ">=6.0,<7", "purpose": "config parsing" },
+    { "package": "pytest", "version": ">=7.0", "purpose": "dev: test runner" },
+    { "package": "pytest-cov", "version": ">=4.0", "purpose": "dev: coverage 85% threshold" },
+    { "package": "ruff", "version": ">=0.4.0", "purpose": "dev: linter + formatter" },
+    { "package": "psutil", "version": ">=5.9", "purpose": "dev: performance checks" },
+    { "package": "autocorrect", "version": ">=2.0", "purpose": "optional: spellcheck auto-correct" }
+  ],
+  "entry_points": [
+    { "kind": "cli", "path": "mempalace/cli.py", "command": "mempalace" },
+    { "kind": "mcp", "path": "mempalace/mcp_server.py", "command": "mempalace mcp" }
+  ],
+  "capabilities": [
+    { "name": "Verbatim storage (sem paraphrase)", "evidence_paths": ["OS/mempalace/mempalace/palace.py", "OS/mempalace/CLAUDE.md"], "category": "core", "description": "Armazena conversas verbatim em drawers, principio inegociavel no CLAUDE.md" },
+    { "name": "Wings/Rooms/Drawers hierarchy", "evidence_paths": ["OS/mempalace/mempalace/palace.py", "OS/mempalace/mempalace/palace_graph.py"], "category": "core", "description": "Estrutura de memoria por pessoa/projeto (wing), dia/sessao (room), conteudo verbatim (drawer)" },
+    { "name": "Pluggable storage backends", "evidence_paths": ["OS/mempalace/mempalace/backends/base.py", "OS/mempalace/mempalace/backends/chroma.py"], "category": "extensibility", "description": "Interface abstrata, ChromaDB default, outros backends drop-in" },
+    { "name": "Hybrid BM25 + vector search", "evidence_paths": ["OS/mempalace/mempalace/searcher.py"], "category": "core", "description": "Okapi-BM25 re-rank sobre candidates vector, IDF sobre corpus fornecido" },
+    { "name": "Temporal knowledge graph (SQLite)", "evidence_paths": ["OS/mempalace/mempalace/knowledge_graph.py"], "category": "core", "description": "Entities + typed predicates + valid_from/valid_to em SQLite local" },
+    { "name": "AAAK compression dialect", "evidence_paths": ["OS/mempalace/mempalace/dialect.py"], "category": "core", "description": "Compressao simbolica do index layer, LLM scan rapido" },
+    { "name": "29 MCP tools", "evidence_paths": ["OS/mempalace/mempalace/mcp_server.py"], "category": "integration", "description": "Palace reads/writes, knowledge graph, cross-wing nav, agent diaries" },
+    { "name": "LongMemEval R@5 96.6% raw", "evidence_paths": ["OS/mempalace/benchmarks/longmemeval_bench.py", "OS/mempalace/benchmarks/BENCHMARKS.md", "OS/mempalace/benchmarks/results_mempal_raw_session_20260414_1629.jsonl"], "category": "governance", "description": "96.6% R@5 raw, 98.4% R@5 hybrid v4 held-out, sem LLM; reproducivel" },
+    { "name": "Entity detection + registry", "evidence_paths": ["OS/mempalace/mempalace/entity_detector.py", "OS/mempalace/mempalace/entity_registry.py"], "category": "core", "description": "Auto-detect pessoas/projetos com disambiguation por DOB/ID/context" },
+    { "name": "L0-L3 wake-up stack", "evidence_paths": ["OS/mempalace/mempalace/layers.py"], "category": "core", "description": "Camadas de memory injection com budget <100ms startup" },
+    { "name": "Claude Code hooks (Stop + PreCompact)", "evidence_paths": ["OS/mempalace/hooks/mempal_save_hook.sh", "OS/mempalace/hooks/mempal_precompact_hook.sh"], "category": "integration", "description": "Auto-save diary + pre-compact state save" },
+    { "name": "Palace repair + dedup", "evidence_paths": ["OS/mempalace/mempalace/repair.py", "OS/mempalace/mempalace/dedup.py"], "category": "governance", "description": "Consistency checks + dedup de drawers" },
+    { "name": "Prompt injection sanitizer", "evidence_paths": ["OS/mempalace/mempalace/query_sanitizer.py"], "category": "governance", "description": "Query sanitizer contra prompt contamination" }
+  ],
+  "quality_signals": {
+    "test_framework": "pytest",
+    "test_file_count": 40,
+    "linter": "ruff",
+    "ci_provider": "GitHub Actions",
+    "ci_workflow_count": null,
+    "coverage_threshold": "85% (80% Windows)"
+  },
+  "documentation": {
+    "readme_sections": ["What it is", "Install", "Quickstart", "Benchmarks", "Knowledge graph", "MCP server"],
+    "has_contributing": true,
+    "has_architecture_doc": true,
+    "docs_page_count": null
+  },
+  "extension_points": {
+    "plugins": { "mechanism": "pluggable backend interface", "path": "mempalace/backends/base.py" },
+    "hooks": { "mechanism": "Claude Code Stop + PreCompact hooks", "events": ["stop", "pre-compact"] },
+    "mcp": { "client": false, "server": true }
+  },
+  "unique_selling_points": [
+    "Verbatim always: politica nao-negociavel de nao summarizar, nao paraphrase, retornar palavras exatas",
+    "100% local-first: zero API calls no caminho core, 96.6% R@5 sem LLM em nenhum estagio",
+    "Benchmarks reproduziveis: LongMemEval 96.6% raw + 98.4% held-out, LoCoMo 88.9% hybrid v5, MemBench 80.3%",
+    "Temporal knowledge graph em SQLite (vs Zep Neo4j cloud): free, local",
+    "Performance budgets explicitos: hooks <500ms, startup injection <100ms"
+  ],
+  "limitations": [
+    { "description": "Python 3.9+ apenas, sem SDK TypeScript", "source": "pyproject.toml" },
+    { "description": "ChromaDB file lock no Windows reduz coverage (85% -> 80%)", "source": "pyproject.toml" },
+    { "description": "Benchmarks publicados mas sem comparacao side-by-side contra Mem0/Zep (por decisao explicita de honestidade)", "source": "README.md" }
+  ],
+  "confidence": "HIGH",
+  "extraction_method": "filesystem-scan",
+  "skill_version": "1.0.0"
+}

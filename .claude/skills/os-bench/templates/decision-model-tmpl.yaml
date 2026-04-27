@@ -1,0 +1,49 @@
+---
+_meta:
+  artifact_id: decision-model
+  version: "1.0.0"
+  skill: os-bench
+  lifecycle_states: [draft, validated, approved]
+  when_to_generate: "Apenas se o subject modela decisões formalmente (retry matrix, priority tables, policy rules). Raro em OS."
+
+# Decision Model — OS subject
+model_name: "{model_name}"
+analysis_date: "{ISO-8601}"
+source_subject: "{subject_slug}"
+source_path: "OS/{subject_slug}/"
+
+decisions:
+  - id: "D-{NNN}"
+    name: "{decision_name}"
+    description: "{1_sentence}"
+    input_data:
+      - name: "{input_name}"
+        type: "string | int | bool | enum"
+        source: "{where_it_comes_from}"
+    business_rules: ["INV-{NNN}"]
+    output: "{what_is_decided}"
+    evidence:
+      file: "OS/{subject_slug}/{path}"
+      line: {N}
+
+decision_tables:
+  - id: "DT-{NNN}"
+    decision_ref: "D-{NNN}"
+    hit_policy: "U | F | P | A | C"
+    conditions:
+      - name: "{condition_name}"
+        type: "string | int | bool | enum"
+    actions:
+      - name: "{action_name}"
+        type: "string | int | bool | enum"
+    rules:
+      - if: ["{cond_1_val}", "{cond_2_val}"]
+        then: ["{action_1_val}"]
+
+traceability:
+  source_files:
+    - path: "OS/{subject_slug}/{path}"
+      role: "defines | implements | tests"
+  extraction_method: "filesystem_scan | doc_scan | code_inference"
+  confidence_level: "HIGH | MEDIUM | LOW"
+  notes: "{freetext}"

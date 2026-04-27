@@ -1,0 +1,410 @@
+{
+  "generatedAt": "2026-04-19T22:30:00Z",
+  "comparison_type": "nway",
+  "subjects": ["BMAD-METHOD", "crewAI", "autogen", "paperclip", "claude-remote-manager"],
+  "dimension_pack": "orchestration",
+  "methods": {
+    "BMAD-METHOD": "installed",
+    "crewAI": "installed",
+    "autogen": "installed",
+    "paperclip": "installed",
+    "claude-remote-manager": "installed"
+  },
+  "dimensions": [
+    {
+      "id": "topology",
+      "name": "Topology",
+      "weight": 0.15,
+      "scores": {
+        "BMAD-METHOD": 70,
+        "crewAI": 72,
+        "autogen": 92,
+        "paperclip": 68,
+        "claude-remote-manager": 25
+      },
+      "signals_observed": {
+        "BMAD-METHOD": [
+          { "signal": "Pipeline agile 4 fases numeradas", "value": "analysis→plan→solutioning→implementation", "evidence": "OS/BMAD-METHOD/src/bmm-skills/" },
+          { "signal": "Party Mode (roundtable de subagents)", "value": "spawn paralelo via Agent tool", "evidence": "OS/BMAD-METHOD/src/core-skills/bmad-party-mode/SKILL.md" }
+        ],
+        "crewAI": [
+          { "signal": "Process.sequential + Process.hierarchical", "value": "2 topologias core", "evidence": "OS/crewAI/src/crewai/process.py" },
+          { "signal": "Flow (graph DSL)", "value": "decorators @start/@listen/@router", "evidence": "OS/crewAI/src/crewai/flow/flow.py" }
+        ],
+        "autogen": [
+          { "signal": "4 topologias formais + graph", "value": "RoundRobin/Selector/Swarm/MagenticOne/GraphFlow", "evidence": "OS/autogen/python/packages/autogen-agentchat/src/autogen_agentchat/teams/_group_chat/" },
+          { "signal": "Magentic-One generalist orchestrator", "value": "Orchestrator + WebSurfer + FileSurfer + Coder", "evidence": "OS/autogen/python/packages/autogen-magentic-one/" },
+          { "signal": "Graph topology DAG", "value": "_graph/ module", "evidence": "OS/autogen/python/packages/autogen-agentchat/src/autogen_agentchat/teams/_group_chat/_graph/" }
+        ],
+        "paperclip": [
+          { "signal": "Company org-chart explícita", "value": "roles CEO/CTO/Engineer em DB", "evidence": "OS/paperclip/server/src/services/company-member-roles.ts" },
+          { "signal": "Org-chart SVG route", "value": "visualização server-side", "evidence": "OS/paperclip/server/src/routes/org-chart-svg.ts" }
+        ],
+        "claude-remote-manager": [
+          { "signal": "Sem topologia coordenada", "value": "agents independentes em tmux", "evidence": "OS/claude-remote-manager/agents/" }
+        ]
+      },
+      "confidence": "HIGH",
+      "justification": {
+        "BMAD-METHOD": "Pipeline sequencial + Party Mode spawn — 2 topologias funcionais, mas sem swarm/graph.",
+        "crewAI": "Sequential + Hierarchical + Flow (3 topologias) — cobertura sólida, falta swarm.",
+        "autogen": "4 topologias formais + graph + Magentic — cobertura incomparável no conjunto.",
+        "paperclip": "Hierarchical programática única (org-chart), mas sem swarm/graph/pipeline formal.",
+        "claude-remote-manager": "Sem topologia de orquestração além de agents independentes."
+      },
+      "leader": "autogen"
+    },
+    {
+      "id": "delegation_model",
+      "name": "Delegation Model",
+      "weight": 0.15,
+      "scores": {
+        "BMAD-METHOD": 75,
+        "crewAI": 85,
+        "autogen": 82,
+        "paperclip": 80,
+        "claude-remote-manager": 45
+      },
+      "signals_observed": {
+        "BMAD-METHOD": [
+          { "signal": "12+ roles como skills", "value": "PM, Architect, Dev, Analyst, Tech Writer, QA", "evidence": "OS/BMAD-METHOD/src/bmm-skills/" },
+          { "signal": "Skill validator no CI", "value": "skills válidas determinísticas", "evidence": "OS/BMAD-METHOD/tools/validate-skills.js" }
+        ],
+        "crewAI": [
+          { "signal": "Role/goal/backstory por Agent", "value": "persona injetada em system prompt", "evidence": "OS/crewAI/src/crewai/agent.py" },
+          { "signal": "manager_llm + Planner", "value": "LLM-driven routing + planning automático", "evidence": "OS/crewAI/src/crewai/utilities/planning_handler.py" },
+          { "signal": "Tools per-agent", "value": "skill tags via tools", "evidence": "OS/crewAI/src/crewai/task.py" }
+        ],
+        "autogen": [
+          { "signal": "SelectorGroupChat LLM-driven", "value": "LLM escolhe próximo speaker", "evidence": "OS/autogen/python/packages/autogen-agentchat/src/autogen_agentchat/teams/_group_chat/_selector_group_chat.py" },
+          { "signal": "Type subscriptions por tópico", "value": "skill routing implícito", "evidence": "OS/autogen/python/packages/autogen-core/src/autogen_core/_type_subscription.py" },
+          { "signal": "Handoff primitive", "value": "transferência explícita entre agents", "evidence": "OS/autogen/python/packages/autogen-agentchat/src/autogen_agentchat/base/_handoff.py" }
+        ],
+        "paperclip": [
+          { "signal": "company-member-roles", "value": "roles DB-persistidos", "evidence": "OS/paperclip/server/src/services/company-member-roles.ts" },
+          { "signal": "company-skills + agent-skills", "value": "skill-based routing", "evidence": "OS/paperclip/server/src/routes/company-skills.ts" },
+          { "signal": "7 adapters heterogêneos", "value": "delegação cross-runtime", "evidence": "OS/paperclip/packages/adapters/" }
+        ],
+        "claude-remote-manager": [
+          { "signal": "Manual send-message <to>", "value": "roteamento manual via bus", "evidence": "OS/claude-remote-manager/core/bus/send-message.sh" },
+          { "signal": "CLAUDE.md per agent", "value": "persona editorial", "evidence": "OS/claude-remote-manager/agents/agent-template/CLAUDE.md" }
+        ]
+      },
+      "confidence": "HIGH",
+      "justification": {
+        "BMAD-METHOD": "Roles robustos via skills + validator, mas delegação é editorial — sem LLM routing.",
+        "crewAI": "Role-playing + manager_llm + Planner — modelo mais completo de cooperação.",
+        "autogen": "SelectorGroupChat LLM-driven + handoff + subscriptions — técnicamente poderoso.",
+        "paperclip": "Roles DB + skills + adapters heterogêneos — delegação cross-runtime única.",
+        "claude-remote-manager": "Delegação manual sem LLM routing nem skill matching — mínimo funcional."
+      },
+      "leader": "crewAI"
+    },
+    {
+      "id": "state_mgmt",
+      "name": "State Mgmt",
+      "weight": 0.12,
+      "scores": {
+        "BMAD-METHOD": 20,
+        "crewAI": 78,
+        "autogen": 82,
+        "paperclip": 92,
+        "claude-remote-manager": 55
+      },
+      "signals_observed": {
+        "BMAD-METHOD": [
+          { "signal": "Sem backend próprio", "value": "estado no IDE host", "evidence": "OS/BMAD-METHOD/package.json (main: tools/installer)" }
+        ],
+        "crewAI": [
+          { "signal": "Multi-tier memory", "value": "short/long/entity/user", "evidence": "OS/crewAI/src/crewai/memory/" },
+          { "signal": "Chroma/SQLite storage", "value": "durable backend para memória", "evidence": "OS/crewAI/src/crewai/memory/storage/" },
+          { "signal": "Task output storage", "value": "persistência de outputs", "evidence": "OS/crewAI/src/crewai/utilities/task_output_storage_handler.py" }
+        ],
+        "autogen": [
+          { "signal": "save_state / load_state em agents e teams", "value": "checkpoint serializável", "evidence": "OS/autogen/python/packages/autogen-agentchat/src/autogen_agentchat/state/" },
+          { "signal": "Memory protocol + impls (Redis/mem0/Chroma)", "value": "backends plug-and-play", "evidence": "OS/autogen/python/packages/autogen-ext/src/autogen_ext/memory/" },
+          { "signal": "Topic-based shared state", "value": "subscriptions", "evidence": "OS/autogen/python/packages/autogen-core/src/autogen_core/_topic.py" }
+        ],
+        "paperclip": [
+          { "signal": "Postgres embutido via Drizzle", "value": "durable relacional zero-config", "evidence": "OS/paperclip/packages/db/" },
+          { "signal": "Embedded Postgres patch", "value": "dev-friendly durável", "evidence": "OS/paperclip/patches/embedded-postgres@18.1.0-beta.16.patch" },
+          { "signal": "Realtime WS live events", "value": "shared state push cross-clients", "evidence": "OS/paperclip/server/src/realtime/live-events-ws.ts" },
+          { "signal": "Execution workspaces (git worktrees)", "value": "state isolado por agent/run", "evidence": "OS/paperclip/server/src/services/execution-workspaces.ts" },
+          { "signal": "Heartbeat run summaries", "value": "checkpoint por run", "evidence": "OS/paperclip/server/src/services/heartbeat-run-summary.ts" }
+        ],
+        "claude-remote-manager": [
+          { "signal": "Filesystem inbox (~/.claude-remote/)", "value": "durable mas simples", "evidence": "OS/claude-remote-manager/core/bus/check-inbox.sh" },
+          { "signal": "--continue soft-restart", "value": "continuidade de sessão", "evidence": "OS/claude-remote-manager/core/bus/self-restart.sh" }
+        ]
+      },
+      "confidence": "HIGH",
+      "justification": {
+        "BMAD-METHOD": "Sem runtime/backend próprio — state mora no IDE host, fora do escopo.",
+        "crewAI": "Multi-tier memory + Chroma é o mais estruturado em frameworks de agent Python.",
+        "autogen": "Checkpoint explícito + memory protocol plugável — state mgmt de nível runtime.",
+        "paperclip": "Postgres embutido + WS realtime + worktrees — state mgmt de nível empresa, disparado.",
+        "claude-remote-manager": "Inbox durable simples; sem checkpoint rich nem DB."
+      },
+      "leader": "paperclip"
+    },
+    {
+      "id": "parallelism",
+      "name": "Parallelism",
+      "weight": 0.12,
+      "scores": {
+        "BMAD-METHOD": 72,
+        "crewAI": 58,
+        "autogen": 88,
+        "paperclip": 78,
+        "claude-remote-manager": 55
+      },
+      "signals_observed": {
+        "BMAD-METHOD": [
+          { "signal": "Party Mode subagents paralelos", "value": "2-4 via Agent tool", "evidence": "OS/BMAD-METHOD/src/core-skills/bmad-party-mode/SKILL.md" }
+        ],
+        "crewAI": [
+          { "signal": "async_execution em Task", "value": "paralelismo parcial por GIL", "evidence": "OS/crewAI/src/crewai/task.py" },
+          { "signal": "Sync-by-default em Crew.kickoff", "value": "limita fan-out", "evidence": "OS/crewAI/src/crewai/crew.py" }
+        ],
+        "autogen": [
+          { "signal": "Async runtime singleton", "value": "asyncio event loop", "evidence": "OS/autogen/python/packages/autogen-core/src/autogen_core/_single_threaded_agent_runtime.py" },
+          { "signal": "gRPC runtime distribuído", "value": "multi-worker real", "evidence": "OS/autogen/python/packages/autogen-ext/src/autogen_ext/runtimes/grpc/" },
+          { "signal": "Topic broadcast fan-out", "value": "pub/sub paralelo", "evidence": "OS/autogen/python/packages/autogen-core/src/autogen_core/_topic.py" }
+        ],
+        "paperclip": [
+          { "signal": "N execution workspaces isolados", "value": "agents paralelos via worktrees", "evidence": "OS/paperclip/server/src/services/execution-workspaces.ts" },
+          { "signal": "Cron routines paralelas", "value": "fan-out temporal", "evidence": "OS/paperclip/server/src/services/cron.ts" }
+        ],
+        "claude-remote-manager": [
+          { "signal": "N tmux sessions independentes", "value": "paralelismo por processo", "evidence": "OS/claude-remote-manager/core/scripts/agent-wrapper.sh" }
+        ]
+      },
+      "confidence": "HIGH",
+      "justification": {
+        "BMAD-METHOD": "Party Mode oferece fan-out real via Agent tool; sem runtime próprio, limitado ao host.",
+        "crewAI": "GIL-limited; async_execution parcial; sem runtime async completo.",
+        "autogen": "Async-first + gRPC distribuído + topic broadcast — paralelismo formal mais forte.",
+        "paperclip": "Workspaces isolados + cron — paralelismo operacional robusto, sem formalismo de runtime.",
+        "claude-remote-manager": "Paralelismo = N processos sem coordenação de fan-out."
+      },
+      "leader": "autogen"
+    },
+    {
+      "id": "failure_recovery",
+      "name": "Failure Recovery",
+      "weight": 0.13,
+      "scores": {
+        "BMAD-METHOD": 15,
+        "crewAI": 45,
+        "autogen": 62,
+        "paperclip": 68,
+        "claude-remote-manager": 82
+      },
+      "signals_observed": {
+        "BMAD-METHOD": [
+          { "signal": "Sem runtime → sem recovery", "value": "IDE host responsável", "evidence": "OS/BMAD-METHOD/tools/installer/" }
+        ],
+        "crewAI": [
+          { "signal": "Retries via litellm", "value": "retry LLM-call layer", "evidence": "OS/crewAI/src/crewai/llm.py" }
+        ],
+        "autogen": [
+          { "signal": "gRPC worker resilience", "value": "recovery per-worker", "evidence": "OS/autogen/python/packages/autogen-ext/src/autogen_ext/runtimes/grpc/" },
+          { "signal": "Topic subscriptions (replay conceptual)", "value": "pub/sub durable", "evidence": "OS/autogen/python/packages/autogen-core/src/autogen_core/_topic.py" }
+        ],
+        "paperclip": [
+          { "signal": "Approval retry flows", "value": "HITL retry explícito", "evidence": "OS/paperclip/server/src/services/approvals.ts" },
+          { "signal": "Cron service retries", "value": "retries scheduling", "evidence": "OS/paperclip/server/src/services/cron.ts" },
+          { "signal": "dev-runner-worktree resilient", "value": "recovery parcial", "evidence": "OS/paperclip/server/src/dev-runner-worktree.ts" }
+        ],
+        "claude-remote-manager": [
+          { "signal": "launchd auto-restart", "value": "watchdog OS-nível", "evidence": "OS/claude-remote-manager/core/scripts/generate-launchd.sh" },
+          { "signal": "At-least-once A2A (inflight → redelivery 5min)", "value": "inbox durable + replay", "evidence": "OS/claude-remote-manager/core/bus/check-inbox.sh" },
+          { "signal": "crash-alert + self-restart", "value": "notificação + soft reset", "evidence": "OS/claude-remote-manager/core/scripts/crash-alert.sh" },
+          { "signal": "71h soft-reset com --continue", "value": "prevenção de degradação", "evidence": "OS/claude-remote-manager/core/bus/self-restart.sh" }
+        ]
+      },
+      "confidence": "HIGH",
+      "justification": {
+        "BMAD-METHOD": "Sem runtime → recovery fica no IDE; dimensão fora do escopo.",
+        "crewAI": "Apenas retry de LLM calls via litellm; sem crash recovery nem DLQ.",
+        "autogen": "gRPC workers + subscriptions dão resilience parcial; não há DLQ explícito.",
+        "paperclip": "Approval retry + cron retries + dev-runner resilience — operacional mas sem replay determinístico.",
+        "claude-remote-manager": "Único com semântica at-least-once explícita + launchd + crash-alert — failure recovery disparado."
+      },
+      "leader": "claude-remote-manager"
+    },
+    {
+      "id": "observability",
+      "name": "Observability",
+      "weight": 0.12,
+      "scores": {
+        "BMAD-METHOD": 12,
+        "crewAI": 70,
+        "autogen": 85,
+        "paperclip": 90,
+        "claude-remote-manager": 40
+      },
+      "signals_observed": {
+        "BMAD-METHOD": [
+          { "signal": "Sem observabilidade embutida", "value": "depende do IDE host", "evidence": "OS/BMAD-METHOD/package.json" }
+        ],
+        "crewAI": [
+          { "signal": "OTel wiring embutido", "value": "export para backend externo", "evidence": "OS/crewAI/src/crewai/telemetry/telemetry.py" },
+          { "signal": "Usage metrics", "value": "token/cost counters", "evidence": "OS/crewAI/src/crewai/types/usage_metrics.py" }
+        ],
+        "autogen": [
+          { "signal": "OTel core tracing", "value": "tracing in-band em messaging", "evidence": "OS/autogen/python/packages/autogen-core/src/autogen_core/_telemetry/" },
+          { "signal": "AutoGen Studio UI", "value": "dashboard no-code", "evidence": "OS/autogen/python/packages/autogen-studio/" },
+          { "signal": "agbench harness", "value": "benchmark framework", "evidence": "OS/autogen/python/packages/agbench/" }
+        ],
+        "paperclip": [
+          { "signal": "Cost + budget + finance services", "value": "cost tracking de nível empresa", "evidence": "OS/paperclip/server/src/services/costs.ts" },
+          { "signal": "Activity log + telemetry", "value": "per-run activity", "evidence": "OS/paperclip/server/src/services/activity-log.ts" },
+          { "signal": "React dashboard + WS realtime + mobile", "value": "UI premium", "evidence": "OS/paperclip/ui/" },
+          { "signal": "Heartbeat run summaries", "value": "summaries truncados por run", "evidence": "OS/paperclip/server/src/services/heartbeat-run-summary.ts" },
+          { "signal": "Promptfoo evals", "value": "smoke evals CI", "evidence": "OS/paperclip/evals/promptfoo/" }
+        ],
+        "claude-remote-manager": [
+          { "signal": "Telegram como UI/alertas", "value": "mobile push as dashboard", "evidence": "OS/claude-remote-manager/core/bus/send-telegram.sh" },
+          { "signal": "Logs file per-agent", "value": "basic file logging", "evidence": "OS/claude-remote-manager/core/scripts/fast-checker.sh" }
+        ]
+      },
+      "confidence": "HIGH",
+      "justification": {
+        "BMAD-METHOD": "Nada embutido — obs é responsabilidade do IDE host.",
+        "crewAI": "OTel + usage metrics — delega backend externo, solução sólida sem UI própria.",
+        "autogen": "OTel + Studio + agbench — cobertura técnica forte.",
+        "paperclip": "Cost + budget + dashboard React + WS + promptfoo — observabilidade de nível empresa, líder.",
+        "claude-remote-manager": "Telegram como UI improvisado + logs file; sem OTel nem cost tracking."
+      },
+      "leader": "paperclip"
+    },
+    {
+      "id": "dsl",
+      "name": "DSL",
+      "weight": 0.11,
+      "scores": {
+        "BMAD-METHOD": 82,
+        "crewAI": 72,
+        "autogen": 58,
+        "paperclip": 78,
+        "claude-remote-manager": 42
+      },
+      "signals_observed": {
+        "BMAD-METHOD": [
+          { "signal": "YAML frontmatter + MD skills", "value": "DSL declarativa pura", "evidence": "OS/BMAD-METHOD/src/core-skills/bmad-party-mode/SKILL.md" },
+          { "signal": "Skill validator strict", "value": "schema enforcement no CI", "evidence": "OS/BMAD-METHOD/tools/validate-skills.js" },
+          { "signal": "Workflows numerados", "value": "pipeline explícita via dir structure", "evidence": "OS/BMAD-METHOD/src/bmm-skills/" }
+        ],
+        "crewAI": [
+          { "signal": "Flow decorators @start/@listen/@router", "value": "DSL Python declarativa", "evidence": "OS/crewAI/src/crewai/flow/flow.py" },
+          { "signal": "Flow visualizer HTML", "value": "viz read-only", "evidence": "OS/crewAI/src/crewai/flow/flow_visualizer.py" },
+          { "signal": "YAML config scaffolding", "value": "create crew gera yaml agents/tasks", "evidence": "OS/crewAI/src/crewai/cli/" }
+        ],
+        "autogen": [
+          { "signal": "Python code-first", "value": "classes + builders; sem DSL nativa", "evidence": "OS/autogen/python/packages/autogen-agentchat/src/autogen_agentchat/teams/" },
+          { "signal": "AutoGen Studio drag-drop", "value": "no-code visual", "evidence": "OS/autogen/python/packages/autogen-studio/" }
+        ],
+        "paperclip": [
+          { "signal": "Routines declarativas", "value": "cron + trigger DSL", "evidence": "OS/paperclip/server/src/routes/routines.ts" },
+          { "signal": "Company portability JSON", "value": "empresa inteira serializável", "evidence": "OS/paperclip/server/src/services/company-portability.ts" },
+          { "signal": "Org-chart SVG + React editor", "value": "visual editor", "evidence": "OS/paperclip/server/src/routes/org-chart-svg.ts" }
+        ],
+        "claude-remote-manager": [
+          { "signal": "config.json per agent", "value": "config simples (crons)", "evidence": "OS/claude-remote-manager/agents/agent-template/config.json" },
+          { "signal": "CLAUDE.md persona", "value": "DSL editorial markdown", "evidence": "OS/claude-remote-manager/agents/agent-template/CLAUDE.md" }
+        ]
+      },
+      "confidence": "HIGH",
+      "justification": {
+        "BMAD-METHOD": "DSL YAML+MD com schema validation é a mais rica do conjunto para descrição de skills/workflows.",
+        "crewAI": "Flow decorators + viz + YAML scaffolding — bom mix code-DSL + visual read-only.",
+        "autogen": "Python code-first sem DSL declarativa nativa; Studio cobre com GUI.",
+        "paperclip": "Routines + company JSON + org-chart editor — DSL + visual editor combinados.",
+        "claude-remote-manager": "config.json + CLAUDE.md é DSL mínima, sem schema validation."
+      },
+      "leader": "BMAD-METHOD"
+    },
+    {
+      "id": "deployment",
+      "name": "Deployment",
+      "weight": 0.10,
+      "scores": {
+        "BMAD-METHOD": 55,
+        "crewAI": 55,
+        "autogen": 80,
+        "paperclip": 88,
+        "claude-remote-manager": 48
+      },
+      "signals_observed": {
+        "BMAD-METHOD": [
+          { "signal": "npx install one-command", "value": "npx bmad-method install", "evidence": "OS/BMAD-METHOD/package.json" }
+        ],
+        "crewAI": [
+          { "signal": "pip install crewai", "value": "install Python", "evidence": "OS/crewAI/pyproject.toml" }
+        ],
+        "autogen": [
+          { "signal": "pip install autogen-agentchat", "value": "install Python", "evidence": "OS/autogen/python/packages/autogen-agentchat/pyproject.toml" },
+          { "signal": "Studio Dockerfile", "value": "UI containerizada", "evidence": "OS/autogen/python/packages/autogen-studio/Dockerfile" },
+          { "signal": "gRPC distributed runtime", "value": "multi-worker scale-out", "evidence": "OS/autogen/python/packages/autogen-ext/src/autogen_ext/runtimes/grpc/" }
+        ],
+        "paperclip": [
+          { "signal": "Dockerfile root + docker/", "value": "container pronto", "evidence": "OS/paperclip/Dockerfile" },
+          { "signal": "Embedded Postgres zero-config", "value": "dev sem setup DB", "evidence": "OS/paperclip/patches/embedded-postgres@18.1.0-beta.16.patch" },
+          { "signal": "pnpm dev one-command", "value": "monorepo com watch", "evidence": "OS/paperclip/package.json" },
+          { "signal": "MCP server distribuível", "value": "npx -y @paperclipai/mcp-server", "evidence": "OS/paperclip/packages/mcp-server/README.md" }
+        ],
+        "claude-remote-manager": [
+          { "signal": "bootstrap.sh + setup.sh", "value": "curl one-liner", "evidence": "OS/claude-remote-manager/bootstrap.sh" },
+          { "signal": "macOS-only (launchd)", "value": "sem Linux/Windows", "evidence": "OS/claude-remote-manager/core/scripts/generate-launchd.sh" }
+        ]
+      },
+      "confidence": "HIGH",
+      "justification": {
+        "BMAD-METHOD": "npx install simples mas sem Docker nem distributed runtime — library-style.",
+        "crewAI": "pip install; sem Docker oficial, sem distributed — library Python padrão.",
+        "autogen": "pip + Studio Dockerfile + gRPC distributed — opções variadas.",
+        "paperclip": "Docker + embedded Postgres + MCP distribuível + monorepo — deployment mais completo.",
+        "claude-remote-manager": "Bootstrap curl excelente mas macOS-only é limitação dura."
+      },
+      "leader": "paperclip"
+    }
+  ],
+  "weighted_totals": {
+    "BMAD-METHOD": 50.70,
+    "crewAI": 67.54,
+    "autogen": 79.14,
+    "paperclip": 79.62,
+    "claude-remote-manager": 48.58
+  },
+  "dimension_wins": {
+    "BMAD-METHOD": 1,
+    "crewAI": 1,
+    "autogen": 2,
+    "paperclip": 3,
+    "claude-remote-manager": 1
+  },
+  "overall_winner": "paperclip (79.62) — empate técnico com autogen (79.14, delta 0.48)",
+  "rankings": {
+    "by_weighted_total": ["paperclip (79.62)", "autogen (79.14)", "crewAI (67.54)", "BMAD-METHOD (50.70)", "claude-remote-manager (48.58)"],
+    "by_category": {
+      "Topology": "autogen",
+      "Delegation Model": "crewAI",
+      "State Mgmt": "paperclip",
+      "Parallelism": "autogen",
+      "Failure Recovery": "claude-remote-manager",
+      "Observability": "paperclip",
+      "DSL": "BMAD-METHOD",
+      "Deployment": "paperclip"
+    },
+    "closest_race": ["paperclip vs autogen — delta 0.48 no weighted total (empate técnico)"]
+  },
+  "confidence_overall": "HIGH",
+  "limitations": [
+    "BMAD-METHOD pontua baixo em dimensões onde não tem runtime (state/recovery/obs) — é library de skills, não runtime; comparação absoluta sub-representa seu valor no nicho 'pipeline agile'.",
+    "autogen está em maintenance mode (README banner) — scores refletem capability atual, não trajetória futura (sucessor: Microsoft Agent Framework).",
+    "claude-remote-manager é macOS-only — Deployment e acessibilidade penalizam vs frameworks multi-OS.",
+    "paperclip última data de commit recente (2026-04-17); crewAI snapshot é de 2024-12-22 — crewAI pode ter evoluído no upstream.",
+    "Pesos do pack são fixos (orchestration v1.0). Para priorizar um caso de uso específico, reponderar dimensões."
+  ]
+}

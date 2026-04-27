@@ -1,0 +1,79 @@
+{
+  "$schema": "os-bench metadata v1.0",
+  "generatedAt": "2026-04-19T22:30:00Z",
+  "comparison_type": "nway",
+  "slug": "orchestration-5way",
+  "subject_count": 5,
+  "subjects": [
+    {
+      "slug": "BMAD-METHOD",
+      "path": "OS/BMAD-METHOD/",
+      "source_url": "https://github.com/bmad-code-org/BMAD-METHOD",
+      "detected_stack": ["JavaScript", "Node.js", "YAML-skills"]
+    },
+    {
+      "slug": "crewAI",
+      "path": "OS/crewAI/",
+      "source_url": "https://github.com/crewAIInc/crewAI",
+      "detected_stack": ["Python", "Pydantic", "LiteLLM", "ChromaDB"]
+    },
+    {
+      "slug": "autogen",
+      "path": "OS/autogen/",
+      "source_url": "https://github.com/microsoft/autogen",
+      "detected_stack": ["Python", "gRPC", "Pydantic", ".NET"]
+    },
+    {
+      "slug": "paperclip",
+      "path": "OS/paperclip/",
+      "source_url": "https://github.com/paperclipai/paperclip",
+      "detected_stack": ["TypeScript", "React", "Drizzle", "embedded-postgres", "MCP"]
+    },
+    {
+      "slug": "claude-remote-manager",
+      "path": "OS/claude-remote-manager/",
+      "source_url": "https://github.com/grandamenium/claude-remote-manager",
+      "detected_stack": ["Bash", "tmux", "launchd", "Telegram Bot API"]
+    }
+  ],
+  "dimension_pack": "orchestration",
+  "scoring_dimensions": [
+    "topology",
+    "delegation_model",
+    "state_mgmt",
+    "parallelism",
+    "failure_recovery",
+    "observability",
+    "dsl",
+    "deployment"
+  ],
+  "profile": "standard",
+  "skill_version": "1.0.0",
+  "output_root": "OS/_bench/orchestration-5way/",
+  "artifacts_generated": [
+    "metadata.json",
+    "_inventories/BMAD-METHOD/inventory.json",
+    "_inventories/BMAD-METHOD/inventory.md",
+    "_inventories/crewAI/inventory.json",
+    "_inventories/crewAI/inventory.md",
+    "_inventories/autogen/inventory.json",
+    "_inventories/autogen/inventory.md",
+    "_inventories/paperclip/inventory.json",
+    "_inventories/paperclip/inventory.md",
+    "_inventories/claude-remote-manager/inventory.json",
+    "_inventories/claude-remote-manager/inventory.md",
+    "comparison-matrix.json",
+    "comparison-matrix.md",
+    "scorecard.json",
+    "scorecard.md",
+    "executive-report.md"
+  ],
+  "artifacts_skipped": [
+    "gap-analysis.{json,md}",
+    "battle-card.md"
+  ],
+  "artifacts_skipped_reason": "Gap analysis e battle card são pair-wise por design; para n-way (5 subjects) o skill deixa-os de fora conforme SKILL.md (estrutura {topic}-Nway omite gap-analysis/battle-card).",
+  "confidence_overall": "HIGH",
+  "quality_gate_passed": true,
+  "notes": "Benchmark 5-way de frameworks de orquestração multi-agente cobrindo paradigmas distintos: agile-pipeline (BMAD), role-playing (crewAI), conversacional/graph distribuído (autogen), company-sim (paperclip) e remote-persistence (claude-remote-manager). Pesos do pack orchestration somam 1.00; todas dimensões pontuadas; overall confidence HIGH."
+}

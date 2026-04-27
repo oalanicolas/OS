@@ -1,0 +1,514 @@
+# os-bench Dimension Packs v1.0
+# Weighted scoring dimensions por tipo de projeto OS.
+# Referenciado por: tasks/bench-score.md, tasks/bench-matrix.md
+#
+# Cada pack define:
+#   - description: tipo de projeto alvo
+#   - dimensions[]:
+#     - id: identificador snake_case (usado em JSON)
+#     - name: nome humano (usado em MD)
+#     - weight: 0.0–1.0 (soma 1.00 por pack)
+#     - signals[]: evidências observáveis que fundamentam o score
+#     - scoring_scale: exemplo 90–100 vs 60–89 vs 30–59 vs 0–29
+
+packs:
+
+  coding-agent:
+    description: "Coding agents / CLI coding assistants (Claude Code, Codex, Aider, OpenHands, gstack, gsd-2, superpowers)"
+    dimensions:
+      - id: coding_depth
+        name: "Coding Depth"
+        weight: 0.18
+        signals: ["SWE-bench score", "HumanEval score", "language coverage", "refactor quality evidence"]
+        scoring_scale:
+          "90-100": "SWE-bench >40% OR demonstrated multi-file refactors with tests passing"
+          "60-89": "Edits em multi-file, testes passando a maior parte"
+          "30-59": "Single-file edits confiáveis, multi-file instável"
+          "0-29": "Apenas completions, sem edits multi-file"
+      - id: autonomy
+        name: "Autonomy"
+        weight: 0.15
+        signals: ["auto-milestone support", "long-horizon tasks", "self-correction", "check-in cadence"]
+        scoring_scale:
+          "90-100": "Roda 30+ min sem human-in-the-loop, auto-milestones"
+          "60-89": "10–30 min sem HITL, check-ins periódicos"
+          "30-59": "Precisa de HITL a cada 5–10 min"
+          "0-29": "HITL constante, não sobrevive a task longa"
+      - id: context_mgmt
+        name: "Context Mgmt"
+        weight: 0.13
+        signals: ["context compression", "memory layer", "RAG integration", "token budget awareness"]
+        scoring_scale:
+          "90-100": "Compressão automática + memory layer persistente + RAG"
+          "60-89": "Compressão OU memory, não ambos"
+          "30-59": "Só sliding window"
+          "0-29": "Context overflow não tratado"
+      - id: git_integration
+        name: "Git Integration"
+        weight: 0.10
+        signals: ["auto-commit", "branch awareness", "PR creation", "diff review"]
+        scoring_scale:
+          "90-100": "Commits automáticos + branches + PRs"
+          "60-89": "Commits automáticos bem formatados"
+          "30-59": "Suggest commits, sem auto"
+          "0-29": "Sem awareness de git"
+      - id: tdd
+        name: "TDD"
+        weight: 0.10
+        signals: ["red-green-refactor enforcement", "test-first subagents", "coverage tracking"]
+        scoring_scale:
+          "90-100": "TDD puro enforcement (red-green-refactor, subagents)"
+          "60-89": "TDD recomendado, agente respeita"
+          "30-59": "Pode gerar testes, não enforça"
+          "0-29": "Sem awareness de testes"
+      - id: multi_agent
+        name: "Multi-agent"
+        weight: 0.12
+        signals: ["subagent orchestration", "role specialization", "parallel execution", "delegation"]
+        scoring_scale:
+          "90-100": "Subagents paralelos especializados com delegation"
+          "60-89": "Subagents sequenciais com roles claros"
+          "30-59": "Single agent com modos"
+          "0-29": "Single monolithic agent"
+      - id: extensibility
+        name: "Extensibility"
+        weight: 0.12
+        signals: ["plugin/skill system", "MCP support", "hook surface", "config-driven behavior"]
+        scoring_scale:
+          "90-100": "Plugin system + MCP + hooks + config completo"
+          "60-89": "Plugin OU MCP, não ambos"
+          "30-59": "Apenas config YAML/JSON"
+          "0-29": "Hardcoded"
+      - id: community
+        name: "Community"
+        weight: 0.10
+        signals: ["GitHub stars", "contributor count", "release cadence", "discord/slack activity"]
+        scoring_scale:
+          "90-100": "50k+ stars OR 100+ contributors ativos"
+          "60-89": "10–50k stars, ativo"
+          "30-59": "1–10k stars"
+          "0-29": "<1k stars, quieto"
+
+  memory:
+    description: "Sistemas de memória, RAG, knowledge graphs (gbrain, mempalace, mem0, gsd-2)"
+    dimensions:
+      - id: recall_accuracy
+        name: "Recall Accuracy"
+        weight: 0.22
+        signals: ["R@5 metric", "R@10 metric", "benchmark dataset used", "MTEB score"]
+        scoring_scale:
+          "90-100": "R@5 >95% em benchmark público"
+          "60-89": "R@5 80–95%"
+          "30-59": "R@5 60–80%"
+          "0-29": "Sem métrica ou <60%"
+      - id: write_latency
+        name: "Write Latency"
+        weight: 0.10
+        signals: ["p50 write ms", "p99 write ms", "batch support", "async writes"]
+        scoring_scale:
+          "90-100": "p50 <50ms, batch + async"
+          "60-89": "p50 <200ms"
+          "30-59": "p50 <1s"
+          "0-29": "p50 >1s"
+      - id: read_latency
+        name: "Read Latency"
+        weight: 0.12
+        signals: ["p50 query ms", "p99 query ms", "index type", "caching layer"]
+        scoring_scale:
+          "90-100": "p50 <50ms para top-k=10"
+          "60-89": "p50 <200ms"
+          "30-59": "p50 <1s"
+          "0-29": "p50 >1s"
+      - id: persistence
+        name: "Persistence"
+        weight: 0.12
+        signals: ["verbatim storage vs paraphrase", "durable backend (PG/SQLite/local)", "snapshot support"]
+        scoring_scale:
+          "90-100": "Verbatim + durable backend + snapshots"
+          "60-89": "Verbatim OU durable, não ambos"
+          "30-59": "Paraphrase em durable store"
+          "0-29": "In-memory only"
+      - id: schema_flexibility
+        name: "Schema Flexibility"
+        weight: 0.10
+        signals: ["schemaless vs rigid", "entity types configuráveis", "metadata fields"]
+        scoring_scale:
+          "90-100": "Schemaless + entity types + metadata ricos"
+          "60-89": "Rigid schema mas extensível"
+          "30-59": "Rigid schema fechado"
+          "0-29": "Único tipo de document"
+      - id: local_first
+        name: "Local-first"
+        weight: 0.13
+        signals: ["no API keys required", "works offline", "data ownership", "encryption at rest"]
+        scoring_scale:
+          "90-100": "100% local, sem API keys, offline, encrypted"
+          "60-89": "Local primário, API opcional"
+          "30-59": "Híbrido local+cloud"
+          "0-29": "Cloud-only"
+      - id: vector_support
+        name: "Vector Support"
+        weight: 0.11
+        signals: ["embedding models supported", "index type (HNSW/IVF/flat)", "dim flexibility"]
+        scoring_scale:
+          "90-100": "HNSW + múltiplos embedding providers + dim flexível"
+          "60-89": "HNSW com 1 provider"
+          "30-59": "Flat index"
+          "0-29": "Sem vector"
+      - id: graph_support
+        name: "Graph Support"
+        weight: 0.10
+        signals: ["entity extraction", "auto-wiring relationships", "graph traversal queries"]
+        scoring_scale:
+          "90-100": "Auto-wiring sem LLM + traversal queries + 3+ hop"
+          "60-89": "Manual wiring + traversal"
+          "30-59": "Entity extraction sem graph"
+          "0-29": "Sem graph"
+
+  orchestration:
+    description: "Multi-agent orchestration frameworks (BMAD-METHOD, crewAI, autogen, paperclip, claude-remote-manager)"
+    dimensions:
+      - id: topology
+        name: "Topology"
+        weight: 0.15
+        signals: ["supported topologies (hub-spoke, pipeline, swarm, hierarchy)", "dynamic topology changes"]
+        scoring_scale:
+          "90-100": "4+ topologies + dynamic reconfiguration"
+          "60-89": "2–3 topologies"
+          "30-59": "1 topology fixa"
+          "0-29": "Single agent only"
+      - id: delegation_model
+        name: "Delegation Model"
+        weight: 0.15
+        signals: ["role-based delegation", "skill-based routing", "LLM-driven dispatch"]
+        scoring_scale:
+          "90-100": "Role + skill + LLM-driven routing"
+          "60-89": "Role-based com skill tags"
+          "30-59": "Round-robin / manual"
+          "0-29": "Sem delegation explícita"
+      - id: state_mgmt
+        name: "State Mgmt"
+        weight: 0.12
+        signals: ["persistent state backend", "shared memory between agents", "checkpointing"]
+        scoring_scale:
+          "90-100": "Durable backend + shared memory + checkpoint/restore"
+          "60-89": "Durable OU shared memory"
+          "30-59": "In-memory compartilhada"
+          "0-29": "Stateless"
+      - id: parallelism
+        name: "Parallelism"
+        weight: 0.12
+        signals: ["true parallel subagent execution", "fan-out patterns", "async primitives"]
+        scoring_scale:
+          "90-100": "True parallel + fan-out + async"
+          "60-89": "Parallel com GIL-limitations"
+          "30-59": "Concurrent (não parallel)"
+          "0-29": "Sequencial"
+      - id: failure_recovery
+        name: "Failure Recovery"
+        weight: 0.13
+        signals: ["retry with backoff", "circuit breaker", "dead-letter queue", "replay"]
+        scoring_scale:
+          "90-100": "Retry + CB + DLQ + replay determinístico"
+          "60-89": "Retry + CB"
+          "30-59": "Só retry simples"
+          "0-29": "Falha = end of session"
+      - id: observability
+        name: "Observability"
+        weight: 0.12
+        signals: ["tracing per agent", "cost tracking", "log aggregation", "UI dashboard"]
+        scoring_scale:
+          "90-100": "Traces + cost + logs + UI completa"
+          "60-89": "Traces + logs"
+          "30-59": "Só logs"
+          "0-29": "Apenas stdout"
+      - id: dsl
+        name: "DSL"
+        weight: 0.11
+        signals: ["workflow DSL (YAML/JSON/code)", "spec files", "graph-based editor"]
+        scoring_scale:
+          "90-100": "DSL rica + validação + editor visual"
+          "60-89": "DSL YAML/JSON com schema"
+          "30-59": "Config simples"
+          "0-29": "Tudo em código"
+      - id: deployment
+        name: "Deployment"
+        weight: 0.10
+        signals: ["docker image", "serverless support", "k8s helm chart", "local dev"]
+        scoring_scale:
+          "90-100": "Docker + serverless + k8s + local"
+          "60-89": "Docker + local"
+          "30-59": "Apenas local dev"
+          "0-29": "Setup complexo não documentado"
+
+  mcp:
+    description: "MCP (Model Context Protocol) servers, clients, reference implementations (mcp-servers)"
+    dimensions:
+      - id: protocol_compliance
+        name: "Protocol Compliance"
+        weight: 0.28
+        signals: ["MCP spec version supported", "validates against spec schema", "passes mcp test suite"]
+        scoring_scale:
+          "90-100": "Latest spec + test suite passa 100%"
+          "60-89": "Spec atual com lacunas menores"
+          "30-59": "Spec antiga"
+          "0-29": "Não conforma"
+      - id: server_count
+        name: "Server Count"
+        weight: 0.18
+        signals: ["# servers implementados", "cobertura de domínios (fs, db, web, etc)"]
+        scoring_scale:
+          "90-100": "50+ servers cobrindo 10+ domínios"
+          "60-89": "20–50 servers"
+          "30-59": "5–20 servers"
+          "0-29": "<5 servers"
+      - id: transport_support
+        name: "Transport Support"
+        weight: 0.18
+        signals: ["stdio", "HTTP/SSE", "WebSocket", "streamable HTTP"]
+        scoring_scale:
+          "90-100": "stdio + HTTP/SSE + WS + streamable"
+          "60-89": "stdio + HTTP/SSE"
+          "30-59": "Apenas stdio"
+          "0-29": "Transport não padrão"
+      - id: auth
+        name: "Auth"
+        weight: 0.16
+        signals: ["OAuth2", "API key", "token-based", "RBAC"]
+        scoring_scale:
+          "90-100": "OAuth2 + RBAC + token rotation"
+          "60-89": "OAuth2 OU API key robusto"
+          "30-59": "API key simples"
+          "0-29": "Sem auth"
+      - id: community
+        name: "Community"
+        weight: 0.20
+        signals: ["GitHub stars", "third-party servers", "Discord activity", "release cadence"]
+        scoring_scale:
+          "90-100": "10k+ stars + active third-party ecosystem"
+          "60-89": "3–10k stars"
+          "30-59": "<3k stars"
+          "0-29": "Abandonado"
+
+  observability:
+    description: "LLM eval / tracing / observability (langfuse e equivalentes)"
+    dimensions:
+      - id: trace_granularity
+        name: "Trace Granularity"
+        weight: 0.18
+        signals: ["span-level traces", "token-level", "tool-call traces", "nested spans"]
+        scoring_scale:
+          "90-100": "Span + token + tool-call + nested"
+          "60-89": "Span + tool-call"
+          "30-59": "Apenas session-level"
+          "0-29": "Só logs"
+      - id: eval_framework
+        name: "Eval Framework"
+        weight: 0.20
+        signals: ["eval datasets", "LLM-as-judge", "human eval UI", "regression tracking"]
+        scoring_scale:
+          "90-100": "Datasets + LLM-judge + human UI + regression"
+          "60-89": "LLM-judge + human UI"
+          "30-59": "Datasets apenas"
+          "0-29": "Sem eval"
+      - id: cost_tracking
+        name: "Cost Tracking"
+        weight: 0.14
+        signals: ["per-model pricing", "cost per trace", "budget alerts", "cost dashboards"]
+        scoring_scale:
+          "90-100": "Per-model + per-trace + alerts + dashboard"
+          "60-89": "Per-trace + dashboard"
+          "30-59": "Tracking simples"
+          "0-29": "Sem tracking"
+      - id: latency_profiling
+        name: "Latency Profiling"
+        weight: 0.13
+        signals: ["TTFT", "tokens/sec", "p50/p99 histograms", "bottleneck detection"]
+        scoring_scale:
+          "90-100": "TTFT + tok/s + p50/p99 + bottleneck auto-detect"
+          "60-89": "TTFT + p50/p99"
+          "30-59": "Latência média"
+          "0-29": "Sem latency"
+      - id: self_hosted
+        name: "Self-hosted"
+        weight: 0.15
+        signals: ["docker-compose fácil", "k8s helm", "air-gapped support", "on-prem license"]
+        scoring_scale:
+          "90-100": "One-command setup + k8s + air-gapped"
+          "60-89": "docker-compose suave"
+          "30-59": "Setup complexo mas possível"
+          "0-29": "SaaS-only"
+      - id: ui_quality
+        name: "UI Quality"
+        weight: 0.20
+        signals: ["dashboard usability", "trace navigator UX", "mobile support", "filters/search"]
+        scoring_scale:
+          "90-100": "UX premium, filtros avançados, mobile"
+          "60-89": "Dashboard limpo com filtros"
+          "30-59": "UI funcional mas limitada"
+          "0-29": "CLI only"
+
+  spec-driven:
+    description: "Spec-driven development, meta-prompting, context engineering (spec-kit, get-shit-done, superpowers)"
+    dimensions:
+      - id: spec_format
+        name: "Spec Format"
+        weight: 0.20
+        signals: ["markdown-based", "YAML schemas", "formal grammars", "examples library"]
+        scoring_scale:
+          "90-100": "Formato híbrido MD+YAML com schema + exemplos"
+          "60-89": "MD estruturado com schema"
+          "30-59": "MD livre"
+          "0-29": "Prompts ad-hoc"
+      - id: traceability
+        name: "Traceability"
+        weight: 0.20
+        signals: ["spec → code links", "requirement IDs", "test coverage mapping"]
+        scoring_scale:
+          "90-100": "IDs em specs + links bidirecionais code↔spec↔test"
+          "60-89": "Spec → code"
+          "30-59": "Only code tags"
+          "0-29": "Sem traceability"
+      - id: executable_specs
+        name: "Executable Specs"
+        weight: 0.22
+        signals: ["spec → test generation", "spec → code scaffolding", "diff-based validation"]
+        scoring_scale:
+          "90-100": "Specs geram testes + scaffold + validação contínua"
+          "60-89": "Specs geram testes"
+          "30-59": "Specs geram scaffolding"
+          "0-29": "Specs documentação apenas"
+      - id: tdd_integration
+        name: "TDD Integration"
+        weight: 0.15
+        signals: ["red-green enforcement", "subagent ↔ test runner", "failing tests first"]
+        scoring_scale:
+          "90-100": "TDD enforcement com subagents + failing tests first"
+          "60-89": "TDD workflow recomendado"
+          "30-59": "Testes gerados após código"
+          "0-29": "Sem TDD"
+      - id: roundtripping
+        name: "Roundtripping"
+        weight: 0.23
+        signals: ["code → spec extraction", "spec update from code change", "drift detection"]
+        scoring_scale:
+          "90-100": "Bidirecional spec↔code + drift detection auto"
+          "60-89": "Extração code→spec ou drift detection"
+          "30-59": "Manual sync"
+          "0-29": "Spec fica desatualizada"
+
+  personal-assistant:
+    description: "Personal assistants multi-channel (openclaw, hermes-agent)"
+    dimensions:
+      - id: channels
+        name: "Channels"
+        weight: 0.20
+        signals: ["# canais suportados (WhatsApp, Telegram, iMessage, etc)", "native apps", "voice support"]
+        scoring_scale:
+          "90-100": "15+ canais + native apps + voz"
+          "60-89": "5–15 canais"
+          "30-59": "2–5 canais"
+          "0-29": "1 canal"
+      - id: local_first
+        name: "Local-first"
+        weight: 0.18
+        signals: ["on-device execution", "no cloud dependency", "offline mode", "e2e encrypted"]
+        scoring_scale:
+          "90-100": "100% on-device + offline + e2e"
+          "60-89": "Local preferred, cloud opcional"
+          "30-59": "Híbrido"
+          "0-29": "Cloud-only"
+      - id: memory
+        name: "Memory"
+        weight: 0.15
+        signals: ["conversational memory", "user profile persistence", "cross-channel continuity"]
+        scoring_scale:
+          "90-100": "Cross-channel memory rico + profile"
+          "60-89": "Per-channel memory persistente"
+          "30-59": "Session memory"
+          "0-29": "Sem memory"
+      - id: skills
+        name: "Skills"
+        weight: 0.17
+        signals: ["skill system aberto", "auto-skill creation", "skill marketplace", "MCP integration"]
+        scoring_scale:
+          "90-100": "Auto-skill + marketplace + MCP"
+          "60-89": "Skill system manual + MCP"
+          "30-59": "Set fixo de skills"
+          "0-29": "Monolítico"
+      - id: cost
+        name: "Cost"
+        weight: 0.13
+        signals: ["VPS mínimo", "serverless support", "$/user/mês", "hibernation support"]
+        scoring_scale:
+          "90-100": "<$5/mês ou serverless com hibernação"
+          "60-89": "$5–20/mês"
+          "30-59": "$20–100/mês"
+          "0-29": ">$100/mês"
+      - id: privacy
+        name: "Privacy"
+        weight: 0.17
+        signals: ["no telemetry", "data ownership explicit", "PII redaction", "audit logs"]
+        scoring_scale:
+          "90-100": "Zero telemetry + ownership + PII redaction + audit"
+          "60-89": "No telemetry + ownership"
+          "30-59": "Telemetry opcional"
+          "0-29": "Telemetry on by default"
+
+  workflow-infra:
+    description: "Durable workflows, event-sourced infra (workflow, gh-aw)"
+    dimensions:
+      - id: durability
+        name: "Durability"
+        weight: 0.22
+        signals: ["step persistence", "crash recovery", "exactly-once semantics"]
+        scoring_scale:
+          "90-100": "Exactly-once + crash recovery automático"
+          "60-89": "At-least-once + crash recovery"
+          "30-59": "At-least-once"
+          "0-29": "Best-effort"
+      - id: retry_semantics
+        name: "Retry Semantics"
+        weight: 0.15
+        signals: ["exponential backoff", "max attempts config", "jitter", "DLQ on exhaustion"]
+        scoring_scale:
+          "90-100": "Backoff + jitter + DLQ configurável"
+          "60-89": "Backoff + DLQ"
+          "30-59": "Retry fixo"
+          "0-29": "Sem retry"
+      - id: event_log
+        name: "Event Log"
+        weight: 0.18
+        signals: ["append-only log", "replay determinístico", "time-travel debugging"]
+        scoring_scale:
+          "90-100": "Append-only + replay determinístico + time-travel"
+          "60-89": "Replay determinístico"
+          "30-59": "Event log query-only"
+          "0-29": "Sem event log"
+      - id: parallelism
+        name: "Parallelism"
+        weight: 0.13
+        signals: ["fan-out/fan-in", "parallel step execution", "concurrency limits"]
+        scoring_scale:
+          "90-100": "Fan-out/fan-in nativo + concurrency limits"
+          "60-89": "Parallel steps com limites"
+          "30-59": "Concurrent (não parallel)"
+          "0-29": "Sequencial"
+      - id: language_support
+        name: "Language Support"
+        weight: 0.15
+        signals: ["# linguagens", "SDK qualidade", "markdown/YAML DSL"]
+        scoring_scale:
+          "90-100": "3+ linguagens + DSL rica"
+          "60-89": "2 linguagens"
+          "30-59": "1 linguagem"
+          "0-29": "Apenas YAML raso"
+      - id: cloud_lock_in
+        name: "Cloud Lock-in (inverse)"
+        weight: 0.17
+        signals: ["self-hostable", "OSS backend", "portable", "vendor-neutral"]
+        scoring_scale:
+          "90-100": "Self-host + OSS backend + portável"
+          "60-89": "Self-host com trade-offs"
+          "30-59": "Self-host complexo"
+          "0-29": "SaaS-lock"

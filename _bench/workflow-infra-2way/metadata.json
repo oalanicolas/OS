@@ -1,0 +1,47 @@
+{
+  "generatedAt": "2026-04-19T00:00:00Z",
+  "comparison_type": "pair",
+  "slug": "workflow-infra-2way",
+  "subjects": [
+    { "slug": "workflow", "path": "OS/workflow/", "display_name": "Vercel Workflow SDK", "source_url": "https://github.com/vercel/workflow" },
+    { "slug": "gh-aw", "path": "OS/gh-aw/", "display_name": "GitHub Agentic Workflows", "source_url": "https://github.com/github/gh-aw" }
+  ],
+  "dimension_pack": "workflow-infra",
+  "dimension_pack_version": "1.0",
+  "scoring_dimensions": [
+    "durability",
+    "retry_semantics",
+    "event_log",
+    "parallelism",
+    "language_support",
+    "cloud_lock_in"
+  ],
+  "weights": {
+    "durability": 0.22,
+    "retry_semantics": 0.15,
+    "event_log": 0.18,
+    "parallelism": 0.13,
+    "language_support": 0.15,
+    "cloud_lock_in": 0.17
+  },
+  "profile": "standard",
+  "skill_version": "1.0.0",
+  "output_root": "OS/_bench/workflow-infra-2way/",
+  "artifacts_generated": [
+    "metadata.json",
+    "inventory-workflow.json",
+    "inventory-workflow.md",
+    "inventory-gh-aw.json",
+    "inventory-gh-aw.md",
+    "comparison-matrix.json",
+    "comparison-matrix.md",
+    "scorecard.json",
+    "scorecard.md",
+    "gap-analysis.json",
+    "gap-analysis.md",
+    "battle-card.md",
+    "executive-report.md"
+  ],
+  "quality_gate_passed": true,
+  "notes": "Pair benchmark of two fundamentally different paradigms: Vercel Workflow SDK (durable event-sourced JS functions) vs GitHub Agentic Workflows (markdown→GitHub Actions compiler with safety rails). Scoring captures paradigm tension: workflow dominates runtime durability; gh-aw dominates portability and multi-language surface via its DSL."
+}

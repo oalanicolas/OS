@@ -1,0 +1,89 @@
+{
+  "generatedAt": "2026-04-19T22:19:37Z",
+  "subject": "gbrain",
+  "path": "OS/gbrain/",
+  "primary_language": "TypeScript",
+  "secondary_languages": ["SQL", "Markdown", "Bash"],
+  "stack": ["Bun", "PGLite", "Postgres", "pgvector", "pg_trgm", "MCP SDK", "Anthropic SDK", "OpenAI SDK"],
+  "license": "MIT",
+  "tagline": "Postgres-native personal knowledge brain with hybrid RAG search (PGLite default, Supabase optional)",
+  "metrics": {
+    "loc_estimate": 44499,
+    "file_count": 584,
+    "top_level_dirs": ["docs", "eval", "recipes", "scripts", "skills", "src", "templates", "test"],
+    "readme_lines": 200,
+    "last_commit_date": "2026-04-19T18:23:02+08:00",
+    "github_stars": null,
+    "github_contributors": null
+  },
+  "modules": [
+    { "name": "src/core", "path": "src/core/", "type": "library", "loc_estimate": 20000 },
+    { "name": "src/core/search", "path": "src/core/search/", "type": "library", "loc_estimate": 3000 },
+    { "name": "src/core/minions", "path": "src/core/minions/", "type": "library", "loc_estimate": 2500 },
+    { "name": "src/commands", "path": "src/commands/", "type": "app", "loc_estimate": 8000 },
+    { "name": "src/mcp", "path": "src/mcp/", "type": "service", "loc_estimate": 1500 },
+    { "name": "skills", "path": "skills/", "type": "library", "loc_estimate": 0 },
+    { "name": "recipes", "path": "recipes/", "type": "library", "loc_estimate": 0 }
+  ],
+  "external_dependencies_top10": [
+    { "package": "@anthropic-ai/sdk", "version": "^0.30.0", "purpose": "LLM provider Anthropic" },
+    { "package": "@aws-sdk/client-s3", "version": "^3.1028.0", "purpose": "storage backend S3" },
+    { "package": "@electric-sql/pglite", "version": "^0.4.4", "purpose": "Postgres embutido via WASM (default engine)" },
+    { "package": "@modelcontextprotocol/sdk", "version": "^1.0.0", "purpose": "MCP server stdio/HTTP" },
+    { "package": "gray-matter", "version": "^4.0.3", "purpose": "frontmatter parsing" },
+    { "package": "marked", "version": "^18.0.0", "purpose": "markdown renderer" },
+    { "package": "openai", "version": "^4.0.0", "purpose": "embedding text-embedding-3-large + LLM" },
+    { "package": "pgvector", "version": "^0.2.0", "purpose": "vector similarity search" },
+    { "package": "postgres", "version": "^3.4.0", "purpose": "driver postgres.js para Supabase" }
+  ],
+  "entry_points": [
+    { "kind": "cli", "path": "src/cli.ts", "command": "gbrain" },
+    { "kind": "mcp", "path": "src/mcp/server.ts", "command": "gbrain serve" }
+  ],
+  "capabilities": [
+    { "name": "Hybrid search (vector + keyword + RRF)", "evidence_paths": ["OS/gbrain/src/core/search/hybrid.ts", "OS/gbrain/src/core/search/vector.ts", "OS/gbrain/src/core/search/keyword.ts"], "category": "core", "description": "Busca hibrida com RRF, expansao multi-query e dedup" },
+    { "name": "Pluggable engines (PGLite default, Postgres/Supabase optional)", "evidence_paths": ["OS/gbrain/src/core/engine-factory.ts", "OS/gbrain/src/core/pglite-engine.ts", "OS/gbrain/src/core/postgres-engine.ts"], "category": "core", "description": "Engine factory com dynamic import, PGLite embutido via WASM ou Postgres remoto" },
+    { "name": "Self-wiring knowledge graph (zero-LLM auto-link)", "evidence_paths": ["OS/gbrain/src/core/link-extraction.ts", "OS/gbrain/src/commands/extract.ts", "OS/gbrain/src/commands/graph-query.ts"], "category": "core", "description": "Extracao de tipos (attended, works_at, invested_in) via heuristicas, sem LLM" },
+    { "name": "Eval harness retrieval", "evidence_paths": ["OS/gbrain/src/core/search/eval.ts", "OS/gbrain/src/commands/eval.ts", "OS/gbrain/docs/benchmarks/2026-04-18-brainbench-v1.md"], "category": "governance", "description": "P@k, R@k, MRR, nDCG@k com benchmark BrainBench publicado" },
+    { "name": "Minions durable job queue (Postgres-native)", "evidence_paths": ["OS/gbrain/src/core/minions/queue.ts", "OS/gbrain/src/core/minions/worker.ts"], "category": "core", "description": "Job queue BullMQ-inspired com parent-child, cascade-kill, idempotency" },
+    { "name": "MCP server (30+ tools via stdio + HTTP)", "evidence_paths": ["OS/gbrain/src/mcp/server.ts", "OS/gbrain/src/commands/auth.ts"], "category": "integration", "description": "Exposes ~41 brain operations como MCP tools" },
+    { "name": "26 skills (thin-harness fat-skills)", "evidence_paths": ["OS/gbrain/skills/RESOLVER.md", "OS/gbrain/skills/brain-ops/SKILL.md"], "category": "extensibility", "description": "Skills markdown que agentes executam" },
+    { "name": "Multi-tier chunking", "evidence_paths": ["OS/gbrain/src/core/chunkers/"], "category": "core", "description": "Recursive, semantic, LLM-guided chunkers" },
+    { "name": "Query intent classifier", "evidence_paths": ["OS/gbrain/src/core/search/intent.ts"], "category": "core", "description": "Classifica entity/temporal/event/general com detail level auto" },
+    { "name": "Deterministic fail-improve loop", "evidence_paths": ["OS/gbrain/src/core/fail-improve.ts"], "category": "governance", "description": "JSONL failure logging com regex generation a partir de falhas" },
+    { "name": "Timeline temporal entries", "evidence_paths": ["OS/gbrain/src/core/link-extraction.ts"], "category": "core", "description": "parseTimelineEntries com batch insert via unnest" },
+    { "name": "Orphans detector", "evidence_paths": ["OS/gbrain/src/commands/orphans.ts"], "category": "governance", "description": "Surface pages sem wikilinks inbound, agrupado por dominio" }
+  ],
+  "quality_signals": {
+    "test_framework": "bun test",
+    "test_file_count": 75,
+    "linter": null,
+    "ci_provider": "GitHub Actions",
+    "ci_workflow_count": null
+  },
+  "documentation": {
+    "readme_sections": ["Install", "Skills", "How It Works", "Minions", "Benchmarks"],
+    "has_contributing": true,
+    "has_architecture_doc": true,
+    "docs_page_count": null
+  },
+  "extension_points": {
+    "plugins": { "mechanism": "skill markdown files + recipes/ YAML", "path": "skills/,recipes/" },
+    "hooks": { "mechanism": "webhook-transforms + cron scheduler", "events": ["signal", "ingest", "cron"] },
+    "mcp": { "client": false, "server": true }
+  },
+  "unique_selling_points": [
+    "Zero-LLM auto-link: relacionamentos tipados extraidos por heuristicas, sem chamar LLM em cada write",
+    "PGLite default: database pronto em 2s, sem servidor, embutido via WASM",
+    "BrainBench publicado: R@5 83% -> 95% com hybrid + graph, graph-only F1 86.6% vs grep 57.8%",
+    "Minions job queue: 753ms vs 10s+ em sub-agents, durability via Postgres com cascade-kill",
+    "Thin harness, fat skills: 26 skills markdown sao o motor, runtime e magro"
+  ],
+  "limitations": [
+    { "description": "OAuth 2.1 nao implementado (ChatGPT bloqueado)", "source": "README.md" },
+    { "description": "Paraphrase-first storage: compiled_truth e o primario, raw fica em raw_data", "source": "src/core/operations.ts" }
+  ],
+  "confidence": "HIGH",
+  "extraction_method": "filesystem-scan",
+  "skill_version": "1.0.0"
+}
