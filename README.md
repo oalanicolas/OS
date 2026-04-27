@@ -9,7 +9,7 @@
 
 <h3>Índice curado de agent harnesses — frameworks, CLIs de coding, memória, orquestração e plataformas enterprise — usados como referência e benchmark de estudo.</h3>
 
-<a href="#-coding-agents--clis">Coding</a> · <a href="#-orquestração-multi-agente">Multi-agente</a> · <a href="#-memória--conhecimento">Memória</a> · <a href="#-assistentes-pessoais">Assistentes</a> · <a href="#-spec-driven--metodologia">Spec-driven</a> · <a href="#️-workflow--execução-durável">Workflow</a> · <a href="#-protocolo--infraestrutura">Protocolo</a> · <a href="#-avaliação--observabilidade">Eval</a> · <a href="#-plataformas-enterprise">Enterprise</a> · <a href="#-skills-cross-agent">Skills</a>
+<a href="#-coding-agents--clis">Coding</a> · <a href="#-orquestração-multi-agente">Multi-agente</a> · <a href="#-memória--conhecimento">Memória</a> · <a href="#-assistentes-pessoais">Assistentes</a> · <a href="#-spec-driven--metodologia">Spec-driven</a> · <a href="#-self-improvement-loops">Self-improvement</a> · <a href="#️-workflow--execução-durável">Workflow</a> · <a href="#-protocolo--infraestrutura">Protocolo</a> · <a href="#-avaliação--observabilidade">Eval</a> · <a href="#-plataformas-enterprise">Enterprise</a> · <a href="#-skills-cross-agent">Skills</a>
 
 <sub>by **Alan Nicolas**</sub>
 
@@ -17,7 +17,7 @@
 
 ---
 
-> **29 projetos. 10 categorias. Curadoria opinativa.** Não contém código próprio — todos os repos são forks/clones para análise. Veja [Espelho local](#-espelho-local) para reproduzir o bench.
+> **32 projetos. 11 categorias. Curadoria opinativa.** Não contém código próprio — todos os repos são forks/clones para análise. Veja [Espelho local](#-espelho-local) para reproduzir o bench.
 
 ---
 
@@ -28,6 +28,7 @@
 - [🧠 Memória & conhecimento](#-memória--conhecimento)
 - [🦾 Assistentes pessoais](#-assistentes-pessoais)
 - [📐 Spec-driven & metodologia](#-spec-driven--metodologia)
+- [🧬 Self-improvement loops](#-self-improvement-loops)
 - [⚙️ Workflow & execução durável](#️-workflow--execução-durável)
 - [🔌 Protocolo & infraestrutura](#-protocolo--infraestrutura)
 - [📊 Avaliação & observabilidade](#-avaliação--observabilidade)
@@ -108,6 +109,18 @@
 
 ---
 
+## 🧬 Self-improvement loops
+
+Sistemas que iteram, mutam e otimizam contra uma métrica — descendentes do `karpathy/autoresearch` e da linhagem de "AI scientist". Veja também [`alvinreal/awesome-autoresearch`](https://github.com/alvinreal/awesome-autoresearch) para o índice completo.
+
+| Projeto | Stack | Diferencial |
+|---------|-------|-------------|
+| [ShengranHu/ADAS](https://github.com/ShengranHu/ADAS) | Python | **Automated Design of Agentic Systems** (ICLR 2025); meta-agentes que inventam novas arquiteturas de agente programando-as em código. |
+| [SakanaAI/AI-Scientist-v2](https://github.com/SakanaAI/AI-Scientist-v2) | Python | Descoberta científica autônoma em nível de workshop via agentic tree search; remove a dependência de template do v1 e generaliza entre domínios. |
+| [gepa-ai/gepa](https://github.com/gepa-ai/gepa) | Python | **GEPA (Genetic-Pareto)** — ICLR 2026 Oral; evolução reflexiva de prompts que supera RL (GRPO); otimiza qualquer parâmetro textual contra qualquer métrica via reflexão em linguagem natural. |
+
+---
+
 ## ⚙️ Workflow & execução durável
 
 | Projeto | Stack | Diferencial |
@@ -165,6 +178,7 @@ Eixo cruzado, agrupando harnesses por técnica/arquitetura recorrente:
 | **Local-first** | mempalace, openclaw, gbrain, hermes-agent | Sem dependência de cloud; on-device ou self-hosted. |
 | **Governance / policy** | agent-governance-toolkit, Clawith | Runtime security e org chart de agentes. |
 | **24/7 persistente** | claude-remote-manager, hermes-agent, gsd-2 | Cron, hibernação, retomada automática. |
+| **Self-improvement / autoresearch** | ADAS, AI-Scientist-v2, gepa, superpowers | Loop que mede, muta e otimiza — código, prompts ou arquitetura. |
 
 ---
 
