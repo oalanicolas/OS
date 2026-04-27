@@ -9,6 +9,7 @@
 !/.claude/
 !/_bench/
 !/README.md
+!/README.pt-BR.md
 !/repos.tsv
 !/STUDENT-AGENT.md
 !/update.sh
