@@ -1,0 +1,43 @@
+{
+  "slug": "memory-5way",
+  "generatedAt": "2026-08-06T20:18:21Z",
+  "subjects": ["gbrain", "mempalace", "mem0", "memori-labs", "gsd-2"],
+  "versions": {
+    "gbrain": "0.42.73.2",
+    "mempalace": "3.6.0",
+    "mem0": "2.0.17",
+    "memori-labs": "3.3.7",
+    "gsd-2": "3.0.0"
+  },
+  "categories": {
+    "recall": {
+      "gbrain": "BrainBench R@5 97.9% P@5 49.1% (custom)",
+      "mempalace": "LongMemEval R@5 96.6% raw / 100% hybrid",
+      "mem0": "LoCoMo 92.5 LongMemEval 94.4 BEAM1M 64.1",
+      "memori-labs": "LoCoMo 87% @ 721 tokens",
+      "gsd-2": "none published"
+    },
+    "persistence_strategy": {
+      "gbrain": "paraphrase+raw",
+      "mempalace": "verbatim",
+      "mem0": "paraphrase_facts",
+      "memori-labs": "structured_facts+conversations",
+      "gsd-2": "six_category_structured"
+    },
+    "vector_stores_count_approx": {
+      "gbrain": 2,
+      "mempalace": 5,
+      "mem0": 24,
+      "memori-labs": 1,
+      "gsd-2": 1
+    },
+    "graph": {
+      "gbrain": "zero_llm_typed_edges+multihop+chronicle",
+      "mempalace": "temporal_kg",
+      "mem0": "optional_external_llm_graph",
+      "memori-labs": "sql_knowledge_graph_triples",
+      "gsd-2": "memory_relations"
+    },
+    "local_first_rank": ["mempalace", "gsd-2", "gbrain", "memori-labs", "mem0"]
+  }
+}

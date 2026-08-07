@@ -1,9 +1,13 @@
 # OS Benchmarks — Index
 
-_Regenerado em 2026-04-19 via `scripts/bench.sh index`._
+_Regenerado em 2026-08-06 via os-bench memory-5way._
 
 | Slug | Type | Pack | Generated | Quality Gate |
 |------|------|------|-----------|--------------|
+| brain-6way | nway | memory+product | 2026-08-06T21:44:27Z | PASS |
+| _research/obsidian-brain-voice-candidates | research | parking-lot | 2026-08-06 | N/A |
+| mempalace-vs-gbrain | pair | memory | 2026-08-06T20:30:00Z | PASS |
+| memory-5way | nway | memory | 2026-08-06T20:18:21Z | PASS |
 | coding-agents-8way.v1 | ? | ? | ? | ? |
 | coding-agents-8way | nway | coding-agent | 2026-04-19T22:45:00Z | PASS |
 | enterprise-platforms-5way | nway | ? | 2026-04-19T22:54:14Z | PASS |

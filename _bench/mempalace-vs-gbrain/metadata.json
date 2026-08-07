@@ -1,0 +1,54 @@
+{
+  "$schema": "os-bench metadata v1.0",
+  "generatedAt": "2026-08-06T20:30:00Z",
+  "comparison_type": "pair",
+  "slug": "mempalace-vs-gbrain",
+  "subject_a": "mempalace",
+  "subject_b": "gbrain",
+  "subjects": [
+    {
+      "slug": "mempalace",
+      "path": "OS/mempalace/",
+      "source_url": "https://github.com/MemPalace/mempalace",
+      "version": "3.6.0",
+      "last_commit": "2026-07-17"
+    },
+    {
+      "slug": "gbrain",
+      "path": "OS/gbrain/",
+      "source_url": "https://github.com/garrytan/gbrain",
+      "version": "0.42.73.2",
+      "last_commit": "2026-08-05"
+    }
+  ],
+  "dimension_pack": "memory",
+  "dimension_weights": {
+    "recall_accuracy": 0.22,
+    "write_latency": 0.10,
+    "read_latency": 0.12,
+    "persistence": 0.12,
+    "schema_flexibility": 0.10,
+    "local_first": 0.13,
+    "vector_support": 0.11,
+    "graph_support": 0.10
+  },
+  "related": ["OS/_bench/memory-5way/", "OS/_bench/memory-4way/"],
+  "artifacts_generated": [
+    "metadata.json",
+    "comparison-matrix.md",
+    "comparison-matrix.json",
+    "scorecard.md",
+    "scorecard.json",
+    "gap-analysis.md",
+    "battle-card.md",
+    "executive-report.md"
+  ],
+  "confidence_overall": "HIGH",
+  "quality_gate_passed": true,
+  "weighted_totals": {
+    "mempalace": 84.23,
+    "gbrain": 78.56
+  },
+  "overall_winner": "mempalace",
+  "delta": 5.67
+}

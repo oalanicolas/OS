@@ -1,0 +1,91 @@
+{
+  "slug": "memory-5way",
+  "generatedAt": "2026-08-06T20:18:21Z",
+  "pack": "memory",
+  "confidence_overall": "HIGH",
+  "weights": {
+    "recall_accuracy": 0.22,
+    "write_latency": 0.10,
+    "read_latency": 0.12,
+    "persistence": 0.12,
+    "schema_flexibility": 0.10,
+    "local_first": 0.13,
+    "vector_support": 0.11,
+    "graph_support": 0.10
+  },
+  "scores": {
+    "gbrain": {
+      "recall_accuracy": 80,
+      "write_latency": 82,
+      "read_latency": 80,
+      "persistence": 82,
+      "schema_flexibility": 78,
+      "local_first": 58,
+      "vector_support": 78,
+      "graph_support": 94,
+      "weighted_total": 78.56
+    },
+    "mempalace": {
+      "recall_accuracy": 93,
+      "write_latency": 65,
+      "read_latency": 75,
+      "persistence": 95,
+      "schema_flexibility": 80,
+      "local_first": 95,
+      "vector_support": 72,
+      "graph_support": 86,
+      "weighted_total": 84.23
+    },
+    "mem0": {
+      "recall_accuracy": 92,
+      "write_latency": 80,
+      "read_latency": 74,
+      "persistence": 72,
+      "schema_flexibility": 86,
+      "local_first": 40,
+      "vector_support": 98,
+      "graph_support": 72,
+      "weighted_total": 77.54
+    },
+    "memori-labs": {
+      "recall_accuracy": 85,
+      "write_latency": 76,
+      "read_latency": 76,
+      "persistence": 78,
+      "schema_flexibility": 88,
+      "local_first": 55,
+      "vector_support": 70,
+      "graph_support": 80,
+      "weighted_total": 76.43
+    },
+    "gsd-2": {
+      "recall_accuracy": 38,
+      "write_latency": 55,
+      "read_latency": 60,
+      "persistence": 65,
+      "schema_flexibility": 55,
+      "local_first": 60,
+      "vector_support": 48,
+      "graph_support": 55,
+      "weighted_total": 52.94
+    }
+  },
+  "ranking": [
+    "mempalace",
+    "gbrain",
+    "mem0",
+    "memori-labs",
+    "gsd-2"
+  ],
+  "overall_winner": "mempalace",
+  "dimension_leaders": {
+    "recall_accuracy": "mempalace",
+    "write_latency": "gbrain",
+    "read_latency": "gbrain",
+    "persistence": "mempalace",
+    "schema_flexibility": "memori-labs",
+    "local_first": "mempalace",
+    "vector_support": "mem0",
+    "graph_support": "gbrain"
+  }
+}

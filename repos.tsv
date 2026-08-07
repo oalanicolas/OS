@@ -25,8 +25,10 @@ mcp-servers	https://github.com/modelcontextprotocol/servers.git	main
 mem0	https://github.com/mem0ai/mem0.git	main
 memori-labs	https://github.com/MemoriLabs/Memori.git	main
 mempalace	https://github.com/milla-jovovich/mempalace	main
+next-level-outreach	https://github.com/henriquecaner/next-level-outreach	main
 openclaw	https://github.com/openclaw/openclaw	main
 paperclip	https://github.com/paperclipai/paperclip	master
 spec-kit	https://github.com/github/spec-kit.git	main
 superpowers	https://github.com/obra/superpowers	main
 workflow	https://github.com/vercel/workflow	main
+LifeOS	https://github.com/danielmiessler/LifeOS	main

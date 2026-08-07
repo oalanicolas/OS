@@ -1,0 +1,52 @@
+{
+  "slug": "mempalace-vs-gbrain",
+  "generatedAt": "2026-08-06T20:30:00Z",
+  "pack": "memory",
+  "confidence_overall": "HIGH",
+  "weights": {
+    "recall_accuracy": 0.22,
+    "write_latency": 0.10,
+    "read_latency": 0.12,
+    "persistence": 0.12,
+    "schema_flexibility": 0.10,
+    "local_first": 0.13,
+    "vector_support": 0.11,
+    "graph_support": 0.10
+  },
+  "scores": {
+    "mempalace": {
+      "recall_accuracy": 93,
+      "write_latency": 65,
+      "read_latency": 75,
+      "persistence": 95,
+      "schema_flexibility": 80,
+      "local_first": 95,
+      "vector_support": 72,
+      "graph_support": 86,
+      "weighted_total": 84.23
+    },
+    "gbrain": {
+      "recall_accuracy": 80,
+      "write_latency": 82,
+      "read_latency": 80,
+      "persistence": 82,
+      "schema_flexibility": 78,
+      "local_first": 58,
+      "vector_support": 78,
+      "graph_support": 94,
+      "weighted_total": 78.56
+    }
+  },
+  "dimension_winners": {
+    "recall_accuracy": "mempalace",
+    "write_latency": "gbrain",
+    "read_latency": "gbrain",
+    "persistence": "mempalace",
+    "schema_flexibility": "mempalace",
+    "local_first": "mempalace",
+    "vector_support": "gbrain",
+    "graph_support": "gbrain"
+  },
+  "overall_winner": "mempalace",
+  "delta": 5.67
+}

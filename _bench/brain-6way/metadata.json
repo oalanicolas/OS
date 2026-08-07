@@ -1,0 +1,36 @@
+{
+  "$schema": "os-bench metadata v1.0",
+  "generatedAt": "2026-08-06T21:44:27Z",
+  "comparison_type": "nway",
+  "slug": "brain-6way",
+  "subject_count": 6,
+  "dimension_pack": "memory",
+  "note": "LifeOS is a Life OS / agent harness with Cortex memory — not a pure memory SDK. Pack scores under-rate product surface outside memory dimensions.",
+  "subjects": [
+    {"slug": "LifeOS", "path": "OS/LifeOS/", "source_url": "https://github.com/danielmiessler/LifeOS"},
+    {"slug": "gbrain", "path": "OS/gbrain/", "source_url": "https://github.com/garrytan/gbrain"},
+    {"slug": "mempalace", "path": "OS/mempalace/", "source_url": "https://github.com/MemPalace/mempalace"},
+    {"slug": "mem0", "path": "OS/mem0/", "source_url": "https://github.com/mem0ai/mem0"},
+    {"slug": "memori-labs", "path": "OS/memori-labs/", "source_url": "https://github.com/MemoriLabs/Memori"},
+    {"slug": "gsd-2", "path": "OS/gsd-2/", "source_url": "https://github.com/gsd-build/gsd-2"}
+  ],
+  "related_benches": [
+    "OS/_bench/memory-5way/",
+    "OS/_bench/mempalace-vs-gbrain/",
+    "OS/_bench/personal-assistant-3way/",
+    "OS/_bench/_research/obsidian-brain-voice-candidates.md"
+  ],
+  "weighted_totals": {
+    "mempalace": 84.23,
+    "gbrain": 78.56,
+    "mem0": 77.54,
+    "memori-labs": 76.43,
+    "LifeOS": 70.58,
+    "gsd-2": 52.94
+  },
+  "overall_winner_memory_pack": "mempalace",
+  "product_brain_os_winner": "LifeOS",
+  "knowledge_brain_winner": "gbrain",
+  "confidence_overall": "HIGH",
+  "quality_gate_passed": true
+}
