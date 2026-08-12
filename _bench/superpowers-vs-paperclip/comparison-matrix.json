@@ -1,0 +1,442 @@
+{
+  "generatedAt": "2026-08-12T20:15:00Z",
+  "comparison_type": "pair",
+  "subjects": [
+    "superpowers",
+    "paperclip"
+  ],
+  "dimension_pack": "harness-structure",
+  "categories": [
+    {
+      "name": "Skill System",
+      "features": [
+        {
+          "name": "Agent Skills SKILL.md unit",
+          "values": {
+            "superpowers": "yes (14 process skills)",
+            "paperclip": "yes (catalog bundled/optional)"
+          },
+          "evidence": {
+            "superpowers": [
+              "OS/superpowers/skills/using-superpowers/SKILL.md"
+            ],
+            "paperclip": [
+              "OS/paperclip/packages/skills-catalog/"
+            ]
+          },
+          "equivalence": "Forte",
+          "delta": "both ship SKILL.md; Superpowers is process, Paperclip is ops"
+        },
+        {
+          "name": "Listing / description budget",
+          "values": {
+            "superpowers": "yes (SDO trigger-only)",
+            "paperclip": "partial (catalog.json, no cap product)"
+          },
+          "evidence": {
+            "superpowers": [
+              "OS/superpowers/skills/writing-skills/SKILL.md"
+            ],
+            "paperclip": [
+              "OS/paperclip/packages/skills-catalog/"
+            ]
+          },
+          "equivalence": "Parcial",
+          "delta": "Superpowers treats description as a token product"
+        },
+        {
+          "name": "Bootstrap force-invoke",
+          "values": {
+            "superpowers": "yes (SessionStart injects body)",
+            "paperclip": "partial (heartbeat \u2192 paperclip skill)"
+          },
+          "evidence": {
+            "superpowers": [
+              "OS/superpowers/hooks/session-start"
+            ],
+            "paperclip": [
+              "OS/paperclip/packages/teams-catalog/catalog/bundled/company-defaults/core-exec-team/agents/ceo/AGENTS.md"
+            ]
+          },
+          "equivalence": "Parcial",
+          "delta": "only Superpowers hard-injects a bootstrap body"
+        },
+        {
+          "name": "Skill authoring tests",
+          "values": {
+            "superpowers": "yes (pressure scenarios)",
+            "paperclip": "yes (catalog-builder tests)"
+          },
+          "evidence": {
+            "superpowers": [
+              "OS/superpowers/tests/explicit-skill-requests/"
+            ],
+            "paperclip": [
+              "OS/paperclip/packages/skills-catalog/src/catalog-builder.test.ts"
+            ]
+          },
+          "equivalence": "Parcial",
+          "delta": "SP tests agent compliance; PC tests the catalog file"
+        }
+      ]
+    },
+    {
+      "name": "Squad Model",
+      "features": [
+        {
+          "name": "Named persistent personas",
+          "values": {
+            "superpowers": "partial (implementer/reviewer)",
+            "paperclip": "yes (CEO/CTO/QA AGENTS.md)"
+          },
+          "evidence": {
+            "superpowers": [
+              "OS/superpowers/skills/subagent-driven-development/SKILL.md"
+            ],
+            "paperclip": [
+              "OS/paperclip/packages/teams-catalog/catalog/bundled/company-defaults/core-exec-team/TEAM.md"
+            ]
+          },
+          "equivalence": "Parcial",
+          "delta": "Paperclip has standing employees"
+        },
+        {
+          "name": "Org-chart composition + hire",
+          "values": {
+            "superpowers": "no",
+            "paperclip": "yes (manager/includes + hire)"
+          },
+          "evidence": {
+            "superpowers": [
+              "OS/superpowers/skills/"
+            ],
+            "paperclip": [
+              "OS/paperclip/packages/teams-catalog/catalog/bundled/company-defaults/core-exec-team/agents/ceo/AGENTS.md"
+            ]
+          },
+          "equivalence": "Sem_Equiv",
+          "delta": "Paperclip-only"
+        },
+        {
+          "name": "Independent-mind spawn",
+          "values": {
+            "superpowers": "yes (fresh subagent per task)",
+            "paperclip": "yes (per-agent adapters/workspaces)"
+          },
+          "evidence": {
+            "superpowers": [
+              "OS/superpowers/skills/subagent-driven-development/SKILL.md"
+            ],
+            "paperclip": [
+              "OS/paperclip/packages/adapters/"
+            ]
+          },
+          "equivalence": "Forte",
+          "delta": "both isolate workers; different isolation primitive"
+        }
+      ]
+    },
+    {
+      "name": "Plugin Extensibility",
+      "features": [
+        {
+          "name": "Manifest-first plugin",
+          "values": {
+            "superpowers": "partial (plugin.json host pack)",
+            "paperclip": "yes (PLUGIN_SPEC + sdk)"
+          },
+          "evidence": {
+            "superpowers": [
+              "OS/superpowers/.claude-plugin/plugin.json"
+            ],
+            "paperclip": [
+              "OS/paperclip/doc/plugins/PLUGIN_SPEC.md"
+            ]
+          },
+          "equivalence": "Parcial",
+          "delta": "PC is a plugin runtime; SP is a plugin artifact"
+        },
+        {
+          "name": "MCP",
+          "values": {
+            "superpowers": "no",
+            "paperclip": "yes (packages/mcp-server)"
+          },
+          "evidence": {
+            "superpowers": [
+              "OS/superpowers/CLAUDE.md"
+            ],
+            "paperclip": [
+              "OS/paperclip/packages/mcp-server/"
+            ]
+          },
+          "equivalence": "Sem_Equiv",
+          "delta": "Paperclip-only (SP zero-dep)"
+        },
+        {
+          "name": "Multi-host / adapters",
+          "values": {
+            "superpowers": "yes (6+ coding hosts)",
+            "paperclip": "yes (7 agent-runtime adapters)"
+          },
+          "evidence": {
+            "superpowers": [
+              "OS/superpowers/README.md"
+            ],
+            "paperclip": [
+              "OS/paperclip/packages/adapters/"
+            ]
+          },
+          "equivalence": "Parcial",
+          "delta": "SP ports process; PC ports runtimes"
+        }
+      ]
+    },
+    {
+      "name": "Context Architecture",
+      "features": [
+        {
+          "name": "Always-on vs on-demand",
+          "values": {
+            "superpowers": "yes (one bootstrap body)",
+            "paperclip": "partial (heartbeat/issue pull)"
+          },
+          "evidence": {
+            "superpowers": [
+              "OS/superpowers/skills/writing-skills/SKILL.md"
+            ],
+            "paperclip": [
+              "OS/paperclip/packages/teams-catalog/catalog/bundled/company-defaults/core-exec-team/agents/ceo/AGENTS.md"
+            ]
+          },
+          "equivalence": "Parcial",
+          "delta": "SP cheaper always-on"
+        },
+        {
+          "name": "Identity file split",
+          "values": {
+            "superpowers": "no (uses host files)",
+            "paperclip": "partial (AGENTS.md collapsed SOUL)"
+          },
+          "evidence": {
+            "superpowers": [
+              "OS/superpowers/AGENTS.md"
+            ],
+            "paperclip": [
+              "OS/paperclip/packages/teams-catalog/catalog/bundled/company-defaults/core-exec-team/TEAM.md"
+            ]
+          },
+          "equivalence": "Parcial",
+          "delta": "neither matches OpenClaw split"
+        },
+        {
+          "name": "Anti-rot protocol",
+          "values": {
+            "superpowers": "yes (ledger + file briefs)",
+            "paperclip": "yes (issue comments, not chat)"
+          },
+          "evidence": {
+            "superpowers": [
+              "OS/superpowers/skills/subagent-driven-development/SKILL.md"
+            ],
+            "paperclip": [
+              "OS/paperclip/packages/teams-catalog/catalog/bundled/company-defaults/core-exec-team/agents/ceo/AGENTS.md"
+            ]
+          },
+          "equivalence": "Forte",
+          "delta": "both refuse chat-as-SoT"
+        }
+      ]
+    },
+    {
+      "name": "Complex-Work Spine",
+      "features": [
+        {
+          "name": "intent\u2192spec\u2192plan\u2192implement\u2192review\u2192ship",
+          "values": {
+            "superpowers": "yes (brainstorm\u2192SDD\u2192finish)",
+            "paperclip": "partial (issue tree + pipelines)"
+          },
+          "evidence": {
+            "superpowers": [
+              "OS/superpowers/README.md"
+            ],
+            "paperclip": [
+              "OS/paperclip/docs/pipelines-tutorial.md"
+            ]
+          },
+          "equivalence": "Parcial",
+          "delta": "SP is a methodology; PC is a work graph"
+        },
+        {
+          "name": "On-disk artifacts as SoT",
+          "values": {
+            "superpowers": "yes (plans + .superpowers/sdd)",
+            "paperclip": "yes (issues + attachments)"
+          },
+          "evidence": {
+            "superpowers": [
+              "OS/superpowers/skills/subagent-driven-development/SKILL.md"
+            ],
+            "paperclip": [
+              "OS/paperclip/packages/teams-catalog/catalog/bundled/company-defaults/core-exec-team/projects/first-project/PROJECT.md"
+            ]
+          },
+          "equivalence": "Forte",
+          "delta": "different artifacts, same idea"
+        }
+      ]
+    },
+    {
+      "name": "Gates & Discipline",
+      "features": [
+        {
+          "name": "Separate reviewer context",
+          "values": {
+            "superpowers": "yes (task + branch review)",
+            "paperclip": "partial (in_review + QA agent)"
+          },
+          "evidence": {
+            "superpowers": [
+              "OS/superpowers/skills/subagent-driven-development/SKILL.md"
+            ],
+            "paperclip": [
+              "OS/paperclip/packages/teams-catalog/catalog/bundled/company-defaults/core-exec-team/agents/qa/AGENTS.md"
+            ]
+          },
+          "equivalence": "Parcial",
+          "delta": "SP forbids controller self-fix"
+        },
+        {
+          "name": "Fix-loop breaker / TDD iron law",
+          "values": {
+            "superpowers": "yes (5-round + TDD)",
+            "paperclip": "no"
+          },
+          "evidence": {
+            "superpowers": [
+              "OS/superpowers/skills/test-driven-development/SKILL.md"
+            ],
+            "paperclip": [
+              "OS/paperclip/README.md"
+            ]
+          },
+          "equivalence": "Sem_Equiv",
+          "delta": "Superpowers-only"
+        }
+      ]
+    },
+    {
+      "name": "Handoff & State",
+      "features": [
+        {
+          "name": "File-path handoff",
+          "values": {
+            "superpowers": "yes (task-brief scripts)",
+            "paperclip": "yes (child issue + comment contract)"
+          },
+          "evidence": {
+            "superpowers": [
+              "OS/superpowers/skills/subagent-driven-development/SKILL.md"
+            ],
+            "paperclip": [
+              "OS/paperclip/packages/teams-catalog/catalog/bundled/company-defaults/core-exec-team/agents/ceo/AGENTS.md"
+            ]
+          },
+          "equivalence": "Forte",
+          "delta": "both file/issue, not paste"
+        },
+        {
+          "name": "Worktree / workspace isolation",
+          "values": {
+            "superpowers": "yes (using-git-worktrees)",
+            "paperclip": "yes (execution workspaces)"
+          },
+          "evidence": {
+            "superpowers": [
+              "OS/superpowers/skills/using-git-worktrees/SKILL.md"
+            ],
+            "paperclip": [
+              "OS/paperclip/packages/adapters/"
+            ]
+          },
+          "equivalence": "Forte",
+          "delta": "both isolate execution"
+        }
+      ]
+    },
+    {
+      "name": "Governance",
+      "features": [
+        {
+          "name": "Budgets + board approvals",
+          "values": {
+            "superpowers": "no",
+            "paperclip": "yes"
+          },
+          "evidence": {
+            "superpowers": [
+              "OS/superpowers/README.md"
+            ],
+            "paperclip": [
+              "OS/paperclip/docs/companies/companies-spec.md"
+            ]
+          },
+          "equivalence": "Sem_Equiv",
+          "delta": "Paperclip-only"
+        },
+        {
+          "name": "Trust / domain-skill reject",
+          "values": {
+            "superpowers": "yes (core stays general)",
+            "paperclip": "yes (plugin capabilities)"
+          },
+          "evidence": {
+            "superpowers": [
+              "OS/superpowers/CLAUDE.md"
+            ],
+            "paperclip": [
+              "OS/paperclip/doc/plugins/PLUGIN_SPEC.md"
+            ]
+          },
+          "equivalence": "Parcial",
+          "delta": "different trust objects (skills vs plugins)"
+        }
+      ]
+    }
+  ],
+  "summary": {
+    "total_features": 21,
+    "forte_count": 6,
+    "parcial_count": 11,
+    "sem_equiv_count": 4,
+    "a_only_count": 1,
+    "b_only_count": 3
+  },
+  "subject_only_capabilities": {
+    "superpowers": [
+      {
+        "name": "Fix-loop breaker / TDD iron law",
+        "category": "Gates & Discipline",
+        "evidence": "OS/superpowers/skills/test-driven-development/SKILL.md"
+      }
+    ],
+    "paperclip": [
+      {
+        "name": "Org-chart composition + hire",
+        "category": "Squad Model",
+        "evidence": "OS/paperclip/packages/teams-catalog/catalog/bundled/company-defaults/core-exec-team/agents/ceo/AGENTS.md"
+      },
+      {
+        "name": "MCP",
+        "category": "Plugin Extensibility",
+        "evidence": "OS/paperclip/packages/mcp-server/"
+      },
+      {
+        "name": "Budgets + board approvals",
+        "category": "Governance",
+        "evidence": "OS/paperclip/docs/companies/companies-spec.md"
+      }
+    ]
+  }
+}

@@ -1,0 +1,70 @@
+{
+  "generatedAt": "2026-08-12T18:00:00Z",
+  "subject": "BMAD-METHOD",
+  "path": "OS/BMAD-METHOD/",
+  "primary_language": "Markdown",
+  "secondary_languages": ["TypeScript", "Python"],
+  "stack": ["Node installer", "uv/Python skill scripts", "IDE skill trees"],
+  "license": "MIT",
+  "tagline": "Agile AI-driven development: named personas + numbered phase skills turn an idea into working software without dropping the thinking.",
+  "metrics": {
+    "loc_estimate": 80000,
+    "file_count": 596,
+    "top_level_dirs": ["docs", "src", "test", "tools"],
+    "readme_lines": 94,
+    "last_commit_date": "2026-08-11T16:51:20-07:00",
+    "github_stars": null,
+    "source_url": "https://github.com/bmad-code-org/BMAD-METHOD",
+    "skill_md_count": 58
+  },
+  "modules": [
+    {"name": "bmm-skills", "path": "src/bmm-skills/", "type": "library", "loc_estimate": 0},
+    {"name": "core-skills", "path": "src/core-skills/", "type": "library", "loc_estimate": 0},
+    {"name": "tools", "path": "tools/", "type": "app", "loc_estimate": 0}
+  ],
+  "external_dependencies_top10": [
+    {"package": "uv", "version": "system", "purpose": "run Python skill scripts"}
+  ],
+  "entry_points": [
+    {"kind": "cli", "path": "package.json", "command": "npx bmad-method install"},
+    {"kind": "skill", "path": "src/bmm-skills/agents/bmad-agent-architect/SKILL.md", "command": "talk to Winston"}
+  ],
+  "capabilities": [
+    {"name": "Named persona skills", "evidence_paths": ["OS/BMAD-METHOD/src/bmm-skills/agents/bmad-agent-architect/SKILL.md", "OS/BMAD-METHOD/src/bmm-skills/agents/bmad-agent-architect/customize.toml"], "category": "core", "description": "Winston/John/Amelia etc. with 3-layer TOML merge and a menu that dispatches other skills."},
+    {"name": "Party Mode", "evidence_paths": ["OS/BMAD-METHOD/src/core-skills/bmad-party-mode/SKILL.md"], "category": "core", "description": "session/auto/subagent/agent-team roundtables; memlog is dynamics not transcript."},
+    {"name": "Numbered agile pipeline", "evidence_paths": ["OS/BMAD-METHOD/src/bmm-skills/plan/", "OS/BMAD-METHOD/src/bmm-skills/ship/"], "category": "core", "description": "Analysis → PRD/UX/SPEC → architecture/epics → build/review, each as a skill with steps/."},
+    {"name": "Skill validator", "evidence_paths": ["OS/BMAD-METHOD/tools/validate-skills.js"], "category": "governance", "description": "Deterministic CI validator for skill frontmatter and structure."},
+    {"name": "Persistent facts + project-context", "evidence_paths": ["OS/BMAD-METHOD/src/bmm-skills/agents/bmad-agent-architect/customize.toml"], "category": "core", "description": "file: globs and literal facts loaded on persona activation."},
+    {"name": "Customization layers", "evidence_paths": ["OS/BMAD-METHOD/src/bmm-skills/agents/bmad-agent-architect/SKILL.md"], "category": "extensibility", "description": "skill default → team toml → user toml."}
+  ],
+  "quality_signals": {
+    "test_framework": "python + node tests under skills",
+    "test_file_count": 15,
+    "linter": "eslint + prettier",
+    "ci_provider": "github-actions",
+    "ci_workflow_count": 1
+  },
+  "documentation": {
+    "readme_sections": ["Start Building", "Why BMad"],
+    "has_contributing": true,
+    "has_architecture_doc": true,
+    "docs_page_count": 164
+  },
+  "extension_points": {
+    "plugins": {"mechanism": "customize.toml + install into IDE skill trees", "path": "src/"},
+    "hooks": {"mechanism": "activation_steps_prepend/append", "events": ["activation"]},
+    "mcp": {"client": false, "server": false}
+  },
+  "unique_selling_points": [
+    "Personas you talk to, not agent-3",
+    "YAML+MD skill DSL with a validator",
+    "Party Mode is for disagreement, not consensus"
+  ],
+  "limitations": [
+    {"description": "No own runtime state backend — lives in the host IDE", "source": "OS/BMAD-METHOD/README.md"},
+    {"description": "No token budgets, no plugin marketplace", "source": "OS/BMAD-METHOD/src/core-skills/"}
+  ],
+  "confidence": "HIGH",
+  "extraction_method": "filesystem-scan",
+  "skill_version": "1.0.0"
+}

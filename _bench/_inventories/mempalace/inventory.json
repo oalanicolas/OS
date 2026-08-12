@@ -1,0 +1,106 @@
+{
+  "generatedAt": "2026-08-12T22:00:00Z",
+  "subject": "mempalace",
+  "path": "OS/mempalace/",
+  "primary_language": "Python",
+  "secondary_languages": [
+    "Markdown"
+  ],
+  "stack": [
+    "local memory palace",
+    "temporal KG"
+  ],
+  "license": "MIT",
+  "tagline": "Verbatim local-first memory with temporal knowledge-graph triples.",
+  "metrics": {
+    "file_count": 553,
+    "last_commit_date": "2026-08-11T09:34:45-03:00",
+    "source_url": "https://github.com/milla-jovovich/mempalace"
+  },
+  "modules": [
+    {
+      "name": "mempalace",
+      "path": "mempalace/",
+      "type": "library"
+    }
+  ],
+  "external_dependencies_top10": [],
+  "entry_points": [
+    {
+      "kind": "skill",
+      "path": "skills/mempalace-recall/SKILL.md",
+      "command": "recall"
+    }
+  ],
+  "capabilities": [
+    {
+      "name": "Verbatim drawers",
+      "evidence_paths": [
+        "OS/mempalace/CLAUDE.md"
+      ],
+      "category": "core",
+      "description": "Do not paraphrase user text."
+    },
+    {
+      "name": "Temporal KG",
+      "evidence_paths": [
+        "OS/mempalace/mempalace/knowledge_graph.py"
+      ],
+      "category": "core",
+      "description": "valid_from/valid_to + atomic supersede."
+    },
+    {
+      "name": "L0\u2013L3 layers",
+      "evidence_paths": [
+        "OS/mempalace/mempalace/layers.py"
+      ],
+      "category": "core",
+      "description": "Identity always-on; drawers on search."
+    }
+  ],
+  "quality_signals": {
+    "test_framework": "pytest",
+    "test_file_count": null,
+    "linter": null,
+    "ci_provider": "github-actions",
+    "ci_workflow_count": 1
+  },
+  "documentation": {
+    "readme_sections": [
+      "Memory"
+    ],
+    "has_contributing": true,
+    "has_architecture_doc": false,
+    "docs_page_count": 10
+  },
+  "extension_points": {
+    "plugins": {
+      "mechanism": "MCP + hooks",
+      "path": "integrations/"
+    },
+    "hooks": {
+      "mechanism": "PreCompact",
+      "events": [
+        "stop",
+        "precompact"
+      ]
+    },
+    "mcp": {
+      "client": true,
+      "server": true
+    }
+  },
+  "unique_selling_points": [
+    "Best verbatim fidelity",
+    "Honest temporal supersede"
+  ],
+  "limitations": [
+    {
+      "description": "Not a case OS or counsel split",
+      "source": "OS/mempalace/README.md"
+    }
+  ],
+  "confidence": "HIGH",
+  "extraction_method": "filesystem-scan",
+  "skill_version": "1.0.0"
+}

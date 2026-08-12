@@ -1,0 +1,387 @@
+{
+  "generatedAt": "2026-08-12T20:15:00Z",
+  "comparison_type": "pair",
+  "subjects": [
+    "superpowers",
+    "paperclip"
+  ],
+  "dimension_pack": "harness-structure",
+  "methods": {
+    "superpowers": "installed",
+    "paperclip": "installed"
+  },
+  "dimensions": [
+    {
+      "id": "skill_system",
+      "name": "Skill System",
+      "weight": 0.16,
+      "scores": {
+        "superpowers": 92,
+        "paperclip": 78
+      },
+      "signals_observed": {
+        "superpowers": [
+          {
+            "signal": "SessionStart bootstrap",
+            "value": "injects using-superpowers body",
+            "evidence": "OS/superpowers/hooks/session-start"
+          },
+          {
+            "signal": "SDO description rules",
+            "value": "trigger-only, no workflow summary",
+            "evidence": "OS/superpowers/skills/writing-skills/SKILL.md"
+          },
+          {
+            "signal": "skill tests",
+            "value": "explicit-skill-requests suite",
+            "evidence": "OS/superpowers/tests/explicit-skill-requests/"
+          }
+        ],
+        "paperclip": [
+          {
+            "signal": "skills-catalog",
+            "value": "bundled vs optional",
+            "evidence": "OS/paperclip/packages/skills-catalog/"
+          },
+          {
+            "signal": "requiredSkills",
+            "value": "TEAM.md declares skill deps",
+            "evidence": "OS/paperclip/packages/teams-catalog/catalog/bundled/company-defaults/core-exec-team/TEAM.md"
+          }
+        ]
+      },
+      "confidence": "HIGH",
+      "justification": {
+        "superpowers": "SDO + SessionStart + writing-skills tests.",
+        "paperclip": "Catalog bundled/optional; no SDO/listing-budget product."
+      },
+      "delta": 14,
+      "advantage": "superpowers"
+    },
+    {
+      "id": "squad_model",
+      "name": "Squad Model",
+      "weight": 0.14,
+      "scores": {
+        "superpowers": 78,
+        "paperclip": 94
+      },
+      "signals_observed": {
+        "superpowers": [
+          {
+            "signal": "SDD roles",
+            "value": "implementer + reviewer per task",
+            "evidence": "OS/superpowers/skills/subagent-driven-development/SKILL.md"
+          },
+          {
+            "signal": "no org files",
+            "value": "no TEAM.md/persona toml",
+            "evidence": "OS/superpowers/skills/"
+          }
+        ],
+        "paperclip": [
+          {
+            "signal": "TEAM.md org",
+            "value": "CEO manager + CTO/QA includes",
+            "evidence": "OS/paperclip/packages/teams-catalog/catalog/bundled/company-defaults/core-exec-team/TEAM.md"
+          },
+          {
+            "signal": "CEO AGENTS.md",
+            "value": "must delegate / hire",
+            "evidence": "OS/paperclip/packages/teams-catalog/catalog/bundled/company-defaults/core-exec-team/agents/ceo/AGENTS.md"
+          }
+        ]
+      },
+      "confidence": "HIGH",
+      "justification": {
+        "superpowers": "Implementer/reviewer roles, not standing employees.",
+        "paperclip": "TEAM.md org; CEO must delegate and hire."
+      },
+      "delta": -16,
+      "advantage": "paperclip"
+    },
+    {
+      "id": "plugin_extensibility",
+      "name": "Plugin Extensibility",
+      "weight": 0.12,
+      "scores": {
+        "superpowers": 82,
+        "paperclip": 86
+      },
+      "signals_observed": {
+        "superpowers": [
+          {
+            "signal": "plugin.json",
+            "value": "Claude marketplace pack",
+            "evidence": "OS/superpowers/.claude-plugin/plugin.json"
+          },
+          {
+            "signal": "multi-host",
+            "value": "gemini-extension.json etc",
+            "evidence": "OS/superpowers/gemini-extension.json"
+          }
+        ],
+        "paperclip": [
+          {
+            "signal": "PLUGIN_SPEC",
+            "value": "capabilities + apiRoutes",
+            "evidence": "OS/paperclip/doc/plugins/PLUGIN_SPEC.md"
+          },
+          {
+            "signal": "7 adapters",
+            "value": "packages/adapters",
+            "evidence": "OS/paperclip/packages/adapters/"
+          }
+        ]
+      },
+      "confidence": "HIGH",
+      "justification": {
+        "superpowers": "plugin.json + 6 hosts; zero-dep; no MCP.",
+        "paperclip": "PLUGIN_SPEC + 7 adapters; cloud install unfinished."
+      },
+      "delta": -4,
+      "advantage": "paperclip"
+    },
+    {
+      "id": "context_architecture",
+      "name": "Context Architecture",
+      "weight": 0.16,
+      "scores": {
+        "superpowers": 86,
+        "paperclip": 76
+      },
+      "signals_observed": {
+        "superpowers": [
+          {
+            "signal": "no @ links",
+            "value": "writing-skills forbids force-load",
+            "evidence": "OS/superpowers/skills/writing-skills/SKILL.md"
+          },
+          {
+            "signal": "bootstrap only always-on",
+            "value": "using-superpowers body",
+            "evidence": "OS/superpowers/skills/using-superpowers/SKILL.md"
+          }
+        ],
+        "paperclip": [
+          {
+            "signal": "issue handoff fields",
+            "value": "objective/owner/acceptance",
+            "evidence": "OS/paperclip/packages/teams-catalog/catalog/bundled/company-defaults/core-exec-team/agents/ceo/AGENTS.md"
+          },
+          {
+            "signal": "collapsed identity",
+            "value": "TEAM.md notes SOUL collapsed",
+            "evidence": "OS/paperclip/packages/teams-catalog/catalog/bundled/company-defaults/core-exec-team/TEAM.md"
+          }
+        ]
+      },
+      "confidence": "HIGH",
+      "justification": {
+        "superpowers": "Tiny bootstrap; no @ force-load; host owns identity.",
+        "paperclip": "Issue/heartbeat bus; SOUL collapsed into AGENTS.md."
+      },
+      "delta": 10,
+      "advantage": "superpowers"
+    },
+    {
+      "id": "complex_work_spine",
+      "name": "Complex-Work Spine",
+      "weight": 0.16,
+      "scores": {
+        "superpowers": 90,
+        "paperclip": 84
+      },
+      "signals_observed": {
+        "superpowers": [
+          {
+            "signal": "README pipeline",
+            "value": "design signoff then SDD hours",
+            "evidence": "OS/superpowers/README.md"
+          },
+          {
+            "signal": "SDD skill",
+            "value": "plan-scoped workspace",
+            "evidence": "OS/superpowers/skills/subagent-driven-development/SKILL.md"
+          }
+        ],
+        "paperclip": [
+          {
+            "signal": "pipelines",
+            "value": "stage machine",
+            "evidence": "OS/paperclip/docs/pipelines-tutorial.md"
+          },
+          {
+            "signal": "issue tree",
+            "value": "parentId delegation",
+            "evidence": "OS/paperclip/packages/teams-catalog/catalog/bundled/company-defaults/core-exec-team/agents/ceo/AGENTS.md"
+          }
+        ]
+      },
+      "confidence": "HIGH",
+      "justification": {
+        "superpowers": "brainstorm\u2192plan\u2192SDD\u2192finish with hard gates.",
+        "paperclip": "Goal\u2192issue tree\u2192pipelines; not an SDD methodology."
+      },
+      "delta": 6,
+      "advantage": "superpowers"
+    },
+    {
+      "id": "gates_and_discipline",
+      "name": "Gates & Discipline",
+      "weight": 0.1,
+      "scores": {
+        "superpowers": 95,
+        "paperclip": 78
+      },
+      "signals_observed": {
+        "superpowers": [
+          {
+            "signal": "TDD skill",
+            "value": "iron law red/green",
+            "evidence": "OS/superpowers/skills/test-driven-development/SKILL.md"
+          },
+          {
+            "signal": "breaker",
+            "value": "5 rounds then adjudicate",
+            "evidence": "OS/superpowers/skills/subagent-driven-development/SKILL.md"
+          }
+        ],
+        "paperclip": [
+          {
+            "signal": "in_review + confirmation",
+            "value": "CEO AGENTS.md",
+            "evidence": "OS/paperclip/packages/teams-catalog/catalog/bundled/company-defaults/core-exec-team/agents/ceo/AGENTS.md"
+          },
+          {
+            "signal": "QA agent",
+            "value": "qa-acceptance skill",
+            "evidence": "OS/paperclip/packages/teams-catalog/catalog/bundled/company-defaults/core-exec-team/agents/qa/AGENTS.md"
+          }
+        ]
+      },
+      "confidence": "HIGH",
+      "justification": {
+        "superpowers": "TDD iron law + separate reviewer + 5-round breaker.",
+        "paperclip": "in_review + QA agent + board; no TDD iron law."
+      },
+      "delta": 17,
+      "advantage": "superpowers"
+    },
+    {
+      "id": "handoff_and_state",
+      "name": "Handoff & State",
+      "weight": 0.1,
+      "scores": {
+        "superpowers": 93,
+        "paperclip": 90
+      },
+      "signals_observed": {
+        "superpowers": [
+          {
+            "signal": "file briefs",
+            "value": "scripts/task-brief",
+            "evidence": "OS/superpowers/skills/subagent-driven-development/SKILL.md"
+          },
+          {
+            "signal": "worktrees",
+            "value": "using-git-worktrees",
+            "evidence": "OS/superpowers/skills/using-git-worktrees/SKILL.md"
+          }
+        ],
+        "paperclip": [
+          {
+            "signal": "durable comment contract",
+            "value": "CEO handoff fields",
+            "evidence": "OS/paperclip/packages/teams-catalog/catalog/bundled/company-defaults/core-exec-team/agents/ceo/AGENTS.md"
+          },
+          {
+            "signal": "adapters/workspaces",
+            "value": "packages/adapters",
+            "evidence": "OS/paperclip/packages/adapters/"
+          }
+        ]
+      },
+      "confidence": "HIGH",
+      "justification": {
+        "superpowers": "task-brief/review-package + ledger + worktrees.",
+        "paperclip": "Child-issue comment contract + execution workspaces."
+      },
+      "delta": 3,
+      "advantage": "superpowers"
+    },
+    {
+      "id": "governance",
+      "name": "Governance",
+      "weight": 0.06,
+      "scores": {
+        "superpowers": 55,
+        "paperclip": 92
+      },
+      "signals_observed": {
+        "superpowers": [
+          {
+            "signal": "domain reject",
+            "value": "core stays general",
+            "evidence": "OS/superpowers/CLAUDE.md"
+          },
+          {
+            "signal": "no budget plane",
+            "value": "README methodology only",
+            "evidence": "OS/superpowers/README.md"
+          }
+        ],
+        "paperclip": [
+          {
+            "signal": "companies-spec",
+            "value": "budgets + board",
+            "evidence": "OS/paperclip/docs/companies/companies-spec.md"
+          },
+          {
+            "signal": "plugin capabilities",
+            "value": "PLUGIN_SPEC trust model",
+            "evidence": "OS/paperclip/doc/plugins/PLUGIN_SPEC.md"
+          }
+        ]
+      },
+      "confidence": "HIGH",
+      "justification": {
+        "superpowers": "Prompt discipline + domain-skill reject; no money plane.",
+        "paperclip": "Budgets + board hire/pause + plugin capabilities."
+      },
+      "delta": -37,
+      "advantage": "paperclip"
+    }
+  ],
+  "weighted_totals": {
+    "superpowers": 85.74,
+    "paperclip": 83.88
+  },
+  "overall_winner": "superpowers",
+  "total_delta": 1.86,
+  "dimension_wins": {
+    "superpowers": 5,
+    "paperclip": 3,
+    "ties": 0
+  },
+  "rankings": {
+    "a_strongest": [
+      "gates_and_discipline",
+      "skill_system",
+      "context_architecture"
+    ],
+    "b_strongest": [
+      "governance",
+      "squad_model",
+      "plugin_extensibility"
+    ],
+    "closest": [
+      "handoff_and_state",
+      "plugin_extensibility"
+    ]
+  },
+  "confidence_overall": "HIGH",
+  "limitations": [
+    "Complementary products; weighted winner is the process pole, not a replacement for a company control plane."
+  ]
+}

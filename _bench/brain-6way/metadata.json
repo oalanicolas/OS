@@ -32,5 +32,15 @@
   "product_brain_os_winner": "LifeOS",
   "knowledge_brain_winner": "gbrain",
   "confidence_overall": "HIGH",
-  "quality_gate_passed": true
+  "quality_gate_passed": true,
+  "feature_lessons": {
+    "feature_class": "knowledge graphs / typed edges / temporal KG / graph signals / projection",
+    "consumer": "VISA-BRAIN evidence graph + investigate-case-evidence",
+    "reports": [
+      "graph-pitfalls-and-lessons.md",
+      "visa-brain-graph-feature-lessons.md"
+    ],
+    "citations": "visa-brain-graph-feature-lessons.citations.json",
+    "generatedAt": "2026-08-06"
+  }
 }

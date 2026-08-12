@@ -1,0 +1,71 @@
+{
+  "generatedAt": "2026-08-12T18:00:00Z",
+  "subject": "gstack",
+  "path": "OS/gstack/",
+  "primary_language": "TypeScript",
+  "secondary_languages": ["Markdown", "Bash"],
+  "stack": ["Bun", "Chromium/CDP", "Claude Code skills"],
+  "license": "MIT",
+  "tagline": "Opinionated software factory of slash-command specialists (CEO, eng, design, QA, ship) plus a persistent browser daemon.",
+  "metrics": {
+    "loc_estimate": 120000,
+    "file_count": 1177,
+    "top_level_dirs": ["bin", "browse", "docs", "hosts", "review", "ship", "test"],
+    "readme_lines": 491,
+    "last_commit_date": "2026-08-08T09:28:45-07:00",
+    "github_stars": null,
+    "source_url": "https://github.com/garrytan/gstack",
+    "skill_md_count": 59
+  },
+  "modules": [
+    {"name": "browse", "path": "browse/", "type": "app", "loc_estimate": 0},
+    {"name": "hosts", "path": "hosts/", "type": "library", "loc_estimate": 0},
+    {"name": "ship", "path": "ship/", "type": "library", "loc_estimate": 0},
+    {"name": "autoplan", "path": "autoplan/", "type": "library", "loc_estimate": 0}
+  ],
+  "external_dependencies_top10": [
+    {"package": "bun", "version": "bundled", "purpose": "compiled skill binaries + HTTP daemon"}
+  ],
+  "entry_points": [
+    {"kind": "cli", "path": "browse/", "command": "$B snapshot / browse daemon"},
+    {"kind": "skill", "path": "SKILL.md", "command": "/gstack router"}
+  ],
+  "capabilities": [
+    {"name": "Generated skill suite", "evidence_paths": ["OS/gstack/docs/skills.md", "OS/gstack/SKILL.md.tmpl"], "category": "core", "description": "Each top-level folder is a SKILL.md generated from templates with shared preamble."},
+    {"name": "Office-hours to ship spine", "evidence_paths": ["OS/gstack/docs/skills.md", "OS/gstack/ship/SKILL.md"], "category": "core", "description": "office-hours → spec → autoplan → implement → review → QA → ship."},
+    {"name": "Sequential specialist pipeline", "evidence_paths": ["OS/gstack/autoplan/SKILL.md"], "category": "core", "description": "CEO → Design → Eng → DX must run in order; dual-voice Claude+Codex per phase."},
+    {"name": "Host adapters", "evidence_paths": ["OS/gstack/hosts/claude.ts", "OS/gstack/hosts/openclaw.ts", "OS/gstack/hosts/hermes.ts"], "category": "extensibility", "description": "One skill source rewritten per host (Claude, Codex, OpenClaw, Hermes, Cursor, …)."},
+    {"name": "Persistent browser daemon", "evidence_paths": ["OS/gstack/ARCHITECTURE.md"], "category": "ux", "description": "Long-lived Chromium over localhost HTTP; ~100–200ms after first start."},
+    {"name": "Context save/restore", "evidence_paths": ["OS/gstack/context-save/SKILL.md"], "category": "core", "description": "Checkpoints under ~/.gstack/projects/ for cross-session resume."}
+  ],
+  "quality_signals": {
+    "test_framework": "bun:test",
+    "test_file_count": 300,
+    "linter": "unknown",
+    "ci_provider": "github-actions",
+    "ci_workflow_count": 1
+  },
+  "documentation": {
+    "readme_sections": ["Quick start", "Skills"],
+    "has_contributing": true,
+    "has_architecture_doc": true,
+    "docs_page_count": 30
+  },
+  "extension_points": {
+    "plugins": {"mechanism": "host-generated skill install, not a native plugin runtime", "path": "hosts/"},
+    "hooks": {"mechanism": "Claude host hooks", "events": ["settings"]},
+    "mcp": {"client": false, "server": false}
+  },
+  "unique_selling_points": [
+    "Markdown is the program; browser is the hard part",
+    "Specialist gauntlet without standing employees",
+    "Multi-host generation from one source"
+  ],
+  "limitations": [
+    {"description": "Generated SKILL.md preamble is large (opposite of Superpowers tiny bootstrap)", "source": "OS/gstack/SKILL.md"},
+    {"description": "No org-chart, hire, or cost budgets", "source": "OS/gstack/docs/skills.md"}
+  ],
+  "confidence": "HIGH",
+  "extraction_method": "filesystem-scan",
+  "skill_version": "1.0.0"
+}

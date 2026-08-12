@@ -63,6 +63,8 @@ NÃO invoque para:
 | `spec-driven` | spec-driven / meta-prompting | Spec Format, Traceability, Executable Specs, TDD Integration, Roundtripping |
 | `personal-assistant` | assistentes pessoais multi-channel | Channels, Local-first, Memory, Skills, Cost, Privacy |
 | `workflow-infra` | durable workflow / event-sourced | Durability, Retry Semantics, Event Log, Parallelism, Language Support, Cloud Lock-in |
+| `harness-structure` | skills / squads / plugins / context packs | Skill System, Squad Model, Plugin Extensibility, Context Architecture, Complex-Work Spine, Gates & Discipline, Handoff & State, Governance |
+| `case-ops` | high-stakes case OS (VISA-BRAIN vs adjacent peers) | Epistemology, Projection Integrity, Workspace Isolation, Extract-before-reviewed, Graph Honesty, Collector≠Auditor, Human/Data Split, Process Spine |
 
 Pesos fechados em 1.00 por pack. Ver `data/dimension-packs.yaml` para signals por dimensão.
 

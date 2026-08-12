@@ -1,0 +1,126 @@
+{
+  "$schema": "os-bench metadata v1.0",
+  "generatedAt": "2026-08-12T22:00:00Z",
+  "comparison_type": "nway",
+  "slug": "case-ops-8way",
+  "subjects": [
+    {
+      "slug": "VISA-BRAIN",
+      "path": "VISA-BRAIN/",
+      "source_url": null,
+      "detected_stack": [
+        "Markdown",
+        "Python"
+      ],
+      "external": true
+    },
+    {
+      "slug": "gbrain",
+      "path": "OS/gbrain/",
+      "source_url": "https://github.com/garrytan/gbrain",
+      "detected_stack": [
+        "TypeScript",
+        "Postgres"
+      ]
+    },
+    {
+      "slug": "gsd-pi",
+      "path": "OS/gsd-pi/",
+      "source_url": "https://github.com/open-gsd/gsd-pi",
+      "detected_stack": [
+        "TypeScript"
+      ]
+    },
+    {
+      "slug": "superpowers",
+      "path": "OS/superpowers/",
+      "source_url": "https://github.com/obra/superpowers",
+      "detected_stack": [
+        "Markdown"
+      ]
+    },
+    {
+      "slug": "spec-kit",
+      "path": "OS/spec-kit/",
+      "source_url": "https://github.com/github/spec-kit",
+      "detected_stack": [
+        "Python"
+      ]
+    },
+    {
+      "slug": "paperclip",
+      "path": "OS/paperclip/",
+      "source_url": "https://github.com/paperclipai/paperclip",
+      "detected_stack": [
+        "TypeScript"
+      ]
+    },
+    {
+      "slug": "mempalace",
+      "path": "OS/mempalace/",
+      "source_url": "https://github.com/milla-jovovich/mempalace",
+      "detected_stack": [
+        "Python"
+      ]
+    },
+    {
+      "slug": "LifeOS",
+      "path": "OS/LifeOS/",
+      "source_url": "https://github.com/danielmiessler/LifeOS",
+      "detected_stack": [
+        "TypeScript"
+      ]
+    }
+  ],
+  "dimension_pack": "case-ops",
+  "scoring_dimensions": [
+    "epistemology",
+    "projection_integrity",
+    "workspace_isolation",
+    "extract_before_reviewed",
+    "graph_honesty",
+    "counsel_separation",
+    "human_data_split",
+    "process_spine"
+  ],
+  "profile": "full",
+  "skill_version": "1.0.0",
+  "output_root": "OS/_bench/case-ops-8way/",
+  "artifacts_generated": [
+    "metadata.json",
+    "comparison-matrix.json",
+    "comparison-matrix.md",
+    "scorecard.json",
+    "scorecard.md",
+    "gap-analysis.json",
+    "gap-analysis.md",
+    "battle-card.md",
+    "executive-report.md",
+    "deep/absorption-roadmap.md",
+    "inventory-VISA-BRAIN.json",
+    "inventory-gbrain.json",
+    "inventory-gsd-pi.json",
+    "inventory-superpowers.json",
+    "inventory-spec-kit.json",
+    "inventory-paperclip.json",
+    "inventory-mempalace.json",
+    "inventory-LifeOS.json",
+    "inventory-VISA-BRAIN.md",
+    "inventory-gbrain.md",
+    "inventory-gsd-pi.md",
+    "inventory-superpowers.md",
+    "inventory-spec-kit.md",
+    "inventory-paperclip.md",
+    "inventory-mempalace.md",
+    "inventory-LifeOS.md"
+  ],
+  "artifacts_skipped": [],
+  "notes": "Pack case-ops is job-specific. VISA-BRAIN is an external kit (not under OS/). A blowout vs OS/ peers is expected: they are adjacent products, not case OS. Do not read this ranking as a general harness ranking.",
+  "confidence_overall": "HIGH",
+  "quality_gate_passed": true,
+  "related": [
+    "_bench/_research/company-brain.md",
+    "_bench/_research/visa-brain-vs-company-brain.md",
+    "_bench/brain-6way/visa-brain-graph-feature-lessons.md"
+  ]
+}

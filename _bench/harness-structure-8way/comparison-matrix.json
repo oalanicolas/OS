@@ -1,0 +1,964 @@
+{
+  "generatedAt": "2026-08-12T20:00:00Z",
+  "comparison_type": "nway",
+  "subjects": [
+    "superpowers",
+    "gstack",
+    "gsd-pi",
+    "BMAD-METHOD",
+    "paperclip",
+    "hermes-agent",
+    "openclaw",
+    "spec-kit"
+  ],
+  "dimension_pack": "harness-structure",
+  "categories": [
+    {
+      "name": "Skill System",
+      "features": [
+        {
+          "name": "Agent Skills SKILL.md unit",
+          "values": {
+            "superpowers": "yes (14 flat skills/)",
+            "gstack": "yes (59 generated SKILL.md)",
+            "gsd-pi": "yes (38 + ~/.agents/skills)",
+            "BMAD-METHOD": "yes (58 persona+workflow)",
+            "paperclip": "yes (catalog bundled/optional)",
+            "hermes-agent": "yes (194 categorized)",
+            "openclaw": "yes (115, 6-root load)",
+            "spec-kit": "no (commands/*.md; 1 SKILL.md)"
+          },
+          "evidence": {
+            "superpowers": [
+              "OS/superpowers/skills/using-superpowers/SKILL.md"
+            ],
+            "gstack": [
+              "OS/gstack/docs/skills.md"
+            ],
+            "gsd-pi": [
+              "OS/gsd-pi/docs/user-docs/skills.md"
+            ],
+            "BMAD-METHOD": [
+              "OS/BMAD-METHOD/src/bmm-skills/agents/bmad-agent-architect/SKILL.md"
+            ],
+            "paperclip": [
+              "OS/paperclip/packages/skills-catalog/"
+            ],
+            "hermes-agent": [
+              "OS/hermes-agent/skills/software-development/hermes-agent-skill-authoring/SKILL.md"
+            ],
+            "openclaw": [
+              "OS/openclaw/docs/tools/skills.md"
+            ],
+            "spec-kit": [
+              "OS/spec-kit/templates/commands/specify.md"
+            ]
+          },
+          "delta": "spec-kit is the command-not-skill contrast"
+        },
+        {
+          "name": "Listing / description budget",
+          "values": {
+            "superpowers": "yes (SDO: trigger-only, no workflow in description)",
+            "gstack": "partial (long generated descriptions + preamble)",
+            "gsd-pi": "yes (XML catalog of name+description only)",
+            "BMAD-METHOD": "partial (rich descriptions, no published cap)",
+            "paperclip": "partial (catalog.json, no listing-budget doc)",
+            "hermes-agent": "yes (hardline \u226460 chars)",
+            "openclaw": "yes (maxSkillsInPrompt 150 / 18k chars)",
+            "spec-kit": "n/a (not an Agent Skills catalog)"
+          },
+          "evidence": {
+            "superpowers": [
+              "OS/superpowers/skills/writing-skills/SKILL.md"
+            ],
+            "gstack": [
+              "OS/gstack/SKILL.md"
+            ],
+            "gsd-pi": [
+              "OS/gsd-pi/packages/pi-coding-agent/src/core/skills.ts"
+            ],
+            "BMAD-METHOD": [
+              "OS/BMAD-METHOD/src/core-skills/bmad-party-mode/SKILL.md"
+            ],
+            "paperclip": [
+              "OS/paperclip/packages/skills-catalog/"
+            ],
+            "hermes-agent": [
+              "OS/hermes-agent/skills/software-development/hermes-agent-skill-authoring/SKILL.md"
+            ],
+            "openclaw": [
+              "OS/openclaw/docs/tools/skills.md"
+            ],
+            "spec-kit": [
+              "OS/spec-kit/templates/commands/"
+            ]
+          },
+          "delta": "hermes+openclaw+superpowers+gsd-pi treat listing as a product"
+        },
+        {
+          "name": "Bootstrap force-invoke",
+          "values": {
+            "superpowers": "yes (SessionStart injects using-superpowers)",
+            "gstack": "yes (root router + CLAUDE.md skill routing offer)",
+            "gsd-pi": "partial (skill_discovery auto/suggest/off)",
+            "BMAD-METHOD": "partial (user invokes named persona)",
+            "paperclip": "partial (heartbeat \u2192 paperclip skill)",
+            "hermes-agent": "partial (slash / skill_view; no session hook)",
+            "openclaw": "partial (AGENTS.md standing orders)",
+            "spec-kit": "no"
+          },
+          "evidence": {
+            "superpowers": [
+              "OS/superpowers/hooks/session-start"
+            ],
+            "gstack": [
+              "OS/gstack/SKILL.md"
+            ],
+            "gsd-pi": [
+              "OS/gsd-pi/docs/user-docs/skills.md"
+            ],
+            "BMAD-METHOD": [
+              "OS/BMAD-METHOD/src/bmm-skills/agents/bmad-agent-architect/SKILL.md"
+            ],
+            "paperclip": [
+              "OS/paperclip/packages/teams-catalog/catalog/bundled/company-defaults/core-exec-team/agents/ceo/AGENTS.md"
+            ],
+            "hermes-agent": [
+              "OS/hermes-agent/agent/skill_utils.py"
+            ],
+            "openclaw": [
+              "OS/openclaw/AGENTS.md"
+            ],
+            "spec-kit": [
+              "OS/spec-kit/spec-driven.md"
+            ]
+          },
+          "delta": "Only superpowers hard-injects a bootstrap skill body"
+        },
+        {
+          "name": "Skill authoring tests / evals",
+          "values": {
+            "superpowers": "yes (pressure scenarios + explicit-skill-requests tests)",
+            "gstack": "partial (skill-llm-eval mentioned in prior bench; suite tests exist)",
+            "gsd-pi": "partial (skill-health / telemetry)",
+            "BMAD-METHOD": "yes (validate-skills.js + per-skill python tests)",
+            "paperclip": "yes (catalog-builder tests)",
+            "hermes-agent": "yes (tests/skills/test_*_skill.py required)",
+            "openclaw": "partial (skill-creator quick_validate.py)",
+            "spec-kit": "yes (extension/workflow pytest)"
+          },
+          "evidence": {
+            "superpowers": [
+              "OS/superpowers/tests/explicit-skill-requests/"
+            ],
+            "gstack": [
+              "OS/gstack/test/"
+            ],
+            "gsd-pi": [
+              "OS/gsd-pi/docs/user-docs/skills.md"
+            ],
+            "BMAD-METHOD": [
+              "OS/BMAD-METHOD/tools/validate-skills.js"
+            ],
+            "paperclip": [
+              "OS/paperclip/packages/skills-catalog/src/catalog-builder.test.ts"
+            ],
+            "hermes-agent": [
+              "OS/hermes-agent/skills/software-development/hermes-agent-skill-authoring/SKILL.md"
+            ],
+            "openclaw": [
+              "OS/openclaw/skills/skill-creator/SKILL.md"
+            ],
+            "spec-kit": [
+              "OS/spec-kit/tests/test_extensions.py"
+            ]
+          },
+          "delta": "superpowers tests agent compliance; hermes tests the file contract"
+        }
+      ]
+    },
+    {
+      "name": "Squad Model",
+      "features": [
+        {
+          "name": "Named persistent personas",
+          "values": {
+            "superpowers": "partial (implementer/reviewer roles, not named employees)",
+            "gstack": "partial (specialist skills, not standing people)",
+            "gsd-pi": "partial (typed agents scout/planner/worker)",
+            "BMAD-METHOD": "yes (Winston/John/Amelia + customize.toml)",
+            "paperclip": "yes (CEO/CTO/QA AGENTS.md)",
+            "hermes-agent": "no",
+            "openclaw": "no (workspace identity, not roster)",
+            "spec-kit": "no"
+          },
+          "evidence": {
+            "superpowers": [
+              "OS/superpowers/skills/subagent-driven-development/SKILL.md"
+            ],
+            "gstack": [
+              "OS/gstack/docs/skills.md"
+            ],
+            "gsd-pi": [
+              "OS/gsd-pi/src/resources/agents/scout.md"
+            ],
+            "BMAD-METHOD": [
+              "OS/BMAD-METHOD/src/bmm-skills/agents/bmad-agent-architect/customize.toml"
+            ],
+            "paperclip": [
+              "OS/paperclip/packages/teams-catalog/catalog/bundled/company-defaults/core-exec-team/TEAM.md"
+            ],
+            "hermes-agent": [
+              "OS/hermes-agent/agent/"
+            ],
+            "openclaw": [
+              "OS/openclaw/AGENTS.md"
+            ],
+            "spec-kit": [
+              "OS/spec-kit/templates/commands/"
+            ]
+          },
+          "delta": "BMAD+paperclip are the only standing-roster models"
+        },
+        {
+          "name": "Org-chart / party / crew composition",
+          "values": {
+            "superpowers": "no",
+            "gstack": "no",
+            "gsd-pi": "no",
+            "BMAD-METHOD": "yes (Party Mode 4 runtimes)",
+            "paperclip": "yes (TEAM.md manager/includes tree)",
+            "hermes-agent": "no",
+            "openclaw": "no",
+            "spec-kit": "no"
+          },
+          "evidence": {
+            "superpowers": [
+              "OS/superpowers/skills/"
+            ],
+            "gstack": [
+              "OS/gstack/docs/skills.md"
+            ],
+            "gsd-pi": [
+              "OS/gsd-pi/docs/user-docs/working-in-teams.md"
+            ],
+            "BMAD-METHOD": [
+              "OS/BMAD-METHOD/src/core-skills/bmad-party-mode/SKILL.md"
+            ],
+            "paperclip": [
+              "OS/paperclip/packages/teams-catalog/catalog/bundled/company-defaults/core-exec-team/TEAM.md"
+            ],
+            "hermes-agent": [
+              "OS/hermes-agent/agent/skill_bundles.py"
+            ],
+            "openclaw": [
+              "OS/openclaw/skills/taskflow/SKILL.md"
+            ],
+            "spec-kit": [
+              "OS/spec-kit/workflows/speckit/workflow.yml"
+            ]
+          },
+          "delta": "composition files exist only in BMAD and paperclip"
+        },
+        {
+          "name": "Independent-mind spawn",
+          "values": {
+            "superpowers": "yes (fresh subagent per task)",
+            "gstack": "partial (dual-voice spawn; phases sequential)",
+            "gsd-pi": "yes (fresh default, parallel workers)",
+            "BMAD-METHOD": "yes (subagent + agent-team modes)",
+            "paperclip": "yes (per-agent adapters / workspaces)",
+            "hermes-agent": "partial (delegate_task)",
+            "openclaw": "partial (TaskFlow children)",
+            "spec-kit": "partial (handoffs between commands)"
+          },
+          "evidence": {
+            "superpowers": [
+              "OS/superpowers/skills/subagent-driven-development/SKILL.md"
+            ],
+            "gstack": [
+              "OS/gstack/autoplan/SKILL.md"
+            ],
+            "gsd-pi": [
+              "OS/gsd-pi/docs/user-docs/subagents.md"
+            ],
+            "BMAD-METHOD": [
+              "OS/BMAD-METHOD/src/core-skills/bmad-party-mode/SKILL.md"
+            ],
+            "paperclip": [
+              "OS/paperclip/packages/adapters/"
+            ],
+            "hermes-agent": [
+              "OS/hermes-agent/skills/software-development/hermes-agent-skill-authoring/SKILL.md"
+            ],
+            "openclaw": [
+              "OS/openclaw/skills/taskflow/SKILL.md"
+            ],
+            "spec-kit": [
+              "OS/spec-kit/templates/commands/"
+            ]
+          },
+          "delta": "isolation quality: superpowers/gsd-pi explicit fresh context"
+        }
+      ]
+    },
+    {
+      "name": "Plugin Extensibility",
+      "features": [
+        {
+          "name": "Manifest-first plugin runtime",
+          "values": {
+            "superpowers": "partial (plugin.json, no capability RPC)",
+            "gstack": "no (host rewrite, not a plugin VM)",
+            "gsd-pi": "partial (extension-manifest.json)",
+            "BMAD-METHOD": "no",
+            "paperclip": "yes (PLUGIN_SPEC + plugin-sdk)",
+            "hermes-agent": "yes (plugin.yaml kinds)",
+            "openclaw": "yes (validate before exec)",
+            "spec-kit": "yes (extension.yml)"
+          },
+          "evidence": {
+            "superpowers": [
+              "OS/superpowers/.claude-plugin/plugin.json"
+            ],
+            "gstack": [
+              "OS/gstack/hosts/claude.ts"
+            ],
+            "gsd-pi": [
+              "OS/gsd-pi/docs/extension-sdk/README.md"
+            ],
+            "BMAD-METHOD": [
+              "OS/BMAD-METHOD/src/"
+            ],
+            "paperclip": [
+              "OS/paperclip/doc/plugins/PLUGIN_SPEC.md"
+            ],
+            "hermes-agent": [
+              "OS/hermes-agent/plugins/"
+            ],
+            "openclaw": [
+              "OS/openclaw/docs/plugins/architecture.md"
+            ],
+            "spec-kit": [
+              "OS/spec-kit/extensions/EXTENSION-DEVELOPMENT-GUIDE.md"
+            ]
+          },
+          "delta": "openclaw is the gold standard for validate-before-exec"
+        },
+        {
+          "name": "MCP client or server",
+          "values": {
+            "superpowers": "no",
+            "gstack": "partial (gbrain MCP wiring skills)",
+            "gsd-pi": "yes (packages/mcp-server)",
+            "BMAD-METHOD": "no",
+            "paperclip": "yes (packages/mcp-server)",
+            "hermes-agent": "yes (optional-mcps + native MCP)",
+            "openclaw": "yes",
+            "spec-kit": "no"
+          },
+          "evidence": {
+            "superpowers": [
+              "OS/superpowers/CLAUDE.md"
+            ],
+            "gstack": [
+              "OS/gstack/setup-gbrain/SKILL.md"
+            ],
+            "gsd-pi": [
+              "OS/gsd-pi/packages/mcp-server/"
+            ],
+            "BMAD-METHOD": [
+              "OS/BMAD-METHOD/README.md"
+            ],
+            "paperclip": [
+              "OS/paperclip/packages/mcp-server/"
+            ],
+            "hermes-agent": [
+              "OS/hermes-agent/optional-mcps/"
+            ],
+            "openclaw": [
+              "OS/openclaw/docs/plugins/architecture.md"
+            ],
+            "spec-kit": [
+              "OS/spec-kit/extensions/"
+            ]
+          },
+          "delta": "process plugins (superpowers/BMAD/spec-kit) skip MCP on purpose"
+        },
+        {
+          "name": "Multi-host / marketplace",
+          "values": {
+            "superpowers": "yes (6+ hosts, official Claude marketplace)",
+            "gstack": "yes (hosts/* generators)",
+            "gsd-pi": "partial (OpenClaw orchestrator skill)",
+            "BMAD-METHOD": "partial (IDE skill-tree install)",
+            "paperclip": "yes (7 adapters + catalogs)",
+            "hermes-agent": "partial (own runtime + ACP)",
+            "openclaw": "yes (ClawHub + foreign bundles)",
+            "spec-kit": "yes (community/org catalogs)"
+          },
+          "evidence": {
+            "superpowers": [
+              "OS/superpowers/README.md"
+            ],
+            "gstack": [
+              "OS/gstack/hosts/"
+            ],
+            "gsd-pi": [
+              "OS/gsd-pi/gsd-orchestrator/SKILL.md"
+            ],
+            "BMAD-METHOD": [
+              "OS/BMAD-METHOD/package.json"
+            ],
+            "paperclip": [
+              "OS/paperclip/packages/adapters/"
+            ],
+            "hermes-agent": [
+              "OS/hermes-agent/acp_adapter/"
+            ],
+            "openclaw": [
+              "OS/openclaw/docs/clawhub/"
+            ],
+            "spec-kit": [
+              "OS/spec-kit/docs/community/bundles.md"
+            ]
+          },
+          "delta": "superpowers ports process; paperclip/openclaw port runtimes"
+        }
+      ]
+    },
+    {
+      "name": "Context Architecture",
+      "features": [
+        {
+          "name": "Always-on vs on-demand split",
+          "values": {
+            "superpowers": "yes (bootstrap body + catalog; no @ force-load)",
+            "gstack": "partial (on-demand skills but huge preamble)",
+            "gsd-pi": "yes (formatSkillsForPrompt catalog only)",
+            "BMAD-METHOD": "partial (activation loads facts + persona)",
+            "paperclip": "partial (heartbeat payload / issue pull)",
+            "hermes-agent": "yes (index always, body via skill_view)",
+            "openclaw": "yes (skill list + 20k/60k file caps)",
+            "spec-kit": "partial (command file is the prompt)"
+          },
+          "evidence": {
+            "superpowers": [
+              "OS/superpowers/skills/writing-skills/SKILL.md"
+            ],
+            "gstack": [
+              "OS/gstack/SKILL.md"
+            ],
+            "gsd-pi": [
+              "OS/gsd-pi/packages/pi-coding-agent/src/core/skills.ts"
+            ],
+            "BMAD-METHOD": [
+              "OS/BMAD-METHOD/src/bmm-skills/agents/bmad-agent-architect/SKILL.md"
+            ],
+            "paperclip": [
+              "OS/paperclip/packages/teams-catalog/catalog/bundled/company-defaults/core-exec-team/agents/ceo/AGENTS.md"
+            ],
+            "hermes-agent": [
+              "OS/hermes-agent/agent/skill_utils.py"
+            ],
+            "openclaw": [
+              "OS/openclaw/docs/tools/skills.md"
+            ],
+            "spec-kit": [
+              "OS/spec-kit/templates/commands/specify.md"
+            ]
+          },
+          "delta": "gstack preamble is the expensive outlier"
+        },
+        {
+          "name": "Identity file split (AGENTS/SOUL/USER)",
+          "values": {
+            "superpowers": "no (uses host files)",
+            "gstack": "partial (CLAUDE.md + ETHOS.md)",
+            "gsd-pi": "partial (.gsd/KNOWLEDGE.md)",
+            "BMAD-METHOD": "partial (persona + persistent_facts)",
+            "paperclip": "partial (AGENTS.md collapsed SOUL/HEARTBEAT)",
+            "hermes-agent": "yes (SOUL.md + project-context files)",
+            "openclaw": "yes (AGENTS/SOUL/USER/IDENTITY/MEMORY)",
+            "spec-kit": "partial (opt-in agent-context block)"
+          },
+          "evidence": {
+            "superpowers": [
+              "OS/superpowers/AGENTS.md"
+            ],
+            "gstack": [
+              "OS/gstack/CLAUDE.md"
+            ],
+            "gsd-pi": [
+              "OS/gsd-pi/gsd-orchestrator/SKILL.md"
+            ],
+            "BMAD-METHOD": [
+              "OS/BMAD-METHOD/src/bmm-skills/agents/bmad-agent-architect/customize.toml"
+            ],
+            "paperclip": [
+              "OS/paperclip/packages/teams-catalog/catalog/bundled/company-defaults/core-exec-team/TEAM.md"
+            ],
+            "hermes-agent": [
+              "OS/hermes-agent/skills/autonomous-ai-agents/hermes-agent/references/project-context-files.md"
+            ],
+            "openclaw": [
+              "OS/openclaw/AGENTS.md"
+            ],
+            "spec-kit": [
+              "OS/spec-kit/extensions/agent-context/"
+            ]
+          },
+          "delta": "openclaw/clawd is the reference constitution"
+        },
+        {
+          "name": "Anti-rot (compaction / no history paste)",
+          "values": {
+            "superpowers": "yes (ledger + file briefs; documented 42k-paste failure)",
+            "gstack": "yes (context-save checkpoints)",
+            "gsd-pi": "yes (fresh child context + STATE.md)",
+            "BMAD-METHOD": "partial (artifacts, no compaction protocol)",
+            "paperclip": "yes (issue comments, not chat)",
+            "hermes-agent": "yes (micro-compaction; never compact user)",
+            "openclaw": "yes (compaction + /context + daily memory)",
+            "spec-kit": "partial (feature dirs, no chat protocol)"
+          },
+          "evidence": {
+            "superpowers": [
+              "OS/superpowers/skills/subagent-driven-development/SKILL.md"
+            ],
+            "gstack": [
+              "OS/gstack/context-save/SKILL.md"
+            ],
+            "gsd-pi": [
+              "OS/gsd-pi/docs/user-docs/subagents.md"
+            ],
+            "BMAD-METHOD": [
+              "OS/BMAD-METHOD/src/bmm-skills/plan/"
+            ],
+            "paperclip": [
+              "OS/paperclip/packages/teams-catalog/catalog/bundled/company-defaults/core-exec-team/agents/ceo/AGENTS.md"
+            ],
+            "hermes-agent": [
+              "OS/hermes-agent/docs/micro-compaction.md"
+            ],
+            "openclaw": [
+              "OS/openclaw/docs/tools/skills.md"
+            ],
+            "spec-kit": [
+              "OS/spec-kit/docs/concepts/spec-persistence.md"
+            ]
+          },
+          "delta": "superpowers documented the most expensive failure mode"
+        }
+      ]
+    },
+    {
+      "name": "Complex-Work Spine",
+      "features": [
+        {
+          "name": "intent\u2192spec\u2192plan\u2192implement\u2192review\u2192ship",
+          "values": {
+            "superpowers": "yes (brainstorm\u2192plans\u2192SDD\u2192finish)",
+            "gstack": "yes (office-hours\u2192autoplan\u2192ship)",
+            "gsd-pi": "yes (new-milestone\u2192auto\u2192verify)",
+            "BMAD-METHOD": "yes (plan/ + ship/ phases)",
+            "paperclip": "partial (issue tree + pipelines, not SDD)",
+            "hermes-agent": "partial (/plan + SDD-style skills)",
+            "openclaw": "partial (TaskFlow, not SDLC)",
+            "spec-kit": "yes (specify\u2192plan\u2192tasks\u2192implement)"
+          },
+          "evidence": {
+            "superpowers": [
+              "OS/superpowers/README.md"
+            ],
+            "gstack": [
+              "OS/gstack/docs/skills.md"
+            ],
+            "gsd-pi": [
+              "OS/gsd-pi/gsd-orchestrator/SKILL.md"
+            ],
+            "BMAD-METHOD": [
+              "OS/BMAD-METHOD/src/bmm-skills/ship/"
+            ],
+            "paperclip": [
+              "OS/paperclip/docs/pipelines-tutorial.md"
+            ],
+            "hermes-agent": [
+              "OS/hermes-agent/skills/software-development/hermes-agent-skill-authoring/SKILL.md"
+            ],
+            "openclaw": [
+              "OS/openclaw/skills/taskflow/SKILL.md"
+            ],
+            "spec-kit": [
+              "OS/spec-kit/spec-driven.md"
+            ]
+          },
+          "delta": "five full spines; paperclip/openclaw/hermes are adjacent"
+        },
+        {
+          "name": "On-disk artifacts as SoT",
+          "values": {
+            "superpowers": "yes (plans + .superpowers/sdd ledger)",
+            "gstack": "yes (~/.gstack/projects)",
+            "gsd-pi": "yes (.gsd/ checkbox files)",
+            "BMAD-METHOD": "yes (PRD/arch/stories)",
+            "paperclip": "yes (issues + attachments)",
+            "hermes-agent": "partial (.hermes/plans)",
+            "openclaw": "partial (daily memory files)",
+            "spec-kit": "yes (spec.md/plan.md/tasks.md)"
+          },
+          "evidence": {
+            "superpowers": [
+              "OS/superpowers/skills/subagent-driven-development/SKILL.md"
+            ],
+            "gstack": [
+              "OS/gstack/context-save/SKILL.md"
+            ],
+            "gsd-pi": [
+              "OS/gsd-pi/gsd-orchestrator/SKILL.md"
+            ],
+            "BMAD-METHOD": [
+              "OS/BMAD-METHOD/src/bmm-skills/plan/"
+            ],
+            "paperclip": [
+              "OS/paperclip/packages/teams-catalog/catalog/bundled/company-defaults/core-exec-team/projects/first-project/PROJECT.md"
+            ],
+            "hermes-agent": [
+              "OS/hermes-agent/skills/software-development/hermes-agent-skill-authoring/SKILL.md"
+            ],
+            "openclaw": [
+              "OS/clawd/AGENTS.md"
+            ],
+            "spec-kit": [
+              "OS/spec-kit/docs/concepts/spec-persistence.md"
+            ]
+          },
+          "delta": "gsd-pi checkboxes are the most mechanical SoT"
+        }
+      ]
+    },
+    {
+      "name": "Gates & Discipline",
+      "features": [
+        {
+          "name": "Separate reviewer context",
+          "values": {
+            "superpowers": "yes (task reviewer + final branch review)",
+            "gstack": "yes (/review specialists + /codex)",
+            "gsd-pi": "yes (3 reviewers at milestone gate)",
+            "BMAD-METHOD": "yes (bmad-review + build review steps)",
+            "paperclip": "partial (in_review status + QA agent)",
+            "hermes-agent": "partial (requesting-code-review skill)",
+            "openclaw": "no",
+            "spec-kit": "partial (workflow type:gate is human)"
+          },
+          "evidence": {
+            "superpowers": [
+              "OS/superpowers/skills/subagent-driven-development/SKILL.md"
+            ],
+            "gstack": [
+              "OS/gstack/review/SKILL.md"
+            ],
+            "gsd-pi": [
+              "OS/gsd-pi/docs/user-docs/subagents.md"
+            ],
+            "BMAD-METHOD": [
+              "OS/BMAD-METHOD/src/core-skills/bmad-review/SKILL.md"
+            ],
+            "paperclip": [
+              "OS/paperclip/packages/teams-catalog/catalog/bundled/company-defaults/core-exec-team/agents/qa/AGENTS.md"
+            ],
+            "hermes-agent": [
+              "OS/hermes-agent/skills/software-development/requesting-code-review/SKILL.md"
+            ],
+            "openclaw": [
+              "OS/openclaw/skills/"
+            ],
+            "spec-kit": [
+              "OS/spec-kit/workflows/speckit/workflow.yml"
+            ]
+          },
+          "delta": "superpowers forbids controller self-fix"
+        },
+        {
+          "name": "Fix-loop breaker / TDD enforcement",
+          "values": {
+            "superpowers": "yes (5-round breaker + TDD iron law)",
+            "gstack": "partial (ship gates, no numbered breaker)",
+            "gsd-pi": "partial (verify + stuck-loop, not TDD iron law)",
+            "BMAD-METHOD": "partial (human phase gates)",
+            "paperclip": "partial (board approvals)",
+            "hermes-agent": "partial (TDD skill exists)",
+            "openclaw": "no",
+            "spec-kit": "partial (checklists, no TDD)"
+          },
+          "evidence": {
+            "superpowers": [
+              "OS/superpowers/skills/test-driven-development/SKILL.md"
+            ],
+            "gstack": [
+              "OS/gstack/ship/SKILL.md"
+            ],
+            "gsd-pi": [
+              "OS/gsd-pi/gsd-orchestrator/SKILL.md"
+            ],
+            "BMAD-METHOD": [
+              "OS/BMAD-METHOD/src/bmm-skills/ship/"
+            ],
+            "paperclip": [
+              "OS/paperclip/packages/teams-catalog/catalog/bundled/company-defaults/core-exec-team/agents/ceo/AGENTS.md"
+            ],
+            "hermes-agent": [
+              "OS/hermes-agent/skills/software-development/test-driven-development/SKILL.md"
+            ],
+            "openclaw": [
+              "OS/openclaw/skills/skill-creator/SKILL.md"
+            ],
+            "spec-kit": [
+              "OS/spec-kit/templates/checklist-template.md"
+            ]
+          },
+          "delta": "superpowers is the only iron-law + breaker pair"
+        }
+      ]
+    },
+    {
+      "name": "Handoff & State",
+      "features": [
+        {
+          "name": "File-path handoff (not pasted history)",
+          "values": {
+            "superpowers": "yes (task-brief + review-package scripts)",
+            "gstack": "yes (artifacts + review logs)",
+            "gsd-pi": "yes (scout output + continue.md + T## files)",
+            "BMAD-METHOD": "yes (phase artifacts)",
+            "paperclip": "yes (child issue + comment contract)",
+            "hermes-agent": "partial (plan files)",
+            "openclaw": "partial (TaskFlow stateJson)",
+            "spec-kit": "yes (FEATURE_DIR JSON from scripts)"
+          },
+          "evidence": {
+            "superpowers": [
+              "OS/superpowers/skills/subagent-driven-development/SKILL.md"
+            ],
+            "gstack": [
+              "OS/gstack/context-save/SKILL.md"
+            ],
+            "gsd-pi": [
+              "OS/gsd-pi/src/resources/skills/handoff/SKILL.md"
+            ],
+            "BMAD-METHOD": [
+              "OS/BMAD-METHOD/src/bmm-skills/plan/"
+            ],
+            "paperclip": [
+              "OS/paperclip/packages/teams-catalog/catalog/bundled/company-defaults/core-exec-team/agents/ceo/AGENTS.md"
+            ],
+            "hermes-agent": [
+              "OS/hermes-agent/skills/software-development/hermes-agent-skill-authoring/SKILL.md"
+            ],
+            "openclaw": [
+              "OS/openclaw/skills/taskflow/SKILL.md"
+            ],
+            "spec-kit": [
+              "OS/spec-kit/scripts/python/setup_plan.py"
+            ]
+          },
+          "delta": "superpowers scripts exist because paste failed in production"
+        },
+        {
+          "name": "Worktree / workspace isolation",
+          "values": {
+            "superpowers": "yes (using-git-worktrees + sdd-workspace)",
+            "gstack": "partial (conductor workspaces / browse per port)",
+            "gsd-pi": "yes (worktree workers + leases)",
+            "BMAD-METHOD": "no",
+            "paperclip": "yes (execution workspaces)",
+            "hermes-agent": "no",
+            "openclaw": "no",
+            "spec-kit": "partial (feature branches via git extension)"
+          },
+          "evidence": {
+            "superpowers": [
+              "OS/superpowers/skills/using-git-worktrees/SKILL.md"
+            ],
+            "gstack": [
+              "OS/gstack/ARCHITECTURE.md"
+            ],
+            "gsd-pi": [
+              "OS/gsd-pi/docs/dev/ADR-001-branchless-worktree-architecture.md"
+            ],
+            "BMAD-METHOD": [
+              "OS/BMAD-METHOD/README.md"
+            ],
+            "paperclip": [
+              "OS/paperclip/packages/adapters/"
+            ],
+            "hermes-agent": [
+              "OS/hermes-agent/AGENTS.md"
+            ],
+            "openclaw": [
+              "OS/openclaw/docs/tools/skills.md"
+            ],
+            "spec-kit": [
+              "OS/spec-kit/extensions/git/"
+            ]
+          },
+          "delta": "gsd-pi has the deepest worktree ADRs"
+        }
+      ]
+    },
+    {
+      "name": "Governance",
+      "features": [
+        {
+          "name": "Budgets + board approvals",
+          "values": {
+            "superpowers": "no",
+            "gstack": "no",
+            "gsd-pi": "partial (cost.total in headless query)",
+            "BMAD-METHOD": "no",
+            "paperclip": "yes (cascading monthly budgets + board)",
+            "hermes-agent": "partial (billing modules, not org budgets)",
+            "openclaw": "no",
+            "spec-kit": "no"
+          },
+          "evidence": {
+            "superpowers": [
+              "OS/superpowers/README.md"
+            ],
+            "gstack": [
+              "OS/gstack/docs/skills.md"
+            ],
+            "gsd-pi": [
+              "OS/gsd-pi/gsd-orchestrator/SKILL.md"
+            ],
+            "BMAD-METHOD": [
+              "OS/BMAD-METHOD/README.md"
+            ],
+            "paperclip": [
+              "OS/paperclip/docs/companies/companies-spec.md"
+            ],
+            "hermes-agent": [
+              "OS/hermes-agent/agent/billing_usage.py"
+            ],
+            "openclaw": [
+              "OS/openclaw/docs/plugins/architecture.md"
+            ],
+            "spec-kit": [
+              "OS/spec-kit/spec-driven.md"
+            ]
+          },
+          "delta": "paperclip is alone on company money"
+        },
+        {
+          "name": "Trust tiers / allowlists / fail-closed install",
+          "values": {
+            "superpowers": "partial (domain skills rejected from core)",
+            "gstack": "partial (/careful /freeze /guard)",
+            "gsd-pi": "partial (confirmProjectAgents)",
+            "BMAD-METHOD": "partial (customize as policy)",
+            "paperclip": "yes (plugin capabilities + board)",
+            "hermes-agent": "partial (platforms + optional tier)",
+            "openclaw": "yes (allowlists, requires gating, ClawHub scan)",
+            "spec-kit": "yes (community catalog discovery-only)"
+          },
+          "evidence": {
+            "superpowers": [
+              "OS/superpowers/CLAUDE.md"
+            ],
+            "gstack": [
+              "OS/gstack/careful/SKILL.md"
+            ],
+            "gsd-pi": [
+              "OS/gsd-pi/docs/user-docs/subagents.md"
+            ],
+            "BMAD-METHOD": [
+              "OS/BMAD-METHOD/src/bmm-skills/agents/bmad-agent-architect/customize.toml"
+            ],
+            "paperclip": [
+              "OS/paperclip/doc/plugins/PLUGIN_SPEC.md"
+            ],
+            "hermes-agent": [
+              "OS/hermes-agent/skills/software-development/hermes-agent-skill-authoring/SKILL.md"
+            ],
+            "openclaw": [
+              "OS/openclaw/docs/tools/skills.md"
+            ],
+            "spec-kit": [
+              "OS/spec-kit/docs/community/bundles.md"
+            ]
+          },
+          "delta": "openclaw+spec-kit+paperclip have explicit trust tiers"
+        }
+      ]
+    }
+  ],
+  "summary": {
+    "total_features": 21,
+    "notes": "n-way: cells are yes|partial|no. Pairwise Forte/Parcial skipped by skeleton rule."
+  },
+  "subject_only_capabilities": {
+    "superpowers": [
+      {
+        "name": "SessionStart bootstrap injection",
+        "category": "Skill System",
+        "evidence": "OS/superpowers/hooks/session-start"
+      },
+      {
+        "name": "5-round review breaker",
+        "category": "Gates",
+        "evidence": "OS/superpowers/skills/subagent-driven-development/SKILL.md"
+      }
+    ],
+    "gstack": [
+      {
+        "name": "Persistent browse daemon",
+        "category": "Plugin/UX",
+        "evidence": "OS/gstack/ARCHITECTURE.md"
+      }
+    ],
+    "gsd-pi": [
+      {
+        "name": "Agent Skills runtime implementation",
+        "category": "Skill System",
+        "evidence": "OS/gsd-pi/packages/pi-coding-agent/src/core/skills.ts"
+      }
+    ],
+    "BMAD-METHOD": [
+      {
+        "name": "Party Mode 4-runtime room",
+        "category": "Squad",
+        "evidence": "OS/BMAD-METHOD/src/core-skills/bmad-party-mode/SKILL.md"
+      }
+    ],
+    "paperclip": [
+      {
+        "name": "Company budgets + hire",
+        "category": "Governance",
+        "evidence": "OS/paperclip/packages/teams-catalog/catalog/bundled/company-defaults/core-exec-team/TEAM.md"
+      }
+    ],
+    "hermes-agent": [
+      {
+        "name": "Skill bundles + never-compact-user",
+        "category": "Context",
+        "evidence": "OS/hermes-agent/docs/micro-compaction.md"
+      }
+    ],
+    "openclaw": [
+      {
+        "name": "Exclusive memory/context-engine plugin slots",
+        "category": "Plugin",
+        "evidence": "OS/openclaw/docs/plugins/architecture.md"
+      }
+    ],
+    "spec-kit": [
+      {
+        "name": "YAML workflow type:gate",
+        "category": "Spine",
+        "evidence": "OS/spec-kit/workflows/speckit/workflow.yml"
+      }
+    ]
+  }
+}

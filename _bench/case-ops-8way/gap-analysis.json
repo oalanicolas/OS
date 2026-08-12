@@ -1,0 +1,172 @@
+{
+  "generatedAt": "2026-08-12T22:00:00Z",
+  "comparison_type": "nway-field",
+  "subjects": [
+    "VISA-BRAIN",
+    "gbrain",
+    "gsd-pi",
+    "superpowers",
+    "spec-kit",
+    "paperclip",
+    "mempalace",
+    "LifeOS"
+  ],
+  "dimension_pack": "case-ops",
+  "notes": "Field gaps. VISA residuals are hardening. Peer gaps are 'not this job' unless noted as portable.",
+  "field_gaps": {
+    "VISA-BRAIN": [
+      {
+        "id": "GAP-VB-001",
+        "name": "Temporal supersede on mutable CLM",
+        "dimension": "graph_honesty",
+        "type": "Partial",
+        "severity": "MED",
+        "complexity": "MED",
+        "strategic_value": "MED",
+        "priority": "P2",
+        "evidence": "OS/mempalace/mempalace/knowledge_graph.py",
+        "description": "B-028 backlog. Steal mempalace half-open supersede, not a graph DB."
+      },
+      {
+        "id": "GAP-VB-002",
+        "name": "Office-level cortex outside the vault",
+        "dimension": "workspace_isolation",
+        "type": "Missing",
+        "severity": "LOW",
+        "complexity": "HIGH",
+        "strategic_value": "LOW",
+        "priority": "P3",
+        "evidence": "OS/gbrain/docs/tutorials/company-brain.md",
+        "description": "Only if product becomes a firm. Never sidecar on case data."
+      }
+    ],
+    "gbrain": [
+      {
+        "id": "GAP-GB-001",
+        "name": "Graph-as-oracle / signals as proof",
+        "dimension": "graph_honesty",
+        "type": "Missing",
+        "severity": "HIGH",
+        "complexity": "MED",
+        "strategic_value": "HIGH",
+        "priority": "P1",
+        "evidence": "VISA-BRAIN/.codex/skills/investigate-case-evidence/references/evidence-graph.md",
+        "description": "Adopt VISA doctrine: edges do not prove; signals must not gate truth."
+      }
+    ],
+    "gsd-pi": [
+      {
+        "id": "GAP-GSD-001",
+        "name": "No evidence epistemology",
+        "dimension": "epistemology",
+        "type": "Missing",
+        "severity": "LOW",
+        "complexity": "HIGH",
+        "strategic_value": "LOW",
+        "priority": "P3",
+        "evidence": "VISA-BRAIN/00-Case-Control/Epistemology-Layers.md",
+        "description": "Out of job. Keep as coding factory."
+      }
+    ],
+    "superpowers": [
+      {
+        "id": "GAP-SP-001",
+        "name": "Script-enforced extract gate",
+        "dimension": "extract_before_reviewed",
+        "type": "Partial",
+        "severity": "MED",
+        "complexity": "MED",
+        "strategic_value": "HIGH",
+        "priority": "P1",
+        "evidence": "VISA-BRAIN/.codex/skills/investigate-case-evidence/SKILL.md",
+        "description": "Portable: reject task-complete without brief/report files."
+      }
+    ],
+    "spec-kit": [
+      {
+        "id": "GAP-SK-001",
+        "name": "Honest completion / coverage\u2260done",
+        "dimension": "counsel_separation",
+        "type": "Partial",
+        "severity": "MED",
+        "complexity": "LOW",
+        "strategic_value": "MED",
+        "priority": "P2",
+        "evidence": "VISA-BRAIN/.codex/skills/investigate-case-evidence/SKILL.md",
+        "description": "Specify-complete is not implement-correct. Speech rules travel."
+      }
+    ],
+    "paperclip": [
+      {
+        "id": "GAP-PC-001",
+        "name": "USER/evidence firewall",
+        "dimension": "human_data_split",
+        "type": "Partial",
+        "severity": "MED",
+        "complexity": "LOW",
+        "strategic_value": "MED",
+        "priority": "P2",
+        "evidence": "VISA-BRAIN/00-Case-Control/Human-Data-Interface-Contract.md",
+        "description": "Do not collapse SOUL into AGENTS.md; keep PARA off company facts."
+      }
+    ],
+    "mempalace": [
+      {
+        "id": "GAP-MP-001",
+        "name": "Not a case runner",
+        "dimension": "process_spine",
+        "type": "Missing",
+        "severity": "LOW",
+        "complexity": "HIGH",
+        "strategic_value": "LOW",
+        "priority": "P3",
+        "evidence": "VISA-BRAIN/PITCH.md",
+        "description": "Stay the archive. VISA already hashes originals."
+      }
+    ],
+    "LifeOS": [
+      {
+        "id": "GAP-LO-001",
+        "name": "Not case ops",
+        "dimension": "epistemology",
+        "type": "Missing",
+        "severity": "LOW",
+        "complexity": "HIGH",
+        "strategic_value": "LOW",
+        "priority": "P3",
+        "evidence": "VISA-BRAIN/PITCH.md",
+        "description": "Stay the life OS. Voice Card pattern already in VISA."
+      }
+    ]
+  },
+  "counts": {
+    "total_gaps": 8,
+    "p0": 0,
+    "p1": 2,
+    "p2": 3,
+    "p3": 3
+  },
+  "action_items": [
+    {
+      "action_title": "gbrain: document graph\u2260oracle; stop treating signals as corroboration",
+      "target": "gbrain",
+      "closes_gap": "GAP-GB-001",
+      "priority": "P1",
+      "source_to_copy": "VISA-BRAIN/.codex/skills/investigate-case-evidence/references/evidence-graph.md"
+    },
+    {
+      "action_title": "superpowers: script-reject complete without brief/report files",
+      "target": "superpowers",
+      "closes_gap": "GAP-SP-001",
+      "priority": "P1",
+      "source_to_copy": "VISA-BRAIN/.codex/skills/investigate-case-evidence/SKILL.md"
+    },
+    {
+      "action_title": "VISA: B-028 temporal supersede from mempalace, stay in backlog order",
+      "target": "VISA-BRAIN",
+      "closes_gap": "GAP-VB-001",
+      "priority": "P2",
+      "source_to_copy": "OS/mempalace/mempalace/knowledge_graph.py"
+    }
+  ]
+}

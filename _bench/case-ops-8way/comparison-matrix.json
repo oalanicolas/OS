@@ -1,0 +1,734 @@
+{
+  "generatedAt": "2026-08-12T22:00:00Z",
+  "comparison_type": "nway",
+  "subjects": [
+    "VISA-BRAIN",
+    "gbrain",
+    "gsd-pi",
+    "superpowers",
+    "spec-kit",
+    "paperclip",
+    "mempalace",
+    "LifeOS"
+  ],
+  "dimension_pack": "case-ops",
+  "categories": [
+    {
+      "name": "Epistemology",
+      "features": [
+        {
+          "name": "Fact/claim/finding split",
+          "values": {
+            "VISA-BRAIN": "yes (A/B/C + AgencyFinding)",
+            "gbrain": "partial (takes vs facts)",
+            "gsd-pi": "no",
+            "superpowers": "no",
+            "spec-kit": "partial (spec-as-SoT)",
+            "paperclip": "no",
+            "mempalace": "partial (verbatim)",
+            "LifeOS": "partial (ISA claims)"
+          },
+          "evidence": {
+            "VISA-BRAIN": [
+              "see scorecard signals"
+            ],
+            "gbrain": [
+              "see scorecard signals"
+            ],
+            "gsd-pi": [
+              "see scorecard signals"
+            ],
+            "superpowers": [
+              "see scorecard signals"
+            ],
+            "spec-kit": [
+              "see scorecard signals"
+            ],
+            "paperclip": [
+              "see scorecard signals"
+            ],
+            "mempalace": [
+              "see scorecard signals"
+            ],
+            "LifeOS": [
+              "see scorecard signals"
+            ]
+          },
+          "delta": ""
+        },
+        {
+          "name": "Category errors blocked",
+          "values": {
+            "VISA-BRAIN": "yes",
+            "gbrain": "partial (takes/facts doc)",
+            "gsd-pi": "no",
+            "superpowers": "no",
+            "spec-kit": "no",
+            "paperclip": "no",
+            "mempalace": "no",
+            "LifeOS": "no"
+          },
+          "evidence": {
+            "VISA-BRAIN": [
+              "see scorecard signals"
+            ],
+            "gbrain": [
+              "see scorecard signals"
+            ],
+            "gsd-pi": [
+              "see scorecard signals"
+            ],
+            "superpowers": [
+              "see scorecard signals"
+            ],
+            "spec-kit": [
+              "see scorecard signals"
+            ],
+            "paperclip": [
+              "see scorecard signals"
+            ],
+            "mempalace": [
+              "see scorecard signals"
+            ],
+            "LifeOS": [
+              "see scorecard signals"
+            ]
+          },
+          "delta": ""
+        }
+      ]
+    },
+    {
+      "name": "Projection",
+      "features": [
+        {
+          "name": "Generated dashboard/digest",
+          "values": {
+            "VISA-BRAIN": "yes",
+            "gbrain": "partial (compiled truth)",
+            "gsd-pi": "partial (STATE derived)",
+            "superpowers": "no",
+            "spec-kit": "partial",
+            "paperclip": "yes",
+            "mempalace": "no",
+            "LifeOS": "partial"
+          },
+          "evidence": {
+            "VISA-BRAIN": [
+              "see scorecard signals"
+            ],
+            "gbrain": [
+              "see scorecard signals"
+            ],
+            "gsd-pi": [
+              "see scorecard signals"
+            ],
+            "superpowers": [
+              "see scorecard signals"
+            ],
+            "spec-kit": [
+              "see scorecard signals"
+            ],
+            "paperclip": [
+              "see scorecard signals"
+            ],
+            "mempalace": [
+              "see scorecard signals"
+            ],
+            "LifeOS": [
+              "see scorecard signals"
+            ]
+          },
+          "delta": ""
+        },
+        {
+          "name": "Fingerprint / rebuild-if-stale",
+          "values": {
+            "VISA-BRAIN": "yes",
+            "gbrain": "partial (sync)",
+            "gsd-pi": "no",
+            "superpowers": "no",
+            "spec-kit": "no",
+            "paperclip": "partial",
+            "mempalace": "no",
+            "LifeOS": "no"
+          },
+          "evidence": {
+            "VISA-BRAIN": [
+              "see scorecard signals"
+            ],
+            "gbrain": [
+              "see scorecard signals"
+            ],
+            "gsd-pi": [
+              "see scorecard signals"
+            ],
+            "superpowers": [
+              "see scorecard signals"
+            ],
+            "spec-kit": [
+              "see scorecard signals"
+            ],
+            "paperclip": [
+              "see scorecard signals"
+            ],
+            "mempalace": [
+              "see scorecard signals"
+            ],
+            "LifeOS": [
+              "see scorecard signals"
+            ]
+          },
+          "delta": ""
+        }
+      ]
+    },
+    {
+      "name": "Isolation",
+      "features": [
+        {
+          "name": "Product kit \u2260 live data",
+          "values": {
+            "VISA-BRAIN": "yes",
+            "gbrain": "yes (two-repo)",
+            "gsd-pi": "partial",
+            "superpowers": "partial",
+            "spec-kit": "partial",
+            "paperclip": "partial (company row)",
+            "mempalace": "no",
+            "LifeOS": "partial"
+          },
+          "evidence": {
+            "VISA-BRAIN": [
+              "see scorecard signals"
+            ],
+            "gbrain": [
+              "see scorecard signals"
+            ],
+            "gsd-pi": [
+              "see scorecard signals"
+            ],
+            "superpowers": [
+              "see scorecard signals"
+            ],
+            "spec-kit": [
+              "see scorecard signals"
+            ],
+            "paperclip": [
+              "see scorecard signals"
+            ],
+            "mempalace": [
+              "see scorecard signals"
+            ],
+            "LifeOS": [
+              "see scorecard signals"
+            ]
+          },
+          "delta": ""
+        },
+        {
+          "name": "No sibling scan / one explicit root",
+          "values": {
+            "VISA-BRAIN": "yes",
+            "gbrain": "partial (source scope)",
+            "gsd-pi": "partial (worktree)",
+            "superpowers": "partial",
+            "spec-kit": "no",
+            "paperclip": "partial (companyId)",
+            "mempalace": "no",
+            "LifeOS": "no"
+          },
+          "evidence": {
+            "VISA-BRAIN": [
+              "see scorecard signals"
+            ],
+            "gbrain": [
+              "see scorecard signals"
+            ],
+            "gsd-pi": [
+              "see scorecard signals"
+            ],
+            "superpowers": [
+              "see scorecard signals"
+            ],
+            "spec-kit": [
+              "see scorecard signals"
+            ],
+            "paperclip": [
+              "see scorecard signals"
+            ],
+            "mempalace": [
+              "see scorecard signals"
+            ],
+            "LifeOS": [
+              "see scorecard signals"
+            ]
+          },
+          "delta": ""
+        }
+      ]
+    },
+    {
+      "name": "Extract",
+      "features": [
+        {
+          "name": "Mechanical reviewed-without-extract reject",
+          "values": {
+            "VISA-BRAIN": "yes",
+            "gbrain": "no",
+            "gsd-pi": "no",
+            "superpowers": "partial (prompt)",
+            "spec-kit": "no",
+            "paperclip": "no",
+            "mempalace": "no",
+            "LifeOS": "no"
+          },
+          "evidence": {
+            "VISA-BRAIN": [
+              "see scorecard signals"
+            ],
+            "gbrain": [
+              "see scorecard signals"
+            ],
+            "gsd-pi": [
+              "see scorecard signals"
+            ],
+            "superpowers": [
+              "see scorecard signals"
+            ],
+            "spec-kit": [
+              "see scorecard signals"
+            ],
+            "paperclip": [
+              "see scorecard signals"
+            ],
+            "mempalace": [
+              "see scorecard signals"
+            ],
+            "LifeOS": [
+              "see scorecard signals"
+            ]
+          },
+          "delta": ""
+        },
+        {
+          "name": "Disk restart authority / ledger",
+          "values": {
+            "VISA-BRAIN": "yes",
+            "gbrain": "partial (git pages)",
+            "gsd-pi": "yes",
+            "superpowers": "yes",
+            "spec-kit": "partial",
+            "paperclip": "yes (issues)",
+            "mempalace": "partial",
+            "LifeOS": "partial"
+          },
+          "evidence": {
+            "VISA-BRAIN": [
+              "see scorecard signals"
+            ],
+            "gbrain": [
+              "see scorecard signals"
+            ],
+            "gsd-pi": [
+              "see scorecard signals"
+            ],
+            "superpowers": [
+              "see scorecard signals"
+            ],
+            "spec-kit": [
+              "see scorecard signals"
+            ],
+            "paperclip": [
+              "see scorecard signals"
+            ],
+            "mempalace": [
+              "see scorecard signals"
+            ],
+            "LifeOS": [
+              "see scorecard signals"
+            ]
+          },
+          "delta": ""
+        }
+      ]
+    },
+    {
+      "name": "Graph",
+      "features": [
+        {
+          "name": "Graph \u2260 truth oracle",
+          "values": {
+            "VISA-BRAIN": "yes (doctrine+P3)",
+            "gbrain": "no (signals reorder)",
+            "gsd-pi": "n/a",
+            "superpowers": "n/a",
+            "spec-kit": "n/a",
+            "paperclip": "n/a",
+            "mempalace": "yes (temporal store)",
+            "LifeOS": "partial"
+          },
+          "evidence": {
+            "VISA-BRAIN": [
+              "see scorecard signals"
+            ],
+            "gbrain": [
+              "see scorecard signals"
+            ],
+            "gsd-pi": [
+              "see scorecard signals"
+            ],
+            "superpowers": [
+              "see scorecard signals"
+            ],
+            "spec-kit": [
+              "see scorecard signals"
+            ],
+            "paperclip": [
+              "see scorecard signals"
+            ],
+            "mempalace": [
+              "see scorecard signals"
+            ],
+            "LifeOS": [
+              "see scorecard signals"
+            ]
+          },
+          "delta": ""
+        },
+        {
+          "name": "Independence groups (not file count)",
+          "values": {
+            "VISA-BRAIN": "yes",
+            "gbrain": "no",
+            "gsd-pi": "no",
+            "superpowers": "no",
+            "spec-kit": "no",
+            "paperclip": "no",
+            "mempalace": "no",
+            "LifeOS": "no"
+          },
+          "evidence": {
+            "VISA-BRAIN": [
+              "see scorecard signals"
+            ],
+            "gbrain": [
+              "see scorecard signals"
+            ],
+            "gsd-pi": [
+              "see scorecard signals"
+            ],
+            "superpowers": [
+              "see scorecard signals"
+            ],
+            "spec-kit": [
+              "see scorecard signals"
+            ],
+            "paperclip": [
+              "see scorecard signals"
+            ],
+            "mempalace": [
+              "see scorecard signals"
+            ],
+            "LifeOS": [
+              "see scorecard signals"
+            ]
+          },
+          "delta": ""
+        }
+      ]
+    },
+    {
+      "name": "Counsel",
+      "features": [
+        {
+          "name": "Independent review / counsel session",
+          "values": {
+            "VISA-BRAIN": "yes",
+            "gbrain": "no",
+            "gsd-pi": "partial",
+            "superpowers": "yes",
+            "spec-kit": "partial",
+            "paperclip": "partial",
+            "mempalace": "no",
+            "LifeOS": "no"
+          },
+          "evidence": {
+            "VISA-BRAIN": [
+              "see scorecard signals"
+            ],
+            "gbrain": [
+              "see scorecard signals"
+            ],
+            "gsd-pi": [
+              "see scorecard signals"
+            ],
+            "superpowers": [
+              "see scorecard signals"
+            ],
+            "spec-kit": [
+              "see scorecard signals"
+            ],
+            "paperclip": [
+              "see scorecard signals"
+            ],
+            "mempalace": [
+              "see scorecard signals"
+            ],
+            "LifeOS": [
+              "see scorecard signals"
+            ]
+          },
+          "delta": ""
+        },
+        {
+          "name": "Coverage \u2260 eligibility / done",
+          "values": {
+            "VISA-BRAIN": "yes",
+            "gbrain": "no",
+            "gsd-pi": "partial",
+            "superpowers": "partial",
+            "spec-kit": "partial",
+            "paperclip": "partial",
+            "mempalace": "no",
+            "LifeOS": "no"
+          },
+          "evidence": {
+            "VISA-BRAIN": [
+              "see scorecard signals"
+            ],
+            "gbrain": [
+              "see scorecard signals"
+            ],
+            "gsd-pi": [
+              "see scorecard signals"
+            ],
+            "superpowers": [
+              "see scorecard signals"
+            ],
+            "spec-kit": [
+              "see scorecard signals"
+            ],
+            "paperclip": [
+              "see scorecard signals"
+            ],
+            "mempalace": [
+              "see scorecard signals"
+            ],
+            "LifeOS": [
+              "see scorecard signals"
+            ]
+          },
+          "delta": ""
+        }
+      ]
+    },
+    {
+      "name": "Human/Data",
+      "features": [
+        {
+          "name": "USER/SOUL forbidden for evidence",
+          "values": {
+            "VISA-BRAIN": "yes",
+            "gbrain": "partial",
+            "gsd-pi": "no",
+            "superpowers": "no",
+            "spec-kit": "no",
+            "paperclip": "partial",
+            "mempalace": "partial",
+            "LifeOS": "partial"
+          },
+          "evidence": {
+            "VISA-BRAIN": [
+              "see scorecard signals"
+            ],
+            "gbrain": [
+              "see scorecard signals"
+            ],
+            "gsd-pi": [
+              "see scorecard signals"
+            ],
+            "superpowers": [
+              "see scorecard signals"
+            ],
+            "spec-kit": [
+              "see scorecard signals"
+            ],
+            "paperclip": [
+              "see scorecard signals"
+            ],
+            "mempalace": [
+              "see scorecard signals"
+            ],
+            "LifeOS": [
+              "see scorecard signals"
+            ]
+          },
+          "delta": ""
+        },
+        {
+          "name": "Plain-language portal vs canonical vault",
+          "values": {
+            "VISA-BRAIN": "yes",
+            "gbrain": "no",
+            "gsd-pi": "no",
+            "superpowers": "no",
+            "spec-kit": "no",
+            "paperclip": "yes",
+            "mempalace": "no",
+            "LifeOS": "partial"
+          },
+          "evidence": {
+            "VISA-BRAIN": [
+              "see scorecard signals"
+            ],
+            "gbrain": [
+              "see scorecard signals"
+            ],
+            "gsd-pi": [
+              "see scorecard signals"
+            ],
+            "superpowers": [
+              "see scorecard signals"
+            ],
+            "spec-kit": [
+              "see scorecard signals"
+            ],
+            "paperclip": [
+              "see scorecard signals"
+            ],
+            "mempalace": [
+              "see scorecard signals"
+            ],
+            "LifeOS": [
+              "see scorecard signals"
+            ]
+          },
+          "delta": ""
+        }
+      ]
+    },
+    {
+      "name": "Spine",
+      "features": [
+        {
+          "name": "Named phases with fail-closed gates",
+          "values": {
+            "VISA-BRAIN": "yes (P0\u2013P7 + freeze)",
+            "gbrain": "partial (dream)",
+            "gsd-pi": "yes",
+            "superpowers": "yes",
+            "spec-kit": "yes",
+            "paperclip": "partial",
+            "mempalace": "no",
+            "LifeOS": "partial"
+          },
+          "evidence": {
+            "VISA-BRAIN": [
+              "see scorecard signals"
+            ],
+            "gbrain": [
+              "see scorecard signals"
+            ],
+            "gsd-pi": [
+              "see scorecard signals"
+            ],
+            "superpowers": [
+              "see scorecard signals"
+            ],
+            "spec-kit": [
+              "see scorecard signals"
+            ],
+            "paperclip": [
+              "see scorecard signals"
+            ],
+            "mempalace": [
+              "see scorecard signals"
+            ],
+            "LifeOS": [
+              "see scorecard signals"
+            ]
+          },
+          "delta": ""
+        },
+        {
+          "name": "Honest completion language",
+          "values": {
+            "VISA-BRAIN": "yes (forbidden overclaim)",
+            "gbrain": "partial",
+            "gsd-pi": "partial",
+            "superpowers": "partial",
+            "spec-kit": "partial",
+            "paperclip": "partial",
+            "mempalace": "no",
+            "LifeOS": "no"
+          },
+          "evidence": {
+            "VISA-BRAIN": [
+              "see scorecard signals"
+            ],
+            "gbrain": [
+              "see scorecard signals"
+            ],
+            "gsd-pi": [
+              "see scorecard signals"
+            ],
+            "superpowers": [
+              "see scorecard signals"
+            ],
+            "spec-kit": [
+              "see scorecard signals"
+            ],
+            "paperclip": [
+              "see scorecard signals"
+            ],
+            "mempalace": [
+              "see scorecard signals"
+            ],
+            "LifeOS": [
+              "see scorecard signals"
+            ]
+          },
+          "delta": ""
+        }
+      ]
+    }
+  ],
+  "summary": {
+    "total_features": 16,
+    "notes": "n-way yes|partial|no|n/a"
+  },
+  "subject_only_capabilities": {
+    "VISA-BRAIN": [
+      {
+        "name": "Mechanical extract-before-reviewed",
+        "category": "Extract",
+        "evidence": "VISA-BRAIN/.codex/skills/investigate-case-evidence/SKILL.md"
+      },
+      {
+        "name": "Boundary Card + SAME_ORIGIN_GROUP",
+        "category": "Graph",
+        "evidence": "VISA-BRAIN/.codex/skills/investigate-case-evidence/references/evidence-graph.md"
+      }
+    ],
+    "gbrain": [
+      {
+        "name": "Company-brain sources+OAuth",
+        "category": "Isolation",
+        "evidence": "OS/gbrain/docs/tutorials/company-brain.md"
+      }
+    ],
+    "mempalace": [
+      {
+        "name": "Atomic temporal supersede",
+        "category": "Graph",
+        "evidence": "OS/mempalace/mempalace/knowledge_graph.py"
+      }
+    ],
+    "gsd-pi": [],
+    "superpowers": [],
+    "spec-kit": [],
+    "paperclip": [],
+    "LifeOS": []
+  }
+}

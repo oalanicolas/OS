@@ -1,0 +1,63 @@
+{
+  "$schema": "os-bench metadata v1.0",
+  "generatedAt": "2026-08-12T20:15:00Z",
+  "comparison_type": "pair",
+  "slug": "superpowers-vs-paperclip",
+  "subjects": [
+    {
+      "slug": "superpowers",
+      "path": "OS/superpowers/",
+      "source_url": "https://github.com/obra/superpowers",
+      "detected_stack": [
+        "Markdown",
+        "JavaScript",
+        "Bash"
+      ]
+    },
+    {
+      "slug": "paperclip",
+      "path": "OS/paperclip/",
+      "source_url": "https://github.com/paperclipai/paperclip",
+      "detected_stack": [
+        "TypeScript",
+        "React",
+        "Postgres"
+      ]
+    }
+  ],
+  "dimension_pack": "harness-structure",
+  "scoring_dimensions": [
+    "skill_system",
+    "squad_model",
+    "plugin_extensibility",
+    "context_architecture",
+    "complex_work_spine",
+    "gates_and_discipline",
+    "handoff_and_state",
+    "governance"
+  ],
+  "profile": "full",
+  "skill_version": "1.0.0",
+  "output_root": "OS/_bench/superpowers-vs-paperclip/",
+  "artifacts_generated": [
+    "metadata.json",
+    "inventory-superpowers.json",
+    "inventory-superpowers.md",
+    "inventory-paperclip.json",
+    "inventory-paperclip.md",
+    "comparison-matrix.json",
+    "comparison-matrix.md",
+    "scorecard.json",
+    "scorecard.md",
+    "gap-analysis.json",
+    "gap-analysis.md",
+    "battle-card.md",
+    "executive-report.md",
+    "deep/absorption-roadmap.md"
+  ],
+  "artifacts_skipped": [],
+  "notes": "Pair follow-up to harness-structure-8way: process-discipline plugin vs company-sim control plane. Complementary, not substitutes.",
+  "confidence_overall": "HIGH",
+  "quality_gate_passed": true,
+  "parent_bench": "harness-structure-8way"
+}

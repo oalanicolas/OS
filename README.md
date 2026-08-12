@@ -58,7 +58,7 @@
 
 | Project | Stack | Differential |
 |---------|-------|--------------|
-| [gsd-build/gsd-2](https://github.com/gsd-build/gsd-2) | TS (Pi SDK) | Auto-milestones with no human in the loop; RTK compresses shell output across long runs. |
+| [open-gsd/gsd-pi](https://github.com/open-gsd/gsd-pi) | TS (Pi SDK) | Living GSD: auto-milestones, worktree isolation, `.gsd/` memory, Agent Skills runtime. (gsd-2 is the archived snapshot.) |
 | [garrytan/gstack](https://github.com/garrytan/gstack) | TS + Playwright | Personal software factory by YC's president; 24 specialized agents in a multi-role workflow. |
 | [obra/superpowers](https://github.com/obra/superpowers) | TS (Claude Code plugin) | Pure red/green TDD with parallel subagents; reports a 94% PR rejection rate. |
 
@@ -172,14 +172,14 @@ Cross-cutting axis, grouping harnesses by recurring technique/architecture:
 
 | Pattern | Projects | Note |
 |---------|----------|------|
-| **First-class memory** | gbrain, mempalace, gsd-2, hermes-agent, mem0, memori-labs | Memory as a separate, measurable component — not a bolt-on. |
+| **First-class memory** | gbrain, mempalace, gsd-pi, hermes-agent, mem0, memori-labs | Memory as a separate, measurable component — not a bolt-on. |
 | **Spec-driven** | spec-kit, get-shit-done, superpowers | Pragmatic alternative to "vibe coding"; specs drive execution. |
 | **Multi-persona / party-mode** | BMAD-METHOD, crewAI, autogen, paperclip, gstack | Coordination across multiple roles inside a single harness. |
 | **Parallel subagents** | superpowers, ai-website-cloner-template, gstack | Task fan-out to specialized agents. |
 | **Durable / replay** | vercel/workflow, gh-aw | Event-sourced; survives crashes; reproducible. |
 | **Local-first** | mempalace, openclaw, gbrain, hermes-agent | No cloud dependency; on-device or self-hosted. |
 | **Governance / policy** | agent-governance-toolkit, Clawith | Runtime security and agent org charts. |
-| **24/7 persistent** | claude-remote-manager, hermes-agent, gsd-2 | Cron, hibernation, automatic resume. |
+| **24/7 persistent** | claude-remote-manager, hermes-agent, gsd-pi | Cron, hibernation, automatic resume. |
 | **Self-improvement / autoresearch** | ADAS, AI-Scientist-v2, gepa, superpowers | A loop that measures, mutates and optimizes — code, prompts or architecture. |
 
 ---

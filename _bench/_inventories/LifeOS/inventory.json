@@ -1,0 +1,105 @@
+{
+  "generatedAt": "2026-08-12T22:00:00Z",
+  "subject": "LifeOS",
+  "path": "OS/LifeOS/",
+  "primary_language": "TypeScript",
+  "secondary_languages": [
+    "Markdown"
+  ],
+  "stack": [
+    "Bun",
+    "Claude Code skills",
+    "ISA"
+  ],
+  "license": "MIT",
+  "tagline": "Personal AI operating system: TELOS, ISA, Pulse \u2014 not a case or company OS.",
+  "metrics": {
+    "file_count": 1890,
+    "last_commit_date": "2026-08-07T09:06:43-07:00",
+    "source_url": "https://github.com/danielmiessler/LifeOS"
+  },
+  "modules": [
+    {
+      "name": "LifeOS",
+      "path": "LifeOS/",
+      "type": "app"
+    }
+  ],
+  "external_dependencies_top10": [],
+  "entry_points": [
+    {
+      "kind": "skill",
+      "path": "LifeOS/install/skills/ISA/SKILL.md",
+      "command": "ISA"
+    }
+  ],
+  "capabilities": [
+    {
+      "name": "ISA living spec",
+      "evidence_paths": [
+        "OS/LifeOS/LifeOS/install/skills/ISA/SKILL.md"
+      ],
+      "category": "core",
+      "description": "Claims/features as personal system of record."
+    },
+    {
+      "name": "LoadContext layers",
+      "evidence_paths": [
+        "OS/LifeOS/LifeOS/install/hooks/LoadContext.hook.ts"
+      ],
+      "category": "core",
+      "description": "Constitution always-on; USER/ISA on demand."
+    },
+    {
+      "name": "USER / identity",
+      "evidence_paths": [
+        "OS/LifeOS/README.md"
+      ],
+      "category": "ux",
+      "description": "Life OS identity split."
+    }
+  ],
+  "quality_signals": {
+    "test_framework": "unknown",
+    "test_file_count": null,
+    "linter": null,
+    "ci_provider": null,
+    "ci_workflow_count": null
+  },
+  "documentation": {
+    "readme_sections": [
+      "OS"
+    ],
+    "has_contributing": true,
+    "has_architecture_doc": true,
+    "docs_page_count": 20
+  },
+  "extension_points": {
+    "plugins": {
+      "mechanism": "install skill unpack",
+      "path": "LifeOS/install/"
+    },
+    "hooks": {
+      "mechanism": "SessionStart LoadContext",
+      "events": [
+        "session-start"
+      ]
+    },
+    "mcp": {
+      "client": false,
+      "server": false
+    }
+  },
+  "unique_selling_points": [
+    "Best human/data split among non-VISA subjects"
+  ],
+  "limitations": [
+    {
+      "description": "Life OS, not case ops",
+      "source": "OS/LifeOS/README.md"
+    }
+  ],
+  "confidence": "HIGH",
+  "extraction_method": "filesystem-scan",
+  "skill_version": "1.0.0"
+}

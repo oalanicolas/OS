@@ -1,0 +1,373 @@
+{
+  "generatedAt": "2026-08-12T20:00:00Z",
+  "comparison_type": "nway-field",
+  "subjects": [
+    "superpowers",
+    "gstack",
+    "gsd-pi",
+    "BMAD-METHOD",
+    "paperclip",
+    "hermes-agent",
+    "openclaw",
+    "spec-kit"
+  ],
+  "dimension_pack": "harness-structure",
+  "notes": "N-way field gaps: each subject vs the field leader on that capability. Bidirectional because every unique is someone else's gap.",
+  "field_gaps": {
+    "superpowers": [
+      {
+        "id": "GAP-SP-001",
+        "name": "Org-chart + budgets",
+        "dimension": "governance",
+        "type": "Missing",
+        "severity": "MED",
+        "complexity": "HIGH",
+        "strategic_value": "MED",
+        "priority": "P3",
+        "evidence": "OS/paperclip/docs/companies/companies-spec.md",
+        "description": "No hire/board/money plane. Correct for a process plugin; required only if Superpowers becomes a fleet OS."
+      },
+      {
+        "id": "GAP-SP-002",
+        "name": "Native plugin runtime + MCP",
+        "dimension": "plugin_extensibility",
+        "type": "Partial",
+        "severity": "MED",
+        "complexity": "HIGH",
+        "strategic_value": "LOW",
+        "priority": "P3",
+        "evidence": "OS/openclaw/docs/plugins/architecture.md",
+        "description": "plugin.json is a host pack, not a capability VM. Deliberate zero-dep stance."
+      },
+      {
+        "id": "GAP-SP-003",
+        "name": "Identity file split",
+        "dimension": "context_architecture",
+        "type": "Missing",
+        "severity": "LOW",
+        "complexity": "LOW",
+        "strategic_value": "MED",
+        "priority": "P2",
+        "evidence": "OS/openclaw/AGENTS.md",
+        "description": "Depends on host CLAUDE.md/AGENTS.md. A SOUL/USER split is cheap to document."
+      }
+    ],
+    "gstack": [
+      {
+        "id": "GAP-GS-001",
+        "name": "Tiny bootstrap / listing budget",
+        "dimension": "context_architecture",
+        "type": "Partial",
+        "severity": "HIGH",
+        "complexity": "MED",
+        "strategic_value": "HIGH",
+        "priority": "P1",
+        "evidence": "OS/superpowers/hooks/session-start",
+        "description": "Generated preamble is the opposite of Superpowers' tiny hook. Carve preamble; keep router."
+      },
+      {
+        "id": "GAP-GS-002",
+        "name": "Review breaker",
+        "dimension": "gates_and_discipline",
+        "type": "Missing",
+        "severity": "MED",
+        "complexity": "MED",
+        "strategic_value": "HIGH",
+        "priority": "P1",
+        "evidence": "OS/superpowers/skills/subagent-driven-development/SKILL.md",
+        "description": "Ship gates exist; no 5-round cap with ledger adjudication."
+      },
+      {
+        "id": "GAP-GS-003",
+        "name": "Native plugin / MCP",
+        "dimension": "plugin_extensibility",
+        "type": "Partial",
+        "severity": "LOW",
+        "complexity": "HIGH",
+        "strategic_value": "MED",
+        "priority": "P3",
+        "evidence": "OS/openclaw/docs/plugins/architecture.md",
+        "description": "Host adapters are enough for a skill suite; a plugin VM is a different product."
+      }
+    ],
+    "gsd-pi": [
+      {
+        "id": "GAP-GSD-001",
+        "name": "Living tree (CLOSED \u2014 now gsd-pi)",
+        "dimension": "complex_work_spine",
+        "type": "Closed",
+        "severity": "LOW",
+        "complexity": "HIGH",
+        "strategic_value": "HIGH",
+        "priority": "P3",
+        "evidence": "OS/gsd-pi/README.md",
+        "description": "Closed 2026-08-12: OS/gsd-pi cloned from open-gsd/gsd-pi v1.15.0. Same primitives; scores unchanged."
+      },
+      {
+        "id": "GAP-GSD-002",
+        "name": "SessionStart-class bootstrap",
+        "dimension": "skill_system",
+        "type": "Partial",
+        "severity": "MED",
+        "complexity": "LOW",
+        "strategic_value": "HIGH",
+        "priority": "P1",
+        "evidence": "OS/superpowers/hooks/session-start",
+        "description": "skill_discovery suggest/auto is weaker than a forced bootstrap body."
+      },
+      {
+        "id": "GAP-GSD-003",
+        "name": "Company governance",
+        "dimension": "governance",
+        "type": "Missing",
+        "severity": "LOW",
+        "complexity": "HIGH",
+        "strategic_value": "LOW",
+        "priority": "P3",
+        "evidence": "OS/paperclip/docs/companies/companies-spec.md",
+        "description": "Headless cost.total is not an org budget."
+      }
+    ],
+    "BMAD-METHOD": [
+      {
+        "id": "GAP-BM-001",
+        "name": "Token/listing budget",
+        "dimension": "context_architecture",
+        "type": "Missing",
+        "severity": "HIGH",
+        "complexity": "MED",
+        "strategic_value": "HIGH",
+        "priority": "P1",
+        "evidence": "OS/openclaw/docs/tools/skills.md",
+        "description": "58 SKILL.md + activation facts with no published cap will truncate on busy hosts."
+      },
+      {
+        "id": "GAP-BM-002",
+        "name": "Own state backend / worktrees",
+        "dimension": "handoff_and_state",
+        "type": "Missing",
+        "severity": "MED",
+        "complexity": "HIGH",
+        "strategic_value": "MED",
+        "priority": "P2",
+        "evidence": "OS/gsd-pi/docs/dev/ADR-001-branchless-worktree-architecture.md",
+        "description": "Lives entirely in the host IDE."
+      },
+      {
+        "id": "GAP-BM-003",
+        "name": "Plugin marketplace",
+        "dimension": "plugin_extensibility",
+        "type": "Missing",
+        "severity": "LOW",
+        "complexity": "HIGH",
+        "strategic_value": "MED",
+        "priority": "P3",
+        "evidence": "OS/spec-kit/extensions/EXTENSION-DEVELOPMENT-GUIDE.md",
+        "description": "customize.toml is policy, not a catalog."
+      }
+    ],
+    "paperclip": [
+      {
+        "id": "GAP-PC-001",
+        "name": "Process bootstrap + TDD breaker",
+        "dimension": "gates_and_discipline",
+        "type": "Missing",
+        "severity": "HIGH",
+        "complexity": "MED",
+        "strategic_value": "HIGH",
+        "priority": "P1",
+        "evidence": "OS/superpowers/skills/subagent-driven-development/SKILL.md",
+        "description": "Company-sim does not teach agents how to write software well."
+      },
+      {
+        "id": "GAP-PC-002",
+        "name": "Skill listing budget / SDO",
+        "dimension": "skill_system",
+        "type": "Partial",
+        "severity": "MED",
+        "complexity": "LOW",
+        "strategic_value": "MED",
+        "priority": "P2",
+        "evidence": "OS/superpowers/skills/writing-skills/SKILL.md",
+        "description": "Catalog exists; descriptions are not treated as a token product."
+      },
+      {
+        "id": "GAP-PC-003",
+        "name": "Cloud/multi-node plugin install",
+        "dimension": "plugin_extensibility",
+        "type": "Partial",
+        "severity": "MED",
+        "complexity": "HIGH",
+        "strategic_value": "HIGH",
+        "priority": "P2",
+        "evidence": "OS/paperclip/doc/plugins/PLUGIN_SPEC.md",
+        "description": "Spec itself says single-tenant filesystem today."
+      }
+    ],
+    "hermes-agent": [
+      {
+        "id": "GAP-HE-001",
+        "name": "Persistent squad / org",
+        "dimension": "squad_model",
+        "type": "Missing",
+        "severity": "MED",
+        "complexity": "HIGH",
+        "strategic_value": "MED",
+        "priority": "P2",
+        "evidence": "OS/paperclip/packages/teams-catalog/catalog/bundled/company-defaults/core-exec-team/TEAM.md",
+        "description": "Bundles compose skills, not employees."
+      },
+      {
+        "id": "GAP-HE-002",
+        "name": "Factory spine",
+        "dimension": "complex_work_spine",
+        "type": "Partial",
+        "severity": "MED",
+        "complexity": "MED",
+        "strategic_value": "HIGH",
+        "priority": "P1",
+        "evidence": "OS/gstack/docs/skills.md",
+        "description": "/plan exists; office-hours\u2192ship does not."
+      },
+      {
+        "id": "GAP-HE-003",
+        "name": "SessionStart bootstrap",
+        "dimension": "skill_system",
+        "type": "Partial",
+        "severity": "MED",
+        "complexity": "LOW",
+        "strategic_value": "HIGH",
+        "priority": "P1",
+        "evidence": "OS/superpowers/hooks/session-start",
+        "description": "Index is always-on; invoke is still hopeful."
+      }
+    ],
+    "openclaw": [
+      {
+        "id": "GAP-OC-001",
+        "name": "SDLC spine + implementation gates",
+        "dimension": "complex_work_spine",
+        "type": "Missing",
+        "severity": "HIGH",
+        "complexity": "MED",
+        "strategic_value": "HIGH",
+        "priority": "P1",
+        "evidence": "OS/spec-kit/spec-driven.md",
+        "description": "TaskFlow is a job runtime, not specify\u2192plan\u2192ship."
+      },
+      {
+        "id": "GAP-OC-002",
+        "name": "Named squad / org",
+        "dimension": "squad_model",
+        "type": "Missing",
+        "severity": "MED",
+        "complexity": "HIGH",
+        "strategic_value": "MED",
+        "priority": "P2",
+        "evidence": "OS/BMAD-METHOD/src/core-skills/bmad-party-mode/SKILL.md",
+        "description": "Workspace identity \u2260 roster. Paperclip already occupies this pole."
+      },
+      {
+        "id": "GAP-OC-003",
+        "name": "TDD / review breaker",
+        "dimension": "gates_and_discipline",
+        "type": "Missing",
+        "severity": "MED",
+        "complexity": "MED",
+        "strategic_value": "MED",
+        "priority": "P2",
+        "evidence": "OS/superpowers/skills/test-driven-development/SKILL.md",
+        "description": "Workshop gates skill authorship, not code."
+      }
+    ],
+    "spec-kit": [
+      {
+        "id": "GAP-SK-001",
+        "name": "Agent Skills surface",
+        "dimension": "skill_system",
+        "type": "Missing",
+        "severity": "HIGH",
+        "complexity": "MED",
+        "strategic_value": "HIGH",
+        "priority": "P1",
+        "evidence": "OS/gsd-pi/docs/user-docs/skills.md",
+        "description": "Hosts that only list SKILL.md will not discover spec-kit commands unless adapted."
+      },
+      {
+        "id": "GAP-SK-002",
+        "name": "Personas / squads",
+        "dimension": "squad_model",
+        "type": "Missing",
+        "severity": "LOW",
+        "complexity": "HIGH",
+        "strategic_value": "LOW",
+        "priority": "P3",
+        "evidence": "OS/BMAD-METHOD/src/bmm-skills/agents/bmad-agent-architect/SKILL.md",
+        "description": "Out of product scope; handoffs are enough for SDD."
+      },
+      {
+        "id": "GAP-SK-003",
+        "name": "Bootstrap + anti-rot ledger",
+        "dimension": "handoff_and_state",
+        "type": "Partial",
+        "severity": "MED",
+        "complexity": "MED",
+        "strategic_value": "HIGH",
+        "priority": "P1",
+        "evidence": "OS/superpowers/skills/subagent-driven-development/SKILL.md",
+        "description": "Feature dirs persist intent; they do not survive a compacted controller the way a ledger does."
+      }
+    ]
+  },
+  "counts": {
+    "total_gaps": 24,
+    "p0": 0,
+    "p1": 10,
+    "p2": 7,
+    "p3": 7
+  },
+  "action_items": [
+    {
+      "action_title": "DONE: gsd-pi cloned; keep gsd-2 as historical snapshot only",
+      "target": "gsd-pi",
+      "closes_gap": "GAP-GSD-001",
+      "priority": "P3",
+      "source_to_copy": "OS/gsd-pi/"
+    },
+    {
+      "action_title": "Carve gstack generated preamble; inject a Superpowers-sized router only",
+      "target": "gstack",
+      "closes_gap": "GAP-GS-001",
+      "priority": "P1",
+      "source_to_copy": "OS/superpowers/hooks/session-start"
+    },
+    {
+      "action_title": "Add SessionStart-class bootstrap to hermes and gsd-pi skill loaders",
+      "target": "both",
+      "closes_gap": "GAP-HE-003",
+      "priority": "P1",
+      "source_to_copy": "OS/superpowers/skills/using-superpowers/SKILL.md"
+    },
+    {
+      "action_title": "Give paperclip a process pack (TDD + SDD ledger) as requiredSkills",
+      "target": "paperclip",
+      "closes_gap": "GAP-PC-001",
+      "priority": "P1",
+      "source_to_copy": "OS/superpowers/skills/subagent-driven-development/SKILL.md"
+    },
+    {
+      "action_title": "Publish BMAD listing-budget + install profiles",
+      "target": "BMAD-METHOD",
+      "closes_gap": "GAP-BM-001",
+      "priority": "P1",
+      "source_to_copy": "OS/openclaw/docs/tools/skills.md"
+    },
+    {
+      "action_title": "Expose spec-kit commands as Agent Skills adapters",
+      "target": "spec-kit",
+      "closes_gap": "GAP-SK-001",
+      "priority": "P1",
+      "source_to_copy": "OS/gsd-pi/docs/user-docs/skills.md"
+    }
+  ]
+}

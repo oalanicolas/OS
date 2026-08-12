@@ -4,8 +4,19 @@ _Regenerado em 2026-08-06 via os-bench memory-5way._
 
 | Slug | Type | Pack | Generated | Quality Gate |
 |------|------|------|-----------|--------------|
+| case-ops-8way | nway | case-ops | 2026-08-12T22:00:00Z | PASS |
+| superpowers-vs-paperclip | pair | harness-structure | 2026-08-12T20:15:00Z | PASS |
+| harness-structure-8way | nway | harness-structure | 2026-08-12T20:00:00Z | PASS |
 | brain-6way | nway | memory+product | 2026-08-06T21:44:27Z | PASS |
 | _research/obsidian-brain-voice-candidates | research | parking-lot | 2026-08-06 | N/A |
+| _research/skills-squads-plugins | research | skills+squads+plugins | 2026-08-12 | N/A |
+| _research/company-brain | research | company-ops | 2026-08-12 | N/A |
+| _research/visa-brain-vs-company-brain | research | case-ops×company-brain | 2026-08-12 | N/A |
+| _research/mega-brain-vip-vs-company-brain | research | holding-ops×company-brain (Frankenstein; NÃO prática) | 2026-08-12 | N/A |
+| _research/capability-first-vs-os | research | capability-first×OS plugins | 2026-08-12 | N/A |
+| _research/market-compatible-packaging | research | Agent Skills + Agent Plugins 1.0 | 2026-08-12 | N/A |
+| _research/plugin-vs-skill-vs-squad | research | glossary (squad = caixa legado) | 2026-08-12 | N/A |
+| _research/solucao-skill-plugin | research | decisão (Agent Plugin + Agent Skills) | 2026-08-12 | N/A |
 | mempalace-vs-gbrain | pair | memory | 2026-08-06T20:30:00Z | PASS |
 | memory-5way | nway | memory | 2026-08-06T20:18:21Z | PASS |
 | coding-agents-8way.v1 | ? | ? | ? | ? |

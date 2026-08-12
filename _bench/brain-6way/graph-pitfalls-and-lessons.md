@@ -1,12 +1,16 @@
 # Armadilhas e aprendizados de grafo — minerados de issues + commits reais
 
+> **Deep dive VISA-BRAIN (prompt aplicado):** ver  
+> [`visa-brain-graph-feature-lessons.md`](./visa-brain-graph-feature-lessons.md)  
+> + [`visa-brain-graph-feature-lessons.citations.json`](./visa-brain-graph-feature-lessons.citations.json)  
+> (gap map doutrina↔enforcement, T1–T22, backlog líquido, code-confirm).
+
 **Date:** 2026-08-06  
 **Slug:** brain-6way  
 **Subjects:** LifeOS · gbrain · mempalace · mem0 · memori-labs · gsd-2  
 **Sources:** issues abertas/fechadas via `gh`, CHANGELOGs e commits nos clones em `OS/`  
 **Foco:** grafo / entidades / arestas / temporal / projeção / isolamento  
 **Audience:** VISA-BRAIN / evidence graph design (clean-room — não copiar código dos peers)
-
 > **Bottom line:** os 6 não falharam por “não ter grafo” — falharam por **extract silencioso, over-typing, dual-SoT, temporal frágil, isolamento furado e métricas mentirosas**. O VISA-BRAIN evita a maior parte se tratar grafo como **projeção reconciliada com receipts e fail-closed na conclusão**, não como feature de ranking.
 
 ---
@@ -533,3 +537,283 @@ Documento complementar da mesma sessão de análise (código em `OS/`, não só 
 > Silêncio na extract, tipo sem texto, dual-SoT, temporal frágil, isolamento por header e health mentirosa são as cinco famílias de falha que o pack `brain-6way` documenta com sangue de produção.
 >
 > VISA-BRAIN: **grafo = projeção reconciliada + receipt + fail-closed na conclusão material**.
+
+---
+
+# PROMPT — Feature lessons from GitHub projects (full report)
+
+Reusable prompt to produce reports **of the same class** as this file: evidence-backed pitfalls and learnings extracted from real GitHub projects (issues, PRs, commits, CHANGELOG, code), not blog marketing.
+
+Copy the block below, fill the `{{PLACEHOLDERS}}`, and run with an agent that has: local clone access (or `gh` + network), `git`, `gh issue`/`gh pr`, and permission to write the report path.
+
+---
+
+## Prompt (copy from here)
+
+```markdown
+# Role
+
+You are a forensic product/engineering researcher. Your job is to extract **implementation lessons** about a **feature class** from one or more real open-source (or local) GitHub projects — especially **mistakes already paid for in production** — and write a durable markdown report.
+
+You do **not** write a marketing comparison or a star ranking of “who is best.”
+You do **not** copy code, schemas, APIs, or brand names into a product as dependencies.
+You **do** abstract **invariants, failure modes, tests, and anti-patterns** that a downstream system can re-implement cleanly (clean-room).
+
+# Goal
+
+Produce a report equal in depth and structure to the reference:
+- pitfalls grouped by failure family (silent failure, isolation, temporal, dual-SoT, metrics lies, API≠behavior, races, …)
+- each pitfall: **trap → evidence (issue/PR/commit/CHANGELOG/code path) → what the consumer system must do**
+- regression checklist (T1…Tn) as testable gates
+- top N lessons by severity for the consumer domain
+- “do not reimplement” table (already burned)
+- index of cited issues/commits per subject
+- method note + tip SHAs so the report is re-auditable
+
+# Inputs (fill before run)
+
+| Field | Value |
+|-------|--------|
+| **Feature class** | `{{FEATURE_CLASS}}` e.g. knowledge graphs, memory write-path, evidence packets, hybrid search, multi-tenant isolation, soft-delete, temporal facts, agent action logs |
+| **Consumer system** | `{{CONSUMER}}` e.g. VISA-BRAIN evidence graph / case ops — domain constraints and non-goals |
+| **Subjects** | `{{SUBJECTS}}` list of `{name, local_path?, github_url, default_branch}` — 1–N projects |
+| **Local roots** | `{{LOCAL_ROOTS}}` e.g. `OS/gbrain`, `OS/mempalace` — prefer code + git history over docs alone |
+| **Output path** | `{{OUTPUT_PATH}}` e.g. `OS/_bench/<slug>/feature-pitfalls-and-lessons.md` |
+| **Related pack** | `{{PACK_PATH}}` optional prior n-way bench (executive-report, inventories) |
+| **Time window** | `{{SINCE}}` e.g. 2025-01-01 — for `git log` / issue filters |
+| **Language** | `{{LANG}}` report language (pt-BR or en) |
+| **Clean-room rule** | Always: abstract only; no adapters; no running peer runtimes on consumer private data |
+
+# Non-negotiable research rules
+
+1. **Evidence > narrative.** Every claim needs at least one of: issue number + title, PR, commit SHA + subject, CHANGELOG bullet, or file:line in the clone.
+2. **Prefer closed bugs and fix commits** over README promises. Open bugs count if verified (repro text or code inspection).
+3. **Confirm in code** when the issue and docs disagree; mark **DOC-STALE** if docs claim a feature removed or unfinished.
+4. **Separate product job from feature class.** A Life OS and a vector SDK may share “graph” vocabulary with different jobs — say so.
+5. **Silent failure is a first-class category.** 0 edges / 0 writes / green health with empty store / swallow exceptions are higher severity than loud crashes.
+6. **No invented metrics.** If BrainBench / LongMemEval / custom benches appear, cite the file or README line; do not invent numbers.
+7. **Do not leak secrets or private case data** from the consumer environment into the report.
+8. **If a subject has no local clone**, use `gh` + shallow clone only if allowed; otherwise mark confidence **LOW** for that subject and say what was not inspected.
+9. **Parallelize** inventory of subjects, but **serialize** the final synthesis so cross-subject failure families are merged (not six disjoint dumps).
+
+# Method (execute in order)
+
+## Phase 0 — Scope freeze
+
+1. Restate the feature class in one sentence and list **in-scope surfaces** (e.g. edge extract, traversal, temporal validity, health metrics, multi-tenant keys).
+2. List **out-of-scope** (e.g. voice UI, install marketing) unless it blocks the feature.
+3. Map each subject to a **product job** (one line): what the project optimizes for.
+
+## Phase 1 — Locate feature surface in each clone
+
+For each subject:
+
+1. Record `git rev-parse HEAD` and remote URL.
+2. Find code paths: `find` / `rg` for keywords derived from the feature class (and synonyms).
+3. Find schema/migrations, CLI/MCP ops, doctor/health checks, tests with the feature name.
+4. Write a short inventory (capabilities claimed vs files that implement them).
+
+## Phase 2 — Mine failure evidence
+
+For each subject, run (adapt keywords to `{{FEATURE_CLASS}}`):
+
+```bash
+# Issues (GitHub)
+gh issue list --state all --limit 50 \
+  --search "{{FEATURE_KEYWORDS}} OR bug OR silently OR race OR stale OR leak"
+
+# Optional: PRs
+gh pr list --state all --limit 30 --search "{{FEATURE_KEYWORDS}}"
+
+# Commits
+git log --oneline --all --since="{{SINCE}}" \
+  --grep='{{FEATURE_KEYWORDS}}' -i | head -80
+
+# CHANGELOG / docs
+rg -n -i '{{FEATURE_KEYWORDS}}|breaking|fix|silent|race|stale' CHANGELOG.md docs/ || true
+```
+
+Pull bodies for the **highest-signal** issues (closed bugs with repro, P0/P1 labels, fix commits linked):
+
+```bash
+gh issue view <N> --json title,body,state,labels,closedAt
+```
+
+Keyword seeds (edit per feature class):
+
+| Feature class | Seed terms (examples) |
+|---------------|------------------------|
+| Graphs / edges | graph, edge, link, wikilink, hop, traverse, related, triple, kg |
+| Temporal | valid_from, valid_to, as_of, supersede, invalidate, bitemporal |
+| Isolation | cross-source, tenant, scope, user_id, attribution, workspace, leak |
+| Memory write | extract, capture, reconcile, dual-write, projection, silent, FTS |
+| Soft-delete | deleted_at, soft-delete, orphan, tombstone |
+| Search/rank | hybrid, RRF, BM25, rerank, fail-open, top-k |
+| Entity | merge, alias, disambiguation, similarity, entity store |
+
+## Phase 3 — Code confirmation (spot-check)
+
+For each high-severity claim:
+
+1. Open the cited file or search the symbol.
+2. Confirm whether the bug is still open, fixed, or only partially fixed (e.g. health fixed but traversal not).
+3. Note **fail-open vs fail-closed** behavior on error paths.
+4. Note **default flags** that skip the feature (e.g. `noExtract` default true).
+
+## Phase 4 — Cluster into failure families
+
+Merge across subjects into families (add/remove as evidence dictates):
+
+1. Silent extract / silent write / silent drop
+2. Over-typing or wrong semantics without evidence
+3. Divergent entrypoints (fs vs db vs async vs webhook)
+4. Soft-delete / lifecycle incomplete on feature surface
+5. Health / metrics / UI lying about store state
+6. Multi-tenant / scope / cache-key / singleton isolation bugs
+7. Temporal / supersession / ADD-only contradiction
+8. Dual-write / dual-SoT / projection without cutover
+9. Feature shipped without deps or without wire on primary path
+10. Entity merge / identity pollution
+11. Synthesis/retrieval not consuming the feature store
+12. Concurrency / RMW races
+13. Hybrid retrieval discarding non-primary lists
+14. Doc/API surface removed or stale
+
+Each family section must include a table: Evidence | Detail.
+
+## Phase 5 — Consumer mapping
+
+For `{{CONSUMER}}`:
+
+1. For each family: **what to do** (invariant + preferred gate), not “integrate project X.”
+2. Build checklist **T1…Tn** (testable: inputs, expected fail/pass).
+3. **Top 12 lessons** ordered by severity for the consumer domain (not by peer star count).
+4. **Do not reimplement** table (burned approaches).
+5. Optional: map to existing consumer doctrine files if paths are provided.
+
+## Phase 6 — Write the report
+
+Write to `{{OUTPUT_PATH}}` in `{{LANG}}` with this **exact skeleton** (sections may grow; do not drop required ones):
+
+```markdown
+# Armadilhas e aprendizados — {{FEATURE_CLASS}}
+# mined from issues + commits ({{SUBJECTS short list}})
+
+**Date:** …
+**Subjects:** …
+**Sources:** gh issues/PRs, git log, CHANGELOG, code paths
+**Consumer:** {{CONSUMER}}
+**Confidence:** HIGH | MEDIUM | LOW (per subject if mixed)
+
+> **Bottom line:** 3–6 sentences.
+
+## Clones e tips de referência
+(table: subject | path | tip SHA | remote)
+
+## Como ler isto
+(symbols legend: silent / isolation / temporal / dual-SoT / metrics / API≠behavior)
+
+## 1…N — Failure families
+### each: trap, evidence table, aprendizado, VISA/consumer action
+
+## Catálogo → testes de regressão (T1…Tn)
+
+## Top 12 lições (por severidade para o consumer)
+
+## O que não reimplementar
+
+## Índice de issues/commits citados (por subject)
+
+## Ligação com práticas confirmadas no código
+(table: practice | confirmed? | related family)
+
+## Relação com packs/benches irmãos (if any)
+
+## Nota de método
+(how mined; clean-room rule; staleness caveat)
+
+## Closing
+(quote-style one-paragraph takeaway)
+```
+
+Also produce a **one-page executive blurb** at the top after the bottom-line (optional table: Top traps × which subjects hit them).
+
+# Quality bar (fail the run if unmet)
+
+- [ ] ≥ 15 distinct issue/PR/commit citations across the report (or explicit “thin subject” notes if a repo has almost no history)
+- [ ] Every Top-12 lesson maps to at least one evidence row
+- [ ] At least one **code-confirmed** finding that differs from README marketing
+- [ ] At least three **silent-failure** class items if the feature has a write or extract path
+- [ ] Checklist items are **mechanically testable** (no “be careful”)
+- [ ] No recommendation to vendor-lock or sidecar-run peer runtimes on consumer private data
+- [ ] Tips SHAs recorded; method reproducible
+- [ ] Consumer section does not paste private case facts
+
+# Output packaging
+
+1. Main report: `{{OUTPUT_PATH}}`
+2. If under a bench pack, add a one-line pointer from `executive-report.md` § Artefatos (only if that file exists and user allowed edit)
+3. Optional JSON sidecar (same stem `.citations.json`): list of `{subject, kind: issue|pr|commit|path, id, title, url?}` for re-audit
+
+# Anti-patterns in *your* report (do not do these)
+
+- Ranking subjects by stars or by a memory pack score as if it answered feature quality
+- “Just use Neo4j/X like project Y”
+- Copying code blocks large enough to be a derivative implementation
+- Treating open feature requests as proven designs
+- Claiming “fixed in main” without SHA or release tag
+- Collapsing all subjects into one without labeling which project taught which lesson
+
+# Kickoff sentence (agent starts here)
+
+Research `{{FEATURE_CLASS}}` across `{{SUBJECTS}}` under `{{LOCAL_ROOTS}}` since `{{SINCE}}`. Mine issues, fix commits, and code paths for production pitfalls. Write a clean-room lessons report for `{{CONSUMER}}` to `{{OUTPUT_PATH}}` following the skeleton and quality bar above. Prefer silent failures, isolation bugs, dual-SoT, temporal errors, and lying health metrics. Abstract invariants and regression tests only — no adapters, no peer runtime integration.
+```
+
+---
+
+## Prompt — filled example (this report)
+
+| Field | Example value used for *this* file |
+|-------|-------------------------------------|
+| FEATURE_CLASS | knowledge graphs / typed edges / temporal KG / graph signals / projection |
+| CONSUMER | VISA-BRAIN evidence graph + investigate-case-evidence |
+| SUBJECTS | gbrain, mempalace, LifeOS, mem0, memori-labs, gsd-2 |
+| LOCAL_ROOTS | `OS/{gbrain,mempalace,lifeos,mem0,memori-labs,gsd-2}` |
+| OUTPUT_PATH | `OS/_bench/brain-6way/graph-pitfalls-and-lessons.md` |
+| PACK_PATH | `OS/_bench/brain-6way/` |
+| SINCE | 2025-01-01 |
+| LANG | pt-BR |
+| FEATURE_KEYWORDS | `graph OR edge OR link OR wikilink OR hop OR temporal OR valid_from OR supersede OR cross-source OR entity OR attribution OR dual-write OR soft-delete` |
+
+---
+
+## Prompt — shorter slash form
+
+For a quick re-run on a **new** feature class with the same six clones:
+
+```text
+/feature-pitfalls
+feature: {{FEATURE_CLASS}}
+consumer: VISA-BRAIN
+subjects: gbrain, mempalace, lifeos, mem0, memori-labs, gsd-2
+roots: /Users/…/OS
+out: OS/_bench/{{slug}}/{{feature}}-pitfalls-and-lessons.md
+since: 2025-01-01
+lang: pt-BR
+follow: OS/_bench/brain-6way/graph-pitfalls-and-lessons.md (structure + quality bar)
+```
+
+Expand `/feature-pitfalls` to the full prompt in the previous section; do not skip Phases 2–3 (issues + code confirm).
+
+---
+
+## Operator checklist (human)
+
+Before launching the agent:
+
+1. [ ] Clones present and roughly up to date (`git fetch` if claims must be current)
+2. [ ] `gh auth status` works for private repos if needed
+3. [ ] Feature class and consumer non-goals written in one paragraph
+4. [ ] Output path outside private case trees (`VISA-LENDARIO/` never)
+5. [ ] After run: spot-check 3 citations open in browser/clone
+6. [ ] Promote only **invariants + T-tests** into product backlog — not peer APIs

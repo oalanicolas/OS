@@ -1,0 +1,1120 @@
+{
+  "generatedAt": "2026-08-12T20:00:00Z",
+  "comparison_type": "nway",
+  "subjects": [
+    "superpowers",
+    "gstack",
+    "gsd-pi",
+    "BMAD-METHOD",
+    "paperclip",
+    "hermes-agent",
+    "openclaw",
+    "spec-kit"
+  ],
+  "dimension_pack": "harness-structure",
+  "methods": {
+    "superpowers": "installed",
+    "gstack": "installed",
+    "gsd-pi": "installed",
+    "BMAD-METHOD": "installed",
+    "paperclip": "installed",
+    "hermes-agent": "installed",
+    "openclaw": "installed",
+    "spec-kit": "installed"
+  },
+  "dimensions": [
+    {
+      "id": "skill_system",
+      "name": "Skill System",
+      "weight": 0.16,
+      "scores": {
+        "superpowers": 92,
+        "gstack": 84,
+        "gsd-pi": 88,
+        "BMAD-METHOD": 80,
+        "paperclip": 78,
+        "hermes-agent": 91,
+        "openclaw": 88,
+        "spec-kit": 42
+      },
+      "signals_observed": {
+        "superpowers": [
+          {
+            "signal": "SessionStart bootstrap",
+            "value": "injects using-superpowers body",
+            "evidence": "OS/superpowers/hooks/session-start"
+          },
+          {
+            "signal": "SDO description rules",
+            "value": "trigger-only, no workflow summary",
+            "evidence": "OS/superpowers/skills/writing-skills/SKILL.md"
+          },
+          {
+            "signal": "skill tests",
+            "value": "explicit-skill-requests suite",
+            "evidence": "OS/superpowers/tests/explicit-skill-requests/"
+          }
+        ],
+        "gstack": [
+          {
+            "signal": "generated skill suite",
+            "value": "59 SKILL.md from tmpl",
+            "evidence": "OS/gstack/docs/skills.md"
+          },
+          {
+            "signal": "root router",
+            "value": "SKILL.md dispatches specialists",
+            "evidence": "OS/gstack/SKILL.md"
+          }
+        ],
+        "gsd-pi": [
+          {
+            "signal": "skills.ts catalog",
+            "value": "XML name+description only",
+            "evidence": "OS/gsd-pi/packages/pi-coding-agent/src/core/skills.ts"
+          },
+          {
+            "signal": "user-docs skills",
+            "value": "~/.agents/skills + project .agents",
+            "evidence": "OS/gsd-pi/docs/user-docs/skills.md"
+          }
+        ],
+        "BMAD-METHOD": [
+          {
+            "signal": "persona SKILL.md",
+            "value": "Winston activation+menu",
+            "evidence": "OS/BMAD-METHOD/src/bmm-skills/agents/bmad-agent-architect/SKILL.md"
+          },
+          {
+            "signal": "validator",
+            "value": "validate-skills.js",
+            "evidence": "OS/BMAD-METHOD/tools/validate-skills.js"
+          }
+        ],
+        "paperclip": [
+          {
+            "signal": "skills-catalog",
+            "value": "bundled vs optional",
+            "evidence": "OS/paperclip/packages/skills-catalog/"
+          },
+          {
+            "signal": "requiredSkills",
+            "value": "TEAM.md declares skill deps",
+            "evidence": "OS/paperclip/packages/teams-catalog/catalog/bundled/company-defaults/core-exec-team/TEAM.md"
+          }
+        ],
+        "hermes-agent": [
+          {
+            "signal": "authoring hardline",
+            "value": "desc \u226460 chars + tests",
+            "evidence": "OS/hermes-agent/skills/software-development/hermes-agent-skill-authoring/SKILL.md"
+          },
+          {
+            "signal": "skill_utils + bundles",
+            "value": "index + skill_view + YAML bundles",
+            "evidence": "OS/hermes-agent/agent/skill_utils.py"
+          }
+        ],
+        "openclaw": [
+          {
+            "signal": "multi-root load + caps",
+            "value": "150 skills / 18k chars",
+            "evidence": "OS/openclaw/docs/tools/skills.md"
+          },
+          {
+            "signal": "skill-creator + Workshop",
+            "value": "human gate for agent-written skills",
+            "evidence": "OS/openclaw/skills/skill-creator/SKILL.md"
+          }
+        ],
+        "spec-kit": [
+          {
+            "signal": "commands not skills",
+            "value": "templates/commands/*.md",
+            "evidence": "OS/spec-kit/templates/commands/specify.md"
+          },
+          {
+            "signal": "SKILL.md count",
+            "value": "1 in tree",
+            "evidence": "OS/spec-kit/"
+          }
+        ]
+      },
+      "confidence": "HIGH",
+      "justification": {
+        "superpowers": "SDO + SessionStart bootstrap + writing-skills TDD.",
+        "gstack": "59 generated SKILL.md with router; preamble bloat.",
+        "gsd-pi": "Living Agent Skills runtime; 5-root load + catalog XML; still no SessionStart bootstrap.",
+        "BMAD-METHOD": "58 SKILL.md persona+workflow; validator; no listing cap.",
+        "paperclip": "Catalog bundled/optional; requiredSkills on teams.",
+        "hermes-agent": "194 skills, \u226460-char hardline, tests+docs required.",
+        "openclaw": "6-root load + 150/18k catalog caps + Workshop.",
+        "spec-kit": "Commands not skills; 1 SKILL.md in tree."
+      },
+      "advantage": "superpowers",
+      "leaders": [
+        "superpowers"
+      ]
+    },
+    {
+      "id": "squad_model",
+      "name": "Squad Model",
+      "weight": 0.14,
+      "scores": {
+        "superpowers": 78,
+        "gstack": 72,
+        "gsd-pi": 82,
+        "BMAD-METHOD": 90,
+        "paperclip": 94,
+        "hermes-agent": 62,
+        "openclaw": 58,
+        "spec-kit": 48
+      },
+      "signals_observed": {
+        "superpowers": [
+          {
+            "signal": "SDD roles",
+            "value": "implementer + reviewer per task",
+            "evidence": "OS/superpowers/skills/subagent-driven-development/SKILL.md"
+          },
+          {
+            "signal": "no org files",
+            "value": "no TEAM.md/persona toml",
+            "evidence": "OS/superpowers/skills/"
+          }
+        ],
+        "gstack": [
+          {
+            "signal": "specialist table",
+            "value": "CEO/eng/design/QA/ship",
+            "evidence": "OS/gstack/docs/skills.md"
+          },
+          {
+            "signal": "autoplan order",
+            "value": "CEO\u2192Design\u2192Eng\u2192DX sequential",
+            "evidence": "OS/gstack/autoplan/SKILL.md"
+          }
+        ],
+        "gsd-pi": [
+          {
+            "signal": "typed agents",
+            "value": "scout.md frontmatter tools",
+            "evidence": "OS/gsd-pi/src/resources/agents/scout.md"
+          },
+          {
+            "signal": "subagents doc",
+            "value": "fresh context default",
+            "evidence": "OS/gsd-pi/docs/user-docs/subagents.md"
+          }
+        ],
+        "BMAD-METHOD": [
+          {
+            "signal": "customize.toml persona",
+            "value": "role/identity/menu",
+            "evidence": "OS/BMAD-METHOD/src/bmm-skills/agents/bmad-agent-architect/customize.toml"
+          },
+          {
+            "signal": "party mode",
+            "value": "session/auto/subagent/agent-team",
+            "evidence": "OS/BMAD-METHOD/src/core-skills/bmad-party-mode/SKILL.md"
+          }
+        ],
+        "paperclip": [
+          {
+            "signal": "TEAM.md org",
+            "value": "CEO manager + CTO/QA includes",
+            "evidence": "OS/paperclip/packages/teams-catalog/catalog/bundled/company-defaults/core-exec-team/TEAM.md"
+          },
+          {
+            "signal": "CEO AGENTS.md",
+            "value": "must delegate / hire",
+            "evidence": "OS/paperclip/packages/teams-catalog/catalog/bundled/company-defaults/core-exec-team/agents/ceo/AGENTS.md"
+          }
+        ],
+        "hermes-agent": [
+          {
+            "signal": "bundles not org",
+            "value": "skill_bundles.py",
+            "evidence": "OS/hermes-agent/agent/skill_bundles.py"
+          },
+          {
+            "signal": "no roster",
+            "value": "authoring forbids router-as-squad",
+            "evidence": "OS/hermes-agent/skills/software-development/hermes-agent-skill-authoring/SKILL.md"
+          }
+        ],
+        "openclaw": [
+          {
+            "signal": "TaskFlow children",
+            "value": "stateJson jobs",
+            "evidence": "OS/openclaw/skills/taskflow/SKILL.md"
+          },
+          {
+            "signal": "workspace identity",
+            "value": "not a named roster",
+            "evidence": "OS/openclaw/AGENTS.md"
+          }
+        ],
+        "spec-kit": [
+          {
+            "signal": "handoffs field",
+            "value": "command-to-command",
+            "evidence": "OS/spec-kit/templates/commands/"
+          },
+          {
+            "signal": "no personas",
+            "value": "SDD doc has no roster",
+            "evidence": "OS/spec-kit/spec-driven.md"
+          }
+        ]
+      },
+      "confidence": "HIGH",
+      "justification": {
+        "superpowers": "Implementer/reviewer loop, not a standing roster.",
+        "gstack": "Sequential specialist skills; phases must not parallelize.",
+        "gsd-pi": "Typed scout/planner/worker with fresh isolation.",
+        "BMAD-METHOD": "Named personas + 4 Party Mode runtimes.",
+        "paperclip": "Org-chart TEAM.md; CEO hires and delegates.",
+        "hermes-agent": "delegate_task / bundles, no persistent org.",
+        "openclaw": "TaskFlow children; workspace identity is not a roster.",
+        "spec-kit": "Command handoffs only."
+      },
+      "advantage": "paperclip",
+      "leaders": [
+        "paperclip"
+      ]
+    },
+    {
+      "id": "plugin_extensibility",
+      "name": "Plugin Extensibility",
+      "weight": 0.12,
+      "scores": {
+        "superpowers": 82,
+        "gstack": 80,
+        "gsd-pi": 78,
+        "BMAD-METHOD": 68,
+        "paperclip": 86,
+        "hermes-agent": 88,
+        "openclaw": 94,
+        "spec-kit": 84
+      },
+      "signals_observed": {
+        "superpowers": [
+          {
+            "signal": "plugin.json",
+            "value": "Claude marketplace pack",
+            "evidence": "OS/superpowers/.claude-plugin/plugin.json"
+          },
+          {
+            "signal": "multi-host",
+            "value": "gemini-extension.json etc",
+            "evidence": "OS/superpowers/gemini-extension.json"
+          }
+        ],
+        "gstack": [
+          {
+            "signal": "hosts/",
+            "value": "claude.ts openclaw.ts hermes.ts",
+            "evidence": "OS/gstack/hosts/claude.ts"
+          },
+          {
+            "signal": "no plugin VM",
+            "value": "ARCHITECTURE: rest is Markdown",
+            "evidence": "OS/gstack/ARCHITECTURE.md"
+          }
+        ],
+        "gsd-pi": [
+          {
+            "signal": "extension SDK",
+            "value": "manifest-spec",
+            "evidence": "OS/gsd-pi/docs/extension-sdk/README.md"
+          },
+          {
+            "signal": "mcp-server package",
+            "value": "first-party MCP",
+            "evidence": "OS/gsd-pi/packages/mcp-server/"
+          }
+        ],
+        "BMAD-METHOD": [
+          {
+            "signal": "customize.toml",
+            "value": "3-layer merge",
+            "evidence": "OS/BMAD-METHOD/src/bmm-skills/agents/bmad-agent-architect/customize.toml"
+          },
+          {
+            "signal": "no plugin runtime",
+            "value": "install copies skill trees",
+            "evidence": "OS/BMAD-METHOD/package.json"
+          }
+        ],
+        "paperclip": [
+          {
+            "signal": "PLUGIN_SPEC",
+            "value": "capabilities + apiRoutes",
+            "evidence": "OS/paperclip/doc/plugins/PLUGIN_SPEC.md"
+          },
+          {
+            "signal": "7 adapters",
+            "value": "packages/adapters",
+            "evidence": "OS/paperclip/packages/adapters/"
+          }
+        ],
+        "hermes-agent": [
+          {
+            "signal": "plugins/ kinds",
+            "value": "plugin.yaml directories",
+            "evidence": "OS/hermes-agent/plugins/"
+          },
+          {
+            "signal": "optional-mcps",
+            "value": "manifest.yaml extras",
+            "evidence": "OS/hermes-agent/optional-mcps/"
+          }
+        ],
+        "openclaw": [
+          {
+            "signal": "architecture.md",
+            "value": "validate manifest before exec",
+            "evidence": "OS/openclaw/docs/plugins/architecture.md"
+          },
+          {
+            "signal": "plugin-sdk",
+            "value": "register(api)",
+            "evidence": "OS/openclaw/packages/plugin-sdk/"
+          }
+        ],
+        "spec-kit": [
+          {
+            "signal": "extension.yml",
+            "value": "namespaced commands + hooks",
+            "evidence": "OS/spec-kit/extensions/EXTENSION-DEVELOPMENT-GUIDE.md"
+          },
+          {
+            "signal": "catalogs",
+            "value": "community discovery-only",
+            "evidence": "OS/spec-kit/docs/community/bundles.md"
+          }
+        ]
+      },
+      "confidence": "HIGH",
+      "justification": {
+        "superpowers": "plugin.json + 6 hosts; no MCP/marketplace of own.",
+        "gstack": "Host adapters generate installs; not a plugin VM.",
+        "gsd-pi": "Extension SDK + first-party MCP server.",
+        "BMAD-METHOD": "customize.toml + IDE install; no plugin runtime.",
+        "paperclip": "PLUGIN_SPEC + 7 adapters; cloud install unfinished.",
+        "hermes-agent": "plugin.yaml kinds + optional-mcps + ACP.",
+        "openclaw": "Manifest validated before exec; exclusive slots; ClawHub.",
+        "spec-kit": "extension.yml + catalogs + lifecycle hooks."
+      },
+      "advantage": "openclaw",
+      "leaders": [
+        "openclaw"
+      ]
+    },
+    {
+      "id": "context_architecture",
+      "name": "Context Architecture",
+      "weight": 0.16,
+      "scores": {
+        "superpowers": 86,
+        "gstack": 74,
+        "gsd-pi": 84,
+        "BMAD-METHOD": 70,
+        "paperclip": 76,
+        "hermes-agent": 90,
+        "openclaw": 93,
+        "spec-kit": 72
+      },
+      "signals_observed": {
+        "superpowers": [
+          {
+            "signal": "no @ links",
+            "value": "writing-skills forbids force-load",
+            "evidence": "OS/superpowers/skills/writing-skills/SKILL.md"
+          },
+          {
+            "signal": "bootstrap only always-on",
+            "value": "using-superpowers body",
+            "evidence": "OS/superpowers/skills/using-superpowers/SKILL.md"
+          }
+        ],
+        "gstack": [
+          {
+            "signal": "generated preamble",
+            "value": "large always-on block",
+            "evidence": "OS/gstack/SKILL.md"
+          },
+          {
+            "signal": "context-save",
+            "value": "checkpoints",
+            "evidence": "OS/gstack/context-save/SKILL.md"
+          }
+        ],
+        "gsd-pi": [
+          {
+            "signal": "formatSkillsForPrompt",
+            "value": "catalog not bodies",
+            "evidence": "OS/gsd-pi/packages/pi-coding-agent/src/core/skills.ts"
+          },
+          {
+            "signal": "fresh child",
+            "value": "subagents.md",
+            "evidence": "OS/gsd-pi/docs/user-docs/subagents.md"
+          }
+        ],
+        "BMAD-METHOD": [
+          {
+            "signal": "persistent_facts",
+            "value": "file: globs on activation",
+            "evidence": "OS/BMAD-METHOD/src/bmm-skills/agents/bmad-agent-architect/customize.toml"
+          },
+          {
+            "signal": "no char budget",
+            "value": "not documented",
+            "evidence": "OS/BMAD-METHOD/src/bmm-skills/agents/bmad-agent-architect/SKILL.md"
+          }
+        ],
+        "paperclip": [
+          {
+            "signal": "issue handoff fields",
+            "value": "objective/owner/acceptance",
+            "evidence": "OS/paperclip/packages/teams-catalog/catalog/bundled/company-defaults/core-exec-team/agents/ceo/AGENTS.md"
+          },
+          {
+            "signal": "collapsed identity",
+            "value": "TEAM.md notes SOUL collapsed",
+            "evidence": "OS/paperclip/packages/teams-catalog/catalog/bundled/company-defaults/core-exec-team/TEAM.md"
+          }
+        ],
+        "hermes-agent": [
+          {
+            "signal": "micro-compaction",
+            "value": "never compact user messages",
+            "evidence": "OS/hermes-agent/docs/micro-compaction.md"
+          },
+          {
+            "signal": "project-context 20k",
+            "value": "first-match AGENTS/CLAUDE",
+            "evidence": "OS/hermes-agent/skills/autonomous-ai-agents/hermes-agent/references/project-context-files.md"
+          }
+        ],
+        "openclaw": [
+          {
+            "signal": "bootstrap caps",
+            "value": "20k/file 60k total",
+            "evidence": "OS/openclaw/docs/tools/skills.md"
+          },
+          {
+            "signal": "identity split",
+            "value": "AGENTS.md ritual",
+            "evidence": "OS/openclaw/AGENTS.md"
+          }
+        ],
+        "spec-kit": [
+          {
+            "signal": "command-as-prompt",
+            "value": "specify.md is the payload",
+            "evidence": "OS/spec-kit/templates/commands/specify.md"
+          },
+          {
+            "signal": "agent-context ext",
+            "value": "managed AGENTS block",
+            "evidence": "OS/spec-kit/extensions/agent-context/"
+          }
+        ]
+      },
+      "confidence": "HIGH",
+      "justification": {
+        "superpowers": "Tiny bootstrap; no @ force-load; host owns identity.",
+        "gstack": "On-demand skills but generated preamble is expensive.",
+        "gsd-pi": "Catalog-only prompt injection; bodies on Skill tool.",
+        "BMAD-METHOD": "persistent_facts on activation; no token budget.",
+        "paperclip": "Issue/heartbeat as context bus; identity collapsed into AGENTS.md.",
+        "hermes-agent": "20k project-context cap + micro-compaction of agent text only.",
+        "openclaw": "20k/60k bootstrap caps; AGENTS\u2260SOUL\u2260USER; skill list only.",
+        "spec-kit": "Command file is the prompt; opt-in agent-context block."
+      },
+      "advantage": "openclaw",
+      "leaders": [
+        "openclaw"
+      ]
+    },
+    {
+      "id": "complex_work_spine",
+      "name": "Complex-Work Spine",
+      "weight": 0.16,
+      "scores": {
+        "superpowers": 90,
+        "gstack": 91,
+        "gsd-pi": 90,
+        "BMAD-METHOD": 88,
+        "paperclip": 84,
+        "hermes-agent": 78,
+        "openclaw": 70,
+        "spec-kit": 90
+      },
+      "signals_observed": {
+        "superpowers": [
+          {
+            "signal": "README pipeline",
+            "value": "design signoff then SDD hours",
+            "evidence": "OS/superpowers/README.md"
+          },
+          {
+            "signal": "SDD skill",
+            "value": "plan-scoped workspace",
+            "evidence": "OS/superpowers/skills/subagent-driven-development/SKILL.md"
+          }
+        ],
+        "gstack": [
+          {
+            "signal": "skills.md lifecycle",
+            "value": "office-hours \u2192 ship",
+            "evidence": "OS/gstack/docs/skills.md"
+          },
+          {
+            "signal": "ship playbook",
+            "value": "release machine",
+            "evidence": "OS/gstack/ship/SKILL.md"
+          }
+        ],
+        "gsd-pi": [
+          {
+            "signal": "orchestrator spine",
+            "value": "spec \u2192 headless auto",
+            "evidence": "OS/gsd-pi/gsd-orchestrator/SKILL.md"
+          },
+          {
+            "signal": ".gsd tree",
+            "value": "M/S/T artifacts",
+            "evidence": "OS/gsd-pi/gsd-orchestrator/SKILL.md"
+          }
+        ],
+        "BMAD-METHOD": [
+          {
+            "signal": "plan/ skills",
+            "value": "PRD UX spec architecture",
+            "evidence": "OS/BMAD-METHOD/src/bmm-skills/plan/"
+          },
+          {
+            "signal": "ship/ skills",
+            "value": "build + review",
+            "evidence": "OS/BMAD-METHOD/src/bmm-skills/ship/"
+          }
+        ],
+        "paperclip": [
+          {
+            "signal": "pipelines",
+            "value": "stage machine",
+            "evidence": "OS/paperclip/docs/pipelines-tutorial.md"
+          },
+          {
+            "signal": "issue tree",
+            "value": "parentId delegation",
+            "evidence": "OS/paperclip/packages/teams-catalog/catalog/bundled/company-defaults/core-exec-team/agents/ceo/AGENTS.md"
+          }
+        ],
+        "hermes-agent": [
+          {
+            "signal": "plan skill family",
+            "value": "authoring related_skills plan",
+            "evidence": "OS/hermes-agent/skills/software-development/hermes-agent-skill-authoring/SKILL.md"
+          },
+          {
+            "signal": "not a factory CLI",
+            "value": "no milestone DAG",
+            "evidence": "OS/hermes-agent/README.md"
+          }
+        ],
+        "openclaw": [
+          {
+            "signal": "TaskFlow",
+            "value": "durable steps",
+            "evidence": "OS/openclaw/skills/taskflow/SKILL.md"
+          },
+          {
+            "signal": "no SDD commands",
+            "value": "not specify/plan/tasks",
+            "evidence": "OS/openclaw/docs/tools/skills.md"
+          }
+        ],
+        "spec-kit": [
+          {
+            "signal": "spec-driven.md",
+            "value": "spec is SoT",
+            "evidence": "OS/spec-kit/spec-driven.md"
+          },
+          {
+            "signal": "workflow.yml",
+            "value": "specify + gate + plan",
+            "evidence": "OS/spec-kit/workflows/speckit/workflow.yml"
+          }
+        ]
+      },
+      "confidence": "HIGH",
+      "justification": {
+        "superpowers": "brainstorm\u2192plan\u2192SDD\u2192finish with hard gates.",
+        "gstack": "office-hours\u2192autoplan\u2192ship is the factory.",
+        "gsd-pi": "new-milestone --auto with .gsd artifact DAG.",
+        "BMAD-METHOD": "plan/ + ship/ numbered agile phases.",
+        "paperclip": "Goal\u2192issue tree\u2192pipelines; not an SDD methodology.",
+        "hermes-agent": "/plan + SDD-style skills; not a full factory.",
+        "openclaw": "TaskFlow + standing orders; not specify\u2192ship.",
+        "spec-kit": "specify\u2192gate\u2192plan\u2192tasks\u2192implement is the product."
+      },
+      "advantage": "gstack",
+      "leaders": [
+        "gstack"
+      ]
+    },
+    {
+      "id": "gates_and_discipline",
+      "name": "Gates & Discipline",
+      "weight": 0.1,
+      "scores": {
+        "superpowers": 95,
+        "gstack": 82,
+        "gsd-pi": 80,
+        "BMAD-METHOD": 76,
+        "paperclip": 78,
+        "hermes-agent": 80,
+        "openclaw": 62,
+        "spec-kit": 78
+      },
+      "signals_observed": {
+        "superpowers": [
+          {
+            "signal": "TDD skill",
+            "value": "iron law red/green",
+            "evidence": "OS/superpowers/skills/test-driven-development/SKILL.md"
+          },
+          {
+            "signal": "breaker",
+            "value": "5 rounds then adjudicate",
+            "evidence": "OS/superpowers/skills/subagent-driven-development/SKILL.md"
+          }
+        ],
+        "gstack": [
+          {
+            "signal": "review specialists",
+            "value": "security/red-team/testing",
+            "evidence": "OS/gstack/review/SKILL.md"
+          },
+          {
+            "signal": "ship gates",
+            "value": "tests/coverage/review dashboard",
+            "evidence": "OS/gstack/ship/SKILL.md"
+          }
+        ],
+        "gsd-pi": [
+          {
+            "signal": "exit 10 blocked",
+            "value": "headless needs steer",
+            "evidence": "OS/gsd-pi/gsd-orchestrator/SKILL.md"
+          },
+          {
+            "signal": "reviewer agents",
+            "value": "subagents.md",
+            "evidence": "OS/gsd-pi/docs/user-docs/subagents.md"
+          }
+        ],
+        "BMAD-METHOD": [
+          {
+            "signal": "bmad-review",
+            "value": "lenses + scripts",
+            "evidence": "OS/BMAD-METHOD/src/core-skills/bmad-review/SKILL.md"
+          },
+          {
+            "signal": "human phase gates",
+            "value": "ship steps",
+            "evidence": "OS/BMAD-METHOD/src/bmm-skills/ship/"
+          }
+        ],
+        "paperclip": [
+          {
+            "signal": "in_review + confirmation",
+            "value": "CEO AGENTS.md",
+            "evidence": "OS/paperclip/packages/teams-catalog/catalog/bundled/company-defaults/core-exec-team/agents/ceo/AGENTS.md"
+          },
+          {
+            "signal": "QA agent",
+            "value": "qa-acceptance skill",
+            "evidence": "OS/paperclip/packages/teams-catalog/catalog/bundled/company-defaults/core-exec-team/agents/qa/AGENTS.md"
+          }
+        ],
+        "hermes-agent": [
+          {
+            "signal": "TDD skill present",
+            "value": "software-development/test-driven-development",
+            "evidence": "OS/hermes-agent/skills/software-development/test-driven-development/SKILL.md"
+          },
+          {
+            "signal": "requesting-code-review",
+            "value": "skill exists",
+            "evidence": "OS/hermes-agent/skills/software-development/requesting-code-review/SKILL.md"
+          }
+        ],
+        "openclaw": [
+          {
+            "signal": "Workshop",
+            "value": "human gate for new skills",
+            "evidence": "OS/openclaw/skills/skill-creator/SKILL.md"
+          },
+          {
+            "signal": "no impl breaker",
+            "value": "not in taskflow",
+            "evidence": "OS/openclaw/skills/taskflow/SKILL.md"
+          }
+        ],
+        "spec-kit": [
+          {
+            "signal": "type:gate",
+            "value": "approve/reject",
+            "evidence": "OS/spec-kit/workflows/speckit/workflow.yml"
+          },
+          {
+            "signal": "checklist template",
+            "value": "completeness artifact",
+            "evidence": "OS/spec-kit/templates/checklist-template.md"
+          }
+        ]
+      },
+      "confidence": "HIGH",
+      "justification": {
+        "superpowers": "TDD iron law + separate reviewer + 5-round breaker.",
+        "gstack": "Specialist reviews + ship coverage; no numbered breaker.",
+        "gsd-pi": "Milestone verify + 3 reviewers; TDD not iron-law.",
+        "BMAD-METHOD": "Human phase gates + bmad-review lenses.",
+        "paperclip": "in_review + QA agent + board; no TDD.",
+        "hermes-agent": "TDD and review skills exist; not bootstrapped.",
+        "openclaw": "Skill Workshop only; no implementation gates.",
+        "spec-kit": "type:gate + checklists; no TDD enforcement."
+      },
+      "advantage": "superpowers",
+      "leaders": [
+        "superpowers"
+      ]
+    },
+    {
+      "id": "handoff_and_state",
+      "name": "Handoff & State",
+      "weight": 0.1,
+      "scores": {
+        "superpowers": 93,
+        "gstack": 84,
+        "gsd-pi": 88,
+        "BMAD-METHOD": 80,
+        "paperclip": 90,
+        "hermes-agent": 72,
+        "openclaw": 74,
+        "spec-kit": 82
+      },
+      "signals_observed": {
+        "superpowers": [
+          {
+            "signal": "file briefs",
+            "value": "scripts/task-brief",
+            "evidence": "OS/superpowers/skills/subagent-driven-development/SKILL.md"
+          },
+          {
+            "signal": "worktrees",
+            "value": "using-git-worktrees",
+            "evidence": "OS/superpowers/skills/using-git-worktrees/SKILL.md"
+          }
+        ],
+        "gstack": [
+          {
+            "signal": "context-save",
+            "value": "checkpoints",
+            "evidence": "OS/gstack/context-save/SKILL.md"
+          },
+          {
+            "signal": "project artifacts",
+            "value": "docs/skills mentions ~/.gstack/projects",
+            "evidence": "OS/gstack/docs/skills.md"
+          }
+        ],
+        "gsd-pi": [
+          {
+            "signal": "handoff skill",
+            "value": "continue.md contract",
+            "evidence": "OS/gsd-pi/src/resources/skills/handoff/SKILL.md"
+          },
+          {
+            "signal": "worktree ADR",
+            "value": "ADR-001",
+            "evidence": "OS/gsd-pi/docs/dev/ADR-001-branchless-worktree-architecture.md"
+          }
+        ],
+        "BMAD-METHOD": [
+          {
+            "signal": "phase artifacts",
+            "value": "plan/ templates",
+            "evidence": "OS/BMAD-METHOD/src/bmm-skills/plan/"
+          },
+          {
+            "signal": "no worktree module",
+            "value": "host IDE state",
+            "evidence": "OS/BMAD-METHOD/README.md"
+          }
+        ],
+        "paperclip": [
+          {
+            "signal": "durable comment contract",
+            "value": "CEO handoff fields",
+            "evidence": "OS/paperclip/packages/teams-catalog/catalog/bundled/company-defaults/core-exec-team/agents/ceo/AGENTS.md"
+          },
+          {
+            "signal": "adapters/workspaces",
+            "value": "packages/adapters",
+            "evidence": "OS/paperclip/packages/adapters/"
+          }
+        ],
+        "hermes-agent": [
+          {
+            "signal": "plans dir convention",
+            "value": "authoring mentions .hermes/plans lineage",
+            "evidence": "OS/hermes-agent/skills/software-development/hermes-agent-skill-authoring/SKILL.md"
+          },
+          {
+            "signal": "no worktree skill",
+            "value": "not in software-development",
+            "evidence": "OS/hermes-agent/skills/software-development/"
+          }
+        ],
+        "openclaw": [
+          {
+            "signal": "TaskFlow state",
+            "value": "stateJson",
+            "evidence": "OS/openclaw/skills/taskflow/SKILL.md"
+          },
+          {
+            "signal": "daily memory",
+            "value": "clawd ritual",
+            "evidence": "OS/clawd/AGENTS.md"
+          }
+        ],
+        "spec-kit": [
+          {
+            "signal": "setup_plan.py",
+            "value": "emits FEATURE_DIR",
+            "evidence": "OS/spec-kit/scripts/python/setup_plan.py"
+          },
+          {
+            "signal": "git extension",
+            "value": "feature branches",
+            "evidence": "OS/spec-kit/extensions/git/"
+          }
+        ]
+      },
+      "confidence": "HIGH",
+      "justification": {
+        "superpowers": "task-brief/review-package scripts + plan ledger + worktrees.",
+        "gstack": "~/.gstack/projects checkpoints + review logs.",
+        "gsd-pi": "continue.md + T## files + worktree leases.",
+        "BMAD-METHOD": "PRD/arch/story artifacts; no worktrees.",
+        "paperclip": "Child issue comment contract + execution workspaces.",
+        "hermes-agent": ".hermes/plans; no isolation primitive.",
+        "openclaw": "TaskFlow stateJson + daily memory.",
+        "spec-kit": "FEATURE_DIR scripts emit paths; git extension for branches."
+      },
+      "advantage": "superpowers",
+      "leaders": [
+        "superpowers"
+      ]
+    },
+    {
+      "id": "governance",
+      "name": "Governance",
+      "weight": 0.06,
+      "scores": {
+        "superpowers": 55,
+        "gstack": 62,
+        "gsd-pi": 60,
+        "BMAD-METHOD": 60,
+        "paperclip": 92,
+        "hermes-agent": 70,
+        "openclaw": 84,
+        "spec-kit": 68
+      },
+      "signals_observed": {
+        "superpowers": [
+          {
+            "signal": "domain reject",
+            "value": "core stays general",
+            "evidence": "OS/superpowers/CLAUDE.md"
+          },
+          {
+            "signal": "no budget plane",
+            "value": "README methodology only",
+            "evidence": "OS/superpowers/README.md"
+          }
+        ],
+        "gstack": [
+          {
+            "signal": "careful/freeze/guard",
+            "value": "destructive + edit lock",
+            "evidence": "OS/gstack/careful/SKILL.md"
+          },
+          {
+            "signal": "no org budget",
+            "value": "skills.md has no finance",
+            "evidence": "OS/gstack/docs/skills.md"
+          }
+        ],
+        "gsd-pi": [
+          {
+            "signal": "cost.total query",
+            "value": "headless JSON",
+            "evidence": "OS/gsd-pi/gsd-orchestrator/SKILL.md"
+          },
+          {
+            "signal": "confirmProjectAgents",
+            "value": "untrusted repo agents",
+            "evidence": "OS/gsd-pi/docs/user-docs/subagents.md"
+          }
+        ],
+        "BMAD-METHOD": [
+          {
+            "signal": "customize as policy",
+            "value": "principles + facts",
+            "evidence": "OS/BMAD-METHOD/src/bmm-skills/agents/bmad-agent-architect/customize.toml"
+          },
+          {
+            "signal": "no money",
+            "value": "README no budgets",
+            "evidence": "OS/BMAD-METHOD/README.md"
+          }
+        ],
+        "paperclip": [
+          {
+            "signal": "companies-spec",
+            "value": "budgets + board",
+            "evidence": "OS/paperclip/docs/companies/companies-spec.md"
+          },
+          {
+            "signal": "plugin capabilities",
+            "value": "PLUGIN_SPEC trust model",
+            "evidence": "OS/paperclip/doc/plugins/PLUGIN_SPEC.md"
+          }
+        ],
+        "hermes-agent": [
+          {
+            "signal": "platforms gate",
+            "value": "OS allowlist",
+            "evidence": "OS/hermes-agent/skills/software-development/hermes-agent-skill-authoring/SKILL.md"
+          },
+          {
+            "signal": "billing modules",
+            "value": "billing_usage.py",
+            "evidence": "OS/hermes-agent/agent/billing_usage.py"
+          }
+        ],
+        "openclaw": [
+          {
+            "signal": "requires gating",
+            "value": "bins/env/os",
+            "evidence": "OS/openclaw/docs/tools/skills.md"
+          },
+          {
+            "signal": "ClawHub",
+            "value": "verify/scan",
+            "evidence": "OS/openclaw/docs/clawhub/"
+          }
+        ],
+        "spec-kit": [
+          {
+            "signal": "catalog trust",
+            "value": "community discovery-only",
+            "evidence": "OS/spec-kit/docs/community/bundles.md"
+          },
+          {
+            "signal": "no runtime authz",
+            "value": "extensions are command packs",
+            "evidence": "OS/spec-kit/extensions/EXTENSION-DEVELOPMENT-GUIDE.md"
+          }
+        ]
+      },
+      "confidence": "HIGH",
+      "justification": {
+        "superpowers": "Prompt discipline + domain-skill reject; no budgets.",
+        "gstack": "/careful /freeze /guard only.",
+        "gsd-pi": "confirmProjectAgents + headless cost.total.",
+        "BMAD-METHOD": "customize.toml as org policy; no money plane.",
+        "paperclip": "Budgets + board hire/pause + plugin capabilities.",
+        "hermes-agent": "platforms + optional tier + billing modules.",
+        "openclaw": "Allowlists, requires gating, ClawHub scan.",
+        "spec-kit": "Community catalog is discovery-only."
+      },
+      "advantage": "paperclip",
+      "leaders": [
+        "paperclip"
+      ]
+    }
+  ],
+  "weighted_totals": {
+    "superpowers": 85.74,
+    "gstack": 79.84,
+    "gsd-pi": 83.16,
+    "BMAD-METHOD": 78.04,
+    "paperclip": 83.88,
+    "hermes-agent": 80.08,
+    "openclaw": 78.2,
+    "spec-kit": 69.52
+  },
+  "overall_winner": "superpowers",
+  "total_delta": 1.86,
+  "ranking": [
+    {
+      "slug": "superpowers",
+      "total": 85.74
+    },
+    {
+      "slug": "paperclip",
+      "total": 83.88
+    },
+    {
+      "slug": "gsd-pi",
+      "total": 83.16
+    },
+    {
+      "slug": "hermes-agent",
+      "total": 80.08
+    },
+    {
+      "slug": "gstack",
+      "total": 79.84
+    },
+    {
+      "slug": "openclaw",
+      "total": 78.2
+    },
+    {
+      "slug": "BMAD-METHOD",
+      "total": 78.04
+    },
+    {
+      "slug": "spec-kit",
+      "total": 69.52
+    }
+  ],
+  "dimension_wins": {
+    "superpowers": 3,
+    "gstack": 1,
+    "gsd-pi": 0,
+    "BMAD-METHOD": 0,
+    "paperclip": 2,
+    "hermes-agent": 0,
+    "openclaw": 2,
+    "spec-kit": 0,
+    "ties": 0
+  },
+  "confidence_overall": "HIGH",
+  "limitations": [
+    "gsd-pi is the living tree (v1.15.0). Archived gsd-2 inventory retained in _inventories/gsd-2/.",
+    "Community stars not scored (local-first).",
+    "N-way deltas are vs field leader per dimension.",
+    "LifeOS and get-shit-done parked."
+  ]
+}

@@ -1,0 +1,150 @@
+{
+  "generatedAt": "2026-08-12T22:00:00Z",
+  "subject": "VISA-BRAIN",
+  "path": "VISA-BRAIN/",
+  "location_note": "External product kit (not cloned under OS/). Citations are kit-relative. Evaluated from the author's usa-process checkout.",
+  "primary_language": "Markdown",
+  "secondary_languages": [
+    "Python",
+    "JSON"
+  ],
+  "stack": [
+    "stdlib Python validators",
+    "SQLite investigation store",
+    "Obsidian-friendly vault"
+  ],
+  "license": "proprietary-product-kit",
+  "tagline": "Case operating system for high-stakes immigration: vault is memory, agents operate it, graph is not a truth oracle.",
+  "metrics": {
+    "file_count": null,
+    "skill_md_count": null,
+    "last_commit_date": "2026-08-12",
+    "source_url": null
+  },
+  "modules": [
+    {
+      "name": "00-Case-Control",
+      "path": "VISA-BRAIN/00-Case-Control/",
+      "type": "library"
+    },
+    {
+      "name": "investigate-case-evidence",
+      "path": "VISA-BRAIN/.codex/skills/investigate-case-evidence/",
+      "type": "app"
+    }
+  ],
+  "external_dependencies_top10": [
+    {
+      "package": "Python 3.10+",
+      "version": "stdlib only",
+      "purpose": "validators and investigation_run"
+    }
+  ],
+  "entry_points": [
+    {
+      "kind": "skill",
+      "path": "VISA-BRAIN/AGENTS.md",
+      "command": "$visa-brain / $investigate-case-evidence / $counsel"
+    }
+  ],
+  "capabilities": [
+    {
+      "name": "Epistemology A/B/C",
+      "evidence_paths": [
+        "VISA-BRAIN/00-Case-Control/Epistemology-Layers.md"
+      ],
+      "category": "core",
+      "description": "Government record vs private prep vs ingest; category errors blocked."
+    },
+    {
+      "name": "Evidence graph \u2260 oracle",
+      "evidence_paths": [
+        "VISA-BRAIN/.codex/skills/investigate-case-evidence/references/evidence-graph.md"
+      ],
+      "category": "core",
+      "description": "Projection with fingerprint; Boundary Card; SAME_ORIGIN_GROUP."
+    },
+    {
+      "name": "Extract-before-reviewed",
+      "evidence_paths": [
+        "VISA-BRAIN/.codex/skills/investigate-case-evidence/SKILL.md"
+      ],
+      "category": "governance",
+      "description": "Script rejects reviewed without hash-bound unit extract."
+    },
+    {
+      "name": "Product \u2260 workspace",
+      "evidence_paths": [
+        "VISA-BRAIN/AGENTS.md"
+      ],
+      "category": "core",
+      "description": "Kit never holds live case data; one explicit case root per op."
+    },
+    {
+      "name": "Human/data contract",
+      "evidence_paths": [
+        "VISA-BRAIN/00-Case-Control/Human-Data-Interface-Contract.md"
+      ],
+      "category": "ux",
+      "description": "Portal + Voice Card; evidence never in USER/MEMORY."
+    },
+    {
+      "name": "Collector \u2260 auditor",
+      "evidence_paths": [
+        "VISA-BRAIN/AGENTS.md"
+      ],
+      "category": "governance",
+      "description": "$review and $counsel in separate sessions; coverage \u2260 eligibility."
+    }
+  ],
+  "quality_signals": {
+    "test_framework": "pytest in parent engineering tree",
+    "test_file_count": null,
+    "linter": "validate_visa_brain.py",
+    "ci_provider": "parent monorepo",
+    "ci_workflow_count": null
+  },
+  "documentation": {
+    "readme_sections": [
+      "Pitch",
+      "Start here"
+    ],
+    "has_contributing": false,
+    "has_architecture_doc": true,
+    "docs_page_count": 20
+  },
+  "extension_points": {
+    "plugins": {
+      "mechanism": "skills + domains JSON",
+      "path": "VISA-BRAIN/.codex/skills/"
+    },
+    "hooks": {
+      "mechanism": "phase gates",
+      "events": [
+        "P0-P7"
+      ]
+    },
+    "mcp": {
+      "client": false,
+      "server": false
+    }
+  },
+  "unique_selling_points": [
+    "Only subject that is a case OS",
+    "Graph honesty + legal epistemology together",
+    "Mechanical extract-before-reviewed"
+  ],
+  "limitations": [
+    {
+      "description": "Not in OS/; evaluated as external kit",
+      "source": "VISA-BRAIN/AGENTS.md"
+    },
+    {
+      "description": "Not a company-sim or general knowledge brain",
+      "source": "VISA-BRAIN/PITCH.md"
+    }
+  ],
+  "confidence": "HIGH",
+  "extraction_method": "filesystem-scan-external-kit",
+  "skill_version": "1.0.0"
+}

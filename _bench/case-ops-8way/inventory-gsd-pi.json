@@ -1,0 +1,199 @@
+{
+  "generatedAt": "2026-08-12T20:00:00Z",
+  "subject": "gsd-pi",
+  "path": "OS/gsd-pi/",
+  "primary_language": "TypeScript",
+  "secondary_languages": [
+    "Rust",
+    "Markdown"
+  ],
+  "stack": [
+    "pi-coding-agent",
+    "Node",
+    "native crates",
+    "optional web TUI"
+  ],
+  "license": "MIT",
+  "tagline": "Living GSD: local-first coding agent that plans, implements, verifies and tracks work via milestones, worktrees and an Agent Skills runtime.",
+  "metrics": {
+    "loc_estimate": 280000,
+    "file_count": 5409,
+    "top_level_dirs": [
+      "docs",
+      "gsd-orchestrator",
+      "packages",
+      "src",
+      "extensions",
+      "integrations"
+    ],
+    "readme_lines": 80,
+    "last_commit_date": "2026-08-12T02:55:19Z",
+    "github_stars": null,
+    "source_url": "https://github.com/open-gsd/gsd-pi",
+    "skill_md_count": 55,
+    "release": "v1.15.0"
+  },
+  "modules": [
+    {
+      "name": "pi-coding-agent",
+      "path": "packages/pi-coding-agent/",
+      "type": "package",
+      "loc_estimate": 0
+    },
+    {
+      "name": "gsd-orchestrator",
+      "path": "gsd-orchestrator/",
+      "type": "library",
+      "loc_estimate": 0
+    },
+    {
+      "name": "mcp-server",
+      "path": "packages/mcp-server/",
+      "type": "package",
+      "loc_estimate": 0
+    },
+    {
+      "name": "daemon",
+      "path": "packages/daemon/",
+      "type": "package",
+      "loc_estimate": 0
+    },
+    {
+      "name": "extension-sdk",
+      "path": "docs/extension-sdk/",
+      "type": "library",
+      "loc_estimate": 0
+    }
+  ],
+  "external_dependencies_top10": [
+    {
+      "package": "@opengsd/gsd-pi",
+      "version": "1.15.0",
+      "purpose": "published npm CLI"
+    }
+  ],
+  "entry_points": [
+    {
+      "kind": "cli",
+      "path": "src/",
+      "command": "gsd / gsd --web / gsd headless"
+    },
+    {
+      "kind": "skill",
+      "path": "gsd-orchestrator/SKILL.md",
+      "command": "OpenClaw wrapper; package gsd-pi"
+    }
+  ],
+  "capabilities": [
+    {
+      "name": "Agent Skills runtime",
+      "evidence_paths": [
+        "OS/gsd-pi/packages/pi-coding-agent/src/core/skills.ts",
+        "OS/gsd-pi/docs/user-docs/skills.md"
+      ],
+      "category": "core",
+      "description": "5-root skill load (bundled ~/.gsd, ~/.agents, .agents, Claude compat). Catalog injection; Skill tool loads bodies."
+    },
+    {
+      "name": "Milestone artifact DAG",
+      "evidence_paths": [
+        "OS/gsd-pi/gsd-orchestrator/SKILL.md"
+      ],
+      "category": "core",
+      "description": ".gsd/ PROJECT/REQUIREMENTS/DECISIONS/STATE + M/S/T checkbox SoT."
+    },
+    {
+      "name": "Isolated typed subagents",
+      "evidence_paths": [
+        "OS/gsd-pi/src/resources/agents/scout.md",
+        "OS/gsd-pi/docs/user-docs/subagents.md"
+      ],
+      "category": "core",
+      "description": "scout/planner/worker/reviewer; fresh context default."
+    },
+    {
+      "name": "Headless orchestrator skill",
+      "evidence_paths": [
+        "OS/gsd-pi/gsd-orchestrator/SKILL.md"
+      ],
+      "category": "integration",
+      "description": "metadata.openclaw.install.package is now gsd-pi; exit 0/1/10/11."
+    },
+    {
+      "name": "Extension SDK + MCP",
+      "evidence_paths": [
+        "OS/gsd-pi/docs/extension-sdk/README.md",
+        "OS/gsd-pi/packages/mcp-server/"
+      ],
+      "category": "extensibility",
+      "description": "Bundled/community extensions plus first-party MCP."
+    },
+    {
+      "name": "File-path handoff",
+      "evidence_paths": [
+        "OS/gsd-pi/src/resources/skills/handoff/SKILL.md"
+      ],
+      "category": "core",
+      "description": "continue.md contract for a stranger."
+    },
+    {
+      "name": "Worktree isolation",
+      "evidence_paths": [
+        "OS/gsd-pi/docs/dev/ADR-001-branchless-worktree-architecture.md"
+      ],
+      "category": "core",
+      "description": "Implementation in isolated worktrees; reviewable main checkout."
+    }
+  ],
+  "quality_signals": {
+    "test_framework": "package tests + CI",
+    "test_file_count": 200,
+    "linter": "unknown",
+    "ci_provider": "github-actions",
+    "ci_workflow_count": 1
+  },
+  "documentation": {
+    "readme_sections": [
+      "Feature Roll-Up",
+      "Latest Release"
+    ],
+    "has_contributing": true,
+    "has_architecture_doc": true,
+    "docs_page_count": 90
+  },
+  "extension_points": {
+    "plugins": {
+      "mechanism": "extension SDK + bundled/community extensions",
+      "path": "docs/extension-sdk/"
+    },
+    "hooks": {
+      "mechanism": "documented hooks",
+      "events": [
+        "see docs/user-docs/hooks.md"
+      ]
+    },
+    "mcp": {
+      "client": true,
+      "server": true
+    }
+  },
+  "unique_selling_points": [
+    "Living successor of gsd-2 (v1.15.0, 2026-08-12)",
+    "Agent Skills runtime + 5-root load including Claude compat",
+    "On-disk milestone checkboxes remain the SoT"
+  ],
+  "limitations": [
+    {
+      "description": "Still no SessionStart-class force-invoke (skill_discovery auto/suggest/off)",
+      "source": "OS/gsd-pi/docs/user-docs/skills.md"
+    },
+    {
+      "description": "No company-sim / org-chart / token budgets",
+      "source": "OS/gsd-pi/README.md"
+    }
+  ],
+  "confidence": "HIGH",
+  "extraction_method": "filesystem-scan",
+  "skill_version": "1.0.0",
+  "supersedes": "gsd-2"
+}

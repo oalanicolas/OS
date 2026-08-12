@@ -455,6 +455,158 @@ packs:
           "30-59": "Telemetry opcional"
           "0-29": "Telemetry on by default"
 
+  harness-structure:
+    description: "How agent harnesses organize skills, squads, plugins and context so agents can execute complex multi-hour work (superpowers, gstack, GSD, BMAD, paperclip, hermes, openclaw, spec-kit)"
+    dimensions:
+      - id: skill_system
+        name: "Skill System"
+        weight: 0.16
+        signals: ["Agent Skills SKILL.md layout", "description/listing budget", "progressive disclosure (catalog vs body vs references)", "bootstrap that forces skill invoke", "skill authoring/tests"]
+        scoring_scale:
+          "90-100": "Standard SKILL.md + listing budget + bootstrap force-invoke + authoring tests/evals"
+          "60-89": "SKILL.md catalog + on-demand body, bootstrap or authoring incomplete"
+          "30-59": "Commands/playbooks exist but no Agent Skills discovery surface"
+          "0-29": "Monolithic prompt, no reusable skill unit"
+      - id: squad_model
+        name: "Squad Model"
+        weight: 0.14
+        signals: ["named personas or roles", "org-chart / party / crew composition", "independent minds vs sequential specialists", "spawn/isolation policy"]
+        scoring_scale:
+          "90-100": "Persistent roster (org or party) + independent spawn + composition files"
+          "60-89": "Named roles with spawn or sequential specialist pipeline"
+          "30-59": "Single agent with modes or ad-hoc subagents"
+          "0-29": "No role/squad primitive"
+      - id: plugin_extensibility
+        name: "Plugin Extensibility"
+        weight: 0.12
+        signals: ["plugin manifest validated before exec", "hooks surface", "MCP client/server", "host adapters / multi-runtime", "marketplace or catalog"]
+        scoring_scale:
+          "90-100": "Manifest-first plugin + hooks + MCP + marketplace/catalog"
+          "60-89": "Plugin OR MCP + hooks, multi-host install"
+          "30-59": "Skills/commands only, no plugin runtime"
+          "0-29": "Hardcoded, no extension point"
+      - id: context_architecture
+        name: "Context Architecture"
+        weight: 0.16
+        signals: ["always-on vs on-demand split", "identity files (AGENTS/SOUL/USER)", "token/char budgets + truncation notice", "anti-rot (compaction, ledger, no history paste)"]
+        scoring_scale:
+          "90-100": "Tiny always-on + budgets + identity split + documented anti-rot"
+          "60-89": "On-demand skill bodies + some identity files, weak budget"
+          "30-59": "Large always-on prompt or no budget"
+          "0-29": "Dump everything into chat"
+      - id: complex_work_spine
+        name: "Complex-Work Spine"
+        weight: 0.16
+        signals: ["intent→spec→plan→implement→review→ship pipeline", "on-disk artifacts as SoT", "phase ownership", "resume across sessions"]
+        scoring_scale:
+          "90-100": "Full spine with durable artifacts and resume"
+          "60-89": "Most stages present, artifacts partial"
+          "30-59": "Plan or implement only"
+          "0-29": "Single-turn chat, no spine"
+      - id: gates_and_discipline
+        name: "Gates & Discipline"
+        weight: 0.10
+        signals: ["TDD / verification-before-done", "separate reviewer context", "fix-loop breaker", "human gates only at one-way doors"]
+        scoring_scale:
+          "90-100": "TDD or spec-review enforcement + separate reviewer + breaker"
+          "60-89": "Review loop or TDD recommended, no breaker"
+          "30-59": "Optional review, no enforcement"
+          "0-29": "No gates"
+      - id: handoff_and_state
+        name: "Handoff & State"
+        weight: 0.10
+        signals: ["file-path handoff (not pasted history)", "ledger/STATE.md/issue tree", "worktree isolation", "compressed scout/continue docs"]
+        scoring_scale:
+          "90-100": "File-only handoff + durable ledger + isolation"
+          "60-89": "Durable state files, handoff informal"
+          "30-59": "Chat transcript as handoff"
+          "0-29": "No handoff primitive"
+      - id: governance
+        name: "Governance"
+        weight: 0.06
+        signals: ["budgets/approvals", "fail-closed policy", "allowlists / skill trust tiers", "audit trail"]
+        scoring_scale:
+          "90-100": "Budgets + approvals + fail-closed + audit"
+          "60-89": "Allowlists or approvals, no cost plane"
+          "30-59": "Prompt-level safety only"
+          "0-29": "No governance surface"
+
+  case-ops:
+    description: "High-stakes case operating systems (VISA-BRAIN and adjacent OS/ peers). Measures epistemology, projection honesty, workspace isolation, extract-before-reviewed, graph-as-index, collector≠auditor — not general memory recall or company-sim."
+    dimensions:
+      - id: epistemology
+        name: "Epistemology"
+        weight: 0.18
+        signals: ["fact vs claim vs finding split", "blocked category errors", "authority vs support vs readiness as independent dimensions"]
+        scoring_scale:
+          "90-100": "Formal layers + blocked category errors + government-finding distinct from counsel claim"
+          "60-89": "Takes vs facts or spec-as-SoT, no legal/government layer"
+          "30-59": "Informal provenance or chat-as-fact"
+          "0-29": "No epistemic split"
+      - id: projection_integrity
+        name: "Projection Integrity"
+        weight: 0.14
+        signals: ["generated dashboard/digest", "fingerprint/rebuild when stale", "portal ≠ canonical", "single write authority"]
+        scoring_scale:
+          "90-100": "Projections fingerprint-bound and rebuildable; dual-SoT forbidden"
+          "60-89": "Clear SoT files; projections informal"
+          "30-59": "Multiple writable views"
+          "0-29": "Chat or UI is the record"
+      - id: workspace_isolation
+        name: "Workspace Isolation"
+        weight: 0.14
+        signals: ["explicit case/company root", "no sibling scan", "product kit ≠ data", "fail-closed cross-boundary"]
+        scoring_scale:
+          "90-100": "One explicit root per op; product/data split; sibling scan forbidden"
+          "60-89": "Worktree or company-scope, weak sibling rules"
+          "30-59": "Cwd inference or shared home"
+          "0-29": "Global implicit state"
+      - id: extract_before_reviewed
+        name: "Extract-before-reviewed"
+        weight: 0.14
+        signals: ["mechanical reject of reviewed-without-extract", "hash-bound unit notes", "disk restart authority", "no grandfathering"]
+        scoring_scale:
+          "90-100": "Script-enforced extract contract + ledger + resume"
+          "60-89": "Prompt-enforced review or verify gate"
+          "30-59": "Optional notes"
+          "0-29": "Mark-done from chat"
+      - id: graph_honesty
+        name: "Graph Honesty"
+        weight: 0.12
+        signals: ["graph ≠ truth oracle", "candidates vs accepted edges", "locator/digest on strong edges", "independence groups not file count"]
+        scoring_scale:
+          "90-100": "Index-only graph + preflight + independence groups + no ranking-as-proof"
+          "60-89": "Temporal or typed graph without oracle claim"
+          "30-59": "Graph used as ranking/proof"
+          "0-29": "No graph or silent auto-type"
+      - id: counsel_separation
+        name: "Collector ≠ Auditor"
+        weight: 0.12
+        signals: ["independent review skill/session", "max remediation then escalate", "promotion ≠ eligibility", "no self-approve"]
+        scoring_scale:
+          "90-100": "Separate collector, reviewer, counsel lenses + breaker"
+          "60-89": "Separate reviewer or human gate"
+          "30-59": "Self-check only"
+          "0-29": "Author marks done"
+      - id: human_data_split
+        name: "Human/Data Split"
+        weight: 0.08
+        signals: ["USER/SOUL never hold evidence", "plain-language portal", "receipts for intake", "style memory ≠ case facts"]
+        scoring_scale:
+          "90-100": "Contracted split + Voice/USER forbidden for evidence"
+          "60-89": "Identity files exist; evidence leak possible"
+          "30-59": "One file holds voice and facts"
+          "0-29": "No split"
+      - id: process_spine
+        name: "Process Spine"
+        weight: 0.08
+        signals: ["named phases with gates", "resume across sessions", "freeze/pack fail-closed", "honest completion language"]
+        scoring_scale:
+          "90-100": "Full phase machine + freeze/pack gates + honest close speech"
+          "60-89": "Specify-plan-implement or milestone DAG"
+          "30-59": "Ad-hoc workflow"
+          "0-29": "Single-turn chat"
+
   workflow-infra:
     description: "Durable workflows, event-sourced infra (workflow, gh-aw)"
     dimensions:

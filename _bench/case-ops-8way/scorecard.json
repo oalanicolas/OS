@@ -1,0 +1,1115 @@
+{
+  "generatedAt": "2026-08-12T22:00:00Z",
+  "comparison_type": "nway",
+  "subjects": [
+    "VISA-BRAIN",
+    "gbrain",
+    "gsd-pi",
+    "superpowers",
+    "spec-kit",
+    "paperclip",
+    "mempalace",
+    "LifeOS"
+  ],
+  "dimension_pack": "case-ops",
+  "methods": {
+    "VISA-BRAIN": "installed-external-kit",
+    "gbrain": "installed",
+    "gsd-pi": "installed",
+    "superpowers": "installed",
+    "spec-kit": "installed",
+    "paperclip": "installed",
+    "mempalace": "installed",
+    "LifeOS": "installed"
+  },
+  "dimensions": [
+    {
+      "id": "epistemology",
+      "name": "Epistemology",
+      "weight": 0.18,
+      "scores": {
+        "VISA-BRAIN": 96,
+        "gbrain": 82,
+        "gsd-pi": 50,
+        "superpowers": 48,
+        "spec-kit": 62,
+        "paperclip": 55,
+        "mempalace": 70,
+        "LifeOS": 58
+      },
+      "signals_observed": {
+        "VISA-BRAIN": [
+          {
+            "signal": "A/B/C layers",
+            "value": "government vs prep vs ingest",
+            "evidence": "VISA-BRAIN/00-Case-Control/Epistemology-Layers.md"
+          },
+          {
+            "signal": "category errors blocked",
+            "value": "argument\u2260evidence; score\u2260finding",
+            "evidence": "VISA-BRAIN/00-Case-Control/knowledge-model.json"
+          }
+        ],
+        "gbrain": [
+          {
+            "signal": "takes vs facts",
+            "value": "multi-holder vs owner hot memory",
+            "evidence": "OS/gbrain/docs/takes-vs-facts.md"
+          },
+          {
+            "signal": "compiled truth",
+            "value": "rewrite vs timeline append",
+            "evidence": "OS/gbrain/docs/guides/compiled-truth.md"
+          }
+        ],
+        "gsd-pi": [
+          {
+            "signal": "DECISIONS.md",
+            "value": "append-only project decisions",
+            "evidence": "OS/gsd-pi/gsd-orchestrator/SKILL.md"
+          },
+          {
+            "signal": "REQUIREMENTS.md",
+            "value": "capability contract",
+            "evidence": "OS/gsd-pi/gsd-orchestrator/SKILL.md"
+          }
+        ],
+        "superpowers": [
+          {
+            "signal": "no evidence ontology",
+            "value": "skills are process",
+            "evidence": "OS/superpowers/README.md"
+          },
+          {
+            "signal": "spec in plans",
+            "value": "implementation plans not claims",
+            "evidence": "OS/superpowers/skills/writing-plans/SKILL.md"
+          }
+        ],
+        "spec-kit": [
+          {
+            "signal": "spec-driven.md",
+            "value": "spec is SoT",
+            "evidence": "OS/spec-kit/spec-driven.md"
+          },
+          {
+            "signal": "constitution",
+            "value": "principles file",
+            "evidence": "OS/spec-kit/templates/constitution-template.md"
+          }
+        ],
+        "paperclip": [
+          {
+            "signal": "issues as work",
+            "value": "no claim/finding types",
+            "evidence": "OS/paperclip/docs/start/core-concepts.md"
+          },
+          {
+            "signal": "goal tree",
+            "value": "alignment not epistemology",
+            "evidence": "OS/paperclip/packages/db/src/schema/goals.ts"
+          }
+        ],
+        "mempalace": [
+          {
+            "signal": "verbatim policy",
+            "value": "do not paraphrase user text",
+            "evidence": "OS/mempalace/CLAUDE.md"
+          },
+          {
+            "signal": "temporal triples",
+            "value": "valid_from/valid_to",
+            "evidence": "OS/mempalace/mempalace/knowledge_graph.py"
+          }
+        ],
+        "LifeOS": [
+          {
+            "signal": "ISA",
+            "value": "claims/features living spec",
+            "evidence": "OS/LifeOS/LifeOS/install/skills/ISA/SKILL.md"
+          },
+          {
+            "signal": "LoadContext",
+            "value": "constitution vs dynamic",
+            "evidence": "OS/LifeOS/LifeOS/install/hooks/LoadContext.hook.ts"
+          }
+        ]
+      },
+      "confidence": "HIGH",
+      "justification": {
+        "VISA-BRAIN": "Layers A/B/C + Fact/Claim/Inference/AgencyFinding; category errors blocked.",
+        "gbrain": "Takes vs facts + dream consolidate; no government-finding layer.",
+        "gsd-pi": "DECISIONS.md / REQUIREMENTS.md \u2014 project memory, not claims.",
+        "superpowers": "Process discipline, not an evidence epistemology.",
+        "spec-kit": "Spec-as-SoT + constitution; no fact/finding split.",
+        "paperclip": "Issues/comments as work objects; no claim vs finding.",
+        "mempalace": "Verbatim drawers; no legal layers.",
+        "LifeOS": "TELOS/ISA identity, not evidence assessment."
+      },
+      "advantage": "VISA-BRAIN",
+      "leaders": [
+        "VISA-BRAIN"
+      ]
+    },
+    {
+      "id": "projection_integrity",
+      "name": "Projection Integrity",
+      "weight": 0.14,
+      "scores": {
+        "VISA-BRAIN": 94,
+        "gbrain": 80,
+        "gsd-pi": 86,
+        "superpowers": 72,
+        "spec-kit": 84,
+        "paperclip": 78,
+        "mempalace": 68,
+        "LifeOS": 70
+      },
+      "signals_observed": {
+        "VISA-BRAIN": [
+          {
+            "signal": "hot-index fingerprint",
+            "value": "rebuild if stale; never authority",
+            "evidence": "VISA-BRAIN/.codex/skills/investigate-case-evidence/references/evidence-graph.md"
+          },
+          {
+            "signal": "dashboard generated",
+            "value": "build_dashboard_projection.py",
+            "evidence": "VISA-BRAIN/AGENTS.md"
+          }
+        ],
+        "gbrain": [
+          {
+            "signal": "system of record",
+            "value": "git markdown; DB cache",
+            "evidence": "OS/gbrain/docs/architecture/system-of-record.md"
+          },
+          {
+            "signal": "compiled truth rewrite",
+            "value": "timeline append-only",
+            "evidence": "OS/gbrain/docs/guides/compiled-truth.md"
+          }
+        ],
+        "gsd-pi": [
+          {
+            "signal": "checkbox SoT",
+            "value": ".gsd/ ROADMAP/PLAN",
+            "evidence": "OS/gsd-pi/gsd-orchestrator/SKILL.md"
+          },
+          {
+            "signal": "STATE derived",
+            "value": "never hand-edit required",
+            "evidence": "OS/gsd-pi/gsd-orchestrator/SKILL.md"
+          }
+        ],
+        "superpowers": [
+          {
+            "signal": "sdd ledger",
+            "value": "progress.md plan-scoped",
+            "evidence": "OS/superpowers/skills/subagent-driven-development/SKILL.md"
+          },
+          {
+            "signal": "git history",
+            "value": "workspace deleted after merge",
+            "evidence": "OS/superpowers/skills/subagent-driven-development/SKILL.md"
+          }
+        ],
+        "spec-kit": [
+          {
+            "signal": "spec persistence",
+            "value": "flow-back/forward/living",
+            "evidence": "OS/spec-kit/docs/concepts/spec-persistence.md"
+          },
+          {
+            "signal": "feature dirs",
+            "value": "spec.md plan.md tasks.md",
+            "evidence": "OS/spec-kit/templates/spec-template.md"
+          }
+        ],
+        "paperclip": [
+          {
+            "signal": "continuation_summary",
+            "value": "issue document",
+            "evidence": "OS/paperclip/docs/agents-runtime.md"
+          },
+          {
+            "signal": "status cards",
+            "value": "compiled watched queries",
+            "evidence": "OS/paperclip/docs/guides/board-operator/status-cards.md"
+          }
+        ],
+        "mempalace": [
+          {
+            "signal": "layers L0\u2013L3",
+            "value": "identity vs drawers",
+            "evidence": "OS/mempalace/mempalace/layers.py"
+          },
+          {
+            "signal": "markdown drawers",
+            "value": "verbatim store",
+            "evidence": "OS/mempalace/CLAUDE.md"
+          }
+        ],
+        "LifeOS": [
+          {
+            "signal": "ISA living",
+            "value": "claims/features SoT",
+            "evidence": "OS/LifeOS/LifeOS/install/skills/ISA/SKILL.md"
+          },
+          {
+            "signal": "CLAUDE routing",
+            "value": "map not library",
+            "evidence": "OS/LifeOS/LifeOS/install/hooks/LoadContext.hook.ts"
+          }
+        ]
+      },
+      "confidence": "HIGH",
+      "justification": {
+        "VISA-BRAIN": "Dashboard/hot-index/DAG-DIGEST are generated; fingerprint rebuild; portal \u2260 vault.",
+        "gbrain": "Markdown SoT; Postgres rebuildable cache; compiled truth rewritten.",
+        "gsd-pi": ".gsd/ checkboxes are SoT; STATE derived from files.",
+        "superpowers": "Ledger + git; no generated operator dashboard.",
+        "spec-kit": "spec/plan/tasks files; managed AGENTS block.",
+        "paperclip": "Dashboard + continuation_summary; wiki plugin opt-in.",
+        "mempalace": "Drawers on disk; little projection layer.",
+        "LifeOS": "ISA as living spec; CLAUDE.md is a map."
+      },
+      "advantage": "VISA-BRAIN",
+      "leaders": [
+        "VISA-BRAIN"
+      ]
+    },
+    {
+      "id": "workspace_isolation",
+      "name": "Workspace Isolation",
+      "weight": 0.14,
+      "scores": {
+        "VISA-BRAIN": 96,
+        "gbrain": 78,
+        "gsd-pi": 82,
+        "superpowers": 70,
+        "spec-kit": 62,
+        "paperclip": 80,
+        "mempalace": 74,
+        "LifeOS": 60
+      },
+      "signals_observed": {
+        "VISA-BRAIN": [
+          {
+            "signal": "PRODUCT.yml pin",
+            "value": "0..N workspaces outside kit",
+            "evidence": "VISA-BRAIN/AGENTS.md"
+          },
+          {
+            "signal": "no sibling scan",
+            "value": "one explicit case root",
+            "evidence": "VISA-BRAIN/.codex/skills/investigate-case-evidence/SKILL.md"
+          }
+        ],
+        "gbrain": [
+          {
+            "signal": "sources + OAuth",
+            "value": "company-brain tutorial",
+            "evidence": "OS/gbrain/docs/tutorials/company-brain.md"
+          },
+          {
+            "signal": "prefix not private",
+            "value": "privacy = own source",
+            "evidence": "OS/gbrain/docs/architecture/brains-and-sources.md"
+          }
+        ],
+        "gsd-pi": [
+          {
+            "signal": "worktree ADR",
+            "value": "isolated implementation",
+            "evidence": "OS/gsd-pi/docs/dev/ADR-001-branchless-worktree-architecture.md"
+          },
+          {
+            "signal": "child flag",
+            "value": "no recursive spawn",
+            "evidence": "OS/gsd-pi/docs/user-docs/subagents.md"
+          }
+        ],
+        "superpowers": [
+          {
+            "signal": "sdd-workspace",
+            "value": "plan-scoped dir",
+            "evidence": "OS/superpowers/skills/subagent-driven-development/SKILL.md"
+          },
+          {
+            "signal": "git worktrees",
+            "value": "using-git-worktrees",
+            "evidence": "OS/superpowers/skills/using-git-worktrees/SKILL.md"
+          }
+        ],
+        "spec-kit": [
+          {
+            "signal": "feature dir",
+            "value": "scripts emit FEATURE_DIR",
+            "evidence": "OS/spec-kit/scripts/python/setup_plan.py"
+          },
+          {
+            "signal": "no multi-case lock",
+            "value": "single project assumed",
+            "evidence": "OS/spec-kit/spec-driven.md"
+          }
+        ],
+        "paperclip": [
+          {
+            "signal": "company scoped",
+            "value": "every entity companyId",
+            "evidence": "OS/paperclip/docs/start/core-concepts.md"
+          },
+          {
+            "signal": "org not ACL",
+            "value": "visibility company-wide",
+            "evidence": "OS/paperclip/docs/guides/board-operator/org-structure.md"
+          }
+        ],
+        "mempalace": [
+          {
+            "signal": "local palace",
+            "value": "on-device store",
+            "evidence": "OS/mempalace/CLAUDE.md"
+          },
+          {
+            "signal": "no kit/data split",
+            "value": "single tree",
+            "evidence": "OS/mempalace/README.md"
+          }
+        ],
+        "LifeOS": [
+          {
+            "signal": "USER tree",
+            "value": "personal knowledge",
+            "evidence": "OS/LifeOS/README.md"
+          },
+          {
+            "signal": "not case roots",
+            "value": "one life OS",
+            "evidence": "OS/LifeOS/LifeOS/install/hooks/LoadContext.hook.ts"
+          }
+        ]
+      },
+      "confidence": "HIGH",
+      "justification": {
+        "VISA-BRAIN": "One explicit case root; product kit \u2260 workspace; never scan siblings.",
+        "gbrain": "Source + OAuth isolation; reads not prefix-private.",
+        "gsd-pi": "Worktree leases + fencing; team mode is humans sharing .gsd/.",
+        "superpowers": "Plan-scoped worktree; host cwd still implicit.",
+        "spec-kit": "Feature dirs; no multi-vault fail-closed.",
+        "paperclip": "companyId scope; org chart is not ACL.",
+        "mempalace": "Local palace; no product/data kit split.",
+        "LifeOS": "User tree; not case-workspace isolation."
+      },
+      "advantage": "VISA-BRAIN",
+      "leaders": [
+        "VISA-BRAIN"
+      ]
+    },
+    {
+      "id": "extract_before_reviewed",
+      "name": "Extract-before-reviewed",
+      "weight": 0.14,
+      "scores": {
+        "VISA-BRAIN": 95,
+        "gbrain": 55,
+        "gsd-pi": 72,
+        "superpowers": 88,
+        "spec-kit": 65,
+        "paperclip": 50,
+        "mempalace": 52,
+        "LifeOS": 45
+      },
+      "signals_observed": {
+        "VISA-BRAIN": [
+          {
+            "signal": "apply-batch reject",
+            "value": "reviewed requires unit extract",
+            "evidence": "VISA-BRAIN/.codex/skills/investigate-case-evidence/SKILL.md"
+          },
+          {
+            "signal": "hash + anchors",
+            "value": "source_sha256 + locators",
+            "evidence": "VISA-BRAIN/.codex/skills/investigate-case-evidence/references/evidence-graph.md"
+          }
+        ],
+        "gbrain": [
+          {
+            "signal": "put_page",
+            "value": "no reviewed-extract gate",
+            "evidence": "OS/gbrain/docs/guides/compiled-truth.md"
+          },
+          {
+            "signal": "volunteer_context",
+            "value": "push pages not extracts",
+            "evidence": "OS/gbrain/docs/guides/push-context.md"
+          }
+        ],
+        "gsd-pi": [
+          {
+            "signal": "verify gate",
+            "value": "milestone reviewers",
+            "evidence": "OS/gsd-pi/docs/user-docs/subagents.md"
+          },
+          {
+            "signal": "T##-SUMMARY",
+            "value": "task completion files",
+            "evidence": "OS/gsd-pi/gsd-orchestrator/SKILL.md"
+          }
+        ],
+        "superpowers": [
+          {
+            "signal": "task-brief file",
+            "value": "prompt-enforced",
+            "evidence": "OS/superpowers/skills/subagent-driven-development/SKILL.md"
+          },
+          {
+            "signal": "review-package",
+            "value": "diff as file",
+            "evidence": "OS/superpowers/skills/subagent-driven-development/SKILL.md"
+          }
+        ],
+        "spec-kit": [
+          {
+            "signal": "checklist",
+            "value": "completeness artifact",
+            "evidence": "OS/spec-kit/templates/checklist-template.md"
+          },
+          {
+            "signal": "no extract reject",
+            "value": "commands not ledger",
+            "evidence": "OS/spec-kit/templates/commands/implement.md"
+          }
+        ],
+        "paperclip": [
+          {
+            "signal": "comments optional",
+            "value": "no extract contract",
+            "evidence": "OS/paperclip/docs/start/core-concepts.md"
+          },
+          {
+            "signal": "heartbeat-context",
+            "value": "pull not extract-gate",
+            "evidence": "OS/paperclip/docs/agents-runtime.md"
+          }
+        ],
+        "mempalace": [
+          {
+            "signal": "recall skill",
+            "value": "search-before-answer",
+            "evidence": "OS/mempalace/skills/mempalace-recall/SKILL.md"
+          },
+          {
+            "signal": "no review ledger",
+            "value": "not a case runner",
+            "evidence": "OS/mempalace/README.md"
+          }
+        ],
+        "LifeOS": [
+          {
+            "signal": "no extract machine",
+            "value": "life ops",
+            "evidence": "OS/LifeOS/README.md"
+          },
+          {
+            "signal": "ISA completeness",
+            "value": "CheckCompleteness",
+            "evidence": "OS/LifeOS/LifeOS/install/skills/ISA/SKILL.md"
+          }
+        ]
+      },
+      "confidence": "HIGH",
+      "justification": {
+        "VISA-BRAIN": "apply-batch rejects reviewed without hash-bound unit extract.",
+        "gbrain": "put_page has no reviewed-extract contract.",
+        "gsd-pi": "Verify/reviewer gates; not extract-before-reviewed.",
+        "superpowers": "Prompt-enforced brief+review; no script reject.",
+        "spec-kit": "Checklists; no extract contract.",
+        "paperclip": "Comments/docs optional; no extract gate.",
+        "mempalace": "Recall skill; no review ledger.",
+        "LifeOS": "No extract-before-done machine."
+      },
+      "advantage": "VISA-BRAIN",
+      "leaders": [
+        "VISA-BRAIN"
+      ]
+    },
+    {
+      "id": "graph_honesty",
+      "name": "Graph Honesty",
+      "weight": 0.12,
+      "scores": {
+        "VISA-BRAIN": 93,
+        "gbrain": 62,
+        "gsd-pi": 45,
+        "superpowers": 35,
+        "spec-kit": 35,
+        "paperclip": 40,
+        "mempalace": 78,
+        "LifeOS": 50
+      },
+      "signals_observed": {
+        "VISA-BRAIN": [
+          {
+            "signal": "index not oracle",
+            "value": "edge alone proves nothing",
+            "evidence": "VISA-BRAIN/.codex/skills/investigate-case-evidence/references/evidence-graph.md"
+          },
+          {
+            "signal": "SAME_ORIGIN_GROUP",
+            "value": "independence \u2260 file count",
+            "evidence": "VISA-BRAIN/.codex/skills/investigate-case-evidence/references/evidence-graph.md"
+          }
+        ],
+        "gbrain": [
+          {
+            "signal": "graph-signals",
+            "value": "reorder top-K fail-open",
+            "evidence": "OS/gbrain/src/core/search/graph-signals.ts"
+          },
+          {
+            "signal": "zero-LLM inferLinkType",
+            "value": "regex + role priors",
+            "evidence": "OS/gbrain/src/core/link-extraction.ts"
+          }
+        ],
+        "gsd-pi": [
+          {
+            "signal": "no evidence graph",
+            "value": "milestone DAG only",
+            "evidence": "OS/gsd-pi/gsd-orchestrator/SKILL.md"
+          },
+          {
+            "signal": "handoff files",
+            "value": "not typed edges",
+            "evidence": "OS/gsd-pi/src/resources/skills/handoff/SKILL.md"
+          }
+        ],
+        "superpowers": [
+          {
+            "signal": "no graph",
+            "value": "process skills",
+            "evidence": "OS/superpowers/README.md"
+          },
+          {
+            "signal": "flowcharts",
+            "value": "skill diagrams not evidence",
+            "evidence": "OS/superpowers/skills/subagent-driven-development/SKILL.md"
+          }
+        ],
+        "spec-kit": [
+          {
+            "signal": "no graph",
+            "value": "workflow YAML",
+            "evidence": "OS/spec-kit/workflows/speckit/workflow.yml"
+          },
+          {
+            "signal": "handoffs",
+            "value": "command chain",
+            "evidence": "OS/spec-kit/templates/commands/specify.md"
+          }
+        ],
+        "paperclip": [
+          {
+            "signal": "no evidence graph",
+            "value": "issue tree only",
+            "evidence": "OS/paperclip/docs/start/core-concepts.md"
+          },
+          {
+            "signal": "org chart",
+            "value": "reporting not proof",
+            "evidence": "OS/paperclip/docs/guides/board-operator/org-structure.md"
+          }
+        ],
+        "mempalace": [
+          {
+            "signal": "supersede()",
+            "value": "atomic temporal replace #1913",
+            "evidence": "OS/mempalace/CHANGELOG.md"
+          },
+          {
+            "signal": "reject inverted interval",
+            "value": "valid_to < valid_from",
+            "evidence": "OS/mempalace/mempalace/knowledge_graph.py"
+          }
+        ],
+        "LifeOS": [
+          {
+            "signal": "MD edges",
+            "value": "wikilink/related",
+            "evidence": "OS/LifeOS/LifeOS/install/skills/ISA/SKILL.md"
+          },
+          {
+            "signal": "not counsel gate",
+            "value": "analytics only",
+            "evidence": "OS/LifeOS/README.md"
+          }
+        ]
+      },
+      "confidence": "HIGH",
+      "justification": {
+        "VISA-BRAIN": "Graph is index; candidates \u2260 proof; SAME_ORIGIN_GROUP; no ranking-as-corroboration.",
+        "gbrain": "Zero-LLM edges + graph-signals reorder top-K fail-open; #3466 class risk.",
+        "gsd-pi": "memory_relations enum; not an evidence graph.",
+        "superpowers": "No evidence graph.",
+        "spec-kit": "No evidence graph.",
+        "paperclip": "No evidence graph in core.",
+        "mempalace": "Temporal KG with supersede/half-open; not a truth oracle.",
+        "LifeOS": "Declared MD edges; analytics not counsel gates."
+      },
+      "advantage": "VISA-BRAIN",
+      "leaders": [
+        "VISA-BRAIN"
+      ]
+    },
+    {
+      "id": "counsel_separation",
+      "name": "Collector \u2260 Auditor",
+      "weight": 0.12,
+      "scores": {
+        "VISA-BRAIN": 94,
+        "gbrain": 40,
+        "gsd-pi": 75,
+        "superpowers": 90,
+        "spec-kit": 70,
+        "paperclip": 72,
+        "mempalace": 30,
+        "LifeOS": 35
+      },
+      "signals_observed": {
+        "VISA-BRAIN": [
+          {
+            "signal": "P6 independent audit",
+            "value": "$review-immigration-evidence",
+            "evidence": "VISA-BRAIN/.codex/skills/investigate-case-evidence/SKILL.md"
+          },
+          {
+            "signal": "$counsel clean session",
+            "value": "coverage-challenge after P7",
+            "evidence": "VISA-BRAIN/AGENTS.md"
+          }
+        ],
+        "gbrain": [
+          {
+            "signal": "think same mind",
+            "value": "no auditor skill",
+            "evidence": "OS/gbrain/README.md"
+          },
+          {
+            "signal": "briefing read-only default",
+            "value": "not independent counsel",
+            "evidence": "OS/gbrain/skills/briefing/SKILL.md"
+          }
+        ],
+        "gsd-pi": [
+          {
+            "signal": "3 reviewers",
+            "value": "requirements/integration/acceptance",
+            "evidence": "OS/gsd-pi/docs/user-docs/subagents.md"
+          },
+          {
+            "signal": "not counsel",
+            "value": "software verify",
+            "evidence": "OS/gsd-pi/gsd-orchestrator/SKILL.md"
+          }
+        ],
+        "superpowers": [
+          {
+            "signal": "task reviewer",
+            "value": "spec + quality",
+            "evidence": "OS/superpowers/skills/subagent-driven-development/SKILL.md"
+          },
+          {
+            "signal": "breaker",
+            "value": "5 rounds then adjudicate",
+            "evidence": "OS/superpowers/skills/subagent-driven-development/SKILL.md"
+          }
+        ],
+        "spec-kit": [
+          {
+            "signal": "type:gate",
+            "value": "approve/reject",
+            "evidence": "OS/spec-kit/workflows/speckit/workflow.yml"
+          },
+          {
+            "signal": "human gate",
+            "value": "not multi-lens counsel",
+            "evidence": "OS/spec-kit/workflows/README.md"
+          }
+        ],
+        "paperclip": [
+          {
+            "signal": "QA agent",
+            "value": "qa-acceptance",
+            "evidence": "OS/paperclip/packages/teams-catalog/catalog/bundled/company-defaults/core-exec-team/TEAM.md"
+          },
+          {
+            "signal": "board",
+            "value": "strategy/hire approvals",
+            "evidence": "OS/paperclip/docs/start/core-concepts.md"
+          }
+        ],
+        "mempalace": [
+          {
+            "signal": "no auditor",
+            "value": "recall only",
+            "evidence": "OS/mempalace/skills/mempalace-recall/SKILL.md"
+          },
+          {
+            "signal": "PreCompact flush",
+            "value": "not review",
+            "evidence": "OS/mempalace/CLAUDE.md"
+          }
+        ],
+        "LifeOS": [
+          {
+            "signal": "no counsel",
+            "value": "life OS",
+            "evidence": "OS/LifeOS/README.md"
+          },
+          {
+            "signal": "DA self",
+            "value": "same assistant",
+            "evidence": "OS/LifeOS/LifeOS/install/hooks/LoadContext.hook.ts"
+          }
+        ]
+      },
+      "confidence": "HIGH",
+      "justification": {
+        "VISA-BRAIN": "Collector / $review / $counsel clean session; P6 breaker; coverage \u2260 eligibility.",
+        "gbrain": "No collector\u2260auditor; think is the same mind.",
+        "gsd-pi": "Three milestone reviewers; not counsel lenses.",
+        "superpowers": "Separate implementer and reviewer + breaker.",
+        "spec-kit": "type:gate human approve/reject.",
+        "paperclip": "QA agent + board; CEO must not IC.",
+        "mempalace": "No auditor role.",
+        "LifeOS": "No independent counsel skill."
+      },
+      "advantage": "VISA-BRAIN",
+      "leaders": [
+        "VISA-BRAIN"
+      ]
+    },
+    {
+      "id": "human_data_split",
+      "name": "Human/Data Split",
+      "weight": 0.08,
+      "scores": {
+        "VISA-BRAIN": 94,
+        "gbrain": 70,
+        "gsd-pi": 48,
+        "superpowers": 50,
+        "spec-kit": 55,
+        "paperclip": 72,
+        "mempalace": 60,
+        "LifeOS": 88
+      },
+      "signals_observed": {
+        "VISA-BRAIN": [
+          {
+            "signal": "interface contract",
+            "value": "portal vs 00\u201314",
+            "evidence": "VISA-BRAIN/00-Case-Control/Human-Data-Interface-Contract.md"
+          },
+          {
+            "signal": "Voice Card firewall",
+            "value": "no evidence in USER",
+            "evidence": "VISA-BRAIN/AGENTS.md"
+          }
+        ],
+        "gbrain": [
+          {
+            "signal": "two-repo",
+            "value": "agent vs world",
+            "evidence": "OS/gbrain/docs/guides/repo-architecture.md"
+          },
+          {
+            "signal": "brain vs memory",
+            "value": "routing table",
+            "evidence": "OS/gbrain/docs/guides/brain-vs-memory.md"
+          }
+        ],
+        "gsd-pi": [
+          {
+            "signal": "KNOWLEDGE.md",
+            "value": "mixes rules and memory",
+            "evidence": "OS/gsd-pi/gsd-orchestrator/SKILL.md"
+          },
+          {
+            "signal": "no Voice Card",
+            "value": "coding agent",
+            "evidence": "OS/gsd-pi/README.md"
+          }
+        ],
+        "superpowers": [
+          {
+            "signal": "host CLAUDE.md",
+            "value": "no evidence firewall",
+            "evidence": "OS/superpowers/AGENTS.md"
+          },
+          {
+            "signal": "using-superpowers",
+            "value": "process bootstrap",
+            "evidence": "OS/superpowers/skills/using-superpowers/SKILL.md"
+          }
+        ],
+        "spec-kit": [
+          {
+            "signal": "agent-context block",
+            "value": "managed routing",
+            "evidence": "OS/spec-kit/extensions/agent-context/"
+          },
+          {
+            "signal": "no USER layer",
+            "value": "spec files only",
+            "evidence": "OS/spec-kit/spec-driven.md"
+          }
+        ],
+        "paperclip": [
+          {
+            "signal": "PARA $AGENT_HOME",
+            "value": "not company DB",
+            "evidence": "OS/paperclip/skills/para-memory-files/SKILL.md"
+          },
+          {
+            "signal": "SOUL collapsed",
+            "value": "into AGENTS.md",
+            "evidence": "OS/paperclip/packages/teams-catalog/catalog/bundled/company-defaults/core-exec-team/TEAM.md"
+          }
+        ],
+        "mempalace": [
+          {
+            "signal": "L0 identity",
+            "value": "~100 tokens",
+            "evidence": "OS/mempalace/mempalace/layers.py"
+          },
+          {
+            "signal": "verbatim drawers",
+            "value": "user words preserved",
+            "evidence": "OS/mempalace/CLAUDE.md"
+          }
+        ],
+        "LifeOS": [
+          {
+            "signal": "USER tree",
+            "value": "first-class",
+            "evidence": "OS/LifeOS/README.md"
+          },
+          {
+            "signal": "ISA vs USER",
+            "value": "work vs person",
+            "evidence": "OS/LifeOS/LifeOS/install/skills/ISA/SKILL.md"
+          }
+        ]
+      },
+      "confidence": "HIGH",
+      "justification": {
+        "VISA-BRAIN": "Voice Card/USER never hold evidence; portal is projection + capture.",
+        "gbrain": "Two-repo split; USER in agent repo.",
+        "gsd-pi": "No Voice/USER contract; KNOWLEDGE.md mixes rules.",
+        "superpowers": "Host identity files; no evidence firewall.",
+        "spec-kit": "No USER/evidence firewall.",
+        "paperclip": "Portal + PARA on $AGENT_HOME; SOUL collapsed in AGENTS.md.",
+        "mempalace": "Identity L0 vs drawers; not a legal firewall.",
+        "LifeOS": "USER/ISA/constitution split is first-class."
+      },
+      "advantage": "VISA-BRAIN",
+      "leaders": [
+        "VISA-BRAIN"
+      ]
+    },
+    {
+      "id": "process_spine",
+      "name": "Process Spine",
+      "weight": 0.08,
+      "scores": {
+        "VISA-BRAIN": 92,
+        "gbrain": 70,
+        "gsd-pi": 90,
+        "superpowers": 90,
+        "spec-kit": 88,
+        "paperclip": 80,
+        "mempalace": 40,
+        "LifeOS": 72
+      },
+      "signals_observed": {
+        "VISA-BRAIN": [
+          {
+            "signal": "P0\u2013P7",
+            "value": "investigate phases + gates",
+            "evidence": "VISA-BRAIN/.codex/skills/investigate-case-evidence/SKILL.md"
+          },
+          {
+            "signal": "freeze/pack",
+            "value": "fail-closed --strict",
+            "evidence": "VISA-BRAIN/AGENTS.md"
+          }
+        ],
+        "gbrain": [
+          {
+            "signal": "dream cycle",
+            "value": "night maintenance",
+            "evidence": "OS/gbrain/src/commands/dream.ts"
+          },
+          {
+            "signal": "ingest loop",
+            "value": "daytime timeline",
+            "evidence": "OS/gbrain/docs/guides/operational-disciplines.md"
+          }
+        ],
+        "gsd-pi": [
+          {
+            "signal": "headless auto",
+            "value": "spec \u2192 milestone",
+            "evidence": "OS/gsd-pi/gsd-orchestrator/SKILL.md"
+          },
+          {
+            "signal": "exit 10 blocked",
+            "value": "steer or escalate",
+            "evidence": "OS/gsd-pi/gsd-orchestrator/SKILL.md"
+          }
+        ],
+        "superpowers": [
+          {
+            "signal": "SDD pipeline",
+            "value": "brainstorm\u2192plan\u2192SDD",
+            "evidence": "OS/superpowers/README.md"
+          },
+          {
+            "signal": "finishing branch",
+            "value": "merge options",
+            "evidence": "OS/superpowers/skills/finishing-a-development-branch/SKILL.md"
+          }
+        ],
+        "spec-kit": [
+          {
+            "signal": "workflow.yml",
+            "value": "specify + gate + plan",
+            "evidence": "OS/spec-kit/workflows/speckit/workflow.yml"
+          },
+          {
+            "signal": "implement command",
+            "value": "tasks \u2192 code",
+            "evidence": "OS/spec-kit/templates/commands/implement.md"
+          }
+        ],
+        "paperclip": [
+          {
+            "signal": "heartbeat",
+            "value": "wake + checkout",
+            "evidence": "OS/paperclip/docs/agents-runtime.md"
+          },
+          {
+            "signal": "delegation",
+            "value": "CEO breaks goals",
+            "evidence": "OS/paperclip/docs/start/core-concepts.md"
+          }
+        ],
+        "mempalace": [
+          {
+            "signal": "no phases",
+            "value": "search/recall",
+            "evidence": "OS/mempalace/skills/mempalace-recall/SKILL.md"
+          },
+          {
+            "signal": "PreCompact",
+            "value": "flush not spine",
+            "evidence": "OS/mempalace/CLAUDE.md"
+          }
+        ],
+        "LifeOS": [
+          {
+            "signal": "Algorithm climb",
+            "value": "life ops",
+            "evidence": "OS/LifeOS/README.md"
+          },
+          {
+            "signal": "Pulse",
+            "value": "voice/cron",
+            "evidence": "OS/LifeOS/README.md"
+          }
+        ]
+      },
+      "confidence": "HIGH",
+      "justification": {
+        "VISA-BRAIN": "P0\u2013P7 + freeze/pack fail-closed + honest close speech.",
+        "gbrain": "Day ingest + night dream; not a case phase machine.",
+        "gsd-pi": "Milestone/slice/task auto + verify.",
+        "superpowers": "brainstorm\u2192plan\u2192SDD\u2192finish.",
+        "spec-kit": "specify\u2192gate\u2192plan\u2192tasks\u2192implement.",
+        "paperclip": "Goal\u2192issue tree\u2192heartbeat; not P0\u2013P7.",
+        "mempalace": "Search-before-answer; no case phases.",
+        "LifeOS": "TELOS\u2192ISA\u2192Algorithm; life ops not case ops."
+      },
+      "advantage": "VISA-BRAIN",
+      "leaders": [
+        "VISA-BRAIN"
+      ]
+    }
+  ],
+  "weighted_totals": {
+    "VISA-BRAIN": 94.5,
+    "gbrain": 68.02,
+    "gsd-pi": 68.04,
+    "superpowers": 67.04,
+    "spec-kit": 64.74,
+    "paperclip": 64.62,
+    "mempalace": 60.72,
+    "LifeOS": 57.94
+  },
+  "overall_winner": "VISA-BRAIN",
+  "total_delta": 26.46,
+  "ranking": [
+    {
+      "slug": "VISA-BRAIN",
+      "total": 94.5
+    },
+    {
+      "slug": "gsd-pi",
+      "total": 68.04
+    },
+    {
+      "slug": "gbrain",
+      "total": 68.02
+    },
+    {
+      "slug": "superpowers",
+      "total": 67.04
+    },
+    {
+      "slug": "spec-kit",
+      "total": 64.74
+    },
+    {
+      "slug": "paperclip",
+      "total": 64.62
+    },
+    {
+      "slug": "mempalace",
+      "total": 60.72
+    },
+    {
+      "slug": "LifeOS",
+      "total": 57.94
+    }
+  ],
+  "dimension_wins": {
+    "VISA-BRAIN": 8,
+    "gbrain": 0,
+    "gsd-pi": 0,
+    "superpowers": 0,
+    "spec-kit": 0,
+    "paperclip": 0,
+    "mempalace": 0,
+    "LifeOS": 0,
+    "ties": 0
+  },
+  "confidence_overall": "HIGH",
+  "limitations": [
+    "Pack is case-ops-specific; VISA blowout is expected.",
+    "VISA-BRAIN is external (not OS/).",
+    "No GitHub stars scored.",
+    "Adjacent peers are not failed case OS \u2014 they refused the job."
+  ]
+}

@@ -162,12 +162,15 @@ Quer coding agent memory only?
 ## 7. Artefatos
 
 ```
-OS/LifeOS/                          # clone local
+OS/LifeOS/                          # clone local (also OS/lifeos, OS/gbrain, …)
 OS/_bench/brain-6way/
 ├── executive-report.md             ← este
 ├── scorecard.{md,json}
 ├── comparison-matrix.md
 ├── metadata.json
+├── graph-pitfalls-and-lessons.md   # mina issues + PROMPT reutilizável
+├── visa-brain-graph-feature-lessons.md          # deep dive → VISA-BRAIN
+├── visa-brain-graph-feature-lessons.citations.json
 └── _inventories/{LifeOS + 5 peers}/
 OS/_bench/_research/obsidian-brain-voice-candidates.md  # confirmado LifeOS
 ```

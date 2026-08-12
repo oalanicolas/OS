@@ -1,0 +1,73 @@
+{
+  "generatedAt": "2026-08-12T18:00:00Z",
+  "subject": "paperclip",
+  "path": "OS/paperclip/",
+  "primary_language": "TypeScript",
+  "secondary_languages": ["SQL", "Go"],
+  "stack": ["Node", "React", "Postgres/Drizzle", "pnpm monorepo"],
+  "license": "MIT",
+  "tagline": "If OpenClaw is an employee, Paperclip is the company — org-chart, budgets, issues, and adapters for heterogeneous agent runtimes.",
+  "metrics": {
+    "loc_estimate": 400000,
+    "file_count": 4519,
+    "top_level_dirs": ["cli", "doc", "packages", "server", "ui", "skills"],
+    "readme_lines": 523,
+    "last_commit_date": "2026-08-12T12:12:55-04:00",
+    "github_stars": null,
+    "source_url": "https://github.com/paperclipai/paperclip",
+    "skill_md_count": 52
+  },
+  "modules": [
+    {"name": "server", "path": "server/", "type": "app", "loc_estimate": 0},
+    {"name": "teams-catalog", "path": "packages/teams-catalog/", "type": "package", "loc_estimate": 0},
+    {"name": "skills-catalog", "path": "packages/skills-catalog/", "type": "package", "loc_estimate": 0},
+    {"name": "adapters", "path": "packages/adapters/", "type": "package", "loc_estimate": 0},
+    {"name": "plugins", "path": "packages/plugins/", "type": "package", "loc_estimate": 0}
+  ],
+  "external_dependencies_top10": [
+    {"package": "drizzle", "version": "workspace", "purpose": "Postgres ORM"},
+    {"package": "react", "version": "workspace", "purpose": "control-plane UI"}
+  ],
+  "entry_points": [
+    {"kind": "http", "path": "server/src/", "command": "paperclip server"},
+    {"kind": "cli", "path": "cli/", "command": "paperclip CLI"}
+  ],
+  "capabilities": [
+    {"name": "agentcompanies/v1 teams", "evidence_paths": ["OS/paperclip/packages/teams-catalog/catalog/bundled/company-defaults/core-exec-team/TEAM.md"], "category": "core", "description": "TEAM.md + AGENTS.md + PROJECT.md + TASK.md packages with manager/includes/requiredSkills."},
+    {"name": "CEO must delegate", "evidence_paths": ["OS/paperclip/packages/teams-catalog/catalog/bundled/company-defaults/core-exec-team/agents/ceo/AGENTS.md"], "category": "governance", "description": "CEO triages and hires; never ICs; child issues carry durable handoff."},
+    {"name": "Cross-runtime adapters", "evidence_paths": ["OS/paperclip/packages/adapters/"], "category": "integration", "description": "Claude, Codex, Cursor, Gemini, OpenClaw, OpenCode, Pi under one company."},
+    {"name": "Plugin spec", "evidence_paths": ["OS/paperclip/doc/plugins/PLUGIN_SPEC.md", "OS/paperclip/packages/plugins/"], "category": "extensibility", "description": "Manifest capabilities, namespaced API routes, UI extensions; current runtime is single-tenant filesystem."},
+    {"name": "Skills catalog", "evidence_paths": ["OS/paperclip/packages/skills-catalog/"], "category": "core", "description": "Bundled vs optional SKILL.md with generated catalog.json."},
+    {"name": "Cost/budget plane", "evidence_paths": ["OS/paperclip/docs/companies/companies-spec.md"], "category": "governance", "description": "Company-sim with budgets and board approvals (see also server cost services)."}
+  ],
+  "quality_signals": {
+    "test_framework": "vitest + e2e",
+    "test_file_count": 100,
+    "linter": "unknown",
+    "ci_provider": "github-actions",
+    "ci_workflow_count": 1
+  },
+  "documentation": {
+    "readme_sections": ["Quickstart", "Docs"],
+    "has_contributing": true,
+    "has_architecture_doc": true,
+    "docs_page_count": 80
+  },
+  "extension_points": {
+    "plugins": {"mechanism": "plugin-sdk + PLUGIN_SPEC", "path": "packages/plugins/"},
+    "hooks": {"mechanism": "plugin events/jobs", "events": ["see PLUGIN_SPEC"]},
+    "mcp": {"client": true, "server": true}
+  },
+  "unique_selling_points": [
+    "Only subject with org + money + heterogeneous runtimes",
+    "Issue tree is the coordination bus",
+    "Catalogs for both teams and skills"
+  ],
+  "limitations": [
+    {"description": "Plugin cloud/multi-node install is not ready (PLUGIN_SPEC caveats)", "source": "OS/paperclip/doc/plugins/PLUGIN_SPEC.md"},
+    {"description": "Not a coding methodology (no TDD iron law / SDD ledger)", "source": "OS/paperclip/README.md"}
+  ],
+  "confidence": "HIGH",
+  "extraction_method": "filesystem-scan",
+  "skill_version": "1.0.0"
+}

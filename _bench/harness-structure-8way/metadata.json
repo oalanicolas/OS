@@ -1,0 +1,134 @@
+{
+  "$schema": "os-bench metadata v1.0",
+  "generatedAt": "2026-08-12T20:00:00Z",
+  "comparison_type": "nway",
+  "slug": "harness-structure-8way",
+  "subjects": [
+    {
+      "slug": "superpowers",
+      "path": "OS/superpowers/",
+      "source_url": "https://github.com/obra/superpowers",
+      "detected_stack": [
+        "Markdown",
+        "JavaScript",
+        "Bash"
+      ]
+    },
+    {
+      "slug": "gstack",
+      "path": "OS/gstack/",
+      "source_url": "https://github.com/garrytan/gstack",
+      "detected_stack": [
+        "TypeScript",
+        "Bun",
+        "Markdown"
+      ]
+    },
+    {
+      "slug": "gsd-pi",
+      "path": "OS/gsd-pi/",
+      "source_url": "https://github.com/open-gsd/gsd-pi",
+      "detected_stack": [
+        "TypeScript",
+        "Rust",
+        "Markdown"
+      ]
+    },
+    {
+      "slug": "BMAD-METHOD",
+      "path": "OS/BMAD-METHOD/",
+      "source_url": "https://github.com/bmad-code-org/BMAD-METHOD",
+      "detected_stack": [
+        "TypeScript",
+        "Python",
+        "Markdown"
+      ]
+    },
+    {
+      "slug": "paperclip",
+      "path": "OS/paperclip/",
+      "source_url": "https://github.com/paperclipai/paperclip",
+      "detected_stack": [
+        "TypeScript",
+        "React",
+        "Postgres"
+      ]
+    },
+    {
+      "slug": "hermes-agent",
+      "path": "OS/hermes-agent/",
+      "source_url": "https://github.com/NousResearch/hermes-agent",
+      "detected_stack": [
+        "Python",
+        "TypeScript"
+      ]
+    },
+    {
+      "slug": "openclaw",
+      "path": "OS/openclaw/",
+      "source_url": "https://github.com/openclaw/openclaw",
+      "detected_stack": [
+        "TypeScript",
+        "Swift",
+        "Kotlin"
+      ]
+    },
+    {
+      "slug": "spec-kit",
+      "path": "OS/spec-kit/",
+      "source_url": "https://github.com/github/spec-kit",
+      "detected_stack": [
+        "Python",
+        "Markdown",
+        "YAML"
+      ]
+    }
+  ],
+  "dimension_pack": "harness-structure",
+  "scoring_dimensions": [
+    "skill_system",
+    "squad_model",
+    "plugin_extensibility",
+    "context_architecture",
+    "complex_work_spine",
+    "gates_and_discipline",
+    "handoff_and_state",
+    "governance"
+  ],
+  "profile": "full",
+  "skill_version": "1.0.0",
+  "output_root": "OS/_bench/harness-structure-8way/",
+  "artifacts_generated": [
+    "metadata.json",
+    "inventory-superpowers.json",
+    "inventory-superpowers.md",
+    "inventory-gstack.json",
+    "inventory-gstack.md",
+    "inventory-gsd-pi.json",
+    "inventory-gsd-pi.md",
+    "inventory-BMAD-METHOD.json",
+    "inventory-BMAD-METHOD.md",
+    "inventory-paperclip.json",
+    "inventory-paperclip.md",
+    "inventory-hermes-agent.json",
+    "inventory-hermes-agent.md",
+    "inventory-openclaw.json",
+    "inventory-openclaw.md",
+    "inventory-spec-kit.json",
+    "inventory-spec-kit.md",
+    "comparison-matrix.json",
+    "comparison-matrix.md",
+    "scorecard.json",
+    "scorecard.md",
+    "gap-analysis.json",
+    "gap-analysis.md",
+    "battle-card.md",
+    "executive-report.md",
+    "deep/feature-comparison.md",
+    "deep/absorption-roadmap.md"
+  ],
+  "artifacts_skipped": [],
+  "notes": "N-way super-complete. 2026-08-12T20:00Z: replaced archived gsd-2 snapshot with living OS/gsd-pi (open-gsd/gsd-pi v1.15.0). Scores for gsd-pi kept on the same band as gsd-2 (same primitives); P0 archive gap closed. Pair follow-up: OS/_bench/superpowers-vs-paperclip/.",
+  "confidence_overall": "HIGH",
+  "quality_gate_passed": true
+}

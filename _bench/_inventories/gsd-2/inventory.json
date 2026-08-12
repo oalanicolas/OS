@@ -1,0 +1,71 @@
+{
+  "generatedAt": "2026-08-12T18:00:00Z",
+  "subject": "gsd-2",
+  "path": "OS/gsd-2/",
+  "primary_language": "TypeScript",
+  "secondary_languages": ["Rust", "Markdown"],
+  "stack": ["pi-coding-agent", "Node", "native crates"],
+  "license": "MIT",
+  "tagline": "Autonomous software factory: spec → milestone → isolated workers → verification, with an Agent Skills runtime.",
+  "metrics": {
+    "loc_estimate": 250000,
+    "file_count": 3607,
+    "top_level_dirs": ["docs", "gsd-orchestrator", "packages", "src", "extensions"],
+    "readme_lines": 20,
+    "last_commit_date": "2026-05-22T18:08:55-05:00",
+    "github_stars": null,
+    "source_url": "https://github.com/gsd-build/gsd-2",
+    "skill_md_count": 38
+  },
+  "modules": [
+    {"name": "pi-coding-agent", "path": "packages/pi-coding-agent/", "type": "package", "loc_estimate": 0},
+    {"name": "gsd-orchestrator", "path": "gsd-orchestrator/", "type": "library", "loc_estimate": 0},
+    {"name": "mcp-server", "path": "packages/mcp-server/", "type": "package", "loc_estimate": 0},
+    {"name": "extension-sdk", "path": "docs/extension-sdk/", "type": "library", "loc_estimate": 0}
+  ],
+  "external_dependencies_top10": [
+    {"package": "pi-coding-agent", "version": "workspace", "purpose": "agent runtime + skill loader"}
+  ],
+  "entry_points": [
+    {"kind": "cli", "path": "src/cli.ts", "command": "gsd / gsd headless"},
+    {"kind": "skill", "path": "gsd-orchestrator/SKILL.md", "command": "OpenClaw wrapper around gsd subprocess"}
+  ],
+  "capabilities": [
+    {"name": "Agent Skills runtime", "evidence_paths": ["OS/gsd-2/packages/pi-coding-agent/src/core/skills.ts", "OS/gsd-2/docs/user-docs/skills.md"], "category": "core", "description": "Scans SKILL.md, injects XML catalog only, Skill tool loads bodies. auto/suggest/off discovery."},
+    {"name": "Milestone artifact DAG", "evidence_paths": ["OS/gsd-2/gsd-orchestrator/SKILL.md"], "category": "core", "description": ".gsd/ PROJECT/REQUIREMENTS/DECISIONS/STATE + M###/S##/T## plan and summary files."},
+    {"name": "Isolated typed subagents", "evidence_paths": ["OS/gsd-2/src/resources/agents/scout.md", "OS/gsd-2/docs/user-docs/subagents.md"], "category": "core", "description": "scout/planner/worker/reviewer with fresh context default; children cannot recurse."},
+    {"name": "Headless orchestrator skill", "evidence_paths": ["OS/gsd-2/gsd-orchestrator/SKILL.md"], "category": "integration", "description": "OpenClaw-facing skill drives gsd as subprocess with exit codes 0/1/10/11."},
+    {"name": "Extension SDK + MCP", "evidence_paths": ["OS/gsd-2/docs/extension-sdk/README.md", "OS/gsd-2/packages/mcp-server/"], "category": "extensibility", "description": "Workflow plugins via .gsd/extensions plus first-party MCP server."},
+    {"name": "File-path handoff", "evidence_paths": ["OS/gsd-2/src/resources/skills/handoff/SKILL.md"], "category": "core", "description": "continue.md written for a stranger: last/next/why/open/do-not."}
+  ],
+  "quality_signals": {
+    "test_framework": "vitest / bun tests",
+    "test_file_count": 160,
+    "linter": "unknown",
+    "ci_provider": "github-actions",
+    "ci_workflow_count": 1
+  },
+  "documentation": {
+    "readme_sections": ["Archived redirect"],
+    "has_contributing": true,
+    "has_architecture_doc": true,
+    "docs_page_count": 80
+  },
+  "extension_points": {
+    "plugins": {"mechanism": "extension-manifest.json + Extension API", "path": "docs/extension-sdk/"},
+    "hooks": {"mechanism": "documented hooks", "events": ["see docs/user-docs/hooks.md"]},
+    "mcp": {"client": true, "server": true}
+  },
+  "unique_selling_points": [
+    "Implements Agent Skills as a runtime, not just a pack",
+    "On-disk milestone state is the source of truth",
+    "Scout compresses context for agents who have not seen the files"
+  ],
+  "limitations": [
+    {"description": "README now redirects to open-gsd/gsd-pi; this clone is an archived snapshot (last commit 2026-05-22)", "source": "OS/gsd-2/README.md"},
+    {"description": "No company-sim / org-chart / token budgets", "source": "OS/gsd-2/docs/user-docs/working-in-teams.md"}
+  ],
+  "confidence": "HIGH",
+  "extraction_method": "filesystem-scan",
+  "skill_version": "1.0.0"
+}

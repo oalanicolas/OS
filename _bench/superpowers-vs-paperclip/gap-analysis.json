@@ -1,0 +1,184 @@
+{
+  "generatedAt": "2026-08-12T20:15:00Z",
+  "subjects": [
+    "superpowers",
+    "paperclip"
+  ],
+  "dimension_pack": "harness-structure",
+  "a_gaps": [
+    {
+      "id": "GAP-A-001",
+      "name": "Org-chart + hire",
+      "dimension": "squad_model",
+      "type": "Missing",
+      "severity": "HIGH",
+      "complexity": "HIGH",
+      "strategic_value": "LOW",
+      "priority": "P3",
+      "evidence": "OS/paperclip/packages/teams-catalog/catalog/bundled/company-defaults/core-exec-team/TEAM.md",
+      "target_in_a": "out of scope (process plugin)",
+      "description": "No standing employees. Correct for Superpowers' product; do not port."
+    },
+    {
+      "id": "GAP-A-002",
+      "name": "Budgets + board",
+      "dimension": "governance",
+      "type": "Missing",
+      "severity": "HIGH",
+      "complexity": "HIGH",
+      "strategic_value": "LOW",
+      "priority": "P3",
+      "evidence": "OS/paperclip/docs/companies/companies-spec.md",
+      "target_in_a": "out of scope",
+      "description": "No money plane. Weighted impact is high but strategic value for a process plugin is low."
+    },
+    {
+      "id": "GAP-A-003",
+      "name": "MCP + plugin runtime",
+      "dimension": "plugin_extensibility",
+      "type": "Missing",
+      "severity": "MED",
+      "complexity": "HIGH",
+      "strategic_value": "LOW",
+      "priority": "P3",
+      "evidence": "OS/paperclip/doc/plugins/PLUGIN_SPEC.md",
+      "target_in_a": "out of scope (zero-dep)",
+      "description": "Zero-dep stance forbids a plugin VM."
+    },
+    {
+      "id": "GAP-A-004",
+      "name": "Cross-runtime adapters",
+      "dimension": "plugin_extensibility",
+      "type": "Partial",
+      "severity": "MED",
+      "complexity": "HIGH",
+      "strategic_value": "MED",
+      "priority": "P2",
+      "evidence": "OS/paperclip/packages/adapters/",
+      "target_in_a": "OS/superpowers/docs/porting-to-a-new-harness.md",
+      "description": "SP ports to coding hosts; does not orchestrate Codex+Claude+Cursor as employees."
+    }
+  ],
+  "b_gaps": [
+    {
+      "id": "GAP-B-001",
+      "name": "TDD iron law + 5-round breaker",
+      "dimension": "gates_and_discipline",
+      "type": "Missing",
+      "severity": "HIGH",
+      "complexity": "MED",
+      "strategic_value": "HIGH",
+      "priority": "P1",
+      "evidence": "OS/superpowers/skills/subagent-driven-development/SKILL.md",
+      "target_in_a": "OS/paperclip/packages/skills-catalog/ as requiredSkills",
+      "description": "Company-sim does not teach agents how to write software. Port as a requiredSkills pack, not core."
+    },
+    {
+      "id": "GAP-B-002",
+      "name": "SessionStart bootstrap + SDO",
+      "dimension": "skill_system",
+      "type": "Missing",
+      "severity": "HIGH",
+      "complexity": "LOW",
+      "strategic_value": "HIGH",
+      "priority": "P1",
+      "evidence": "OS/superpowers/hooks/session-start",
+      "target_in_a": "OS/paperclip heartbeat / AGENTS.md",
+      "description": "Heartbeat names a skill; it does not inject a force-invoke body or SDO."
+    },
+    {
+      "id": "GAP-B-003",
+      "name": "File-brief scripts / ledger",
+      "dimension": "handoff_and_state",
+      "type": "Partial",
+      "severity": "MED",
+      "complexity": "MED",
+      "strategic_value": "HIGH",
+      "priority": "P1",
+      "evidence": "OS/superpowers/skills/subagent-driven-development/SKILL.md",
+      "target_in_a": "OS/paperclip issue attachments",
+      "description": "Issue comments are durable but do not extract a task brief or scoped review package."
+    },
+    {
+      "id": "GAP-B-004",
+      "name": "Methodology spine (brainstorm\u2192plan\u2192SDD)",
+      "dimension": "complex_work_spine",
+      "type": "Partial",
+      "severity": "MED",
+      "complexity": "MED",
+      "strategic_value": "HIGH",
+      "priority": "P2",
+      "evidence": "OS/superpowers/README.md",
+      "target_in_a": "OS/paperclip/docs/pipelines-tutorial.md",
+      "description": "Pipelines move cases; they do not produce a signed-off design then a junior-proof plan."
+    }
+  ],
+  "counts": {
+    "a_gaps_total": 4,
+    "b_gaps_total": 4,
+    "a_p0": 0,
+    "a_p1": 0,
+    "a_p2": 1,
+    "a_p3": 3,
+    "b_p0": 0,
+    "b_p1": 3,
+    "b_p2": 1,
+    "b_p3": 0
+  },
+  "most_affected_dimensions": {
+    "a": [
+      {
+        "dimension": "governance",
+        "gap_count": 1,
+        "highest_priority": "P3"
+      },
+      {
+        "dimension": "squad_model",
+        "gap_count": 1,
+        "highest_priority": "P3"
+      }
+    ],
+    "b": [
+      {
+        "dimension": "gates_and_discipline",
+        "gap_count": 1,
+        "highest_priority": "P1"
+      },
+      {
+        "dimension": "skill_system",
+        "gap_count": 1,
+        "highest_priority": "P1"
+      }
+    ]
+  },
+  "action_items": [
+    {
+      "action_title": "Add Superpowers process pack as Paperclip requiredSkills (TDD+SDD+SDO)",
+      "target": "B",
+      "closes_gap": "GAP-B-001",
+      "priority": "P1",
+      "source_to_copy": "OS/superpowers/skills/subagent-driven-development/SKILL.md"
+    },
+    {
+      "action_title": "Inject a using-superpowers-class bootstrap into Paperclip heartbeat",
+      "target": "B",
+      "closes_gap": "GAP-B-002",
+      "priority": "P1",
+      "source_to_copy": "OS/superpowers/hooks/session-start"
+    },
+    {
+      "action_title": "Adopt task-brief/review-package file handoff on Paperclip issues",
+      "target": "B",
+      "closes_gap": "GAP-B-003",
+      "priority": "P1",
+      "source_to_copy": "OS/superpowers/skills/subagent-driven-development/SKILL.md"
+    },
+    {
+      "action_title": "Do not add org/budgets to Superpowers core",
+      "target": "A",
+      "closes_gap": "GAP-A-001",
+      "priority": "P3",
+      "source_to_copy": "OS/paperclip/docs/companies/companies-spec.md"
+    }
+  ]
+}
