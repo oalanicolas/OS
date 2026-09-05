@@ -26,7 +26,8 @@ mcp-servers	https://github.com/modelcontextprotocol/servers.git	main
 mem0	https://github.com/mem0ai/mem0.git	main
 memori-labs	https://github.com/MemoriLabs/Memori.git	main
 mempalace	https://github.com/milla-jovovich/mempalace	main
-next-level-outreach	https://github.com/henriquecaner/next-level-outreach	main
+# next-level-outreach — remoto 404 desde 2026-08-23 (henriquecaner/next-level-outreach). Clone local preservado.
+# next-level-outreach	https://github.com/henriquecaner/next-level-outreach	main
 openclaw	https://github.com/openclaw/openclaw	main
 paperclip	https://github.com/paperclipai/paperclip	master
 spec-kit	https://github.com/github/spec-kit.git	main

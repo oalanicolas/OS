@@ -1,9 +1,11 @@
 # OS Benchmarks — Index
 
-_Regenerado em 2026-08-06 via os-bench memory-5way._
+_Atualizado em 2026-09-05._
 
 | Slug | Type | Pack | Generated | Quality Gate |
 |------|------|------|-----------|--------------|
+| _research/os-update-convergence-2026-09-05 | research | cross-project-delta | 2026-09-05 | evidence paths + commit ranges |
+| _research/os-update-convergence-2026-08-23 | research | cross-project-delta | 2026-08-23 | evidence paths + commit ranges |
 | case-ops-8way | nway | case-ops | 2026-08-12T22:00:00Z | PASS |
 | superpowers-vs-paperclip | pair | harness-structure | 2026-08-12T20:15:00Z | PASS |
 | harness-structure-8way | nway | harness-structure | 2026-08-12T20:00:00Z | PASS |

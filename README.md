@@ -5,7 +5,7 @@
 <sub>🌐 <b>English</b> · <a href="README.pt-BR.md">Português</a></sub>
 
 [![Awesome](https://awesome.re/badge-flat2.svg)](https://awesome.re)
-[![Last Update](https://img.shields.io/badge/last%20update-April%202026-blue?style=flat-square)]()
+[![Last Update](https://img.shields.io/badge/last%20update-September%202026-blue?style=flat-square)]()
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](#contributing)
 [![License: CC0-1.0](https://img.shields.io/badge/License-CC0_1.0-lightgrey.svg?style=flat-square)](https://creativecommons.org/publicdomain/zero/1.0/)
 
@@ -19,7 +19,7 @@
 
 ---
 
-> **32 projects. 11 categories. Opinionated curation.** Contains no original code — all repos are forks/clones for analysis. See [Local mirror](#-local-mirror) to reproduce the bench.
+> **33 projects. 11 categories. Opinionated curation.** Contains no original code — all repos are forks/clones for analysis. See [Local mirror](#-local-mirror) to reproduce the bench.
 
 ---
 
@@ -88,7 +88,7 @@
 |---------|-------|--------------|
 | [mem0ai/mem0](https://github.com/mem0ai/mem0) | Python | Leading memory layer in 2025; native vector store and a simple API for LLM apps. |
 | [milla-jovovich/mempalace](https://github.com/milla-jovovich/mempalace) | Python + Chroma | 96.6% R@5 with verbatim storage (no paraphrasing); local-first, no API keys. |
-| [garrytan/gbrain](https://github.com/garrytan/gbrain) | TS + PGLite + pgvector | 95% recall@5; entity self-wiring without an LLM; 30-minute setup. |
+| [garrytan/gbrain](https://github.com/garrytan/gbrain) | TS + PGLite + pgvector | 95.32% LongMemEval recall_all@5 with Voyage rerank (hybrid-only 93.19%; expansion@k=5 is 54.89%); entity self-wiring without an LLM. |
 | [MemoriLabs/Memori](https://github.com/MemoriLabs/Memori) | Python | LLM-agnostic, agent-native memory infrastructure; 81.95% on LoCoMo, SQL-backed. |
 
 ---
@@ -99,6 +99,7 @@
 |---------|-------|--------------|
 | [openclaw/openclaw](https://github.com/openclaw/openclaw) | TS + SwiftUI + Kotlin | 20+ channels (WhatsApp, Telegram, iMessage…) running on-device. |
 | [NousResearch/hermes-agent](https://github.com/NousResearch/hermes-agent) | Python asyncio | Auto-creates skills; runs on a $5 VPS or serverless with hibernation; multi-model. |
+| [danielmiessler/LifeOS](https://github.com/danielmiessler/LifeOS) | Skills + hooks | Personal life OS: TELOS/ISA as living spec, Pulse dashboard, receipts-gated releases (claim ≠ done). |
 
 ---
 
@@ -172,12 +173,12 @@ Cross-cutting axis, grouping harnesses by recurring technique/architecture:
 
 | Pattern | Projects | Note |
 |---------|----------|------|
-| **First-class memory** | gbrain, mempalace, gsd-pi, hermes-agent, mem0, memori-labs | Memory as a separate, measurable component — not a bolt-on. |
+| **First-class memory** | gbrain, mempalace, gsd-pi, hermes-agent, mem0, memori-labs, LifeOS | Memory as a separate, measurable component — not a bolt-on. |
 | **Spec-driven** | spec-kit, get-shit-done, superpowers | Pragmatic alternative to "vibe coding"; specs drive execution. |
 | **Multi-persona / party-mode** | BMAD-METHOD, crewAI, autogen, paperclip, gstack | Coordination across multiple roles inside a single harness. |
 | **Parallel subagents** | superpowers, ai-website-cloner-template, gstack | Task fan-out to specialized agents. |
 | **Durable / replay** | vercel/workflow, gh-aw | Event-sourced; survives crashes; reproducible. |
-| **Local-first** | mempalace, openclaw, gbrain, hermes-agent | No cloud dependency; on-device or self-hosted. |
+| **Local-first** | mempalace, openclaw, gbrain, hermes-agent, LifeOS | No cloud dependency; on-device or self-hosted. |
 | **Governance / policy** | agent-governance-toolkit, Clawith | Runtime security and agent org charts. |
 | **24/7 persistent** | claude-remote-manager, hermes-agent, gsd-pi | Cron, hibernation, automatic resume. |
 | **Self-improvement / autoresearch** | ADAS, AI-Scientist-v2, gepa, superpowers | A loop that measures, mutates and optimizes — code, prompts or architecture. |
@@ -192,9 +193,11 @@ To clone/update every project in parallel:
 ./update.sh
 ```
 
-The script reads `repos.tsv`, clones whatever is missing and runs `pull --ff-only` on the rest.
+The script reads `repos.tsv`, clones whatever is missing and runs `pull --ff-only` on the rest. Lines starting with `#` are skipped (the `next-level-outreach` remote has been 404 since 2026-08-23; the local clone is kept).
 
 Legend: `[+]` cloned · `[↑]` updated · `[=]` up-to-date · `[x]` error
+
+Latest sync notes: [`_bench/_research/os-update-convergence-2026-09-05.md`](_bench/_research/os-update-convergence-2026-09-05.md).
 
 ---
 
