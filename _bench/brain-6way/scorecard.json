@@ -1,6 +1,7 @@
 {
   "slug": "brain-6way",
-  "generatedAt": "2026-08-06T21:44:27Z",
+  "generatedAt": "2026-09-05T18:00:00Z",
+  "supersedes": "2026-08-06T21:44:27Z",
   "pack": "memory",
   "weights": {
     "recall_accuracy": 0.22,
@@ -14,19 +15,19 @@
   },
   "scores": {
     "mempalace": {
-      "recall_accuracy": 93, "write_latency": 65, "read_latency": 75, "persistence": 95,
-      "schema_flexibility": 80, "local_first": 95, "vector_support": 72, "graph_support": 86,
-      "weighted_total": 84.23
+      "recall_accuracy": 93, "write_latency": 65, "read_latency": 77, "persistence": 95,
+      "schema_flexibility": 83, "local_first": 95, "vector_support": 75, "graph_support": 86,
+      "weighted_total": 85.1
     },
     "gbrain": {
-      "recall_accuracy": 80, "write_latency": 82, "read_latency": 80, "persistence": 82,
-      "schema_flexibility": 78, "local_first": 58, "vector_support": 78, "graph_support": 94,
-      "weighted_total": 78.56
+      "recall_accuracy": 90, "write_latency": 84, "read_latency": 80, "persistence": 82,
+      "schema_flexibility": 80, "local_first": 58, "vector_support": 82, "graph_support": 94,
+      "weighted_total": 81.6
     },
     "mem0": {
-      "recall_accuracy": 92, "write_latency": 80, "read_latency": 74, "persistence": 72,
-      "schema_flexibility": 86, "local_first": 40, "vector_support": 98, "graph_support": 72,
-      "weighted_total": 77.54
+      "recall_accuracy": 92, "write_latency": 80, "read_latency": 74, "persistence": 74,
+      "schema_flexibility": 86, "local_first": 40, "vector_support": 98, "graph_support": 76,
+      "weighted_total": 78.18
     },
     "memori-labs": {
       "recall_accuracy": 85, "write_latency": 76, "read_latency": 76, "persistence": 78,
@@ -44,7 +45,33 @@
       "weighted_total": 52.94
     }
   },
-  "ranking_memory_pack": ["mempalace", "gbrain", "mem0", "memori-labs", "LifeOS", "gsd-2"],
+  "taxonomy": {
+    "spec": "OS/_bench/_research/taxonomy.md §12",
+    "job_id": {
+      "mempalace": "M1",
+      "gbrain": "M2",
+      "mem0": "M3",
+      "memori-labs": "M4",
+      "LifeOS": "life-OS",
+      "gsd-2": "process",
+      "honcho": "M5",
+      "claude-mem": "session-observer"
+    },
+    "pack_admission": {
+      "admitted": ["mempalace", "gbrain", "mem0", "memori-labs"],
+      "excluded_from_weighted_ranking": ["LifeOS", "gsd-2"],
+      "adjacent_not_scored": ["honcho", "claude-mem"],
+      "excluded_reason": {
+        "LifeOS": "kind=life-OS; Cortex is an M2-like module inside a non-M product. Diagnostic dimension scores only; not in pack ranking.",
+        "gsd-2": "kind=process; E4 residue, not an M store.",
+        "honcho": "job=M5; pack memory.recall_accuracy is IR R@k, not peer representation. Do not invent a recall score.",
+        "claude-mem": "kind=session-observer; not a vault."
+      }
+    }
+  },
+  "ranking_admitted": ["mempalace", "gbrain", "mem0", "memori-labs"],
+  "ranking_memory_pack": ["mempalace", "gbrain", "mem0", "memori-labs"],
+  "buy": "You do not buy rank 1 of this pack. You buy a job ID. LifeOS is the life-OS product, not 5th memory.",
   "dimension_leaders": {
     "recall_accuracy": "mempalace",
     "write_latency": "gbrain",
@@ -55,10 +82,15 @@
     "vector_support": "mem0",
     "graph_support": "gbrain"
   },
+  "adjacent_not_scored": {
+    "honcho": "peer-identity memory (scopes + representations + Qdrant). See OS/_bench/_inventories/honcho/",
+    "claude-mem": "coding-session observer, not a knowledge vault"
+  },
   "LifeOS_notes": {
     "recall_accuracy": "BM25 + markdown; no public industry recall bench",
     "vector_support": "Explicitly no intermediate vector index — by design",
     "graph_support": "graphology KnowledgeGraph + People/Companies/Ideas/Research",
-    "local_first": "Files local; DA depends on cloud harness LLM"
+    "local_first": "Files local; DA depends on cloud harness LLM",
+    "delta": "v7.40.4 Pulse dashboard export + Hermes heartbeat — pack scores unchanged"
   }
 }

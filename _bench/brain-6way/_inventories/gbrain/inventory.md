@@ -1,47 +1,81 @@
-# Inventario: GBrain (refresh)
+# Inventário: GBrain
 
-**Path:** `OS/gbrain/`  
-**Date:** 2026-08-06  
-**Confidence:** HIGH  
-**Version:** 0.42.73.2
+**Path:** `OS/gbrain/`
+**Date:** 2026-09-05
+**Extraction Method:** filesystem-scan + doc-scan + CHANGELOG
+**Confidence:** HIGH
+**Supersedes:** inventory 2026-04-19 / 2026-08-06
+
+---
 
 ## Identity
 
 | Field | Value |
 |-------|-------|
-| Source | https://github.com/garrytan/gbrain |
-| Stack | Bun/TS, PGLite or Postgres+pgvector, MCP, Minions queue |
+| Slug | gbrain |
+| Source URL | https://github.com/garrytan/gbrain |
+| Primary language | TypeScript (Bun) |
+| Secondary languages | SQL, Markdown (skills) |
+| Stack | Bun, PGLite / Postgres+pgvector, MCP, OpenClaw plugin, Voyage rerank |
 | License | MIT |
-| Tagline | Search gives pages; GBrain gives the **answer** (synthesis + gap analysis + graph) |
+| Version | **0.48.2.0** (`VERSION`) |
+| Last commit | 2026-09-03 `8c70f6255` |
+| Tagline | Search gives you raw pages. GBrain gives you the answer. |
 
-## Headline metrics (in-repo)
+## Key Metrics
 
 | Metric | Value | Source |
 |--------|-------|--------|
-| BrainBench P@5 / R@5 | 49.1% / **97.9%** | `README.md` (graph on; +31.4 P@5 vs graph-off) |
-| Production scale (author) | 146k pages, 24k people, 5k companies | README |
-| Engines | PGLite default + Postgres/Supabase | README / `src/core/engine.ts` |
+| Files | 4761 | filesystem scan (excl. .git) |
+| Version | 0.48.2.0 | `OS/gbrain/VERSION` |
+| Last commit | 2026-09-03 | `git log -1` |
+| Author prod claim | 155 795 pages, 24 589 people, 5 340 companies, 66 crons | `OS/gbrain/README.md` |
 
-## Capabilities (delta since memory-4way / v0.33)
+## Capabilities (observed, delta vs ago/2026)
 
-| Capability | Evidence |
-|------------|----------|
-| Company brain / multi-tenant | README company-brain; auth slug-prefix write fence v0.42.72 |
-| Provider-agnostic AI gateway | `src/core/ai/gateway.ts`, embedding migration v0.42.67 |
-| Life Chronicle bi-temporal | v0.42.56 feat(chronicle) |
-| Typed-edge relational retrieval | v0.42.34 |
-| skillopt / skillpacks | v0.42.1, v0.42.47 |
-| Content-quality gate on sync | v0.42.8 |
-| Doctor cause-ranked + remediate | v0.42.16+ |
-| Self-upgrade + GitHub Releases | v0.42.12 / v0.42.71 |
+### Core (unchanged job)
 
-## Persistence
+| Capability | Evidence | Notes |
+|------------|----------|-------|
+| Synthesis `think` + gap analysis | `OS/gbrain/README.md` | Answer + citations + what the brain doesn't know |
+| Zero-LLM typed graph on write | `OS/gbrain/src/core/link-extraction.ts` | `attended` / `works_at` / `invested_in` / `founded` / `advises` |
+| Company brain + source isolation | `OS/gbrain/docs/tutorials/company-brain.md` | OAuth slice per person; fuzz-tested reads |
+| Dream / enrich / doctor overnight | `OS/gbrain/CHANGELOG.md` v0.47.8 | Write-path distillation + buried-signal rescue |
+| Minions durable queue | `OS/gbrain/src/core/minions/` | Postgres-native jobs |
 
-- Primary: `compiled_truth` (synthesized) + raw in JSONB
-- Graph edges on every write (zero-LLM heuristics)
-- Not verbatim-first
+### New since memory-5way (2026-08-06 / v0.42.73.2)
 
-## Local-first
+| Capability | Evidence | Notes |
+|------------|----------|-------|
+| Public LongMemEval retrieval | `OS/gbrain/CHANGELOG.md` `[0.48.2.0]` | `recall_all@5` hybrid **93.19%** (438/470); hybrid+Voyage rerank **95.32%** (448/470); `recall_any@5` 98.72–99.79%. Dataset `longmemeval_s` 470 scored. Receipts in sibling gbrain-evals. |
+| Fusion demotion fix | `OS/gbrain/CHANGELOG.md` v0.48.0.0 | Unpublished keyword-fallback had dropped hybrid to **51.3%**; v0.48 restored 93.19% |
+| Volunteer / push context | `OS/gbrain/docs/guides/push-context.md`, `openclaw.plugin.json` | OpenClaw volunteer arm default-on; Claude Code hook lane since v0.43 |
+| Ambient memory writeback | `OS/gbrain/CHANGELOG.md` v0.47.10.0 | MCP instructions + Stop-hook backstop + read-time TTL |
+| Multi-harness capture | `OS/gbrain/CHANGELOG.md` v0.47.9.0 | claude-code / openclaw / codex + consent-before-egress |
+| Voyage rerank default | `OS/gbrain/CHANGELOG.md` v0.48.2.0 | `voyage:rerank-2.5`; no_key fail-open (`degraded: reranker_skipped`) |
+| Chat history sync | `OS/gbrain/CHANGELOG.md` v0.46.31.0 | live ChatGPT/Claude history into the brain |
+| Gmail open-loop | `OS/gbrain/CHANGELOG.md` v0.47.0.0 | connector + credential vault |
 
-- PGLite zero-server works; embeddings/rerank usually need API keys
-- Full offline path incomplete vs mempalace
+## Unique Selling Points
+
+- Only box that ships synthesis + graph traversal + gap analysis together (`README.md`)
+- Now also ships a **public** LongMemEval retrieval receipt (closes the Aug gap vs mempalace/mem0)
+- Push, not only pull (`volunteer_context`)
+
+## Limitations / Known Issues
+
+- Default rerank needs `VOYAGE_API_KEY`; without it, hybrid is 93.19% not 95.32%
+- `tokenmax` multi-query expansion **hurts** small-k LME (`recall_all@5` 93.19% → 54.89%)
+- No LLM-judged **answer-accuracy** run published (CHANGELOG discloses this)
+- Primary path still paraphrases (`compiled_truth`); not verbatim-first
+- Embed/think still assume API keys (local-first hit)
+
+## Extraction Notes
+
+- Scanned: `VERSION`, `README.md`, `CHANGELOG.md` `[0.46–0.48]`, `docs/tutorials/company-brain.md`, `docs/guides/push-context.md`, `docs/protocol/MEMORY_VERBS_v1.md`, `openclaw.plugin.json`
+- Data sources: filesystem 100%
+- Previous inventory (0.12.3 / 0.42.73.2) retained as historical; this file is the Sept 2026 tip
+
+---
+
+_Generated by os-bench inventory task | 2026-09-05_

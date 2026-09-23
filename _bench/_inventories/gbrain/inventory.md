@@ -1,9 +1,10 @@
 # Inventário: GBrain
 
 **Path:** `OS/gbrain/`
-**Date:** 2026-04-19
-**Extraction Method:** filesystem-scan + doc-scan
+**Date:** 2026-09-05
+**Extraction Method:** filesystem-scan + doc-scan + CHANGELOG
 **Confidence:** HIGH
+**Supersedes:** inventory 2026-04-19 / 2026-08-06
 
 ---
 
@@ -13,144 +14,68 @@
 |-------|-------|
 | Slug | gbrain |
 | Source URL | https://github.com/garrytan/gbrain |
-| Primary language | TypeScript (Bun runtime) |
+| Primary language | TypeScript (Bun) |
 | Secondary languages | SQL, Markdown (skills) |
-| Stack | Bun, TypeScript, PGLite (embedded Postgres via WASM), Postgres+pgvector (Supabase), OpenAI text-embedding-3-large, MCP (stdio+HTTP) |
+| Stack | Bun, PGLite / Postgres+pgvector, MCP, OpenClaw plugin, Voyage rerank |
 | License | MIT |
-| Version | 0.12.3 |
-| Tagline | Your AI agent is smart but forgetful. GBrain gives it a brain — hybrid RAG + self-wiring knowledge graph |
+| Version | **0.48.2.0** (`VERSION`) |
+| Last commit | 2026-09-03 `8c70f6255` |
+| Tagline | Search gives you raw pages. GBrain gives you the answer. |
 
 ## Key Metrics
 
 | Metric | Value | Source |
 |--------|-------|--------|
-| TS files (src) | 1,703 | filesystem scan |
-| Bundled skills | 26 | `skills/` |
-| CLI commands | 34 | `src/commands/` |
-| MCP operations | 41 | `src/core/operations.ts` |
-| Integration recipes | 7 | `recipes/` |
-| Published benchmarks | 4 | `docs/benchmarks/` |
-| Last commit | 2026-04-19 | `git log -1` |
+| Files | 4761 | filesystem scan (excl. .git) |
+| Version | 0.48.2.0 | `OS/gbrain/VERSION` |
+| Last commit | 2026-09-03 | `git log -1` |
+| Author prod claim | 155 795 pages, 24 589 people, 5 340 companies, 66 crons | `OS/gbrain/README.md` |
 
-## Modules / Top-level Structure
+## Capabilities (observed, delta vs ago/2026)
 
-| Module | Path | Type | Description |
-|--------|------|------|-------------|
-| src/core | `src/core/` | library | Operations contract, engines (PGLite + Postgres), hybrid search, chunkers, embeddings |
-| src/commands | `src/commands/` | app | 34 CLI subcommands |
-| src/mcp | `src/mcp/` | service | MCP stdio server generated from contract |
-| src/core/minions | `src/core/minions/` | library | Durable Postgres-native job queue |
-| skills | `skills/` | package | 26 skills + RESOLVER.md routing |
-| recipes | `recipes/` | library | 7 integration recipes |
-| docs | `docs/` | library | MCP deploy, benchmarks, architecture, ethos, guides, designs |
-| templates | `templates/` | library | SOUL/USER/ACCESS_POLICY/HEARTBEAT templates |
-
-## Entry Points
-
-| Entry | Path | Command |
-|-------|------|---------|
-| CLI | `src/cli.ts` | `gbrain <cmd>` |
-| MCP stdio | `src/mcp/server.ts` | `gbrain serve` |
-| MCP HTTP | `src/mcp/server.ts` | `gbrain serve --http 8787` (via ngrok + token) |
-
-## Capabilities (observed)
-
-### Core Capabilities
+### Core (unchanged job)
 
 | Capability | Evidence | Notes |
 |------------|----------|-------|
-| Hybrid search (vector + keyword + RRF) | `src/core/search/`, `src/core/search/intent.ts`, `src/core/search/expansion.ts`, `src/core/search/eval.ts` | Multi-query expansion + dedup + intent classifier |
-| Self-wiring knowledge graph (zero-LLM) | `src/core/link-extraction.ts`, `src/commands/extract.ts`, `src/commands/graph-query.ts` | Typed edges: attended/works_at/invested_in/founded/advises/source/mentions |
-| Pluggable engines (PGLite / Postgres) | `src/core/engine.ts`, `src/core/engine-factory.ts`, `src/core/pglite-engine.ts`, `src/core/postgres-engine.ts` | Bidirectional migration via `gbrain migrate` |
-| Contract-first ops (~41 shared) | `src/core/operations.ts` (1137 LOC), `src/mcp/server.ts`, `src/cli.ts` | CLI + MCP from single source |
-| Minions durable job queue | `src/core/minions/queue.ts`, `src/core/minions/worker.ts`, `src/core/minions/attachments.ts`, `src/commands/jobs.ts` | Postgres-native, BullMQ-inspired, cascade-kill, idempotency |
-| Tiered enrichment | `src/core/enrichment-service.ts`, `skills/enrich/` | Auto-escalation by mention frequency |
-| 3-tier chunking | `src/core/chunkers/` | Recursive, semantic, LLM-guided |
-| Retrieval eval harness | `src/core/search/eval.ts`, `src/commands/eval.ts`, `docs/benchmarks/2026-04-18-brainbench-v1.md` | P@k, R@k, MRR, nDCG@k; BrainBench v1 R@5 83→95% |
+| Synthesis `think` + gap analysis | `OS/gbrain/README.md` | Answer + citations + what the brain doesn't know |
+| Zero-LLM typed graph on write | `OS/gbrain/src/core/link-extraction.ts` | `attended` / `works_at` / `invested_in` / `founded` / `advises` |
+| Company brain + source isolation | `OS/gbrain/docs/tutorials/company-brain.md` | OAuth slice per person; fuzz-tested reads |
+| Dream / enrich / doctor overnight | `OS/gbrain/CHANGELOG.md` v0.47.8 | Write-path distillation + buried-signal rescue |
+| Minions durable queue | `OS/gbrain/src/core/minions/` | Postgres-native jobs |
 
-### Optional/Extensibility Capabilities
+### New since memory-5way (2026-08-06 / v0.42.73.2)
 
 | Capability | Evidence | Notes |
 |------------|----------|-------|
-| MCP stdio + HTTP | `src/mcp/server.ts`, `docs/mcp/{DEPLOY,CLAUDE_CODE,CLAUDE_DESKTOP,CLAUDE_COWORK,PERPLEXITY}.md` | Remote MCP with Bearer token |
-| 26 skills | `skills/signal-detector/`, `skills/brain-ops/`, `skills/query/`, `skills/enrich/`, `skills/minion-orchestrator/`, `skills/RESOLVER.md` | Fat markdown skills + resolver |
-| 7 recipes | `recipes/calendar-to-brain.md`, `recipes/email-to-brain.md`, `recipes/twilio-voice-brain.md`, `recipes/x-to-brain.md` | YAML+MD, trust-tagged |
-| 4-tier identity (SOUL/USER/ACCESS/HEARTBEAT) | `skills/soul-audit/SKILL.md`, `templates/` | 6-phase interview |
-| Publish (password-HTML, zero LLM) | `src/commands/publish.ts` | Deterministic |
-| Universal migration | `skills/migrate/`, `src/commands/migrate-engine.ts` | Obsidian/Notion/Logseq/Roam/CSV/JSON/MD |
-| Doctor + reliability checks | `src/commands/doctor.ts` | jsonb_integrity, markdown_body_completeness |
-| Voice transcription (Groq Whisper default, OpenAI fallback) | `src/core/transcription.ts` | ffmpeg segmentation for >25 MB |
-| Trust boundary (remote flag) | `src/core/operations.ts` OperationContext.remote | Tightens filesystem confinement for untrusted agent callers |
-
-## Tests / Quality Signals
-
-| Signal | Value | Evidence |
-|--------|-------|----------|
-| Unit tests | ~75 files, 1412 pass | `test/` |
-| E2E tests | 8 files, 119 when `DATABASE_URL` set | `test/e2e/` |
-| Test framework | bun test | `bun test` |
-| CI/CD | GitHub Actions | `.github/workflows/` |
-| Benchmarks published | Yes (BrainBench v1, Minions prod/lab, tweet ingestion) | `docs/benchmarks/` |
-
-## Documentation
-
-| Type | Path | Status |
-|------|------|--------|
-| README | `README.md` | Present (detailed tables + benchmarks) |
-| CLAUDE.md | `CLAUDE.md` | 39 KB detailed architecture notes |
-| CHANGELOG | `CHANGELOG.md` | 100 KB |
-| Ethos | `docs/ethos/THIN_HARNESS_FAT_SKILLS.md`, `docs/ethos/MARKDOWN_SKILLS_AS_RECIPES.md` | Present |
-| Benchmarks | `docs/benchmarks/2026-04-18-brainbench-v1.md` + 3 others | Reproducible |
-| MCP guides | `docs/mcp/` | Per-client setup |
-| Install for agents | `INSTALL_FOR_AGENTS.md` | Agent-driven install |
-
-## Extension Points
-
-| Extension Type | Where | How to extend |
-|----------------|-------|---------------|
-| Skills | `skills/` + RESOLVER.md | Fat markdown + conformance test (skill-creator) |
-| Recipes | `recipes/` | YAML frontmatter + MD |
-| Engines | `src/core/engine.ts` interface | pglite / postgres (bidirectional migrate) |
-| Storage | `src/core/storage.ts` | S3, Supabase Storage, local |
-| MCP | `src/mcp/server.ts` | 41 operations auto-exposed |
-| Plugin handlers | `docs/guides/plugin-handlers.md` | Host-specific (RCE-safe): migration emits structured TODOs |
-
-## Notable Design Decisions
-
-- **Thin harness, fat skills** — evidence: `docs/ethos/THIN_HARNESS_FAT_SKILLS.md` (intelligence in skills, not runtime)
-- **Contract-first** — evidence: `src/core/operations.ts` defines ~41 shared ops; CLI + MCP are generated from it
-- **Engine pluggable from day one** — evidence: `src/core/engine-factory.ts` dynamic import of `pglite` or `postgres`
-- **Benchmarks are first-class** — evidence: `docs/benchmarks/` with reproducible harnesses, published numbers
-- **Trust boundary explicit** — evidence: `OperationContext.remote` flag; SSRF helpers in `src/commands/integrations.ts`
-- **Not a standalone assistant** — evidence: README "Designed to be installed and operated by an AI agent" (OpenClaw / Hermes recommended)
-
-## Limitations / Known Issues
-
-- Not a standalone assistant — brain layer under an agent platform — `README.md`
-- No built-in messaging channels — channels come from host (OpenClaw/Hermes)
-- MCP remote HTTP requires manual ngrok + token (not hosted) — `README.md`
-- ChatGPT MCP requires OAuth 2.1 (not yet implemented) — `README.md`
+| Public LongMemEval retrieval | `OS/gbrain/CHANGELOG.md` `[0.48.2.0]` | `recall_all@5` hybrid **93.19%** (438/470); hybrid+Voyage rerank **95.32%** (448/470); `recall_any@5` 98.72–99.79%. Dataset `longmemeval_s` 470 scored. Receipts in sibling gbrain-evals. |
+| Fusion demotion fix | `OS/gbrain/CHANGELOG.md` v0.48.0.0 | Unpublished keyword-fallback had dropped hybrid to **51.3%**; v0.48 restored 93.19% |
+| Volunteer / push context | `OS/gbrain/docs/guides/push-context.md`, `openclaw.plugin.json` | OpenClaw volunteer arm default-on; Claude Code hook lane since v0.43 |
+| Ambient memory writeback | `OS/gbrain/CHANGELOG.md` v0.47.10.0 | MCP instructions + Stop-hook backstop + read-time TTL |
+| Multi-harness capture | `OS/gbrain/CHANGELOG.md` v0.47.9.0 | claude-code / openclaw / codex + consent-before-egress |
+| Voyage rerank default | `OS/gbrain/CHANGELOG.md` v0.48.2.0 | `voyage:rerank-2.5`; no_key fail-open (`degraded: reranker_skipped`) |
+| Chat history sync | `OS/gbrain/CHANGELOG.md` v0.46.31.0 | live ChatGPT/Claude history into the brain |
+| Gmail open-loop | `OS/gbrain/CHANGELOG.md` v0.47.0.0 | connector + credential vault |
 
 ## Unique Selling Points
 
-- Self-wiring knowledge graph with zero-LLM auto-link
-- Hybrid RAG with published benchmark (R@5 83→95%, graph-only F1 86.6%)
-- Pluggable engines (PGLite zero-config OR Postgres+pgvector)
-- Contract-first: 41 ops drive both CLI and MCP
-- Minions durable Postgres-native job queue
-- Trust boundary: CLI vs agent callers treated differently
-- Installed by an agent (~30 min agent-driven install)
-- Designed as brain layer under OpenClaw or Hermes
+- Only box that ships synthesis + graph traversal + gap analysis together (`README.md`)
+- Now also ships a **public** LongMemEval retrieval receipt (closes the Aug gap vs mempalace/mem0)
+- Push, not only pull (`volunteer_context`)
 
----
+## Limitations / Known Issues
+
+- Default rerank needs `VOYAGE_API_KEY`; without it, hybrid is 93.19% not 95.32%
+- `tokenmax` multi-query expansion **hurts** small-k LME (`recall_all@5` 93.19% → 54.89%)
+- No LLM-judged **answer-accuracy** run published (CHANGELOG discloses this)
+- Primary path still paraphrases (`compiled_truth`); not verbatim-first
+- Embed/think still assume API keys (local-first hit)
 
 ## Extraction Notes
 
-- Scanned: `src/`, `skills/`, `recipes/`, `docs/`, `templates/`
-- Skipped: `node_modules`, `.git`, `bun.lock`
+- Scanned: `VERSION`, `README.md`, `CHANGELOG.md` `[0.46–0.48]`, `docs/tutorials/company-brain.md`, `docs/guides/push-context.md`, `docs/protocol/MEMORY_VERBS_v1.md`, `openclaw.plugin.json`
 - Data sources: filesystem 100%
-- Tools used: `ls`, `find`, `grep`, README/CLAUDE read
+- Previous inventory (0.12.3 / 0.42.73.2) retained as historical; this file is the Sept 2026 tip
 
 ---
 
-_Generated by os-bench inventory task | Template v1.0_
+_Generated by os-bench inventory task | 2026-09-05_

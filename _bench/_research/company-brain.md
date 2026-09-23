@@ -1,9 +1,10 @@
 # O cérebro da empresa — o que esses harnesses realmente modelam
 
-**Date:** 2026-08-12  
-**Escopo:** Paperclip (control plane), gbrain (knowledge ops), bordas (PARA, wiki plugin, LifeOS, mempalace, Superpowers)  
+**Date:** 2026-08-12 · **Refresh:** 2026-09-05  
+**Escopo:** Paperclip (control plane), gbrain (knowledge ops), bordas (PARA, wiki plugin, LifeOS, mempalace, Superpowers, honcho)  
 **Método:** leitura de paths reais + triangulação com `brain-6way`, `harness-structure-8way`, `superpowers-vs-paperclip`  
-**Não é um bench canônico** — é o mapa do *job* “cérebro de negócio”. Sem score inventado.
+**Não é um bench canônico** — é o mapa do *job* “cérebro de negócio”. Sem score inventado.  
+**Delta set/2026:** ver §7. Tese dos quatro jobs **não muda**. O que muda é a pressão para colapsá-los.
 
 ---
 
@@ -226,6 +227,41 @@ Teste de roteamento (gbrain `brain-vs-memory` + Paperclip memory-landscape):
 O buraco entre “Paperclip 83.88” e “gbrain 78.56 no pack memory” é exatamente este memo: **um é o nervoso, o outro é o córtex**. Nenhum dos dois sozinho é o cérebro da empresa.
 
 O mega-brain-vip é o contraexemplo vivo da linha “um store só para os quatro jobs”: recusou recusar, declarou a fusion (BMAD · Spec-Kit · Claude Code · Foundry · SINKRA · AIOX · JARVIS · KSL) e ficou com cinco control planes e membros `declared_gap` sob pele de produto. Não é o cérebro da empresa. É o corpo inteiro sem um coração único.
+
+---
+
+## 7. Delta setembro 2026 (após o pull)
+
+Tips: gbrain **0.48.2.0**, mempalace **3.9.0**, mem0 **2.0.20**, honcho **3.1.1**. Pack `memory` re-score em `memory-5way` / `brain-6way`. Memo irmão: `_research/second-brain-convergence.md`.
+
+A recusa Paperclip≠gbrain **sobrevive**. O que o pull fez foi aproximar os *bordas* do córtex:
+
+| Job | O que o pull tentou colar em cima | Por que ainda não é o job 2 |
+|-----|-----------------------------------|-----------------------------|
+| 1 Nervoso (Paperclip) | runner recovery, `agent.task_run`, GPT-6 Astra — control plane, não wiki | Continua recusando vector DB |
+| 2 Córtex (gbrain) | LME público 93.19/95.32; volunteer OpenClaw; ambient writeback | Continua recusando verbatim e org-chart |
+| 3 Memória do empregado | OpenClaw memory ranking; Clawith soul/memory; claude-mem observer | Continua privado do agente |
+| 4 Resíduo | spec-kit workflow slots, superpowers SDD workspace | Continua cartão, não dossier |
+| *Novo 2b. Peer identity* | **honcho** scopes + Qdrant + dialectic search-before-answer | Não é página de empresa; é “o que sei sobre Alice” |
+| *Novo 1b. Fleet archive* | **mempalace 3.9 hub** | Frota de agentes ≠ OAuth de funcionário |
+
+### O que absorver a mais (além da §5)
+
+8. **Volunteer de poucas páginas, com kill switch** — gbrain `retrieval_reflex_volunteer` / `docs/guides/push-context.md`. Paperclip heartbeat thin continua o modelo; o córtex *oferece*, o nervoso *não despeja*.
+9. **Recall ≠ coordenação** — mempalace `mempalace-task` vs skill de recall. Se a empresa copiar um hub, não misturar “quem tem a vez” com “o que foi dito”.
+10. **Scopes, não prefixos** — honcho: session ∈ vários scopes; peer unificado. Casa com gbrain “privacidade por source, não por prefixo”.
+11. **Dream é higiene, `think` é resposta** — mem0 Dream (merge/prune) não substitui gap analysis. Não promover o skill Dream a córtex.
+12. **When-to-touch é um contrato, não uma feature** — mempalace é question-driven (não busca greenfield); gbrain volunteer é reflexivo default-on. Ligar os dois no mesmo turno sem budget. Ver `_research/second-brain-protocols.md` §3.
+13. **OpenClaw já é o host** — engines builtin \| Honcho \| LanceDB + wiki ao lado (`OS/openclaw/docs/concepts/memory.md`). Migração Honcho é non-destructive → dual-SoT se o builtin ficar ligado. Gbrain plugin no mesmo assistente precisa de regra de roteamento, senão é mega-brain-vip em miniatura.
+14. **Scope ≠ auth** — honcho `scopes.mdx`: unscoped request vê tudo. Não usar scope como ACL de empresa.
+15. **Wake ≠ dump** — Paperclip `heartbeat-context` + gbrain `context_pack`/`delta` + OpenClaw `NO_REPLY`. Compactação é wake disfarçado. Ver `_research/wake-protocols.md`.
+16. **Host ≠ store** — um slot `memory`, um slot `contextEngine`; plugin quebra → quarantine + `legacy`. Workspace não é sandbox. Ver `_research/host-protocols.md`.
+
+### O que o pack `memory` agora diz (e o que não diz)
+
+gbrain 78.56 → **81.60** porque publicou LME, não porque virou nervoso. mempalace 84.23 → **85.10** porque o hub melhorou schema/vector, não porque virou company brain. A distância caiu (+5.67 → **+3.50**) e **local-first ainda desempata**. Honcho fora do pack de propósito.
+
+`graph-pitfalls-and-lessons.md` **não foi reescrito**: extract silencioso e `works_at` por adjacência continuam as armadilhas; um R@5 público não as apaga.
 
 Stack honesta:
 

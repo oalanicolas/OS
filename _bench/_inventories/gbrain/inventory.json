@@ -1,109 +1,37 @@
 {
-  "generatedAt": "2026-04-19T22:30:00Z",
+  "generatedAt": "2026-09-05T18:00:00Z",
   "subject": "gbrain",
   "path": "OS/gbrain/",
+  "source_url": "https://github.com/garrytan/gbrain",
   "primary_language": "TypeScript",
-  "secondary_languages": ["Markdown (skills)", "SQL"],
-  "stack": ["Bun runtime", "TypeScript", "PGLite (embedded Postgres 17 via WASM)", "Postgres + pgvector (Supabase)", "OpenAI text-embedding-3-large", "BullMQ-inspired job queue (Postgres-native)", "MCP (stdio + HTTP)"],
+  "secondary_languages": ["SQL", "Markdown"],
+  "stack": ["Bun", "PGLite", "Postgres", "pgvector", "MCP", "Voyage rerank", "OpenClaw plugin"],
   "license": "MIT",
-  "tagline": "Your AI agent is smart but forgetful. GBrain gives it a brain — hybrid RAG + self-wiring knowledge graph for agent platforms",
+  "version": "0.48.2.0",
+  "tagline": "Search gives you raw pages. GBrain gives you the answer.",
   "metrics": {
-    "loc_estimate": null,
-    "file_count": null,
-    "top_level_dirs": ["src", "skills", "docs", "recipes", "templates", "test", "eval", "scripts"],
-    "ts_source_files": 1703,
-    "readme_lines": null,
-    "last_commit_date": "2026-04-19",
-    "github_stars": null,
-    "github_contributors": null,
-    "skills_count": 26,
-    "mcp_operations": 41,
-    "commands_count": 34
+    "file_count": 4761,
+    "last_commit_date": "2026-09-03",
+    "last_commit": "8c70f6255"
   },
-  "version": "0.12.3",
-  "modules": [
-    { "name": "src/core", "path": "OS/gbrain/src/core/", "type": "library", "description": "Contract-first operations, pluggable engine interface, PGLite + Postgres engines, hybrid search, chunkers, embeddings" },
-    { "name": "src/commands", "path": "OS/gbrain/src/commands/", "type": "app", "description": "34 CLI command implementations (init, import, sync, query, eval, jobs, doctor, orphans, repair-jsonb, extract, etc)" },
-    { "name": "src/mcp", "path": "OS/gbrain/src/mcp/", "type": "service", "description": "MCP stdio server (41 operations generated from contract)" },
-    { "name": "src/core/minions", "path": "OS/gbrain/src/core/minions/", "type": "library", "description": "Postgres-native durable job queue (BullMQ-inspired): queue, worker, attachments, cascade-kill" },
-    { "name": "skills", "path": "OS/gbrain/skills/", "type": "package", "description": "26 skills organized by RESOLVER.md (signal-detector, brain-ops, ingest, query, maintain, enrich, minion-orchestrator, etc)" },
-    { "name": "recipes", "path": "OS/gbrain/recipes/", "type": "library", "description": "7 integration recipes (calendar, credential-gateway, email, meeting-sync, ngrok, twilio-voice, x-to-brain)" },
-    { "name": "docs", "path": "OS/gbrain/docs/", "type": "library", "description": "MCP deploy guides, benchmarks, architecture, ethos, guides, designs" },
-    { "name": "templates", "path": "OS/gbrain/templates/", "type": "library", "description": "SOUL.md, USER.md, ACCESS_POLICY.md, HEARTBEAT.md templates" }
-  ],
-  "external_dependencies_top10": [
-    { "package": "pglite", "version": "via npm", "purpose": "Embedded Postgres 17 via WASM (default engine)" },
-    { "package": "postgres", "version": "postgres.js v3", "purpose": "Postgres driver for Supabase / self-hosted" },
-    { "package": "pgvector", "version": "native", "purpose": "Vector similarity (HNSW)" },
-    { "package": "openai", "version": "SDK", "purpose": "text-embedding-3-large embeddings + LLM calls" },
-    { "package": "@modelcontextprotocol/sdk", "version": "external", "purpose": "MCP server (stdio + HTTP)" },
-    { "package": "groq-sdk", "version": "external", "purpose": "Whisper transcription (default)" }
-  ],
-  "entry_points": [
-    { "kind": "cli", "path": "OS/gbrain/src/cli.ts", "command": "gbrain <cmd>" },
-    { "kind": "mcp-stdio", "path": "OS/gbrain/src/mcp/server.ts", "command": "gbrain serve" },
-    { "kind": "mcp-http", "path": "OS/gbrain/src/mcp/server.ts", "command": "gbrain serve --http 8787" }
-  ],
   "capabilities": [
-    { "name": "Hybrid search (vector + keyword + RRF)", "evidence_paths": ["OS/gbrain/src/core/search/", "OS/gbrain/src/core/search/intent.ts", "OS/gbrain/src/core/search/expansion.ts", "OS/gbrain/src/core/search/eval.ts"], "category": "core", "description": "Vector + keyword + RRF + multi-query expansion + dedup; intent classifier auto-selects detail level" },
-    { "name": "Self-wiring knowledge graph (zero-LLM auto-link)", "evidence_paths": ["OS/gbrain/src/core/link-extraction.ts", "OS/gbrain/src/commands/extract.ts", "OS/gbrain/src/commands/graph-query.ts"], "category": "core", "description": "Every page write extracts entity refs and creates typed links (attended/works_at/invested_in/founded/advises/source/mentions) with zero LLM calls; traversal queries" },
-    { "name": "Pluggable engines (PGLite / Postgres)", "evidence_paths": ["OS/gbrain/src/core/engine.ts", "OS/gbrain/src/core/engine-factory.ts", "OS/gbrain/src/core/pglite-engine.ts", "OS/gbrain/src/core/postgres-engine.ts", "OS/gbrain/src/commands/migrate-engine.ts"], "category": "core", "description": "PGLite (embedded, zero-config, 2-second init) OR Postgres+pgvector (Supabase / self-hosted); bidirectional migration" },
-    { "name": "Contract-first operations (~41 shared)", "evidence_paths": ["OS/gbrain/src/core/operations.ts", "OS/gbrain/src/mcp/server.ts", "OS/gbrain/src/cli.ts"], "category": "core", "description": "Single source truth; CLI and MCP both generated from it; 1137-line operations file" },
-    { "name": "Minions durable job queue (Postgres-native)", "evidence_paths": ["OS/gbrain/src/core/minions/queue.ts", "OS/gbrain/src/core/minions/worker.ts", "OS/gbrain/src/core/minions/attachments.ts", "OS/gbrain/src/commands/jobs.ts"], "category": "core", "description": "BullMQ-inspired: submit/claim/complete, stall detection, parent-child, depth/child-cap, timeouts, cascade-kill, attachments, idempotency keys" },
-    { "name": "Tiered enrichment (Tier 1/2/3 auto-escalation)", "evidence_paths": ["OS/gbrain/src/core/enrichment-service.ts", "OS/gbrain/skills/enrich/"], "category": "core", "description": "Stub page → web+social → full pipeline based on mention frequency and context" },
-    { "name": "MCP stdio + remote HTTP", "evidence_paths": ["OS/gbrain/src/mcp/server.ts", "OS/gbrain/docs/mcp/DEPLOY.md", "OS/gbrain/docs/mcp/CLAUDE_CODE.md", "OS/gbrain/docs/mcp/CLAUDE_DESKTOP.md", "OS/gbrain/docs/mcp/CLAUDE_COWORK.md", "OS/gbrain/docs/mcp/PERPLEXITY.md"], "category": "integration", "description": "30+ MCP tools via stdio; remote HTTP with token auth via ngrok" },
-    { "name": "3-tier chunking", "evidence_paths": ["OS/gbrain/src/core/chunkers/"], "category": "core", "description": "Recursive, semantic, LLM-guided" },
-    { "name": "Retrieval eval harness", "evidence_paths": ["OS/gbrain/src/core/search/eval.ts", "OS/gbrain/src/commands/eval.ts", "OS/gbrain/docs/benchmarks/2026-04-18-brainbench-v1.md"], "category": "core", "description": "P@k, R@k, MRR, nDCG@k; single-run + A/B config comparison; published BrainBench v1 (R@5 83%→95%, graph-only F1 86.6% vs grep 57.8%)" },
-    { "name": "Trust-boundary-aware ops (remote flag)", "evidence_paths": ["OS/gbrain/src/core/operations.ts", "OS/gbrain/src/cli.ts", "OS/gbrain/src/mcp/server.ts"], "category": "governance", "description": "OperationContext.remote distinguishes trusted local CLI vs untrusted agent-facing callers; tightens filesystem confinement for uploads" },
-    { "name": "26 bundled skills (agent workflows)", "evidence_paths": ["OS/gbrain/skills/signal-detector/", "OS/gbrain/skills/brain-ops/", "OS/gbrain/skills/ingest/", "OS/gbrain/skills/query/", "OS/gbrain/skills/maintain/", "OS/gbrain/skills/enrich/", "OS/gbrain/skills/minion-orchestrator/", "OS/gbrain/skills/soul-audit/", "OS/gbrain/skills/cron-scheduler/", "OS/gbrain/skills/RESOLVER.md"], "category": "extensibility", "description": "Fat markdown skills; resolver routes; skill-creator for conformance" },
-    { "name": "7 integration recipes", "evidence_paths": ["OS/gbrain/recipes/calendar-to-brain.md", "OS/gbrain/recipes/email-to-brain.md", "OS/gbrain/recipes/meeting-sync.md", "OS/gbrain/recipes/twilio-voice-brain.md", "OS/gbrain/recipes/x-to-brain.md", "OS/gbrain/recipes/credential-gateway.md", "OS/gbrain/recipes/ngrok-tunnel.md"], "category": "integration", "description": "YAML+markdown recipes for external events (Twilio voice, email, X, calendar, meetings)" },
-    { "name": "4-tier identity + access (SOUL/USER/ACCESS/HEARTBEAT)", "evidence_paths": ["OS/gbrain/skills/soul-audit/SKILL.md", "OS/gbrain/templates/"], "category": "governance", "description": "6-phase interview generating SOUL.md (agent identity), USER.md (user profile), ACCESS_POLICY.md (4-tier privacy), HEARTBEAT.md (cadence)" },
-    { "name": "Publish (password-protected HTML, zero LLM)", "evidence_paths": ["OS/gbrain/src/commands/publish.ts"], "category": "ux", "description": "Share brain pages as password-protected HTML; deterministic, zero LLM calls" },
-    { "name": "Universal migration (Obsidian/Notion/Logseq/Roam/CSV/JSON/MD)", "evidence_paths": ["OS/gbrain/skills/migrate/", "OS/gbrain/src/commands/migrate-engine.ts"], "category": "integration", "description": "Universal import from common note-taking formats" },
-    { "name": "Doctor + reliability checks", "evidence_paths": ["OS/gbrain/src/commands/doctor.ts"], "category": "governance", "description": "jsonb_integrity + markdown_body_completeness + data checks; fix hints to repair-jsonb and sync --force" }
+    {"name": "think + gap analysis", "evidence_paths": ["OS/gbrain/README.md"], "category": "core"},
+    {"name": "zero-LLM typed graph", "evidence_paths": ["OS/gbrain/src/core/link-extraction.ts"], "category": "core"},
+    {"name": "company brain source isolation", "evidence_paths": ["OS/gbrain/docs/tutorials/company-brain.md"], "category": "governance"},
+    {"name": "public LongMemEval retrieval", "evidence_paths": ["OS/gbrain/CHANGELOG.md"], "category": "core", "description": "recall_all@5 hybrid 93.19%; hybrid+voyage rerank 95.32% on longmemeval_s 470q"},
+    {"name": "volunteer / push context", "evidence_paths": ["OS/gbrain/docs/guides/push-context.md", "OS/gbrain/openclaw.plugin.json"], "category": "integration"},
+    {"name": "ambient memory writeback", "evidence_paths": ["OS/gbrain/CHANGELOG.md"], "category": "core"},
+    {"name": "Voyage rerank fail-open", "evidence_paths": ["OS/gbrain/CHANGELOG.md"], "category": "core"}
   ],
-  "quality_signals": {
-    "test_framework": "bun test + E2E (pytest-style with real Postgres)",
-    "test_file_count": "~75 unit + 8 E2E",
-    "linter": null,
-    "ci_provider": "GitHub Actions",
-    "ci_workflow_count": null,
-    "e2e_with_real_db": true,
-    "benchmarks_published": true
+  "benchmarks": {
+    "longmemeval_s_recall_all_at_5_hybrid": 0.9319,
+    "longmemeval_s_recall_all_at_5_hybrid_rerank": 0.9532,
+    "longmemeval_s_recall_any_at_5_hybrid": 0.9872,
+    "brainbench_r_at_5_custom": 0.979,
+    "source": "OS/gbrain/CHANGELOG.md [0.48.2.0]; OS/gbrain/README.md"
   },
-  "documentation": {
-    "readme_lines": null,
-    "readme_sections": ["Install (agent platform / standalone / MCP)", "The 26 Skills", "How It Works", "Minions", "Database engines", "Upgrading"],
-    "has_contributing": true,
-    "has_architecture_doc": true,
-    "docs_page_count": null,
-    "published_benchmarks": 4
-  },
-  "extension_points": {
-    "skills": { "mechanism": "Fat markdown skills in skills/; RESOLVER.md routing; skill-creator with conformance tests", "path": "OS/gbrain/skills/" },
-    "recipes": { "mechanism": "YAML frontmatter + markdown in recipes/; trust-tagged sources", "path": "OS/gbrain/recipes/" },
-    "engines": { "mechanism": "src/core/engine.ts interface; pluggable PGLite or Postgres", "path": "OS/gbrain/src/core/engine.ts" },
-    "storage": { "mechanism": "src/core/storage.ts (S3, Supabase Storage, local)", "path": "OS/gbrain/src/core/storage.ts" },
-    "mcp": { "client": false, "server": true, "note": "MCP server is a primary surface (30+ tools, stdio + HTTP)" },
-    "plugin_handlers": { "mechanism": "Host-specific handlers registered via plugin contract; migration emits TODOs to pending-host-work.jsonl", "path": "OS/gbrain/docs/guides/plugin-handlers.md" }
-  },
-  "unique_selling_points": [
-    "Self-wiring knowledge graph with zero-LLM auto-link on every write",
-    "Hybrid RAG (vector + keyword + RRF + multi-query expansion) with published benchmark (R@5 83%→95%)",
-    "Pluggable engines: PGLite (zero-config, 2s init) or Postgres+pgvector (Supabase)",
-    "Contract-first: 41 operations generate both CLI and MCP server from single source",
-    "Minions: durable Postgres-native job queue built into the brain",
-    "Trust boundary: remote flag distinguishes trusted CLI vs untrusted agent callers",
-    "Installed by an agent in ~30 minutes (agent-driven install)",
-    "Designed to run under OpenClaw and Hermes (not a standalone assistant)"
-  ],
-  "limitations": [
-    { "description": "Not a standalone assistant — designed as a brain layer under an agent platform (OpenClaw or Hermes recommended)", "source": "OS/gbrain/README.md" },
-    { "description": "No built-in messaging channels (channels come from host platform)", "source": "observed — no channels/gateway dir" },
-    { "description": "MCP remote HTTP requires manual ngrok + token setup (not a hosted service)", "source": "OS/gbrain/README.md" },
-    { "description": "ChatGPT MCP requires OAuth 2.1 (not yet implemented)", "source": "OS/gbrain/README.md" }
-  ],
   "confidence": "HIGH",
   "extraction_method": "filesystem-scan",
-  "skill_version": "1.0.0"
+  "skill_version": "1.0.0",
+  "supersedes": "2026-04-19 / 2026-08-06 inventories (v0.12.3 / v0.42.73.2)"
 }

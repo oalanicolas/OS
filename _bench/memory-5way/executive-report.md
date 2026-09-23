@@ -1,33 +1,35 @@
 # Executive Report: memory-5way
 
-**Date:** 2026-08-06  
+**Date:** 2026-09-05  
 **Type:** nway  
 **Slug:** memory-5way  
 **Dimension pack:** memory  
-**Supersedes:** `memory-4way` (2026-04-19)
+**Supersedes:** `memory-5way` (2026-08-06) · `memory-4way` (2026-04-19)
 
 ---
 
 ## Executive summary
 
-Cinco camadas de memória para agentes, no tip atual dos clones em `OS/`:
+**Você não compra o 1º deste pack. Compra o ID** (`taxonomy.md` §12).
 
-| Rank | Subject | Score | Papel |
-|-----:|---------|------:|-------|
-| 1 | **mempalace** | **84.23** | Memória **verbatim local-first** — baseline de fidelidade |
-| 2 | **gbrain** | **78.56** | **Knowledge brain** com síntese + graph zero-LLM + dream cycle |
-| 3 | **mem0** | **77.54** | **SDK universal** multi-vector-store / multi-embedder |
-| 4 | **memori-labs** | **76.43** | Memória do que o agente **faz** (tools/outcomes) + SQL BYODB |
-| 5 | **gsd-2** | **52.94** | Side-feature de coding agent — não compete como produto |
+Pack `memory` admite **M1–M4**. gsd-2 é processo (E4), fora do ranking.
 
-**Mudança vs memory-4way:** gbrain sobe ~2.7 pts (gateway multi-provider, company brain, retrieval/graph wave v0.34–0.42) e **passa mem0** no total ponderado. memori-labs entra no ranking logo atrás de mem0 — produto distinto (agent-action / LoCoMo token-efficient), não clone de mem0.
+| Rank | ID | Subject | Score | vs 6 ago | O que você está comprando |
+|-----:|----|---------|------:|---------:|---------------------------|
+| 1 | **M1** | **mempalace 3.9.0** | **85.10** | +0.87 | Arquivo **verbatim** local-first (+ hub de frota) |
+| 2 | **M2** | **gbrain 0.48.2.0** | **81.60** | **+3.04** | Córtex: síntese + gaps + volunteer |
+| 3 | **M3** | **mem0 2.0.20** | **78.18** | +0.64 | SDK + Dream + plugins de harness |
+| 4 | **M4** | **memori-labs 3.3.7** | **76.43** | 0 | Log do que o agente **fez** |
+| — | process | gsd-2 | 52.94 | 0 | **Não admitido** — `.gsd/` é resíduo E4 |
 
-A decisão entre os quatro líderes depende do eixo:
+O 1º do pack é o campeão de **M1** (fidelity/local-first pesam 47%). Não é o “melhor second brain”. M2 fechou o buraco de LME público (`recall_all@5` 93.19 / 95.32) e continua o córtex.
 
-1. **Fidelidade + offline** → mempalace  
-2. **Síntese + graph de entidades + cron noturno** → gbrain  
-3. **Plugar em qualquer stack de vetores** → mem0  
-4. **Lembrar execução do agente (OpenClaw/Hermes)** → memori-labs  
+Compre assim:
+
+1. **M1** fidelidade + offline → mempalace  
+2. **M2** síntese + graph + push → gbrain  
+3. **M3** plugar no app → mem0  
+4. **M4** execução do agente → memori (sem momentum neste pull)
 
 ---
 
@@ -35,90 +37,56 @@ A decisão entre os quatro líderes depende do eixo:
 
 | Dimension | W | gbrain | mempalace | mem0 | memori | gsd-2 |
 |-----------|--:|:------:|:---------:|:----:|:------:|:-----:|
-| Recall | 22% | 80 | **93** | 92 | 85 | 38 |
-| Write lat. | 10% | **82** | 65 | 80 | 76 | 55 |
-| Read lat. | 12% | **80** | 75 | 74 | 76 | 60 |
-| Persistence | 12% | 82 | **95** | 72 | 78 | 65 |
-| Schema flex. | 10% | 78 | 80 | 86 | **88** | 55 |
+| Recall | 22% | 90 | **93** | 92 | 85 | 38 |
+| Write lat. | 10% | **84** | 65 | 80 | 76 | 55 |
+| Read lat. | 12% | **80** | 77 | 74 | 76 | 60 |
+| Persistence | 12% | 82 | **95** | 74 | 78 | 65 |
+| Schema flex. | 10% | 80 | 83 | 86 | **88** | 55 |
 | Local-first | 13% | 58 | **95** | 40 | 55 | 60 |
-| Vector | 11% | 78 | 72 | **98** | 70 | 48 |
-| Graph | 10% | **94** | 86 | 72 | 80 | 55 |
-| **Total** | | **78.56** | **84.23** | **77.54** | **76.43** | **52.94** |
+| Vector | 11% | 82 | 75 | **98** | 70 | 48 |
+| Graph | 10% | **94** | 86 | 76 | 80 | 55 |
+| **Total** | | **81.60** | **85.10** | **78.18** | **76.43** | **52.94** |
 
 ---
 
-## Dimension highlights
+## O que mudou neste pull (maio→set, foco pós 6 ago)
 
-### Recall
-- **mempalace** lidera em recall de *retrieval* (LongMemEval R@5 96.6% sem LLM).  
-- **mem0** lidera em *suite* de industry benches (LoCoMo + LongMemEval + BEAM).  
-- **memori** publica **87% LoCoMo com 721 tokens** — trade-off accuracy vs custo de contexto.  
-- **gbrain** R@5 97.9% em corpus próprio; comparabilidade limitada.
+### gbrain — o maior movimento do pack
+- **LME público.** Entre v0.28 e v0.47 o hybrid tinha caído a 51.3% por um fusion bug; v0.48 restaura 93.19% e o reranker default soma +2.13 pts (`CHANGELOG.md` `[0.48.2.0]`, receipts em gbrain-evals).
+- **Push.** Volunteer no OpenClaw (default on) + ambient writeback com TTL na leitura (`docs/guides/push-context.md`, v0.47.10).
+- **Dream no write path** (v0.47.8) — não só cron noturno.
+- **Honesty no próprio changelog:** `tokenmax` expansion derruba LME para 54.89%; sem key de Voyage o path é 93.19% não 95.32%; sem answer-accuracy LLM-judged.
 
-### Graph (onde gbrain vence)
-Auto-wiring **sem LLM** em cada write + `graph-query` multi-hop + retrieval relacional tipado + Life Chronicle bi-temporal. mempalace temporal KG é o runner-up; memori tem tabelas KG no Rust core; mem0 terceiriza graph store.
+### mempalace — o palácio virou frota sem largar verbatim
+- 3.9.0: **shared-brain hub** (private / hub / client), skill-first (`npx skills add`), **`mempalace-task` separado do recall**, fingerprint de embedder/backend, logstream RFC 003/004.
+- Headline 96.6% R@5 raw **não mudou** — e continua o único zero-API.
 
-### Vector (onde mem0 vence)
-~24 vector stores e ~11 embedders no tree. gbrain melhorou (gateway multi-provider) mas continua centrado em pgvector. mempalace agora tem 5 backends. memori usa FAISS+SQL, não zoo de stores.
+### mem0 — Dream saiu do gbrain e virou plugin
+- Claude Code 0.3.0, DeepSeek Harness, Strands, OpenClaw; skill `dream` em `integrations/mem0-plugin/skills/dream/SKILL.md`.
+- Benches README iguais (LoCoMo 92.5 / LME 94.4).
 
-### Schema (onde memori vence)
-BYODB: SQLite, Postgres, MySQL, TiDB, Oracle, OceanBase, MongoDB, Cockroach + adapters SQLAlchemy/Django. Entity attribution multi-user. Ganha flexibilidade de *infra* em cima de mem0 (que ganha em *metadata de memória*).
-
-### Local-first (onde mempalace vence de lavada)
-Único com path core **zero API / offline / zero telemetry**. Os outros quatro assumem LLM ou cloud em algum grau.
+### memori-labs / gsd-2
+- memori: 2 commits, Enterprise no README. Pack congelado.
+- gsd-2: auto-close apontando `open-gsd/gsd-core`.
 
 ---
 
 ## Strategic recommendations
 
-### 1. Default local / auditável → **mempalace**
-Use quando a memória precisa ser auditável palavra-por-palavra e rodar offline.  
-**P0** se privacidade e fidelidade forem non-negotiable.
-
-### 2. Company / personal knowledge brain → **gbrain**
-Use para people/companies/deals, síntese com gap analysis, dream cycle, MCP no coding agent, multi-tenant company brain.  
-**P0** se o workload é entity-graph heavy (o caso Garry/OpenClaw/Hermes production brain).
-
-### 3. Product memory layer multi-stack → **mem0**
-Use quando o time já tem Qdrant/Pinecone/etc. e quer SDK Python+TS + platform.  
-**P0** para SaaS multi-tenant genérico.
-
-### 4. Agent execution memory → **memori-labs**
-Use para capturar tool calls, decisions, outcomes; plugin OpenClaw / provider Hermes; recall com budget de tokens baixo.  
-**P1** complementar a gbrain/mempalace (não substitui knowledge vault).
-
-### 5. gsd-2
-Só se já vive no GSD coding agent. Não escolher como memory system standalone.
-
-### 6. Combinações sensatas
-| Stack | Papel |
-|-------|--------|
-| **gbrain + memori** | knowledge vault + agent-action log (OpenClaw/Hermes) |
-| **mempalace + mem0** | verbatim local core + cloud multi-tenant edge |
-| **gbrain + mem0** | raro — overlapping; prefira um como SoT |
-
----
-
-## GBrain delta (por que subiu no ranking)
-
-Desde o memory-4way / tip v0.33 → **v0.42.73.2** (~683 commits):
-
-1. Company brain + auth write fences (multi-tenant real)  
-2. AI gateway multi-provider + embedding migration path  
-3. Retrieval cathedral / typed-edge relational / contextual / autocut  
-4. Life Chronicle bi-temporal  
-5. skillopt + skillpacks + doctor remediations  
-6. Content-quality gates + sync resumable  
-
-Isso move gbrain de “RAG+graph promissor” para “daemon de memória institucional” — o que explica a ultrapassagem de mem0 no pack `memory` (pesos valorizam graph e latência de write/read, onde gbrain pontua).
+1. **Default local / auditável → mempalace 3.9.** O hub é opt-in; o path privado continua o produto. Não use o hub como se fosse company OAuth (não é).
+2. **Company / personal knowledge brain → gbrain 0.48.** Agora com receipt público. Use `search.mode balanced` (não `tokenmax`) até o TODO de expansion.
+3. **Product memory layer → mem0.** Se o host já é Claude/Cursor/DeepSeek/Strands, o plugin nativo mata o “cole o SDK na mão”.
+4. **Agent execution memory → memori** só se você já está no plugin OpenClaw/Hermes. Sem código novo neste trimestre.
+5. **Combinações:** gbrain + mempalace (hot/cold) continua a stack ambiciosa. mem0 + gbrain overlap; prefira um SoT de síntese.
 
 ---
 
 ## Caveats
 
-1. **Métricas não comensuráveis 1:1** — R@5 retrieval ≠ QA accuracy. Scores ajustam, mas cross-bench perfeito é impossível sem re-run unificado.  
-2. **memory-4way permanece** em `OS/_bench/memory-4way/` como snapshot histórico.  
-3. Battle-card / gap-analysis **não** gerados (n-way core = matrix + scorecard + executive). Pedir `*bench-pair gbrain memori-labs` se quiser battle-card focado.
+1. Retrieval R@k ≠ QA accuracy. gbrain 95.32% e mempalace 96.6% são retrieval; mem0 94.4 LME é QA.
+2. gbrain 90 exige dois signals e ainda assim o 95.32% é rerank-on.
+3. Honcho (M5) **não entra** neste 5-way — representation ≠ IR R@k; ver `taxonomy.md` §12.  
+4. gsd-2 **excluído** do ranking admitido (process / E4).
 
 ---
 
@@ -130,5 +98,7 @@ OS/_bench/memory-5way/
 ├── comparison-matrix.{md,json}
 ├── scorecard.{md,json}
 ├── executive-report.md
-└── _inventories/{gbrain,mempalace,mem0,memori-labs,gsd-2}/inventory.md
+└── (inventários canônicos em OS/_bench/_inventories/{gbrain,mempalace,mem0,memori-labs}/)
 ```
+
+_Generated by os-bench bench-executive-report | 2026-09-05_

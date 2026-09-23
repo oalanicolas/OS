@@ -1,0 +1,27 @@
+{
+  "generatedAt": "2026-09-05T18:00:00Z",
+  "supersedes": "2026-08-06",
+  "subjects": ["mempalace", "gbrain"],
+  "dimension_pack": "memory",
+  "a_gaps": [
+    {"id": "GAP-A-001", "name": "think + gap analysis", "dimension": "recall_accuracy", "type": "Missing", "severity": "HIGH", "complexity": "HIGH", "priority": "P1", "evidence": "OS/gbrain/README.md"},
+    {"id": "GAP-A-002", "name": "Minions durable queue", "dimension": "write_latency", "type": "Missing", "severity": "HIGH", "complexity": "HIGH", "priority": "P1", "evidence": "OS/gbrain/src/core/minions/"},
+    {"id": "GAP-A-003", "name": "company OAuth tenancy", "dimension": "schema_flexibility", "type": "Partial", "severity": "HIGH", "complexity": "HIGH", "priority": "P2", "evidence": "OS/gbrain/docs/tutorials/company-brain.md", "note": "mempalace 3.9 hub is fleet not company OAuth"},
+    {"id": "GAP-A-004", "name": "dream/enrich/doctor loop", "dimension": "write_latency", "type": "Missing", "severity": "HIGH", "complexity": "HIGH", "priority": "P2", "evidence": "OS/gbrain/CHANGELOG.md"},
+    {"id": "GAP-A-011", "name": "volunteer / push context", "dimension": "recall_accuracy", "type": "Missing", "severity": "HIGH", "complexity": "MED", "priority": "P1", "evidence": "OS/gbrain/docs/guides/push-context.md"}
+  ],
+  "b_gaps": [
+    {"id": "GAP-B-001", "name": "verbatim-first policy", "dimension": "persistence", "type": "Missing", "severity": "HIGH", "complexity": "HIGH", "priority": "P0", "evidence": "OS/mempalace/README.md"},
+    {"id": "GAP-B-002", "name": "zero-API core", "dimension": "local_first", "type": "Missing", "severity": "HIGH", "complexity": "MED", "priority": "P0", "evidence": "OS/mempalace/README.md"},
+    {"id": "GAP-B-003", "name": "public LongMemEval", "dimension": "recall_accuracy", "type": "Closed", "severity": "LOW", "complexity": "MED", "priority": "P2", "evidence": "OS/gbrain/CHANGELOG.md", "note": "CLOSED as missing; residual retrieval-only / keyed rerank"},
+    {"id": "GAP-B-006", "name": "Claude session mine hooks", "dimension": "schema_flexibility", "type": "Missing", "severity": "MED", "complexity": "LOW", "priority": "P1", "evidence": "OS/mempalace/hooks/"},
+    {"id": "GAP-B-010", "name": "recall vs task skill split", "dimension": "schema_flexibility", "type": "Missing", "severity": "MED", "complexity": "MED", "priority": "P2", "evidence": "OS/mempalace/skills/mempalace-task/SKILL.md"}
+  ],
+  "counts": {
+    "a_gaps_open": 8,
+    "b_gaps_open": 6,
+    "b_closed": 1,
+    "a_p0": 0, "a_p1": 4, "a_p2": 3, "a_p3": 1,
+    "b_p0": 2, "b_p1": 1, "b_p2": 3, "b_p3": 1
+  }
+}

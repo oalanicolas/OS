@@ -1,105 +1,32 @@
 {
-  "generatedAt": "2026-08-12T22:00:00Z",
+  "generatedAt": "2026-09-05T18:00:00Z",
   "subject": "mempalace",
   "path": "OS/mempalace/",
+  "source_url": "https://github.com/MemPalace/mempalace",
   "primary_language": "Python",
-  "secondary_languages": [
-    "Markdown"
-  ],
-  "stack": [
-    "local memory palace",
-    "temporal KG"
-  ],
+  "secondary_languages": ["Markdown"],
+  "stack": ["ChromaDB", "Qdrant", "Milvus", "pgvector", "sqlite_exact", "SQLite KG", "MCP"],
   "license": "MIT",
-  "tagline": "Verbatim local-first memory with temporal knowledge-graph triples.",
+  "version": "3.9.0",
+  "tagline": "Local-first AI memory. Verbatim storage, pluggable backend, 96.6% R@5 raw on LongMemEval — zero API calls.",
   "metrics": {
-    "file_count": 553,
-    "last_commit_date": "2026-08-11T09:34:45-03:00",
-    "source_url": "https://github.com/milla-jovovich/mempalace"
+    "file_count": 580,
+    "last_commit_date": "2026-08-31",
+    "last_commit": "d5250c7"
   },
-  "modules": [
-    {
-      "name": "mempalace",
-      "path": "mempalace/",
-      "type": "library"
-    }
-  ],
-  "external_dependencies_top10": [],
-  "entry_points": [
-    {
-      "kind": "skill",
-      "path": "skills/mempalace-recall/SKILL.md",
-      "command": "recall"
-    }
-  ],
   "capabilities": [
-    {
-      "name": "Verbatim drawers",
-      "evidence_paths": [
-        "OS/mempalace/CLAUDE.md"
-      ],
-      "category": "core",
-      "description": "Do not paraphrase user text."
-    },
-    {
-      "name": "Temporal KG",
-      "evidence_paths": [
-        "OS/mempalace/mempalace/knowledge_graph.py"
-      ],
-      "category": "core",
-      "description": "valid_from/valid_to + atomic supersede."
-    },
-    {
-      "name": "L0\u2013L3 layers",
-      "evidence_paths": [
-        "OS/mempalace/mempalace/layers.py"
-      ],
-      "category": "core",
-      "description": "Identity always-on; drawers on search."
-    }
+    {"name": "verbatim drawers", "evidence_paths": ["OS/mempalace/README.md", "OS/mempalace/CLAUDE.md"], "category": "core"},
+    {"name": "LongMemEval 96.6% R@5 raw", "evidence_paths": ["OS/mempalace/README.md", "OS/mempalace/benchmarks/BENCHMARKS.md"], "category": "core"},
+    {"name": "five vector backends", "evidence_paths": ["OS/mempalace/mempalace/backends/"], "category": "core"},
+    {"name": "shared-brain hub", "evidence_paths": ["OS/mempalace/skills/mempalace/SKILL.md"], "category": "integration"},
+    {"name": "skill-first setup", "evidence_paths": ["OS/mempalace/skills/mempalace/SKILL.md"], "category": "extensibility"},
+    {"name": "task skill split from recall", "evidence_paths": ["OS/mempalace/skills/mempalace-task/SKILL.md"], "category": "governance"},
+    {"name": "hub embedder fingerprint", "evidence_paths": ["OS/mempalace/CHANGELOG.md"], "category": "governance"}
   ],
-  "quality_signals": {
-    "test_framework": "pytest",
-    "test_file_count": null,
-    "linter": null,
-    "ci_provider": "github-actions",
-    "ci_workflow_count": 1
+  "benchmarks": {
+    "longmemeval_r_at_5_raw": 0.966,
+    "source": "OS/mempalace/README.md"
   },
-  "documentation": {
-    "readme_sections": [
-      "Memory"
-    ],
-    "has_contributing": true,
-    "has_architecture_doc": false,
-    "docs_page_count": 10
-  },
-  "extension_points": {
-    "plugins": {
-      "mechanism": "MCP + hooks",
-      "path": "integrations/"
-    },
-    "hooks": {
-      "mechanism": "PreCompact",
-      "events": [
-        "stop",
-        "precompact"
-      ]
-    },
-    "mcp": {
-      "client": true,
-      "server": true
-    }
-  },
-  "unique_selling_points": [
-    "Best verbatim fidelity",
-    "Honest temporal supersede"
-  ],
-  "limitations": [
-    {
-      "description": "Not a case OS or counsel split",
-      "source": "OS/mempalace/README.md"
-    }
-  ],
   "confidence": "HIGH",
   "extraction_method": "filesystem-scan",
   "skill_version": "1.0.0"

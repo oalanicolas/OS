@@ -1,46 +1,49 @@
 {
   "$schema": "os-bench metadata v1.0",
-  "generatedAt": "2026-08-06T21:44:27Z",
+  "generatedAt": "2026-09-05T18:00:00Z",
+  "supersedes": "2026-08-06T21:44:27Z",
   "comparison_type": "nway",
   "slug": "brain-6way",
   "subject_count": 6,
   "dimension_pack": "memory",
-  "note": "LifeOS is a Life OS / agent harness with Cortex memory — not a pure memory SDK. Pack scores under-rate product surface outside memory dimensions.",
+  "taxonomy_spec": "OS/_bench/_research/taxonomy.md §12",
+  "note": "Pack ranking admits M1–M4 only. LifeOS (life-OS) and gsd-2 (process) are diagnostic, not ranked. Honcho is M5: no IR recall_accuracy score.",
   "subjects": [
-    {"slug": "LifeOS", "path": "OS/LifeOS/", "source_url": "https://github.com/danielmiessler/LifeOS"},
-    {"slug": "gbrain", "path": "OS/gbrain/", "source_url": "https://github.com/garrytan/gbrain"},
-    {"slug": "mempalace", "path": "OS/mempalace/", "source_url": "https://github.com/MemPalace/mempalace"},
-    {"slug": "mem0", "path": "OS/mem0/", "source_url": "https://github.com/mem0ai/mem0"},
-    {"slug": "memori-labs", "path": "OS/memori-labs/", "source_url": "https://github.com/MemoriLabs/Memori"},
-    {"slug": "gsd-2", "path": "OS/gsd-2/", "source_url": "https://github.com/gsd-build/gsd-2"}
+    {"slug": "LifeOS", "job_id": "life-OS", "pack_admitted": false, "path": "OS/LifeOS/", "source_url": "https://github.com/danielmiessler/LifeOS", "version": "7.40.4"},
+    {"slug": "gbrain", "job_id": "M2", "pack_admitted": true, "path": "OS/gbrain/", "source_url": "https://github.com/garrytan/gbrain", "version": "0.48.2.0"},
+    {"slug": "mempalace", "job_id": "M1", "pack_admitted": true, "path": "OS/mempalace/", "source_url": "https://github.com/MemPalace/mempalace", "version": "3.9.0"},
+    {"slug": "mem0", "job_id": "M3", "pack_admitted": true, "path": "OS/mem0/", "source_url": "https://github.com/mem0ai/mem0", "version": "2.0.20"},
+    {"slug": "memori-labs", "job_id": "M4", "pack_admitted": true, "path": "OS/memori-labs/", "source_url": "https://github.com/MemoriLabs/Memori", "version": "3.3.7"},
+    {"slug": "gsd-2", "job_id": "process", "pack_admitted": false, "path": "OS/gsd-2/", "source_url": "https://github.com/gsd-build/gsd-2", "version": "3.0.0"}
+  ],
+  "adjacent": [
+    {"slug": "honcho", "job_id": "M5", "pack_admitted": false, "path": "OS/honcho/", "inventory": "OS/_bench/_inventories/honcho/", "note": "Do not score recall_accuracy IR against M1/M2 LME retrieval."},
+    {"slug": "claude-mem", "job_id": "session-observer", "pack_admitted": false, "path": "OS/claude-mem/"}
   ],
   "related_benches": [
     "OS/_bench/memory-5way/",
     "OS/_bench/mempalace-vs-gbrain/",
-    "OS/_bench/personal-assistant-3way/",
-    "OS/_bench/_research/obsidian-brain-voice-candidates.md"
+    "OS/_bench/_research/second-brain-convergence.md",
+    "OS/_bench/_research/second-brain-protocols.md",
+    "OS/_bench/_research/company-brain.md"
   ],
-  "weighted_totals": {
-    "mempalace": 84.23,
-    "gbrain": 78.56,
-    "mem0": 77.54,
-    "memori-labs": 76.43,
-    "LifeOS": 70.58,
-    "gsd-2": 52.94
+  "weighted_totals_admitted": {
+    "mempalace": 85.1,
+    "gbrain": 81.6,
+    "mem0": 78.18,
+    "memori-labs": 76.43
   },
+  "weighted_totals": {
+    "mempalace": 85.1,
+    "gbrain": 81.6,
+    "mem0": 78.18,
+    "memori-labs": 76.43
+  },
+  "buy": "You do not buy rank 1 of this pack. You buy a job ID.",
   "overall_winner_memory_pack": "mempalace",
   "product_brain_os_winner": "LifeOS",
   "knowledge_brain_winner": "gbrain",
+  "peer_memory_winner": "honcho",
   "confidence_overall": "HIGH",
-  "quality_gate_passed": true,
-  "feature_lessons": {
-    "feature_class": "knowledge graphs / typed edges / temporal KG / graph signals / projection",
-    "consumer": "VISA-BRAIN evidence graph + investigate-case-evidence",
-    "reports": [
-      "graph-pitfalls-and-lessons.md",
-      "visa-brain-graph-feature-lessons.md"
-    ],
-    "citations": "visa-brain-graph-feature-lessons.citations.json",
-    "generatedAt": "2026-08-06"
-  }
+  "quality_gate_passed": true
 }

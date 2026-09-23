@@ -1,5 +1,6 @@
 {
-  "generatedAt": "2026-08-12T22:00:00Z",
+  "generatedAt": "2026-09-05T18:00:00Z",
+  "version": "7.40.4",
   "subject": "LifeOS",
   "path": "OS/LifeOS/",
   "primary_language": "TypeScript",

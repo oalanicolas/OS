@@ -1,6 +1,8 @@
 # mempalace vs gbrain
 
-**Date:** 2026-08-06 | **Pack:** memory | **Profile:** head-to-head (top-2 memory-5way)
+**Date:** 2026-09-05 | **Pack:** memory | **Jobs:** **M1** mempalace vs **M2** gbrain  
+**Buy the ID, not the pack rank** (`taxonomy.md` §12)  
+**Supersedes:** 2026-08-06
 
 ---
 
@@ -9,12 +11,12 @@
 | Spec | mempalace | gbrain |
 |------|:---------:|:------:|
 | Stack | Python · Chroma · SQLite KG | Bun/TS · PGLite/Postgres · pgvector |
-| Primary language | Python | TypeScript |
-| Version | 3.6.0 | 0.42.73.2 |
+| Version | **3.9.0** | **0.48.2.0** |
 | License | MIT | MIT |
-| Last commit | 2026-07-17 | 2026-08-05 |
-| MCP tools | ~36 | ~30+ |
+| Last commit | 2026-08-31 | 2026-09-03 |
 | Local-first | **YES** (core path) | Partial (DB yes, AI keys usual) |
+| Public LME | **96.6% R@5 raw, $0** | **93.19 / 95.32% recall_all@5** |
+| New in this tip | shared-brain hub + task skill | volunteer + Voyage rerank |
 | Job | Remember **exactly** | Answer **what matters** |
 
 ---
@@ -23,17 +25,17 @@
 
 | Dimension | mempalace | gbrain | Winner |
 |-----------|:---------:|:------:|:------:|
-| Recall Accuracy (22%) | **93** | 80 | mempalace |
-| Write Latency (10%) | 65 | **82** | gbrain |
-| Read Latency (12%) | 75 | **80** | gbrain |
+| Recall Accuracy (22%) | **93** | 90 | mempalace |
+| Write Latency (10%) | 65 | **84** | gbrain |
+| Read Latency (12%) | 77 | **80** | gbrain |
 | Persistence (12%) | **95** | 82 | mempalace |
-| Schema Flexibility (10%) | **80** | 78 | mempalace |
+| Schema Flexibility (10%) | **83** | 80 | mempalace |
 | Local-first (13%) | **95** | 58 | mempalace |
-| Vector Support (11%) | 72 | **78** | gbrain |
+| Vector Support (11%) | 75 | **82** | gbrain |
 | Graph Support (10%) | 86 | **94** | gbrain |
-| **TOTAL (weighted)** | **84.23** | **78.56** | **mempalace (+5.67)** |
+| **TOTAL (weighted)** | **85.10** | **81.60** | **mempalace (+3.50)** |
 
-Dim wins: **4–4**. Pack weights favor fidelity/local (mempalace).
+Dim wins: **4–4**. Pack weights favor fidelity/local. Gap vs August: **−2.17** (gbrain LME).
 
 ---
 
@@ -44,46 +46,47 @@ Dim wins: **4–4**. Pack weights favor fidelity/local (mempalace).
 **Strengths:**
 - Verbatim non-negotiable + LongMemEval 96.6% R@5 **sem LLM**
 - True offline / zero-API core — único no top-5
-- Temporal KG (`as_of`, valid_from/to) + Claude mine/hooks polish
+- 3.9: hub + skill-first + recall/task split (frota sem corromper o protocolo de busca)
 
 **Weaknesses:**
-- Não devolve *resposta* — devolve material; agente ainda sintetiza
-- Sem multi-tenant company brain / dream daemon de produção
-- Write path sem batch queue durable (Minions)
+- Não devolve *resposta* — devolve material
+- Hub ≠ company OAuth
+- Write path sem batch queue durable
 
 ### gbrain
 
 **Strengths:**
-- `think` = síntese + citations + **gap analysis** (job diferente)
-- Graph zero-LLM + relational retrieval + Chronicle + company brain
-- Ops de produção: Minions, doctor, dream, enrich, self-upgrade
+- `think` = síntese + citations + **gap analysis**
+- Graph zero-LLM + company brain + volunteer/push (OpenClaw)
+- Agora com receipt público de LME (fecha o asterisco de agosto)
+- Ops: Minions, doctor, dream no write path
 
 **Weaknesses:**
-- Primary path paraphrases (`compiled_truth`) — perde fidelidade literal
-- Dependência típica de API keys (embed/rerank/think)
-- Benchmarks industry-standard fracos vs peers (BrainBench custom)
+- Primary path paraphrases (`compiled_truth`)
+- 95.32% LME precisa Voyage; `tokenmax` expansion **piora** small-k (54.89%)
+- Sem answer-accuracy LLM-judged
 
 ---
 
 ## When to pick mempalace
 
-Você quer **memória auditável e barata**: o que foi dito em reuniões/chats Claude, offline, sem conta OpenAI no path crítico. Coding agents via MCP que fazem retrieval e **você** (ou o LLM da sessão) sintetiza. Solo founder / privacy-first / air-gapped.
+Memória auditável e barata. Offline. Frota de agentes no mesmo palácio (3.9). Coding agents via MCP que retrievam e **você** sintetiza.
 
 ## When to pick gbrain
 
-Você quer um **cérebro operacional**: “prepare minha call com Alice”, grafo de people/companies/deals, consolidação noturna, team brain multi-user, wiring OpenClaw/Hermes. Aceita pagar tokens de embed/LLM e não precisa de verbatim como SoT.
+Cérebro operacional: prepare a call, grafo, consolidação, volunteer no meio do chat, team brain. Aceita tokens. Não precisa de verbatim como SoT. Use `search.mode balanced`.
 
 ---
 
 ## TL;DR Verdict
 
-**mempalace vence o pack `memory` (+5.7 pts)** porque os pesos premiam recall público, persistence verbatim e local-first — e aí gbrain leva um hit de −37 em local-first sozinho. Mas **não é o mesmo produto**: se o critério for “agente acorda mais inteligente e me responde com gaps”, **gbrain vence o job de brain layer** mesmo perdendo o scorecard. Empate de dimensões (4–4); vitória de mempalace é de **política de armazenamento + offline**, não de feature count.
+**M1 vence o pack `memory` (+3.5 pts)** porque o pack premia fidelity/local-first. **M2 vence o job de córtex** (`think` + gaps + volunteer). Você não compra o 1º — compra M1 e/ou M2.
 
 **Recommendation:**  
-- **Default storage / fidelity layer → mempalace**  
-- **Default agent brain / synthesis layer → gbrain**  
-- **Melhor stack:** os dois — mempalace como cold archive verbatim; gbrain como hot brain sintético (não escolher um e fingir que cobre o outro).
+- **Default storage / fidelity → mempalace**  
+- **Default agent brain / synthesis / push → gbrain**  
+- **Melhor stack:** os dois — cold verbatim + hot synthetic. Não escolher um e fingir que cobre o outro.
 
 ---
 
-_Generated by os-bench bench-battle-card | memory pack | 2026-08-06_
+_Generated by os-bench bench-battle-card | memory pack | 2026-09-05_

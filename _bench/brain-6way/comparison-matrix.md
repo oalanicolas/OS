@@ -1,76 +1,60 @@
 # Comparison Matrix: brain-6way
 
-**Date:** 2026-08-06 · **Pack:** memory + product framing
+**Date:** 2026-09-05 · **Pack:** memory + product framing  
+**Supersedes:** 2026-08-06
 
 ---
 
-## Product job (o que cada um *é*)
+## Product job
 
-| Subject | Job-to-be-done | Unit of knowledge |
-|---------|----------------|-------------------|
-| **LifeOS** | Rodar a **vida/trabalho** com um DA que conhece TELOS e sobe o hill | markdown files + hot memory cards |
-| **gbrain** | **Responder** com síntese + gaps sobre um corpus de páginas/entidades | pages + graph edges (Postgres) |
-| **mempalace** | **Lembrar verbatim** e buscar offline | drawers (exact text) |
-| **mem0** | Embutir **memory layer** em qualquer app multi-provider | extracted facts + vectors |
-| **memori-labs** | Lembrar o que o **agente fez** (tools/outcomes) | SQL entity facts |
-| **gsd-2** | Memória tribal **dentro** do coding agent GSD | 6 categorias enum |
-
----
+| Subject | ID | Job-to-be-done | Unit of knowledge | Pack |
+|---------|----|----------------|-------------------|------|
+| **mempalace** | **M1** | Lembrar verbatim (+ hub) | drawers | admitido |
+| **gbrain** | **M2** | Responder com síntese + gaps + push | pages + graph | admitido |
+| **mem0** | **M3** | Memory layer no app | extracted facts | admitido (LME = platform) |
+| **memori-labs** | **M4** | O que o agente fez (+ conversas) | SQL facts | admitido |
+| **honcho** | **M5** | Representar peers | representations | adjacente, sem R@k |
+| **LifeOS** | life-OS | OS da vida (TELOS, Pulse) | markdown + hot cards | **excluído** |
+| **gsd-2** | process | Memória tribal GSD | 6 categorias | **excluído** |
 
 ## Architecture snapshot
 
-| | LifeOS | gbrain | mempalace | mem0 | memori |
-|--|--------|--------|-----------|------|--------|
-| Runtime | Claude Code + Pulse daemon | CLI/MCP + Minions + dream | CLI/MCP | SDK/API | SDK/plugin |
-| Storage | MD tree local | PGLite/Postgres | Chroma + SQLite KG | 24 vector stores | multi SQL |
-| Search | BM25 (+ graph tool) | hybrid vector+BM25+graph | vector + hybrid | vector multi-backend | FAISS+BM25 |
-| Graph | graphology over MD | zero-LLM edges + multi-hop | temporal KG | optional Neo4j etc. | KG tables |
-| Voice | **Pulse TTS + Siri + DA voice** | agent-voice / Twilio | no first-class | no | no |
-| Dashboard | **Pulse Observatory** | admin embed | no | Platform hosted | Cloud console |
-| Life goals / TELOS | **first-class** | no | no | no | no |
-| Published recall bench | no | BrainBench custom | LongMemEval | LoCoMo+LME+BEAM | LoCoMo |
+| | LifeOS | gbrain | mempalace | mem0 | memori | honcho |
+|--|--------|--------|-----------|------|--------|--------|
+| Runtime | Claude Code + Pulse | CLI/MCP + Minions | CLI/MCP + hub | SDK/API | SDK/plugin | API + deriver |
+| Storage | MD tree | PGLite/Postgres | Chroma + SQLite KG | 24 stores | multi SQL | messages + Qdrant |
+| Search | BM25 | hybrid + Voyage rerank | vector + hybrid | vector multi | FAISS+BM25 | scoped search |
+| Graph | graphology/MD | zero-LLM + multi-hop | temporal KG | optional | KG tables | peer graph |
+| Push | — | **volunteer** | hub forward | plugin | capture | search-before-answer |
+| Voice | **Pulse** | agent-voice | no | no | no | no |
+| Life goals | **TELOS** | no | no | no | no | no |
+| Public retrieval bench | no | **LME 93/95** | **LME 96.6 raw** | LME QA 94.4 | LoCoMo 87 | web evals |
 
----
+## Feature classes (LifeOS-centric + Sept delta)
 
-## Feature classes (LifeOS-centric)
-
-| Capability | LifeOS | gbrain | mempalace | mem0 | memori |
-|------------|:------:|:------:|:---------:|:----:|:------:|
-| Verbatim storage policy | Parcial | Parcial | **Forte** | Sem | Parcial |
-| Industry recall leaderboard | Sem | Parcial | **Forte** | **Forte** | Forte |
-| Entity knowledge (people/co) | **Forte** | **Forte** | Parcial | Parcial | Parcial |
-| Synthesis / gap analysis | Parcial (DA) | **Forte** (`think`) | Sem | Sem | Parcial |
-| Autonomic memory loop | **Forte** | dream/enrich | Sem | graph recon | capture |
-| Life OS / goals / TELOS | **Forte** | Sem | Sem | Sem | Sem |
-| Voice runtime | **Forte** | Forte | Sem | Sem | Sem |
-| Multi vector-store SDK | Sem | Sem | Parcial | **Forte** | Sem |
-| Zero-API offline core | Parcial | Sem | **Forte** | Sem | Parcial |
-| Coding-agent side memory only | Sem | Sem | Sem | Sem | Sem (gsd-2 yes) |
-
----
-
-## When LifeOS wins the room
-
-- Você quer **um sistema de vida**, não um store de embeddings  
-- DA com identidade, TELOS, Algorithm, dashboard, voz  
-- Markdown/files como SoT (git-friendly, legível)  
-- Já vive em Claude Code (ou aceita harness forte)
-
-## When LifeOS loses the room
-
-- Precisa **R@5 SOTA** / LongMemEval  
-- Precisa **offline zero LLM**  
-- Precisa **SDK multi-tenant multi-Qdrant**  
-- Precisa só “coloque mem0 no meu chatbot” em 10 linhas  
-
----
+| Capability | LifeOS | gbrain | mempalace | mem0 | memori | honcho |
+|------------|:------:|:------:|:---------:|:----:|:------:|:------:|
+| Verbatim policy | Parcial | Parcial | **Forte** | Sem | Parcial | Sem |
+| Industry recall leaderboard | Sem | **Forte** (novo) | **Forte** | **Forte** | Forte | Parcial (web) |
+| Synthesis / gap | Parcial | **Forte** | Sem | Parcial Dream | Parcial | Parcial dialectic |
+| Push / volunteer | Sem | **Forte** | Parcial | Parcial | Sem | Parcial |
+| Fleet / scopes | Sem | Forte company | **Forte** hub | Parcial | Parcial | **Forte** |
+| Life OS / TELOS / voice | **Forte** | Sem / Forte voice | Sem | Sem | Sem | Sem |
+| Multi vector-store SDK | Sem | Sem | Parcial | **Forte** | Sem | Sem |
+| Zero-API offline | Parcial | Sem | **Forte** | Sem | Parcial | Sem |
+| Peer identity over time | Parcial DA | Parcial | Sem | Parcial | Sem | **Forte** |
 
 ## Stacks sensatos (compose)
 
 | Stack | Papéis |
 |-------|--------|
 | **LifeOS alone** | full personal OS |
-| **LifeOS + mempalace** | life OS + cold verbatim archive |
-| **LifeOS + gbrain** | life OS + institutional knowledge synthesis (pesado; overlapping people/companies) |
-| **gbrain + memori** | knowledge + agent-action (sem life TELOS) |
+| **LifeOS + mempalace** | life OS + cold verbatim |
+| **mempalace hub + gbrain** | fleet archive + institutional think (dois SoTs; precisa de regra) |
+| **gbrain + honcho** | corpus institucional + “quem é esta pessoa pra mim” |
+| **gbrain + memori** | knowledge + agent-action |
 | **mem0 + app** | product memory layer only |
+
+---
+
+_Generated by os-bench bench-matrix | 2026-09-05_
