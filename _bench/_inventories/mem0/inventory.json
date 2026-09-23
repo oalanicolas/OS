@@ -1,0 +1,30 @@
+{
+  "generatedAt": "2026-09-05T18:00:00Z",
+  "subject": "mem0",
+  "path": "OS/mem0/",
+  "source_url": "https://github.com/mem0ai/mem0",
+  "primary_language": "Python",
+  "secondary_languages": ["TypeScript"],
+  "version": "2.0.20",
+  "tagline": "The Memory Layer for Personalized AI",
+  "metrics": {
+    "file_count": 1777,
+    "last_commit_date": "2026-09-04"
+  },
+  "benchmarks": {
+    "locomo": 92.5,
+    "longmemeval": 94.4,
+    "beam_1m": 64.1,
+    "source": "OS/mem0/README.md"
+  },
+  "capabilities": [
+    {"name": "multi vector-store SDK", "evidence_paths": ["OS/mem0/mem0/"], "category": "core"},
+    {"name": "Dream consolidation skill/API", "evidence_paths": ["OS/mem0/integrations/mem0-plugin/skills/dream/SKILL.md"], "category": "core"},
+    {"name": "Claude Code plugin 0.3.0", "evidence_paths": ["OS/mem0/integrations/claude-code-plugin/"], "category": "integration"},
+    {"name": "DeepSeek Harness plugin", "evidence_paths": ["OS/mem0/integrations/deepseek-plugin/"], "category": "integration"},
+    {"name": "Strands MemoryStore", "evidence_paths": ["OS/mem0/integrations/mem0-strands/"], "category": "integration"}
+  ],
+  "confidence": "HIGH",
+  "extraction_method": "filesystem-scan",
+  "skill_version": "1.0.0"
+}

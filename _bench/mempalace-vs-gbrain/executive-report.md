@@ -1,26 +1,28 @@
 # Executive Report: mempalace vs gbrain
 
-**Date:** 2026-08-06  
+**Date:** 2026-09-05  
 **Type:** pair (top-2 de memory-5way)  
 **Slug:** mempalace-vs-gbrain  
 **Pack:** memory  
-**Winner (weighted):** mempalace **84.23** vs gbrain **78.56** (Δ **+5.67**)
+**Pack winner (M1 vs M2, ambos admitidos):** mempalace **85.10** vs gbrain **81.60** (Δ **+3.50**, era +5.67)
+
+**Você não compra o 1º do pack. Compra o ID:** M1 = verbatim; M2 = córtex. (`taxonomy.md` §12)
 
 ---
 
-## 1. The real question
+## 1. The real question (unchanged)
 
 Não é “qual é melhor software?” — é **qual job você está comprando?**
 
-| | mempalace | gbrain |
+| | mempalace 3.9 | gbrain 0.48 |
 |--|-----------|--------|
-| Metaphor | Palácio: guarda o original nas gavetas | Cérebro: lê as gavetas e te conta o que importa |
+| Metaphor | Palácio: guarda o original; agora também **aluga salas para a frota** | Cérebro: lê, responde, empurra o que falta |
 | Query UX | “Aqui estão os trechos” | “Aqui está a resposta — e o que eu ainda não sei” |
-| Cost model | $0 no path raw | API keys embed + LLM synthesis |
-| Trust model | Verbatim = auditável | Synthesis = útil, mas interpretada |
-| Ops model | CLI + MCP + hooks | Daemon + Minions + dream + doctor |
+| Cost model | $0 no path raw | API keys embed + LLM + Voyage opcional |
+| Trust model | Verbatim = auditável | Synthesis = útil, interpretada |
+| Ops model | CLI + MCP + **hub** + skills | Daemon + Minions + dream + **volunteer** |
 
-O scorecard do pack `memory` **foi desenhado** com pesos altos em recall/persistence/local-first (0.22+0.12+0.13 = 47%). Nesse eixo, mempalace é o campeão natural. gbrain otimiza eixos com peso menor (graph 0.10, write 0.10) mas com valor de produto enorme em produção de agentes.
+O pack ainda premia fidelity/local (47% em recall+persistence+local-first). Mempalace ganha esse pack. Gbrain ganha o job de brain.
 
 ---
 
@@ -28,148 +30,84 @@ O scorecard do pack `memory` **foi desenhado** com pesos altos em recall/persist
 
 | Dimension | W | mempalace | gbrain | Edge |
 |-----------|--:|:---------:|:------:|------|
-| Recall | 22% | **93** | 80 | LongMemEval público vs BrainBench custom |
-| Local-first | 13% | **95** | 58 | **maior delta (+37)** |
-| Persistence | 12% | **95** | 82 | Verbatim vs paraphrase+raw |
-| Write lat. | 10% | 65 | **82** | Minions + batch |
-| Read lat. | 12% | 75 | **80** | Hybrid RRF + autocut |
-| Schema | 10% | **80** | 78 | Quase empate |
-| Vector | 11% | 72 | **78** | Gateway multi-provider |
-| Graph | 10% | 86 | **94** | Auto-wiring zero-LLM |
-| **Total** | | **84.23** | **78.56** | mempalace |
+| Recall | 22% | **93** | **90** | mempalace (Δ era 13, agora **3**) |
+| Local-first | 13% | **95** | 58 | **maior delta (+37)** — o que decide o pack |
+| Persistence | 12% | **95** | 82 | verbatim vs paraphrase+raw |
+| Write lat. | 10% | 65 | **84** | Minions + writeback |
+| Read lat. | 12% | 77 | **80** | |
+| Schema | 10% | **83** | 80 | hub modes vs schema packs |
+| Vector | 11% | 75 | **82** | gateway + Voyage |
+| Graph | 10% | 86 | **94** | auto-wiring |
+| **Total** | | **85.10** | **81.60** | mempalace |
 
-**Dim wins 4–4.** Vitória de mempalace é **ponderada**, não unânime.
+**Dim wins 4–4.** Vitória de mempalace continua **ponderada**.
 
 ---
 
-## 3. Architectural contrast
+## 3. O que o pair de agosto errou (e agora corrige)
 
-### mempalace path
-```
-source (chat, file, mine)
-  → drawer VERBATIM
-  → embed (local Chroma default)
-  → search → top-k snippets
-  → (optional) hybrid rerank with small LLM
-  → agent synthesizes outside
-```
-
-### gbrain path
-```
-source (sync, capture, webhook)
-  → page (compiled_truth + raw)
-  → zero-LLM edge extract
-  → embed (multi-provider gateway)
-  → hybrid + graph signals
-  → gbrain think → answer + citations + gaps
-  → dream/enrich overnight
-```
-
-Implicação: **latência cognitiva** do usuário final é menor em gbrain (uma chamada `think`); **fidelidade e custo** favorecem mempalace.
+| Claim 6 ago | Status 5 set |
+|-------------|--------------|
+| GAP-B-003 gbrain sem LongMemEval público | **Fechado.** `CHANGELOG.md` `[0.48.2.0]` + receipts gbrain-evals. Residual: retrieval-only, rerank keyed. |
+| GAP-A-003 mempalace sem multi-tenant | **Parcial.** Shared-brain hub = frota de agentes, **não** OAuth por pessoa. Company brain continua gbrain. |
+| GAP-A-004 sem dream | Aberto. Logstream ≠ dream cycle. |
+| GAP-A-008 sem self-update | **Parcial.** Opt-in update awareness 3.9. |
+| “gbrain benchmarks industry-standard fracos” (battle-card) | **Obsoleto** como headline. Ainda verdade que não há answer-accuracy LLM-judged. |
 
 ---
 
 ## 4. Where each is undefeatable
 
-### mempalace only (prático)
-1. Air-gapped / no API budget no hot path  
-2. Compliance: “prove as palavras originais”  
-3. LongMemEval-class retrieval SOTA sem extraction loss  
-4. Claude Code retention (mine + precompact hooks) com UX madura  
+### mempalace only
+1. Air-gapped / no API no hot path (96.6% R@5 raw)  
+2. Compliance: prove as palavras originais  
+3. Claude Code retention (mine + hooks)  
+4. **Novo:** frota de agentes no mesmo palácio sem misturar recall com coordenação (`mempalace-task`)
 
-### gbrain only (prático)
-1. Meeting prep sintético com gap analysis  
-2. Graph questions (“who works at X?”, multi-hop) sem Neo4j  
-3. Company brain multi-user com write fences  
-4. Overnight self-improvement (dream, enrich, doctor remediations)  
-5. Production scale story (100k+ pages, dozens of crons)  
+### gbrain only
+1. `think` + gap analysis  
+2. Graph multi-hop zero-LLM  
+3. Company brain com source/OAuth fences  
+4. Volunteer / ambient writeback (OpenClaw default-on)  
+5. Dream no write path + 24/7 minions  
 
 ---
 
-## 5. Decision matrix (use cases)
+## 5. Decision matrix
 
 | Use case | Winner | Why |
 |----------|:------:|-----|
 | Personal notes offline | **mempalace** | zero API, verbatim |
-| Claude Code session memory | **mempalace** | mine + hooks |
+| Claude Code session archive | **mempalace** | mine + hooks |
+| Agent fleet sharing one memory | **mempalace hub** | 3.9 job novo |
 | YC-style people/deals brain | **gbrain** | graph + think |
 | Team institutional memory | **gbrain** | company brain |
-| Legal/audit transcript store | **mempalace** | verbatim policy |
-| OpenClaw/Hermes production brain | **gbrain** | designed for that |
-| Lowest token bill | **mempalace** | raw path $0 |
 | “What don’t I know?” | **gbrain** | gap analysis |
-| Solo privacy maximalist | **mempalace** | local-first |
-| Solo leverage maximalist | **gbrain** | synthesis + dream |
+| Unprompted context mid-chat | **gbrain** | volunteer |
+| Legal/audit transcript | **mempalace** | verbatim policy |
 
 ---
 
 ## 6. Can you run both?
 
-**Yes — recommended for serious setups.**
+**Yes — still the serious setup.** 3.9 e 0.48 **aumentam** o overlap (ambos fazem frota/push) mas **não** unificam SoT.
 
 | Layer | System | Role |
 |-------|--------|------|
-| Cold | mempalace | Verbatim archive, session mine, offline recall |
-| Hot | gbrain | Synthetic working memory, graph, think, crons |
+| Cold | mempalace | Verbatim archive, session mine, optional hub |
+| Hot | gbrain | Synthetic working memory, graph, think, volunteer, crons |
 
-Pattern: periodicamente (ou via agent) promover drawers relevantes → `gbrain put` pages; gbrain nunca vira SoT de fidelidade; mempalace nunca precisa virar company daemon.
-
-**Anti-pattern:** instalar só gbrain e esperar offline zero-cost; instalar só mempalace e esperar gap analysis de board meeting.
+Anti-pattern novo: instalar o hub do mempalace e esperar gap analysis; ligar volunteer do gbrain e esperar prova literal.
 
 ---
 
-## 7. If you must pick one
+## 7. Bottom line
 
-### Pick **mempalace** if…
-- Privacy/offline/cost são non-negotiable  
-- O agente já é bom em sintetizar; você só precisa de retrieval fiel  
-- Caso de uso = coding-agent memory + chat history  
-
-### Pick **gbrain** if…
-- Você quer o brain como **produto operacional** (não só store)  
-- Workload entity-heavy (people, companies, investments)  
-- Team / multi-tenant / overnight autonomy  
-
-### Pack score winner
-**mempalace** — para o pack `memory` como definido.  
-
-### Product-brain winner
-**gbrain** — se o critério for “substitui o estagiário que lê suas notas”.
+> **mempalace is still the better memory. gbrain is still the better brain.**  
+> A distância no pack caiu de +5.7 para **+3.5** porque gbrain publicou LME.  
+> Local-first (+37) continua o desempate.  
+> Default: **os dois em camadas**. Um sozinho finge o job do outro.
 
 ---
 
-## 8. Gaps worth closing (see gap-analysis.md)
-
-| Priority | On gbrain | On mempalace |
-|:--------:|-----------|--------------|
-| P0 | Offline embed path; optional verbatim-primary mode | — |
-| P1 | LongMemEval harness; Claude mine hooks | Optional think-lite; zero-LLM edge auto-wire |
-| Skip | — | Full multi-tenant (wrong product shape) |
-
----
-
-## 9. Bottom line
-
-> **mempalace is the better memory. gbrain is the better brain.**
-
-O pack `memory` elege mempalace (+5.7). Um pack hipotético `agent-brain` (synthesis, autonomy, multi-tenant, graph ops) elegeria gbrain com folga.  
-
-**Recommendation final:**  
-1. **Solo / privacy / fidelity → mempalace**  
-2. **Agent ops / company knowledge → gbrain**  
-3. **Ambicioso → ambos em camadas** (não monólito único)
-
----
-
-## Artefatos deste pair
-
-```
-OS/_bench/mempalace-vs-gbrain/
-├── battle-card.md          ← 1 página decisória
-├── executive-report.md     ← este arquivo
-├── scorecard.{md,json}
-├── comparison-matrix.{md,json}
-├── gap-analysis.md
-├── metadata.json
-└── _inventories/{mempalace,gbrain}/
-```
+_Generated by os-bench bench-executive-report | 2026-09-05_

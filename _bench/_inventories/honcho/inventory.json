@@ -1,0 +1,29 @@
+{
+  "generatedAt": "2026-09-05T18:00:00Z",
+  "subject": "honcho",
+  "path": "OS/honcho/",
+  "source_url": "https://github.com/plastic-labs/honcho",
+  "primary_language": "Python",
+  "secondary_languages": ["TypeScript"],
+  "stack": ["FastAPI", "Qdrant", "MCP", "deriver worker", "honcho-cli"],
+  "version": "3.1.1",
+  "tagline": "Memory infrastructure for stateful agents that understand changing people, agents, groups, projects, and ideas over time.",
+  "metrics": {
+    "file_count": 1033,
+    "last_commit_date": "2026-09-04",
+    "last_commit": "be54355"
+  },
+  "capabilities": [
+    {"name": "peer representations", "evidence_paths": ["OS/honcho/README.md"], "category": "core"},
+    {"name": "scopes many-to-many with sessions", "evidence_paths": ["OS/honcho/README.md"], "category": "governance"},
+    {"name": "Qdrant vector search", "evidence_paths": ["OS/honcho/README.md"], "category": "core"},
+    {"name": "MCP stdio", "evidence_paths": ["OS/honcho/mcp/"], "category": "integration"},
+    {"name": "harness-plugin-core", "evidence_paths": ["OS/honcho/harness-plugin-core/"], "category": "extensibility"}
+  ],
+  "job": "peer-identity-memory",
+  "scored_in_memory_pack": false,
+  "reason_not_scored": "Different job than vault/SDK/knowledge-brain; no in-tree LongMemEval runner comparable to mempalace/gbrain receipts.",
+  "confidence": "HIGH",
+  "extraction_method": "filesystem-scan",
+  "skill_version": "1.0.0"
+}

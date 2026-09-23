@@ -1,6 +1,7 @@
 {
   "slug": "memory-5way",
-  "generatedAt": "2026-08-06T20:18:21Z",
+  "generatedAt": "2026-09-05T18:00:00Z",
+  "supersedes": "2026-08-06T20:18:21Z",
   "pack": "memory",
   "confidence_overall": "HIGH",
   "weights": {
@@ -13,39 +14,46 @@
     "vector_support": 0.11,
     "graph_support": 0.10
   },
+  "methods": {
+    "gbrain": "installed",
+    "mempalace": "installed",
+    "mem0": "installed",
+    "memori-labs": "installed",
+    "gsd-2": "installed-partial"
+  },
   "scores": {
     "gbrain": {
-      "recall_accuracy": 80,
-      "write_latency": 82,
+      "recall_accuracy": 90,
+      "write_latency": 84,
       "read_latency": 80,
       "persistence": 82,
-      "schema_flexibility": 78,
+      "schema_flexibility": 80,
       "local_first": 58,
-      "vector_support": 78,
+      "vector_support": 82,
       "graph_support": 94,
-      "weighted_total": 78.56
+      "weighted_total": 81.6
     },
     "mempalace": {
       "recall_accuracy": 93,
       "write_latency": 65,
-      "read_latency": 75,
+      "read_latency": 77,
       "persistence": 95,
-      "schema_flexibility": 80,
+      "schema_flexibility": 83,
       "local_first": 95,
-      "vector_support": 72,
+      "vector_support": 75,
       "graph_support": 86,
-      "weighted_total": 84.23
+      "weighted_total": 85.1
     },
     "mem0": {
       "recall_accuracy": 92,
       "write_latency": 80,
       "read_latency": 74,
-      "persistence": 72,
+      "persistence": 74,
       "schema_flexibility": 86,
       "local_first": 40,
       "vector_support": 98,
-      "graph_support": 72,
-      "weighted_total": 77.54
+      "graph_support": 76,
+      "weighted_total": 78.18
     },
     "memori-labs": {
       "recall_accuracy": 85,
@@ -70,14 +78,34 @@
       "weighted_total": 52.94
     }
   },
-  "ranking": [
-    "mempalace",
-    "gbrain",
-    "mem0",
-    "memori-labs",
-    "gsd-2"
-  ],
+  "taxonomy": {
+    "spec": "OS/_bench/_research/taxonomy.md §12",
+    "job_id": {
+      "mempalace": "M1",
+      "gbrain": "M2",
+      "mem0": "M3",
+      "memori-labs": "M4",
+      "gsd-2": "process"
+    },
+    "pack_admission": {
+      "admitted": ["mempalace", "gbrain", "mem0", "memori-labs"],
+      "excluded": ["gsd-2"],
+      "excluded_reason": {
+        "gsd-2": "kind=process; .gsd/ is E4 residue, not an M store. Diagnostic scores only."
+      }
+    }
+  },
+  "delta_vs_2026_08_06": {
+    "gbrain": 3.04,
+    "mempalace": 0.87,
+    "mem0": 0.64,
+    "memori-labs": 0.0,
+    "gsd-2": 0.0
+  },
+  "ranking_admitted": ["mempalace", "gbrain", "mem0", "memori-labs"],
+  "ranking": ["mempalace", "gbrain", "mem0", "memori-labs"],
   "overall_winner": "mempalace",
+  "buy": "You do not buy rank 1 of this pack. You buy a job ID (M1 verbatim / M2 cortex / M3 SDK / M4 action log).",
   "dimension_leaders": {
     "recall_accuracy": "mempalace",
     "write_latency": "gbrain",
@@ -87,5 +115,26 @@
     "local_first": "mempalace",
     "vector_support": "mem0",
     "graph_support": "gbrain"
-  }
+  },
+  "recall_signals": {
+    "gbrain": [
+      {"signal": "LongMemEval recall_all@5 hybrid+rerank 95.32% (448/470)", "evidence": "OS/gbrain/CHANGELOG.md [0.48.2.0]"},
+      {"signal": "LongMemEval recall_all@5 hybrid 93.19% (438/470) reranker-off", "evidence": "OS/gbrain/CHANGELOG.md [0.48.2.0]"},
+      {"signal": "BrainBench custom R@5 97.9%", "evidence": "OS/gbrain/README.md"}
+    ],
+    "mempalace": [
+      {"signal": "LongMemEval R@5 96.6% raw, zero LLM", "evidence": "OS/mempalace/README.md"},
+      {"signal": "benchmarks/BENCHMARKS.md + longmemeval_bench.py", "evidence": "OS/mempalace/benchmarks/"}
+    ],
+    "mem0": [
+      {"signal": "LoCoMo 92.5 / LongMemEval 94.4 / BEAM1M 64.1 — README says managed platform, not OSS SDK", "evidence": "OS/mem0/README.md L49–54"}
+    ]
+  },
+  "limitations": [
+    "gbrain LME is retrieval-only (no LLM-judged answer accuracy); 95.32% needs Voyage key",
+    "mem0/memori benches are QA-style; mempalace/gbrain LME rows are retrieval R@k — still not 1:1",
+    "mem0 92.5/94.4 are managed-platform scores (proprietary opts, top_200); OSS SDK is not the same artifact — recall_accuracy 92 overstates a local clone",
+    "gbrain memory.auto_writeback defaults to off; volunteer (read) ≠ writeback (write)",
+    "gsd-2 excluded from admitted ranking (process)"
+  ]
 }

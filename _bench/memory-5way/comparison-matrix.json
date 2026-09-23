@@ -1,28 +1,43 @@
 {
   "slug": "memory-5way",
-  "generatedAt": "2026-08-06T20:18:21Z",
+  "generatedAt": "2026-09-05T18:00:00Z",
+  "supersedes": "2026-08-06T20:18:21Z",
   "subjects": ["gbrain", "mempalace", "mem0", "memori-labs", "gsd-2"],
   "versions": {
-    "gbrain": "0.42.73.2",
-    "mempalace": "3.6.0",
-    "mem0": "2.0.17",
+    "gbrain": "0.48.2.0",
+    "mempalace": "3.9.0",
+    "mem0": "2.0.20",
     "memori-labs": "3.3.7",
     "gsd-2": "3.0.0"
   },
   "categories": {
     "recall": {
-      "gbrain": "BrainBench R@5 97.9% P@5 49.1% (custom)",
-      "mempalace": "LongMemEval R@5 96.6% raw / 100% hybrid",
-      "mem0": "LoCoMo 92.5 LongMemEval 94.4 BEAM1M 64.1",
+      "gbrain": "LongMemEval recall_all@5 hybrid 93.19% / hybrid+rerank 95.32% (470q); BrainBench R@5 97.9% custom",
+      "mempalace": "LongMemEval R@5 96.6% raw / hybrid optional — zero LLM",
+      "mem0": "LoCoMo 92.5 LongMemEval 94.4 BEAM1M 64.1 (QA-style)",
       "memori-labs": "LoCoMo 87% @ 721 tokens",
       "gsd-2": "none published"
     },
     "persistence_strategy": {
       "gbrain": "paraphrase+raw",
       "mempalace": "verbatim",
-      "mem0": "paraphrase_facts",
+      "mem0": "paraphrase_facts+dream",
       "memori-labs": "structured_facts+conversations",
       "gsd-2": "six_category_structured"
+    },
+    "push_volunteer": {
+      "gbrain": "volunteer_context + OpenClaw default-on + ambient writeback",
+      "mempalace": "hub search forwarding (not unsolicited push)",
+      "mem0": "plugin hooks",
+      "memori-labs": "background capture",
+      "gsd-2": "none"
+    },
+    "fleet_or_tenant": {
+      "gbrain": "company brain OAuth / source isolation",
+      "mempalace": "shared-brain hub 3.9 (private|hub|client)",
+      "mem0": "user/agent/run_id",
+      "memori-labs": "entity attribution",
+      "gsd-2": "project"
     },
     "vector_stores_count_approx": {
       "gbrain": 2,
@@ -34,7 +49,7 @@
     "graph": {
       "gbrain": "zero_llm_typed_edges+multihop+chronicle",
       "mempalace": "temporal_kg",
-      "mem0": "optional_external_llm_graph",
+      "mem0": "optional_external_llm_graph+dream",
       "memori-labs": "sql_knowledge_graph_triples",
       "gsd-2": "memory_relations"
     },

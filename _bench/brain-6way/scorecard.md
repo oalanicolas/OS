@@ -1,26 +1,36 @@
 # Scorecard: brain-6way
 
-**Date:** 2026-08-06  
+**Date:** 2026-09-05  
 **Pack:** memory (weights sum 1.00)  
 **Subjects:** LifeOS · gbrain · mempalace · mem0 · memori-labs · gsd-2  
 **Confidence:** HIGH  
+**Supersedes:** 2026-08-06
 
-> **Caveat:** o pack `memory` mede **camada de memória**. LifeOS é um **Life OS / harness** com Cortex embutido — o score total **subestima** dashboard, voz, Algorithm, skills e DA. Use a seção “Product jobs” no executive-report.
+> **Taxonomia** (`_research/taxonomy.md` §12): o pack `memory` admite **M1–M4**. Você **não compra o 1º do pack** — compra o **ID**. LifeOS é life OS, não 5º memory.
+
+| Subject | Job ID | Pack ranking |
+|---------|--------|--------------|
+| mempalace | **M1** arquivo fiel | admitido |
+| gbrain | **M2** córtex | admitido |
+| mem0 | **M3** SDK | admitido |
+| memori-labs | **M4** log de ação | admitido |
+| LifeOS | life-OS | **excluído** (diagnóstico na tabela de dimensões) |
+| gsd-2 | process | **excluído** |
+| honcho | **M5** peer | adjacente; **sem** `recall_accuracy` IR |
+| claude-mem | session-observer | adjacente; não pontuado |
 
 ---
 
-## Ranking (memory pack)
+## Ranking admitido (pack `memory`, só M1–M4)
 
-| Rank | Subject | Total | Dim wins |
-|-----:|---------|------:|:--------:|
-| 1 | **mempalace** | **84.23** | 3 |
-| 2 | **gbrain** | **78.56** | 3 |
-| 3 | **mem0** | **77.54** | 1 |
-| 4 | **memori-labs** | **76.43** | 1 |
-| 5 | **LifeOS** | **70.58** | 0* |
-| 6 | **gsd-2** | **52.94** | 0 |
+| Rank | ID | Subject | Total | vs 6 ago | Dim wins |
+|-----:|----|---------|------:|---------:|:--------:|
+| 1 | M1 | **mempalace** | **85.10** | +0.87 | 3 |
+| 2 | M2 | **gbrain** | **81.60** | **+3.04** | 3 |
+| 3 | M3 | **mem0** | **78.18** | +0.64 | 1 |
+| 4 | M4 | **memori-labs** | **76.43** | 0 | 1 |
 
-\*LifeOS não lidera nenhuma dimensão do pack, mas é #2 em schema e graph, e o único **full life-OS product**.
+LifeOS **70.58** e gsd-2 **52.94** não entram neste ranking. LifeOS continua o único **full life-OS** — na product matrix, não aqui.
 
 ---
 
@@ -28,39 +38,29 @@
 
 | Dimension | W | mempalace | gbrain | mem0 | memori | **LifeOS** | gsd-2 | Leader |
 |-----------|--:|:---------:|:------:|:----:|:------:|:----------:|:-----:|:------:|
-| Recall | 22% | **93** | 80 | 92 | 85 | 68 | 38 | mempalace |
-| Write lat. | 10% | 65 | **82** | 80 | 76 | 72 | 55 | gbrain |
-| Read lat. | 12% | 75 | **80** | 74 | 76 | 74 | 60 | gbrain |
-| Persistence | 12% | **95** | 82 | 72 | 78 | 80 | 65 | mempalace |
-| Schema flex. | 10% | 80 | 78 | 86 | **88** | 86 | 55 | memori |
+| Recall | 22% | **93** | 90 | 92 | 85 | 68 | 38 | mempalace |
+| Write lat. | 10% | 65 | **84** | 80 | 76 | 72 | 55 | gbrain |
+| Read lat. | 12% | 77 | **80** | 74 | 76 | 74 | 60 | gbrain |
+| Persistence | 12% | **95** | 82 | 74 | 78 | 80 | 65 | mempalace |
+| Schema flex. | 10% | 83 | 80 | 86 | **88** | 86 | 55 | memori |
 | Local-first | 13% | **95** | 58 | 40 | 55 | 64 | 60 | mempalace |
-| Vector | 11% | 72 | 78 | **98** | 70 | 42 | 48 | mem0 |
-| Graph | 10% | 86 | **94** | 72 | 80 | 84 | 55 | gbrain |
-| **Total** | | **84.23** | **78.56** | **77.54** | **76.43** | **70.58** | **52.94** | |
+| Vector | 11% | 75 | 82 | **98** | 70 | 42 | 48 | mem0 |
+| Graph | 10% | 86 | **94** | 76 | 80 | 84 | 55 | gbrain |
+| **Total** | | **85.10** | **81.60** | **78.18** | **76.43** | 70.58† | 52.94† | |
+
+† fora do ranking ponderado do pack (life-OS / process). Dimensões ficam como diagnóstico.
 
 ---
 
-## LifeOS — rationale por dimensão
+## Adjacent (not scored in this pack)
 
-| Dim | Score | Signals |
-|-----|------:|---------|
-| Recall | 68 | BM25 + LLM compress; sem LongMemEval/LoCoMo público; hot-layer always-on compensa parcialmente |
-| Write | 72 | hooks + set-overwrite hot layer + append knowledge; sem Minions/batch vector |
-| Read | 74 | hot-layer free; BM25 top-k + cache 60s; não HNSW |
-| Persistence | 80 | markdown durable + audit jsonl; facts curados (não verbatim policy) |
-| Schema | 86 | People/Companies/Ideas/Research + proposal kinds + TELOS/USER tree |
-| Local-first | 64 | files 100% local; DA precisa LLM cloud no path principal |
-| Vector | 42 | **by design** sem vector DB intermediário (`MemorySystem.md`) |
-| Graph | 84 | graphology + domains; wikilinks/related; menos auto-wire zero-LLM que gbrain |
+| Subject | Why not scored | Pointer |
+|---------|----------------|---------|
+| **honcho** 3.1.1 | Job = peer representations + scopes, not vault/SDK | `OS/_bench/_inventories/honcho/` |
+| **claude-mem** 13.24.1 | Coding-session observer | session product, not knowledge brain |
+
+See `_research/second-brain-convergence.md`.
 
 ---
 
-## Cross-read vs peers
-
-| Se você compara LifeOS com… | Leitura |
-|----------------------------|---------|
-| **mempalace** | LifeOS perde fidelity/offline; ganha life-ops, DA, dashboard, Algorithm |
-| **gbrain** | mais próximo: ambos entity knowledge (people/companies) + agent runtime. gbrain = **knowledge brain product**; LifeOS = **life OS harness** com knowledge folder |
-| **mem0** | eixos opostos: mem0 = multi-store SDK; LifeOS = monólito file-first no harness |
-| **memori** | memori = agent-action facts SQL; LifeOS = identity + goals + knowledge MD |
-| **gsd-2** | ambos “side memory no coding agent”; LifeOS é ordens de magnitude mais completo como OS |
+_Generated by os-bench bench-score | 2026-09-05_

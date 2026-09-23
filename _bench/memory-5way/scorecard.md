@@ -1,37 +1,47 @@
 # Scorecard: memory-5way
 
-**Date:** 2026-08-06  
+**Date:** 2026-09-05  
 **Pack:** memory (8 dimensions, weights sum 1.00)  
 **Confidence overall:** HIGH  
-**Supersedes:** memory-4way (2026-04-19)
+**Supersedes:** memory-5way (2026-08-06) · memory-4way (2026-04-19)  
+**Tips:** gbrain **0.48.2.0** · mempalace **3.9.0** · mem0 **2.0.20** · memori **3.3.7** · gsd-2 3.0.0 (excluído do ranking)
+
+**Taxonomia:** `_research/taxonomy.md` §12. Você **não compra o 1º do pack** — compra o **ID** (M1 verbatim / M2 córtex / M3 SDK / M4 log de ação).
+
+| Subject | Job ID | Pack `memory` |
+|---------|--------|---------------|
+| mempalace | **M1** | admitido |
+| gbrain | **M2** | admitido |
+| mem0 | **M3** | admitido |
+| memori-labs | **M4** | admitido |
+| gsd-2 | process (E4 residue) | **excluído** — scores só diagnósticos |
 
 ---
 
-## Dimension scores
+## Dimension scores (admitidos em negrito; gsd-2 diagnóstico)
 
 | Dimension | Weight | gbrain | mempalace | mem0 | memori-labs | gsd-2 | Leader |
 |-----------|-------:|:------:|:---------:|:----:|:-----------:|:-----:|:------:|
-| Recall Accuracy | 22% | 80 | **93** | 92 | 85 | 38 | mempalace |
-| Write Latency | 10% | **82** | 65 | 80 | 76 | 55 | gbrain |
-| Read Latency | 12% | **80** | 75 | 74 | 76 | 60 | gbrain |
-| Persistence | 12% | 82 | **95** | 72 | 78 | 65 | mempalace |
-| Schema Flexibility | 10% | 78 | 80 | 86 | **88** | 55 | memori-labs |
+| Recall Accuracy | 22% | 90 | **93** | 92 | 85 | 38 | mempalace |
+| Write Latency | 10% | **84** | 65 | 80 | 76 | 55 | gbrain |
+| Read Latency | 12% | **80** | 77 | 74 | 76 | 60 | gbrain |
+| Persistence | 12% | 82 | **95** | 74 | 78 | 65 | mempalace |
+| Schema Flexibility | 10% | 80 | 83 | 86 | **88** | 55 | memori-labs |
 | Local-first | 13% | 58 | **95** | 40 | 55 | 60 | mempalace |
-| Vector Support | 11% | 78 | 72 | **98** | 70 | 48 | mem0 |
-| Graph Support | 10% | **94** | 86 | 72 | 80 | 55 | gbrain |
-| **Weighted total** | **100%** | **78.56** | **84.23** | **77.54** | **76.43** | **52.94** | **mempalace** |
+| Vector Support | 11% | 82 | 75 | **98** | 70 | 48 | mem0 |
+| Graph Support | 10% | **94** | 86 | 76 | 80 | 55 | gbrain |
+| **Weighted total** | **100%** | **81.60** | **85.10** | **78.18** | **76.43** | **52.94** | **mempalace** |
 
-### Weighted totals (sorted)
+### Ranking admitido (só M1–M4)
 
-| Rank | Subject | Score | Dim wins |
-|-----:|---------|------:|:--------:|
-| 1 | **mempalace** | **84.23** | 3 |
-| 2 | **gbrain** | **78.56** | 3 |
-| 3 | **mem0** | **77.54** | 1 |
-| 4 | **memori-labs** | **76.43** | 1 |
-| 5 | **gsd-2** | **52.94** | 0 |
+| Rank | ID | Subject | Score | vs 6 ago | Dim wins |
+|-----:|----|---------|------:|---------:|:--------:|
+| 1 | M1 | **mempalace** | **85.10** | +0.87 | 3 |
+| 2 | M2 | **gbrain** | **81.60** | **+3.04** | 3 |
+| 3 | M3 | **mem0** | **78.18** | +0.64 | 1 |
+| 4 | M4 | **memori-labs** | **76.43** | 0 | 1 |
 
-Delta vs memory-4way (same 4 subjects): gbrain 75.89→**78.56** (+2.7); mem0 76.36→**77.54** (+1.2); mempalace 83.14→**84.23** (+1.1); gsd-2 ~flat. **gbrain ultrapassa mem0** no total ponderado (antes 3º).
+gsd-2 **52.94** — fora do ranking (process). Delta M1–M2: +3.50 (era +5.67).
 
 ---
 
@@ -41,86 +51,60 @@ Delta vs memory-4way (same 4 subjects): gbrain 75.89→**78.56** (+2.7); mem0 76
 
 | Subject | Score | Signals |
 |---------|------:|---------|
-| mempalace | 93 | LongMemEval R@5 96.6% raw; hybrid 100% optional — `benchmarks/BENCHMARKS.md` |
-| mem0 | 92 | LoCoMo 92.5, LongMemEval 94.4, BEAM 64.1 — `README.md` table |
-| memori-labs | 85 | LoCoMo 87% accuracy @ 721 tok; in-repo notebooks — `README.md`, `benchmarks/` |
-| gbrain | 80 | R@5 97.9% / P@5 49.1% BrainBench custom — `README.md`; not industry dataset |
+| mempalace | 93 | LongMemEval R@5 **96.6% raw, zero LLM** — `README.md`, `benchmarks/BENCHMARKS.md` |
+| mem0 | 92 | LoCoMo 92.5 / LME 94.4 — **plataforma gerenciada**, não o SDK OSS (`README.md` L54). Score do pack **superestima** um clone local. |
+| gbrain | **90** (was 80) | Public LME `recall_all@5` hybrid **93.19%** / hybrid+Voyage rerank **95.32%** on 470q — `CHANGELOG.md` `[0.48.2.0]`; BrainBench custom R@5 97.9% — `README.md`. Score 90 not 93: rerank needs key; no LLM-judged answer accuracy; `tokenmax` expansion collapses to 54.89%. |
+| memori-labs | 85 | LoCoMo 87% @ 721 tok — `README.md` |
 | gsd-2 | 38 | no published recall metric |
 
 ### Write Latency (10%)
 
 | Subject | Score | Signals |
 |---------|------:|---------|
-| gbrain | 82 | batch unnest writes; Minions durable queue; pace for backfills — README + CHANGELOG v0.42.49 |
-| mem0 | 80 | AsyncMemory; published 0.88–1.09s e2e |
-| memori-labs | 76 | Writer path + async API client; background capture |
-| mempalace | 65 | incremental; hook budgets; no batch queue |
+| gbrain | **84** (was 82) | Minions + batch + **ambient writeback** v0.47.10 + dream on write-path v0.47.8 |
+| mem0 | 80 | AsyncMemory; 0.88–1.09s e2e |
+| memori-labs | 76 | Writer + async API |
+| mempalace | 65 | incremental; hub concurrent reads help the read side more than write |
 | gsd-2 | 55 | sync single-writer |
 
 ### Read Latency (12%)
 
 | Subject | Score | Signals |
 |---------|------:|---------|
-| gbrain | 80 | HNSW + hybrid RRF + autocut + explain path — README search section |
-| memori-labs | 76 | FAISS + BM25 two-stage hybrid in Rust core — `core/src/search/` |
-| mempalace | 75 | Chroma HNSW + budgets |
-| mem0 | 74 | e2e includes LLM; store-dependent |
-| gsd-2 | 60 | FTS5 / simple embed |
+| gbrain | 80 | HNSW + hybrid RRF; LME p50 3.7s is session-retrieval bench, not interactive |
+| mempalace | **77** (was 75) | concurrent hub reads; Qdrant bounded scroll |
+| memori-labs | 76 | FAISS + BM25 Rust core |
+| mem0 | 74 | e2e includes LLM |
+| gsd-2 | 60 | FTS5 |
 
 ### Persistence (12%)
 
-| Subject | Score | Signals |
-|---------|------:|---------|
-| mempalace | 95 | explicit VERBATIM policy; no paraphrase |
-| gbrain | 82 | compiled_truth + raw_data; page_versions; company isolation |
-| memori-labs | 78 | SQL facts + conversations durable; not verbatim-first |
-| mem0 | 72 | paraphrase facts; history API |
-| gsd-2 | 65 | structured categories only |
+Unchanged policy: mempalace verbatim 95; gbrain compiled_truth+raw 82; mem0 **74** (was 72) for Dream merge/prune still on paraphrased facts; memori 78; gsd-2 65.
 
 ### Schema Flexibility (10%)
 
-| Subject | Score | Signals |
-|---------|------:|---------|
-| memori-labs | 88 | 8+ SQL/NoSQL drivers; entity attribution; KG triples |
-| mem0 | 86 | rich metadata + user/agent/run scoping |
-| mempalace | 80 | schemaless drawers + entity registry |
-| gbrain | 78 | schema packs BYO + frontmatter JSONB (↑ since packs) |
-| gsd-2 | 55 | fixed 6-category enum |
+memori 88 (BYODB). mem0 86. mempalace **83** (was 80) — fleet identity + hub/client/private modes. gbrain **80** (was 78) — sources + writeback TTL. gsd-2 55.
 
 ### Local-first (13%)
 
-| Subject | Score | Signals |
-|---------|------:|---------|
-| mempalace | 95 | zero API core; offline; no telemetry |
-| gsd-2 | 60 | local SQLite; LLM optional |
-| gbrain | 58 | PGLite local DB; embed/rerank keys usual |
-| memori-labs | 55 | BYODB local possible; Cloud + LLM default story |
-| mem0 | 40 | PostHog client path; hosted Platform first |
+Unchanged: mempalace 95; gsd-2 60; gbrain 58; memori 55; mem0 40. Voyage fail-open does **not** make gbrain offline (embed still keyed).
 
 ### Vector Support (11%)
 
-| Subject | Score | Signals |
-|---------|------:|---------|
-| mem0 | 98 | 24 vector_store modules; 11 embedding modules |
-| gbrain | 78 | multi-provider gateway + pgvector HNSW (↑ from single OpenAI era) |
-| mempalace | 72 | 5 backends (chroma/qdrant/milvus/pgvector/sqlite_exact) |
-| memori-labs | 70 | FAISS in-proc + SQL embeddings; not multi-store zoo |
-| gsd-2 | 48 | optional SQLite embeddings |
+mem0 98 (~24 stores). gbrain **82** (was 78) — Voyage rerank + multi-provider gateway. mempalace **75** (was 72) — Qdrant production-hardening. memori 70. gsd-2 48.
 
 ### Graph Support (10%)
 
-| Subject | Score | Signals |
-|---------|------:|---------|
-| gbrain | 94 | zero-LLM typed edges; multi-hop; relational retrieval; Chronicle |
-| mempalace | 86 | temporal KG valid_from/to |
-| memori-labs | 80 | `memori_knowledge_graph` in Rust migrations + ops |
-| mem0 | 72 | optional external graph + LLM extract |
-| gsd-2 | 55 | memory_relations only |
+gbrain 94. mempalace 86. memori 80. mem0 **76** (was 72) — Dream consolidation is graph-ish hygiene, still optional external KG. gsd-2 55.
 
 ---
 
 ## Confidence notes
 
-- **HIGH** for mempalace/mem0/gbrain public claims (in-repo docs).
-- **MEDIUM** cross-comparing R@5 retrieval (mempalace/gbrain) vs QA accuracy (mem0/memori) — metrics not identical; scores penalize incomparability slightly on gbrain custom corpus.
-- memori-labs LoCoMo is strong on **token efficiency** (721 tok) more than raw top-line accuracy vs mem0 92.5.
+- **HIGH** for mempalace/gbrain LME (in-tree CHANGELOG + benches).
+- **MEDIUM** cross-comparing retrieval R@k (mempalace/gbrain) vs QA accuracy (mem0/memori).
+- gbrain 90 is the only score that crossed the 90-gate this round; two public signals cited.
+
+---
+
+_Generated by os-bench bench-score | 2026-09-05_

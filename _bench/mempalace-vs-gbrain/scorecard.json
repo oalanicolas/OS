@@ -1,6 +1,7 @@
 {
   "slug": "mempalace-vs-gbrain",
-  "generatedAt": "2026-08-06T20:30:00Z",
+  "generatedAt": "2026-09-05T18:00:00Z",
+  "supersedes": "2026-08-06T20:30:00Z",
   "pack": "memory",
   "confidence_overall": "HIGH",
   "weights": {
@@ -17,24 +18,24 @@
     "mempalace": {
       "recall_accuracy": 93,
       "write_latency": 65,
-      "read_latency": 75,
+      "read_latency": 77,
       "persistence": 95,
-      "schema_flexibility": 80,
+      "schema_flexibility": 83,
       "local_first": 95,
-      "vector_support": 72,
+      "vector_support": 75,
       "graph_support": 86,
-      "weighted_total": 84.23
+      "weighted_total": 85.1
     },
     "gbrain": {
-      "recall_accuracy": 80,
-      "write_latency": 82,
+      "recall_accuracy": 90,
+      "write_latency": 84,
       "read_latency": 80,
       "persistence": 82,
-      "schema_flexibility": 78,
+      "schema_flexibility": 80,
       "local_first": 58,
-      "vector_support": 78,
+      "vector_support": 82,
       "graph_support": 94,
-      "weighted_total": 78.56
+      "weighted_total": 81.6
     }
   },
   "dimension_winners": {
@@ -47,6 +48,14 @@
     "vector_support": "gbrain",
     "graph_support": "gbrain"
   },
+  "taxonomy": {
+    "spec": "OS/_bench/_research/taxonomy.md §12",
+    "job_id": {"mempalace": "M1", "gbrain": "M2"},
+    "pack_admission": {"admitted": ["mempalace", "gbrain"]}
+  },
+  "buy": "Pack winner is M1. Synthesis/gaps job is M2. You buy the ID, not the pack rank.",
   "overall_winner": "mempalace",
-  "delta": 5.67
+  "delta": 3.5,
+  "delta_vs_2026_08_06": -2.17,
+  "note": "Pack winner unchanged. Gap shrank because gbrain published LongMemEval retrieval (90 vs 80). Dim wins still 4–4."
 }

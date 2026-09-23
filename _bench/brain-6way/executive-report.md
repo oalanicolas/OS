@@ -1,123 +1,66 @@
 # Executive Report: brain-6way
 
-**Date:** 2026-08-06  
+**Date:** 2026-09-05  
 **Slug:** brain-6way  
 **Subjects:** LifeOS · gbrain · mempalace · mem0 · memori-labs · gsd-2  
-**Pack:** memory (quantitativo) + product framing (qualitativo)
+**Pack:** memory (quantitativo) + product framing (qualitativo)  
+**Supersedes:** 2026-08-06
 
 ---
 
-## 1. One-sentence map
+**Você não compra o 1º deste pack. Compra o ID** (`taxonomy.md` §12).
 
-| Subject | Em uma frase |
-|---------|----------------|
-| **LifeOS** | O **sistema operacional da sua vida** com DA, Cortex e Pulse (voz/dashboard) |
-| **gbrain** | O **cérebro de conhecimento** que sintetiza e fecha gaps sobre páginas/entidades |
-| **mempalace** | O **arquivo fiel** offline, palavra por palavra |
-| **mem0** | O **SDK de memória** para plugar em qualquer stack |
-| **memori** | A **memória de ação** do agente (tools, outcomes) |
-| **gsd-2** | Memória lateral de um coding agent — não compete |
+## 1. One-sentence map (job ID)
 
----
-
-## 2. Scorecard memory pack (quantitativo)
-
-| Rank | Subject | Score |
-|-----:|---------|------:|
-| 1 | mempalace | **84.23** |
-| 2 | gbrain | **78.56** |
-| 3 | mem0 | **77.54** |
-| 4 | memori-labs | **76.43** |
-| 5 | **LifeOS** | **70.58** |
-| 6 | gsd-2 | **52.94** |
-
-**LifeOS fica em 5º no pack `memory`** porque:
-
-1. Retrieval é **BM25 em markdown**, não hybrid HNSW com bench público  
-2. **Vector support = 42** de propósito (“sem index intermediário”)  
-3. Não publica LongMemEval/LoCoMo  
-
-Isso **não** significa que LifeOS seja o pior “brain” no sentido produto — significa que o pack mede store/retrieval, e LifeOS otimiza **operating system**.
-
-### Onde LifeOS pontua bem no pack
-
-| Dim | Score | vs campo |
-|-----|------:|----------|
-| Schema flexibility | 86 | empatado com mem0, atrás só de memori |
-| Graph support | 84 | 2º atrás de gbrain (94) |
-| Persistence | 80 | arquivos MD + audit jsonl |
-| Local-first | 64 | melhor que mem0/gbrain/memori no eixo “files on disk”; pior que mempalace |
-
-### Onde LifeOS sangra no pack
-
-| Dim | Score | Por quê |
-|-----|------:|---------|
-| Vector | **42** | design file-first |
-| Recall | 68 | sem leaderboard industry; BM25 only |
+| Subject | ID | Em uma frase | Tip |
+|---------|----|----------------|-----|
+| **mempalace** | **M1** | Arquivo fiel, verbatim, offline; 3.9 = hub de frota | 3.9.0 |
+| **gbrain** | **M2** | Córtex: síntese, gaps, volunteer | 0.48.2 |
+| **mem0** | **M3** | SDK + Dream + plugins | 2.0.20 |
+| **memori** | **M4** | Log do que o agente fez | 3.3.7 |
+| **honcho** | **M5** | Peer identity (adjacente; sem R@k IR) | 3.1.1 |
+| **LifeOS** | life-OS | OS da vida (TELOS, Pulse, DA) — **não é store** | 7.40.4 |
+| **gsd-2** | process | Coding-agent residue (E4) | move |
+| **claude-mem** | session-observer | Observer de sessão de código | 13.24 |
 
 ---
 
-## 3. Product matrix (o que o scorecard não captura)
+## 2. Ranking admitido (pack `memory` = M1–M4)
 
-| Capability | LifeOS | gbrain | mempalace | mem0 | memori |
-|------------|:------:|:------:|:---------:|:----:|:------:|
-| Life goals / TELOS / Ideal State | ★★★★★ | — | — | — | — |
-| Digital Assistant identity | ★★★★★ | ★★ | — | — | ★★ |
-| Voice runtime (TTS/Siri/phone) | ★★★★★ | ★★★★ | — | — | — |
-| Observability dashboard | ★★★★★ | ★★ | — | ★★★ | ★★ |
-| Autonomic memory reviewer | ★★★★★ | ★★★ (dream) | — | ★★ | ★★★ |
-| Synthesis + gap analysis | ★★ (via DA) | ★★★★★ | — | — | ★★ |
-| Verbatim offline recall | ★★ | ★★ | ★★★★★ | ★ | ★★ |
-| Multi-store vector SDK | — | ★ | ★★ | ★★★★★ | ★★ |
-| Published recall SOTA | — | ★★ | ★★★★★ | ★★★★★ | ★★★★ |
-| Entity people/companies graph | ★★★★ | ★★★★★ | ★★★ | ★★★ | ★★ |
-| Install as agent skill pack | ★★★★★ | ★★★★ | ★★★ | ★★★★ | ★★★★ |
+| Rank | ID | Subject | Score | vs 6 ago |
+|-----:|----|---------|------:|---------:|
+| 1 | M1 | mempalace | **85.10** | +0.87 |
+| 2 | M2 | gbrain | **81.60** | **+3.04** |
+| 3 | M3 | mem0 | **78.18** | +0.64 |
+| 4 | M4 | memori-labs | **76.43** | 0 |
+
+LifeOS **70.58** e gsd-2 **52.94** saíram do ranking ponderado. LifeOS não é “5º memory”: o pack mede store M; o produto é life OS. Honcho M5 não leva `recall_accuracy` IR (unidade = representation, não R@k).
 
 ---
 
-## 4. LifeOS vs cada peer (head-to-head curto)
+## 3. Product matrix (o scorecard não captura)
 
-### LifeOS vs gbrain (o par mais interessante)
+| Capability | LifeOS | gbrain | mempalace | mem0 | memori | honcho |
+|------------|:------:|:------:|:---------:|:----:|:------:|:------:|
+| Life goals / TELOS | ★★★★★ | — | — | — | — | — |
+| Voice / dashboard | ★★★★★ | ★★★★ | — | ★★★ | ★★ | ★★ |
+| Synthesis + gap analysis | ★★ | ★★★★★ | — | ★★ Dream | ★★ | ★★ dialectic |
+| Verbatim offline recall | ★★ | ★★ | ★★★★★ | ★ | ★★ | — |
+| Push / volunteer | — | ★★★★★ | ★★ hub | ★★ | — | ★★ search-before-answer |
+| Shared fleet / scopes | — | ★★★ company | ★★★★ hub 3.9 | user/run ids | entity_id | ★★★★★ scopes |
+| Multi-store vector SDK | — | ★ | ★★ | ★★★★★ | ★★ | ★ Qdrant |
+| Peer identity over time | ★★ DA | ★★ | — | ★ | — | ★★★★★ |
+| Published retrieval SOTA | — | ★★★★ LME 0.48 | ★★★★★ | ★★★★★ QA | ★★★★ | web evals |
 
-| | LifeOS | gbrain |
-|--|--------|--------|
-| Metáfora | **OS da vida** + DA | **Cérebro de conhecimento** |
-| Storage | markdown + hooks | Postgres/pgvector |
-| Query UX | DA na sessão + BM25 context | `think` / search / graph-query |
-| Graph | graphology sobre MD | zero-LLM edges + multi-hop SQL |
-| Scale story | life ops + skills | 100k+ pages production |
-| Voice | Pulse first-class | agent-voice / Twilio |
-| Melhor para | “meu assistente que conhece minha vida” | “prepare a call com Alice a partir do corpus” |
+---
 
-**Não são substitutos 1:1.** Overlap em People/Companies. Compose só se aceitar dois SoTs ou sync deliberado.
+## 4. LifeOS vs peers (head-to-head curto)
 
-### LifeOS vs mempalace
+Inalterado vs agosto: LifeOS **não substitui** gbrain nem mempalace. 7.40.4 endurece Pulse/Hermes; não cria vector index. Compose continua:
 
-| | Winner |
-|--|--------|
-| Offline / fidelity | **mempalace** |
-| Life ops / DA / voice / goals | **LifeOS** |
-| Compose? | **Sim** — mempalace cold archive; LifeOS hot OS |
-
-### LifeOS vs mem0
-
-| | Winner |
-|--|--------|
-| Embutir memória num SaaS multi-tenant | **mem0** |
-| Operar a vida de um humano com agent | **LifeOS** |
-| Compose? | Raro — eixos diferentes |
-
-### LifeOS vs memori-labs
-
-| | Winner |
-|--|--------|
-| Tool-call / execution memory | **memori** |
-| Identity, TELOS, work, knowledge archive | **LifeOS** |
-| Compose? | **Sim** — memori como log de ação do agent; LifeOS como OS |
-
-### LifeOS vs gsd-2
-
-LifeOS engole o use case de “coding agent com memória” e vai muito além. gsd-2 só se você já é GSD-only.
+- LifeOS + mempalace = OS da vida + arquivo fiel  
+- LifeOS + gbrain = overlap em People/Companies; só com sync deliberado  
+- LifeOS + honcho = DA + peer representations (ainda não documentado pelos dois)
 
 ---
 
@@ -125,63 +68,61 @@ LifeOS engole o use case de “coding agent com memória” e vai muito além. g
 
 ```
 Quer só retrieval fiel offline?
-  → mempalace
+  → mempalace 3.9 (hub só se frota de agentes)
 
 Quer memory SDK no seu produto?
-  → mem0
+  → mem0 (plugin nativo se o host já for Claude/Cursor/DeepSeek/Strands)
 
 Quer lembrar o que o agente FEZ?
   → memori-labs
 
-Quer knowledge brain (síntese + graph + dream) sobre corpus?
-  → gbrain
+Quer knowledge brain (síntese + graph + dream + push)?
+  → gbrain 0.48 (mode=balanced)
 
-Quer um LIFE OPERATING SYSTEM (DA, TELOS, voz, dashboard, skills)?
-  → LifeOS
+Quer um agente que te CONHECE ao longo de sessões?
+  → honcho (não está no pack; job diferente)
 
-Quer coding agent memory only?
-  → gsd-2 (ou LifeOS se topa o setup maior)
+Quer LIFE OPERATING SYSTEM (DA, TELOS, voz)?
+  → LifeOS 7.40
+
+Quer coding-session memory?
+  → claude-mem (não é vault)
 ```
 
 ---
 
-## 6. Recommendation (opinionated)
+## 6. Convergência (por que atualizar agora)
 
-1. **Se o brief era “o cérebro do cara do blog com voz” → LifeOS é o produto certo** — não compete no LongMemEval, compete em **operating the self**.  
-2. **Se o brief é “melhor memory layer no pack memory” → mempalace (fidelity) ou gbrain (knowledge ops).**  
-3. **Stack ambiciosa:**  
-   - **LifeOS** = OS + DA + goals  
-   - **mempalace** = archive verbatim  
-   - opcional **memori** = execution log  
-   - **gbrain** só se precisar de synthesis/gap institutional em Postgres (cuidado com overlap)
+Três produtos andam para o mesmo desenho — **recall + dream + push + frota** — por caminhos diferentes. mempalace **separou** task skill de recall; gbrain **disclosed** o fusion bug e o expansion harm; mem0 **empacotou** Dream como skill. A tese de `_research/company-brain.md` (não colapsar quatro jobs) ficou mais urgente, não menos.
 
-4. **Não force LifeOS a ser mem0** (não tem 24 vector stores) nem **mempalace a ser LifeOS** (não tem TELOS/Pulse).
+Camada de produto: `_research/second-brain-convergence.md`.  
+Camada de **fio** (verbos, when-to-touch, scopes≠auth, quatro dreams, OpenClaw engines): `_research/second-brain-protocols.md`.  
+Camada de **turno** (heartbeat, compactação, filho não herda o pai): `_research/wake-protocols.md`.  
+Camada de **host** (slots, assemble/compact, sandbox ≠ workspace): `_research/host-protocols.md`.
 
 ---
 
-## 7. Artefatos
+## 7. Bottom line
+
+> **Você não compra o 1º do pack. Compra o ID.**  
+> **M1** mempalace 85.1 — arquivo fiel. **M2** gbrain 81.6 — córtex (LME público). **M3** mem0 — SDK. **M4** memori — ação.  
+> **LifeOS** saiu do ranking: é life OS, não 5º memory. **M5** honcho: sem R@k IR.  
+> Taxonomia: `_research/taxonomy.md`.
+
+---
+
+## Artefatos
 
 ```
-OS/LifeOS/                          # clone local (also OS/lifeos, OS/gbrain, …)
 OS/_bench/brain-6way/
-├── executive-report.md             ← este
+├── executive-report.md
 ├── scorecard.{md,json}
 ├── comparison-matrix.md
 ├── metadata.json
-├── graph-pitfalls-and-lessons.md   # mina issues + PROMPT reutilizável
-├── visa-brain-graph-feature-lessons.md          # deep dive → VISA-BRAIN
-├── visa-brain-graph-feature-lessons.citations.json
-└── _inventories/{LifeOS + 5 peers}/
-OS/_bench/_research/obsidian-brain-voice-candidates.md  # confirmado LifeOS
+└── graph-pitfalls-and-lessons.md   # não reescrito neste refresh
+OS/_bench/_inventories/{LifeOS,gbrain,mempalace,mem0,memori-labs,honcho}/
+OS/_bench/_research/taxonomy.md              # IDs + contrato de medida
+OS/_bench/_research/second-brain-convergence.md
 ```
 
----
-
-## 8. Bottom line
-
-> **No pack `memory`, LifeOS é 5º (70.6).**  
-> **No espaço “personal AI brain / life OS”, LifeOS é o único full-stack.**  
-> **gbrain** continua o melhor *knowledge brain* de produto.  
-> **mempalace** continua o melhor *memory fidelity*.  
-> **mem0** continua o melhor *memory SDK*.  
-> Escolher entre eles é escolher o **job**, não o ranking único.
+_Generated by os-bench bench-executive-report | 2026-09-05_

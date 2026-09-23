@@ -5,6 +5,8 @@
 > + [`visa-brain-graph-feature-lessons.citations.json`](./visa-brain-graph-feature-lessons.citations.json)  
 > (gap map doutrina↔enforcement, T1–T22, backlog líquido, code-confirm).
 
+**Date:** 2026-08-06 · **Banner 2026-09-05:** mineração de issues **não refeita**. gbrain agora tem LME público (`CHANGELOG.md` 0.48.2) — isso **não** invalida extract silencioso / over-typing. Refresh de scores em `scorecard.md`; convergência em `_research/second-brain-convergence.md`.
+
 **Date:** 2026-08-06  
 **Slug:** brain-6way  
 **Subjects:** LifeOS · gbrain · mempalace · mem0 · memori-labs · gsd-2  

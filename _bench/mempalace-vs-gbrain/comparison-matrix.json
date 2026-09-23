@@ -1,19 +1,10 @@
 {
-  "slug": "mempalace-vs-gbrain",
-  "generatedAt": "2026-08-06T20:30:00Z",
-  "subject_a": "mempalace",
-  "subject_b": "gbrain",
-  "feature_classes": {
-    "verbatim_policy": { "mempalace": "Forte", "gbrain": "Parcial" },
-    "longmemeval_public": { "mempalace": "Forte", "gbrain": "Sem_Equiv" },
-    "zero_api_core": { "mempalace": "Forte", "gbrain": "Sem_Equiv" },
-    "temporal_kg_as_of": { "mempalace": "Forte", "gbrain": "Parcial" },
-    "synthesis_think_gap": { "mempalace": "Sem_Equiv", "gbrain": "Forte" },
-    "zero_llm_graph_wiring": { "mempalace": "Parcial", "gbrain": "Forte" },
-    "durable_job_queue": { "mempalace": "Sem_Equiv", "gbrain": "Forte" },
-    "company_multi_tenant": { "mempalace": "Sem_Equiv", "gbrain": "Forte" },
-    "dream_enrich_doctor": { "mempalace": "Sem_Equiv", "gbrain": "Forte" },
-    "hybrid_search": { "mempalace": "Forte", "gbrain": "Forte" },
-    "mcp_surface": { "mempalace": "Forte", "gbrain": "Forte" }
+  "generatedAt": "2026-09-05T18:00:00Z",
+  "comparison_type": "pair",
+  "subjects": ["mempalace", "gbrain"],
+  "dimension_pack": "memory",
+  "versions": {"mempalace": "3.9.0", "gbrain": "0.48.2.0"},
+  "summary": {
+    "note": "LongMemEval existence is no longer A-only. Zero-API and verbatim remain A-only. think/volunteer/Minions remain B-only."
   }
 }

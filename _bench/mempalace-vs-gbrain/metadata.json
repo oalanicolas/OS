@@ -1,54 +1,23 @@
 {
   "$schema": "os-bench metadata v1.0",
-  "generatedAt": "2026-08-06T20:30:00Z",
+  "generatedAt": "2026-09-05T18:00:00Z",
+  "supersedes": "2026-08-06T20:30:00Z",
   "comparison_type": "pair",
   "slug": "mempalace-vs-gbrain",
   "subject_a": "mempalace",
   "subject_b": "gbrain",
+  "taxonomy_spec": "OS/_bench/_research/taxonomy.md §12",
   "subjects": [
-    {
-      "slug": "mempalace",
-      "path": "OS/mempalace/",
-      "source_url": "https://github.com/MemPalace/mempalace",
-      "version": "3.6.0",
-      "last_commit": "2026-07-17"
-    },
-    {
-      "slug": "gbrain",
-      "path": "OS/gbrain/",
-      "source_url": "https://github.com/garrytan/gbrain",
-      "version": "0.42.73.2",
-      "last_commit": "2026-08-05"
-    }
+    {"slug": "mempalace", "job_id": "M1", "pack_admitted": true, "path": "OS/mempalace/", "source_url": "https://github.com/MemPalace/mempalace", "version": "3.9.0", "last_commit": "2026-08-31"},
+    {"slug": "gbrain", "job_id": "M2", "pack_admitted": true, "path": "OS/gbrain/", "source_url": "https://github.com/garrytan/gbrain", "version": "0.48.2.0", "last_commit": "2026-09-03"}
   ],
+  "buy": "Pack winner is M1 (verbatim). Job winner for synthesis/gaps is M2. You buy the ID, not the pack rank.",
   "dimension_pack": "memory",
-  "dimension_weights": {
-    "recall_accuracy": 0.22,
-    "write_latency": 0.10,
-    "read_latency": 0.12,
-    "persistence": 0.12,
-    "schema_flexibility": 0.10,
-    "local_first": 0.13,
-    "vector_support": 0.11,
-    "graph_support": 0.10
-  },
-  "related": ["OS/_bench/memory-5way/", "OS/_bench/memory-4way/"],
-  "artifacts_generated": [
-    "metadata.json",
-    "comparison-matrix.md",
-    "comparison-matrix.json",
-    "scorecard.md",
-    "scorecard.json",
-    "gap-analysis.md",
-    "battle-card.md",
-    "executive-report.md"
-  ],
+  "related": ["OS/_bench/memory-5way/", "OS/_bench/brain-6way/", "OS/_bench/_research/second-brain-convergence.md"],
   "confidence_overall": "HIGH",
   "quality_gate_passed": true,
-  "weighted_totals": {
-    "mempalace": 84.23,
-    "gbrain": 78.56
-  },
+  "weighted_totals": {"mempalace": 85.1, "gbrain": 81.6},
   "overall_winner": "mempalace",
-  "delta": 5.67
+  "delta": 3.5,
+  "delta_vs_previous": -2.17
 }

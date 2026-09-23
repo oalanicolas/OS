@@ -1,0 +1,21 @@
+{
+  "generatedAt": "2026-09-05T18:00:00Z",
+  "subject": "memori-labs",
+  "path": "OS/memori-labs/",
+  "source_url": "https://github.com/MemoriLabs/Memori",
+  "version": "3.3.7",
+  "tagline": "Memory from what agents do, not just what they say.",
+  "metrics": {
+    "file_count": 673,
+    "last_commit_date": "2026-09-03"
+  },
+  "benchmarks": {
+    "locomo_accuracy": 0.87,
+    "locomo_tokens_per_query": 721,
+    "source": "OS/memori-labs/README.md"
+  },
+  "delta_since_2026_08_06": "2 commits, README Enterprise only — no pack-score change",
+  "confidence": "HIGH",
+  "extraction_method": "filesystem-scan",
+  "skill_version": "1.0.0"
+}
