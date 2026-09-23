@@ -5,7 +5,7 @@
 <sub>🌐 <a href="README.md">English</a> · <b>Português</b></sub>
 
 [![Awesome](https://awesome.re/badge-flat2.svg)](https://awesome.re)
-[![Last Update](https://img.shields.io/badge/última%20atualização-Abril%202026-blue?style=flat-square)]()
+[![Last Update](https://img.shields.io/badge/última%20atualização-Setembro%202026-blue?style=flat-square)]()
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](#contribuindo)
 [![License: CC0-1.0](https://img.shields.io/badge/License-CC0_1.0-lightgrey.svg?style=flat-square)](https://creativecommons.org/publicdomain/zero/1.0/)
 
@@ -19,7 +19,7 @@
 
 ---
 
-> **32 projetos. 11 categorias. Curadoria opinativa.** Não contém código próprio — todos os repos são forks/clones para análise. Veja [Espelho local](#-espelho-local) para reproduzir o bench.
+> **33 projetos. 11 categorias. Curadoria opinativa.** Não contém código próprio — todos os repos são forks/clones para análise. Veja [Espelho local](#-espelho-local) para reproduzir o bench.
 
 ---
 
@@ -88,7 +88,7 @@
 |---------|-------|-------------|
 | [mem0ai/mem0](https://github.com/mem0ai/mem0) | Python | Memory layer líder em 2025; vector store nativo e API simples para LLM apps. |
 | [milla-jovovich/mempalace](https://github.com/milla-jovovich/mempalace) | Python + Chroma | 96.6% R@5 com storage verbatim (sem paráfrase); local-first e sem API keys. |
-| [garrytan/gbrain](https://github.com/garrytan/gbrain) | TS + PGLite + pgvector | 95% recall@5; self-wiring de entidades sem LLM; setup em 30 minutos. |
+| [garrytan/gbrain](https://github.com/garrytan/gbrain) | TS + PGLite + pgvector | 95.32% LongMemEval recall_all@5 com Voyage rerank (hybrid-only 93.19%; expansion@k=5 é 54.89%); self-wiring de entidades sem LLM. |
 | [MemoriLabs/Memori](https://github.com/MemoriLabs/Memori) | Python | Memory infrastructure agent-native LLM-agnóstica; 81.95% no LoCoMo, backing em SQL. |
 
 ---
@@ -99,6 +99,7 @@
 |---------|-------|-------------|
 | [openclaw/openclaw](https://github.com/openclaw/openclaw) | TS + SwiftUI + Kotlin | 20+ canais (WhatsApp, Telegram, iMessage…) rodando on-device. |
 | [NousResearch/hermes-agent](https://github.com/NousResearch/hermes-agent) | Python asyncio | Auto-cria skills; roda em VPS de $5 ou serverless com hibernação; multi-model. |
+| [danielmiessler/LifeOS](https://github.com/danielmiessler/LifeOS) | Skills + hooks | Life OS pessoal: TELOS/ISA como spec viva, dashboard Pulse, releases com receipts (claim ≠ done). |
 
 ---
 
@@ -172,12 +173,12 @@ Eixo cruzado, agrupando harnesses por técnica/arquitetura recorrente:
 
 | Padrão | Projetos | Observação |
 |--------|----------|------------|
-| **Memória first-class** | gbrain, mempalace, gsd-pi, hermes-agent, mem0, memori-labs | Memória como componente separado e medível, não bolt-on. |
+| **Memória first-class** | gbrain, mempalace, gsd-pi, hermes-agent, mem0, memori-labs, LifeOS | Memória como componente separado e medível, não bolt-on. |
 | **Spec-driven** | spec-kit, get-shit-done, superpowers | Alternativa pragmática a "vibe coding"; specs guiam execução. |
 | **Multi-persona / party-mode** | BMAD-METHOD, crewAI, autogen, paperclip, gstack | Coordenação entre múltiplos roles em um harness. |
 | **Subagents paralelos** | superpowers, ai-website-cloner-template, gstack | Fan-out de tarefas para agentes especializados. |
 | **Durable / replay** | vercel/workflow, gh-aw | Event-sourced; sobrevive a crash; reproduzível. |
-| **Local-first** | mempalace, openclaw, gbrain, hermes-agent | Sem dependência de cloud; on-device ou self-hosted. |
+| **Local-first** | mempalace, openclaw, gbrain, hermes-agent, LifeOS | Sem dependência de cloud; on-device ou self-hosted. |
 | **Governance / policy** | agent-governance-toolkit, Clawith | Runtime security e org chart de agentes. |
 | **24/7 persistente** | claude-remote-manager, hermes-agent, gsd-pi | Cron, hibernação, retomada automática. |
 | **Self-improvement / autoresearch** | ADAS, AI-Scientist-v2, gepa, superpowers | Loop que mede, muta e otimiza — código, prompts ou arquitetura. |
@@ -192,9 +193,11 @@ Para clonar/atualizar todos os projetos em paralelo:
 ./update.sh
 ```
 
-O script lê `repos.tsv`, clona o que falta e dá `pull --ff-only` no resto.
+O script lê `repos.tsv`, clona o que falta e dá `pull --ff-only` no resto. Linhas com `#` são ignoradas (`next-level-outreach` está 404 desde 2026-08-23; o clone local foi preservado).
 
 Legenda: `[+]` clonado · `[↑]` atualizado · `[=]` up-to-date · `[x]` erro
+
+Notas do último sync: [`_bench/_research/os-update-convergence-2026-09-05.md`](_bench/_research/os-update-convergence-2026-09-05.md).
 
 ---
 
