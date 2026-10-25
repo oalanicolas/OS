@@ -61,6 +61,7 @@
 | [open-gsd/gsd-pi](https://github.com/open-gsd/gsd-pi) | TS (Pi SDK) | GSD vivo: auto-milestones, worktrees, memória em `.gsd/`, runtime Agent Skills. (gsd-2 é o snapshot arquivado.) |
 | [garrytan/gstack](https://github.com/garrytan/gstack) | TS + Playwright | Software factory pessoal do presidente da YC; 24 agentes especializados em workflow multi-role. |
 | [obra/superpowers](https://github.com/obra/superpowers) | TS (Claude Code plugin) | TDD red/green puro com subagents paralelos; reporta 94% de PR rejection rate. |
+| [Gabrielrtads/kage-bunshin](https://github.com/Gabrielrtads/kage-bunshin) | Shell + PowerShell + Skill | Spawna N clones CLI headless do mesmo agente (Claude Code, Codex, Antigravity) em git worktrees isolados com reintegração de memória. |
 
 ### Templates / App-builders
 
@@ -176,7 +177,7 @@ Eixo cruzado, agrupando harnesses por técnica/arquitetura recorrente:
 | **Memória first-class** | gbrain, mempalace, gsd-pi, hermes-agent, mem0, memori-labs, LifeOS | Memória como componente separado e medível, não bolt-on. |
 | **Spec-driven** | spec-kit, get-shit-done, superpowers | Alternativa pragmática a "vibe coding"; specs guiam execução. |
 | **Multi-persona / party-mode** | BMAD-METHOD, crewAI, autogen, paperclip, gstack | Coordenação entre múltiplos roles em um harness. |
-| **Subagents paralelos** | superpowers, ai-website-cloner-template, gstack | Fan-out de tarefas para agentes especializados. |
+| **Subagents paralelos** | superpowers, ai-website-cloner-template, gstack, kage-bunshin | Fan-out de tarefas para agentes especializados. |
 | **Durable / replay** | vercel/workflow, gh-aw | Event-sourced; sobrevive a crash; reproduzível. |
 | **Local-first** | mempalace, openclaw, gbrain, hermes-agent, LifeOS | Sem dependência de cloud; on-device ou self-hosted. |
 | **Governance / policy** | agent-governance-toolkit, Clawith | Runtime security e org chart de agentes. |
